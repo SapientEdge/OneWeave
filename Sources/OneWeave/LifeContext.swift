@@ -351,6 +351,14 @@ enum Amplifier: String, CaseIterable {
 }
 
 extension LifeContext {
+    
+    // Echo (Phase 2): revisit past event/quest for insight + small essence + Meaning ripple. Integrate with MeaningThread.
+    func echoPastEvent(eventId: UUID? = nil) {
+        // Placeholder: lookup past TimelineEvent, award small essence, emit resonance to Meaning.
+        weaveEssence += 1
+        essenceLedger.append("+1 for echo")
+    }
+
     func spendEssenceForAmplifier(_ amp: Amplifier, amount: Double = 10) -> Bool {
         if weaveEssence >= amount {
             weaveEssence -= amount
