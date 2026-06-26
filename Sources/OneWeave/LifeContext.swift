@@ -208,26 +208,24 @@ var activeQuests: [UUID] = []
 
     /// Time since last state change (supports decay UI logic / feedback)
     var timeInCurrentState: TimeInterval {
-
+        Date().timeIntervalSince(lastStateTransition)
+    }
     // Gentle decay (Phase 2): linear on long inactivity. Encourages rhythm, no hard timers or FOMO.
     // All local, tunable, anti-addictive.
     func applyGentleDecay() {
         let inactiveHours = timeInCurrentState / 3600.0
-        if inactiveHours > 48 {  // after 2 days of low activity
-            let decay = min(5.0, inactiveHours * 0.05)  // very gentle
+        if inactiveHours > 48 {
+            let decay = min(5.0, inactiveHours * 0.05)
             if weaveEssence > 10 {
                 weaveEssence = max(10, weaveEssence - decay)
                 essenceLedger.append("-\(Int(decay)) gentle decay (rhythm)")
             }
-            // Harmony decays slower
             if harmonyScore > 0.5 {
                 harmonyScore = max(0.5, harmonyScore - 0.01)
             }
         }
     }
 
-        Date().timeIntervalSince(lastStateTransition)
-    }
     
     // MARK: - Basic Gamification (local only, tied to TimelineEvent + state machine)
     
