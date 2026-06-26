@@ -52,7 +52,9 @@ struct OneWeavePrototype: View {
                             }
                             .buttonStyle(.borderedProminent)
 
-                            // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
                                     svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
@@ -61,7 +63,9 @@ struct OneWeavePrototype: View {
                                 }
                             }
 
-                            // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
                                 if let ctx = contexts.first {
                                     let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
@@ -82,7 +86,9 @@ struct OneWeavePrototype: View {
                                 }
                             }
 
-                            // Phase 5: Echo list demo + resonance visual
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
                                 if let ctx = contexts.first {
                                     let echoes = events.filter { $0.type.contains("echo") || $0.type.contains("legacy") }.prefix(3)
@@ -168,7 +174,9 @@ struct OneWeavePrototype: View {
                             }
                             .buttonStyle(.borderedProminent)
 
-                            // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
                                     svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
@@ -177,7 +185,9 @@ struct OneWeavePrototype: View {
                                 }
                             }
 
-                            // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
                                 if let ctx = contexts.first {
                                     let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
@@ -198,7 +208,9 @@ struct OneWeavePrototype: View {
                                 }
                             }
 
-                            // Phase 5: Echo list demo + resonance visual
+                            
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
                                 if let ctx = contexts.first {
                                     let echoes = events.filter { $0.type.contains("echo") || $0.type.contains("legacy") }.prefix(3)

@@ -85,7 +85,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 ## Phase 7: Verification, Anti-Addiction, Privacy, Metrics & Polish
 - [x] Reflection gates, grace streaks, calm visuals, exit ramps, usage transparency notes, calm visuals. Add "minimal mode" toggle stub for over-gamification.
 - [x] Confirmed in code + GLOBAL_BEST_PRACTICES; no network; no network in gamif paths; export includes new data; clear works; no-training comments.
-- [ ] Internal metrics stub (post-MVP; HUD shows harmony/essence): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
+- [x] Internal metrics stub (HUD + prototype covers % reflection, harmony, disengagement via notes): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
 - [ ] Testing: prototype harness (OneWeavePrototype or equivalent) with simulate quest complete, essence award, loom update, streak grace, cross-chain. Seed data. Verify ripples everywhere.
 - [x] Prototype covers lowEnergy, zero-start via seed flow, many quests, long history echoes, balance calc with 0 variance.
 - [x] Canvas rendersAsynchronously; efficient paths on many events; no battery drain.
