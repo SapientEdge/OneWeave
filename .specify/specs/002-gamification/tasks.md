@@ -74,7 +74,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
 - [x] Mastery/streak surfaced in ThreadDetailView progress, streak, amplifiers, recent ripples with visual links.
-- [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
+- [x] New lightweight views: EssenceLedgerView (simple list + stats) + QuestsView (list + reflection modal) created. MasteryMapView already solid. Wired/demoted in prototype. Full nav in Compass post-MVP.
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [x] Basic onboarding; gamif hook in prototype + Compass (sample quests/loom) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [x] Feedback toasts + IRL prompts in flows.

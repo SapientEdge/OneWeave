@@ -613,6 +613,28 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .background(.quaternary.opacity(0.3))
 
 
+        // Phase 6 lightweight views demo (QuestsView, EssenceLedgerView, MasteryMapView already present)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Lightweight Views (Phase 6)").font(.caption).foregroundStyle(.secondary)
+            Button("Show QuestsView (list + reflect)") {
+                // In real: .sheet or nav. Here: simple note + call service
+                if let ctx = contexts.first {
+                    let suggested = QuestService.shared.generateSuggestedQuests(from: ctx, recentEvents: [])
+                    lastAction = "Quests: \(suggested.map(\$0.title).joined(separator: ", ")) (see QuestsView.swift for full modal)"
+                }
+            }
+            Button("Show EssenceLedgerView") {
+                lastAction = "Ledger view ready (see EssenceLedgerView.swift). Recent: \(contexts.first?.essenceLedger.suffix(2).joined(separator: "; ") ?? "none")"
+            }
+            Button("Show MasteryMapView (existing)") {
+                lastAction = "MasteryMapView: Tap domains to echo (already implemented, calm grid)"
+            }
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.2))
+
+
+
         // Starter state-driven visuals (Phase 4): bind to LifeContext energy/harmony
         VStack(alignment: .leading, spacing: 4) {
             Text("State-driven (starter)").font(.caption).foregroundStyle(.secondary)
