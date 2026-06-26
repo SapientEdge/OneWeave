@@ -48,9 +48,15 @@ struct SettingsView: View {
                 
                 Section("Internal Metrics (private)") {
                     if let ctx = contexts.first {
+                        Text("Essence: \(ctx.weaveEssence) • Level \(ctx.weaveLevel)")
                         Text("Completed quests: \(ctx.completedQuestCount) (reflections drive full mastery)")
-                        Text("Harmony: \(Int(ctx.harmonyScore * 100))%")
+                        let reflectedCount = quests.filter { ($0.reflectionNote ?? "").count > 0 }.count
+                        Text("Harmony: \(Int(ctx.harmonyScore * 100))% • Reflected quests: \(reflectedCount)")
                         Text("Global streak: \(ctx.globalWeaveStreak) (grace: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays))")
+                        if !ctx.masteryTiers.isEmpty {
+                            let tiersSummary = ctx.masteryTiers.map { "\($0.key.prefix(3)):\($0.value)" }.joined(separator: " ")
+                            Text("Mastery: \(tiersSummary)")
+                        }
                     }
                 }
 

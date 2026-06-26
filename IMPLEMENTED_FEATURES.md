@@ -122,15 +122,37 @@ Net: 24 Swift files, low placeholders, launch-ready artifacts.
 - Placeholders: 0 core. Graphify: 601 nodes.
 - Addresses audit edge case directly.
 
-## Phase 8 Packaging Notes (high-level, ref .specify/specs/002-gamification/tasks.md)
+## Phase 8 Packaging Notes (high-level + concrete, ref .specify/specs/002-gamification/tasks.md + LAUNCH_CHECKLIST)
 - Widgets/Intents (post-MVP): Harmony/quests surfaces for iOS home widgets, Live Activities, App Intents/Siri (Phase 8 post; not core MVP). See tasks.md Phase 8.
+  **Concrete (harmony/quest widgets stub)**: 
+  - Harmony Widget (small/medium via WidgetKit): TimelineProvider using LifeContext snapshot or @Query for harmonyScore, active quest count/title, mini tapestry (4 color nodes sized by mastery). 
+  - Quest widget stub: Suggested quests with accept intent.
+  - Live Activity stub for streak or quest IRL timer.
+  - App Intents: intents for log weave, show stats, quest complete w/ reflection param. Stub file OneWeaveAppIntents.swift planned for extension target. Shared via app group container for data parity.
 - Full PWA parity: Web PWA (web-pwa manifest/sw.js + oneweave-pwa.html) to match native: full loom canvas parity, quests + reflection gate, essence/streak/mastery HUD, offline via SW, local storage upgrade; privacy hardening (inline assets, no external CDNs).
+  **Concrete (loom/quests)**: 
+  - Loom JS: Match Swift exactly - wavy flowing threads (bezier/quad horiz 4 threads animated), perpendicular mastery embroidery stitches (tier-based count/density), ripple pulses (concentric rings), harmony links. Add highFlow/lowEnergy modulation + state pulse.
+  - Quests: Enhance toggle to full showReflectionGate + submit with note required for full XP (update state.xp, streak, drawTapestry, save). Add context-aware generate like QuestService.
+  - Full HUD + export parity JSON.
+  - sw.js + manifest: Cache strategy for full offline gamif, inline styles to harden privacy (no cdn.tailwind etc in prod build).
 - Legacy exports: Backward/forward compatible export (JSON) and import for pre-gamification data structures + current gamif (WeaveQuest, essenceLedger, masteryTiers, streaks+grace, activeQuests). Ensures portability across versions.
+  **Concrete**: v2 export always from Settings (includes preGamif fallback + full gamif dict as detailed in tasks/LAUNCH). Import in Settings/Prototype: if (!data.gamif) { defaults }; else merge. Legacy v1 still parsable (gamif fields defaulted). Harness has roundtrip test.
 - Personalization: Local-first (prefs for quest generation filters, UI accents, grace limits, theme); opt-in on-device personalization (e.g. rule or FoundationModels for custom quests/echo synthesis); premium gated per spec. High-level tracking only; no server-side.
-All per Phase 8 packaging/follow-up in tasks.md; post-MVP items.
+  **Concrete (seasonal themes)**: Extend LifeContext with season state. QuestService + LoomView condition on season for templates/palettes (Spring: growth emphasis + fresh palette; etc). Auto gate + bonus on change. Local prefs persist; seasonal is opt-in or calendar driven. Update PWA state to support season toggle for parity.
+All per Phase 8 packaging/follow-up in tasks.md; post-MVP items. Updated 2026-06-26 with concrete specs.
 
 ## Parallel update (post export delegate + direct)
 - Export: full structured JSON via @Query (quests + mastery/ledger/streaks/essence).
 - Harness: roundtrip persistence + export test button added.
 - Phase 8 notes: advanced in tasks + docs.
 - All direct after failed delegate (tool_choice/patch patterns).
+
+
+## Phase 8 Packaging Finalized Note
+## Phase 8 Packaging Notes (high-level, ref .specify/specs/002-gamification/tasks.md; FINALIZED 2026-06-26)
+- Widgets/Intents (post-MVP): Harmony/quests surfaces for iOS home widgets, Live Activities, App Intents/Siri (Phase 8 post; not core MVP). See tasks.md Phase 8 (detailed concrete notes).
+- Full PWA parity: Web PWA (web-pwa manifest/sw.js + oneweave-pwa.html) to match native: full loom canvas parity, quests + reflection gate, essence/streak/mastery HUD, offline via SW, local storage upgrade; privacy hardening (inline assets, no external CDNs). Brief notes added to README.
+- Legacy exports: Backward/forward compatible export (JSON) and import for pre-gamification data structures + current gamif (WeaveQuest, essenceLedger, masteryTiers, streaks+grace, activeQuests). Ensures portability across versions. Export in Settings now full.
+- Personalization: Local-first (prefs for quest generation filters, UI accents, grace limits, theme); opt-in on-device personalization (e.g. rule or FoundationModels for custom quests/echo synthesis); premium gated per spec. High-level tracking only; no server-side.
+- Low-pri Phase 7: Metrics surface in Settings polished (essence, level, reflected count, mastery, etc.).
+All per Phase 8 packaging/follow-up in tasks.md (now with status header); post-MVP items. README.md updated with dedicated Packaging/PWA/Legacy section. LAUNCH_CHECKLIST + tasks re-read/updated.

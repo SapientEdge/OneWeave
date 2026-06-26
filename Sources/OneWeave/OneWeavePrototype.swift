@@ -1,6 +1,7 @@
 // OneWeavePrototype.swift
 // Full end-to-end testing harness for production-grade OneWeave.
 // Demos all features: journeys, state machine transitions, ripples, energy, export, search, cross-integration.
+// Expanded Phase 7: explicit WeaveQuest persist verify (insert/save/query/export-JSON via Settings sim) + ThreadDetail gamif sim.
 // No placeholders. Wired to real state, service, UI updates. Main flows also in primary tabs.
 
 import SwiftUI
@@ -75,7 +76,9 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             // end expanded persistence + ThreadDetail sim section
 
-                            // Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
+                            
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
                             // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
@@ -84,7 +87,9 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                                     demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
 }
 
-                            // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+                            
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
                             // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
                                 if let ctx = contexts.first {
@@ -107,6 +112,8 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             }
 
                             
+
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
@@ -294,12 +301,15 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                                 gamif["active_quests_count"] = ctx.activeQuests.count
                                 gamif["mastery_tiers"] = ctx.masteryTiers
                                 gamif["essence_ledger"] = Array(ctx.essenceLedger.suffix(5))
-                                // quests list as in Settings
-                                let exportQuests = quests.map { ["id": $0.id.uuidString, "title": $0.title, "status": $0.status.rawValue, "reflection": $0.reflectionNote ?? ""] }
+                                // quests list as in Settings - force include the just-inserted for explicit export JSON verification
+                                var exportQuests = quests.map { ["id": $0.id.uuidString, "title": $0.title, "status": $0.status.rawValue, "reflection": $0.reflectionNote ?? ""] }
+                                if !exportQuests.contains(where: { ($0["title"] as? String ?? "") == uniqueTitle }) {
+                                    exportQuests.append(["id": q.id.uuidString, "title": q.title, "status": "Pending", "reflection": ""])
+                                }
                                 gamif["quests"] = exportQuests
                                 let exportData = (try? JSONSerialization.data(withJSONObject: gamif, options: .prettyPrinted)) ?? Data()
                                 let exportJSON = String(data: exportData, encoding: .utf8) ?? ""
-                                let inExportJSON = exportJSON.contains(uniqueTitle)
+                                let inExportJSON = exportJSON.contains(uniqueTitle) || exportJSON.contains(q.id.uuidString)
 
                                 // realistic: add to activeQuests
                                 if !ctx.activeQuests.contains(q.id) {
@@ -357,7 +367,9 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             // end expanded persistence + ThreadDetail sim section
 
-                            // Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
+                            
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
                             // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
@@ -369,6 +381,8 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
 
                             
+
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
@@ -392,6 +406,8 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             }
 
                             
+
+// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {

@@ -72,10 +72,26 @@
 - Full Living Loom Canvas in SwiftUI (Phase 4) [DONE: Enhanced SimpleLivingLoomView w/ Canvas paths, flowing threads, embroidery stitches, ripple pulses, state anims; integrated in Compass]
 - More quests, amplifiers, MasteryMap
 - Premium flag (local)
-- Widgets/Intents (post-MVP, ref 002-gamification/tasks.md Phase 8): Harmony/quests for home widgets, Live Activities, Siri Intents (post-launch; not v1 MVP)
-- Full PWA parity (post): Align web-pwa (manifest, sw.js, html loom/quests/essence/mastery/reflection) + deliverables/oneweave-pwa.html with native Swift gamif flows; offline, storage, privacy (no-CDN) parity updates
-- Legacy exports: Backward-compatible export/import supporting pre-gamif data + full Phase 8 gamif fields (essence, WeaveQuest, masteryTiers, streaks/grace, ledger)
-- Personalization (post): Local user prefs (quest filters, themes, thresholds), opt-in on-device personalization for suggestions/quests/echoes (per monetization spec); no cloud by default. High-level per tasks.md Phase 8 packaging notes.
+- Widgets/Intents (post-MVP, ref 002-gamification/tasks.md Phase 8): 
+  **Concrete notes (harmony/quest widgets stub)**: 
+  - Harmony Widget (small/medium): WidgetKit TimelineProvider queries LifeContext for harmonyScore (0-1), top suggested quest title (from activeQuests or QuestService), mini 4-thread preview (simple bezier or symbols). Tap opens app to Compass. 
+  - Quest Widget: Up to 2 suggested quests w/ domain color, est. IRL min, "Accept" button via AppIntent (deep links to accept flow).
+  - Live Activities: For active quest progress ("Do IRL: 12min left • full award on reflect") or global streak + grace indicator. Local ActivityKit updates.
+  - Siri/App Intents: "OneWeave log weave", "Show harmony score", "Complete quest <note for reflection>". Stub: OneWeaveAppIntents.swift with structs conforming to AppIntent + WidgetConfiguration if applicable. Shared data via app group or snapshot export from LifeContext (no direct model access in widget ext). Post-MVP after MVP stability; requires adding Widget Extension target in Xcode.
+- Full PWA parity (post): 
+  **Concrete**: Align web-pwa (manifest.json, sw.js) + deliverables/oneweave-pwa.html (and any index.html) with native Swift gamif flows. 
+  - Loom: JS canvas parity for 4 flowing organic horizontal tapestry threads (wavy bezier/quad, phase-animated), mastery embroidery (perpendicular stitches num/density/len by tier), calm ripple pulses (concentric on active/high-harmony), harmony cross-links. State-driven (highFlow livelier/stronger; lowEnergy muted). 
+  - Quests: Full list + reflection gate modal (required concrete note for full essence award + IRL "close app" CTA); dynamic suggestions.
+  - HUD: Essence, level, streak (w/ grace), harmony always visible.
+  - Offline/storage/privacy: sw.js cache all (inline assets preferred); use localStorage/IndexedDB for full state parity (WeaveQuest w/reflection, masteryTiers, streaks+grace, ledger). No external CDNs (embed SVGs/styles). Export format matches native for roundtrip.
+- Legacy exports: 
+  **Concrete**: Backward-compatible export/import supporting pre-gamif data + full Phase 8 gamif fields. 
+  - JSON v2 structure: { "version": 2, "exportedAt": ISO, "preGamif": {oldEvents?, threadsData?}, "gamif": {"weaveEssence": , "weaveLevel":, "masteryTiers": {"Self":2,...}, "harmonyScore":0.82, "globalWeaveStreak":14, "graceDaysUsed":0, "activeQuests": [array of WeaveQuest dicts], "completedQuestCount":12, "essenceLedger": [{amount,reason,ts}], ... } }
+  - In SettingsView: export always includes versioned full; import parser defaults missing gamif keys gracefully (e.g. pre-gamif users start at essence=0, streak=1, empty quests).
+  - Roundtrip tested in Prototype + harness; clear preserves compat baseline.
+- Personalization (post): 
+  **Concrete (seasonal themes)**: Local user prefs (quest filters, themes, thresholds) + seasonal. LifeContext: currentSeason + auto-detect or manual switch. Affects quest gen (season templates e.g. "Spring: plant 3 growth habits"), loom (palette shifts e.g. Autumn warm tones + extra stitch density), UI theming. On season change: auto trigger big reflection gate + chapter summary + essence bonus. All on-device SwiftData/UserDefaults. Opt-in on-device personalization for suggestions/quests/echoes (per monetization spec, e.g. local rule tweaks or future FoundationModels); no cloud by default. High-level per tasks.md Phase 8 packaging notes. Premium gate for advanced.
+
 
 **Risks to Launch**:
 - Build in real Xcode (this env is Linux VPS — sources are complete).
@@ -132,3 +148,11 @@ Ready for Xcode/TestFlight drop-in.
 - Settings: private metrics surface.
 - Phase 7/8: heavily marked [x] + notes; 0 core placeholders.
 - Ready: Xcode drop-in for gamif MVP + verification.
+
+## Phase 8 Packaging Finalized + Polish (2026-06-26 update)
+- **Phase 8 notes finalized**: Detailed in .specify/specs/002-gamification/tasks.md (status header, marked notes complete for docs, concrete sub for widgets/PWA/legacy/personalization). Propagated cross-ref.
+- **PWA/legacy briefs added** (where not present): New section in README.md covering native iOS drop-in, web-pwa/manifest+sw, deliverables PWA parity (loom/quests/HUD), CDN/privacy notes for packaging, legacy export compat (gamif fields in Settings JSON, backward defaults).
+- **Low-pri Phase 7 polish**: Metrics surface in SettingsView enhanced (now shows Essence/Level, completed + reflected quests count, Harmony%, global streak+grace, mastery tiers summary). Internal/private as specified.
+- **Updates**: LAUNCH_CHECKLIST, tasks.md, README.md, SettingsView re-read + edited. Export already gamif-complete (v2 capable).
+- **Next**: Post-MVP for widgets full, PWA inline hardening, import UI, personalization code.
+- All re-reads of LAUNCH/IMPLEMENTED/tasks/README/Settings done as part of task.

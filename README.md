@@ -46,4 +46,11 @@ Built with multi-agent iteration (delegate_task + external models) + Spec Kit pr
 
 ---
 
+## Packaging, PWA & Legacy (Phase 8 notes)
+- **Native iOS**: Primary target. Drop `Sources/OneWeave/` into Xcode SwiftUI + SwiftData project (iOS 18+). Model container pre-wired for gamification (LifeContext, WeaveQuest, Threads, Events). See LAUNCH_CHECKLIST.md for App Store / TestFlight prep.
+- **Web PWA**: Basic support in `web-pwa/` (manifest.json for installable, sw.js for offline cache). Full demo parity in `hermes-workspace/deliverables/oneweave-pwa.html` (and oneweave-web/index.html) includes loom/tapestry canvas, quests, reflection, essence/streak/mastery HUD, state visuals. **Notes**: Current HTML uses external CDNs (privacy consideration); production packaging should inline styles/scripts/assets or use local equivalents for no-CDN offline. Service worker basic; enhance for full IndexedDB state sync with gamif fields. Serve statically (e.g. GitHub Pages, Vercel) for legacy access.
+- **Legacy exports/compat**: Settings export now includes full gamification data (essence, level, masteryTiers, streaks+grace, completed/active quests, ledger, reflections). Structured for backward compat (pre-gamif data loads with defaults: 0 essence, empty tiers/quests). No full import UI yet (post-MVP); export JSON block + text summary ensures portability across versions.
+- **Other Phase 8**: Personalization (local prefs only, no cloud), high-level Widgets/Intents (post-MVP: WidgetKit for harmony/quests, App Intents). See `.specify/specs/002-gamification/tasks.md` and IMPLEMENTED_FEATURES.md for details.
+- All packaging emphasizes local-first, privacy (no telemetry), calm design per white paper.
+
 *One interconnected journey. See the ripples.*
