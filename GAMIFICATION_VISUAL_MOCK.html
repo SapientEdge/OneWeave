@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneWeave • Calm Gamification Mock (Compass + Tapestry + Quests)</title>
+  <style>
+    :root { --bg: #f8f5f0; --ink: #2c2522; --accent: #5c4e3a; --flow: #4a7043; --care: #8b6f47; --meaning: #6b5b8c; --steward: #3a5f5a; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); margin: 0; padding: 20px; line-height: 1.5; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .brand { font-size: 1.5rem; font-weight: 600; }
+    .hud { display: flex; gap: 12px; font-size: 0.9rem; }
+    .hud-item { background: white; padding: 4px 10px; border-radius: 999px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .compass { background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 20px; position: relative; }
+    .weave { width: 100%; max-width: 420px; height: 220px; margin: 0 auto; position: relative; background: #faf7f2; border-radius: 999px; border: 2px solid #e8e0d0; overflow: hidden; }
+    .thread { position: absolute; border-radius: 999px; opacity: 0.85; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    .thread.self { background: linear-gradient(90deg, #6b5b8c, #8b6f47); top: 25%; left: 10%; width: 35%; height: 8px; transform: rotate(-12deg); }
+    .thread.steward { background: linear-gradient(90deg, #3a5f5a, #4a7043); top: 45%; left: 15%; width: 45%; height: 7px; transform: rotate(8deg); }
+    .thread.carekin { background: linear-gradient(90deg, #8b6f47, #6b5b8c); top: 62%; left: 8%; width: 40%; height: 9px; transform: rotate(-5deg); }
+    .thread.meaning { background: linear-gradient(90deg, #4a7043, #6b5b8c); top: 78%; left: 18%; width: 38%; height: 6px; transform: rotate(15deg); }
+    .ripple-line { position: absolute; height: 1px; background: linear-gradient(to right, transparent, #5c4e3a, transparent); animation: flow 1.8s ease-in-out infinite; }
+    .ring { width: 68px; height: 68px; border-radius: 999px; border: 6px solid; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; margin: 6px; position: relative; }
+    .ring.self { border-color: #6b5b8c; background: rgba(107,91,140,0.08); }
+    .ring.steward { border-color: #3a5f5a; background: rgba(58,95,90,0.08); }
+    .ring.carekin { border-color: #8b6f47; background: rgba(139,111,71,0.08); }
+    .ring.meaning { border-color: #4a7043; background: rgba(74,112,67,0.08); }
+    .mastery { font-size: 9px; opacity: 0.7; position: absolute; bottom: -2px; }
+    .energy-bar { height: 5px; background: #e8e0d0; border-radius: 3px; overflow: hidden; margin-top: 4px; }
+    .energy-fill { height: 100%; background: var(--flow); transition: width 0.4s; }
+    .section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .quest { border: 1px solid #e8e0d0; border-radius: 10px; padding: 12px; margin: 8px 0; }
+    .quest-header { display: flex; justify-content: space-between; font-weight: 600; }
+    .badge { font-size: 0.75rem; padding: 1px 7px; border-radius: 999px; background: #f0e9df; }
+    .btn { background: var(--accent); color: white; border: none; padding: 8px 14px; border-radius: 8px; font-size: 0.9rem; cursor: pointer; }
+    .btn.secondary { background: #e8e0d0; color: var(--ink); }
+    .subtle { opacity: 0.75; font-size: 0.85rem; }
+    .tapestry { height: 120px; background: repeating-linear-gradient(45deg, #faf7f2, #faf7f2 10px, #f0e9df 10px, #f0e9df 11px); border-radius: 8px; position: relative; overflow: hidden; }
+    .stitch { position: absolute; height: 2px; background: #5c4e3a; opacity: 0.6; }
+    @keyframes flow { 0%,100% { opacity: 0.3; } 50% { opacity: 0.9; } }
+    .footer { text-align: center; font-size: 0.8rem; opacity: 0.6; margin-top: 30px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="brand">OneWeave</div>
+      <div class="subtle">Journey Compass • Calm Weave</div>
+    </div>
+    <div class="hud">
+      <div class="hud-item">✧ <span id="essence">142</span> Essence</div>
+      <div class="hud-item">Weave L<span id="level">11</span></div>
+      <div class="hud-item">Harmony <span id="harmony">87</span>%</div>
+    </div>
+  </div>
+
+  <div class="compass">
+    <h3 style="margin:0 0 12px 0; font-size:1rem;">Journey Compass <span class="subtle">(Living Tapestry)</span></h3>
+    
+    <div class="weave" id="weave">
+      <!-- Organic threads -->
+      <div class="thread self" style="width:42%; top:22%;"></div>
+      <div class="thread steward" style="width:48%; top:41%;"></div>
+      <div class="thread carekin" style="width:39%; top:59%;"></div>
+      <div class="thread meaning" style="width:44%; top:76%;"></div>
+      
+      <!-- Subtle ripple flow lines -->
+      <div class="ripple-line" style="top:35%; left:12%; width:55%; animation-delay:0.2s;"></div>
+      <div class="ripple-line" style="top:68%; left:20%; width:48%; animation-delay:1.1s;"></div>
+    </div>
+
+    <div style="display:flex; gap:8px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
+      <div class="ring self">
+        <div>Self<br><span class="mastery">Guardian</span></div>
+        <div class="energy-bar"><div class="energy-fill" style="width:78%"></div></div>
+      </div>
+      <div class="ring steward">
+        <div>Stew<br><span class="mastery">Weaver</span></div>
+        <div class="energy-bar"><div class="energy-fill" style="width:91%"></div></div>
+      </div>
+      <div class="ring carekin">
+        <div>CareKin<br><span class="mastery">Luminary</span></div>
+        <div class="energy-bar"><div class="energy-fill" style="width:64%"></div></div>
+      </div>
+      <div class="ring meaning">
+        <div>Meaning<br><span class="mastery">Guardian</span></div>
+        <div class="energy-bar"><div class="energy-fill" style="width:83%"></div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; font-size:0.85rem;">
+      <strong>Active Ripples</strong> (last 3)
+      <div style="margin-top:6px; font-size:0.8rem; line-height:1.3;">
+        • Stewardship leak fixed → +CareKin respite suggestion<br>
+        • Self habit streak 12d → Meaning legacy echo unlocked<br>
+        • IRL CareKin coffee logged (photo) → Harmony +8%
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 style="margin-top:0; font-size:1rem;">Suggested Weave Quests</h3>
+    
+    <div class="quest">
+      <div class="quest-header">
+        <span>🌱 Redirect Savings to IRL Experience</span>
+        <span class="badge">Stewardship + CareKin</span>
+      </div>
+      <div class="subtle">Audit one subscription. Redirect $18/mo saved to a shared meal or outing with kin. Log photo + reflection.</div>
+      <div style="margin-top:8px;"><button class="btn" onclick="completeQuest(this)">Accept &amp; Weave</button> <span class="subtle">+18 Essence • Multi-ripple</span></div>
+    </div>
+
+    <div class="quest">
+      <div class="quest-header">
+        <span>📖 Echo a Past Legacy Moment</span>
+        <span class="badge">Meaning</span>
+      </div>
+      <div class="subtle">Revisit your "first apartment" story. Add one new reflection or photo. Connect to current Self habit.</div>
+      <div style="margin-top:8px;"><button class="btn" onclick="completeQuest(this)">Start Echo</button> <span class="subtle">+12 Essence</span></div>
+    </div>
+
+    <div class="quest">
+      <div class="quest-header">
+        <span>🤝 Schedule Care Respite</span>
+        <span class="badge">CareKin</span>
+      </div>
+      <div class="subtle">Delegate or book 2 hours relief this week. Log outcome for ripple credit.</div>
+      <div style="margin-top:8px;"><button class="btn secondary">View in Calendar</button></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3 style="margin-top:0; font-size:1rem;">Legacy Tapestry (Growing)</h3>
+    <div class="tapestry">
+      <div class="stitch" style="top:22%; left:5%; width:18%; transform:rotate(12deg);"></div>
+      <div class="stitch" style="top:38%; left:25%; width:32%; transform:rotate(-8deg);"></div>
+      <div class="stitch" style="top:55%; left:12%; width:25%; transform:rotate(22deg);"></div>
+      <div class="stitch" style="top:71%; left:48%; width:29%; transform:rotate(-14deg);"></div>
+      <div style="position:absolute; bottom:8px; right:10px; font-size:0.7rem; opacity:0.5;">12 stitches • L11</div>
+    </div>
+    <div class="subtle" style="margin-top:6px;">Click to echo or add story (opens Thread detail)</div>
+  </div>
+
+  <div class="section">
+    <strong>Calm Tools (Amplifiers)</strong> <span class="subtle">• 3 available</span><br>
+    <button class="btn secondary" style="margin:4px 4px 0 0; font-size:0.8rem;">🛡️ Grace (protect streak)</button>
+    <button class="btn secondary" style="margin:4px 4px 0 0; font-size:0.8rem;">🔁 Double Ripple (next event)</button>
+    <button class="btn secondary" style="margin:4px 4px 0 0; font-size:0.8rem;">🪡 Redirect Lens</button>
+    <div class="subtle" style="margin-top:4px;">Use after reflection. Temporary. Essence cost optional in premium.</div>
+  </div>
+
+  <div style="text-align:center; margin:16px 0;">
+    <button class="btn" onclick="simulateRipple()">Simulate Ripple Event</button>
+    <button class="btn secondary" onclick="showBreak()">Take Brain Break</button>
+  </div>
+
+  <div class="footer">
+    All local • Privacy-first • Ripples drive real life • Close app after weaving.
+    <br>Mock for spec validation. See ONEWEAVE_GAMIFICATION_SPEC.md
+  </div>
+
+  <script>
+    let essence = 142, level = 11, harmony = 87;
+    function updateHUD() {
+      document.getElementById('essence').textContent = essence;
+      document.getElementById('level').textContent = level;
+      document.getElementById('harmony').textContent = harmony;
+    }
+    function completeQuest(el) {
+      essence += 18;
+      harmony = Math.min(100, harmony + 4);
+      el.textContent = 'Weaved ✓';
+      el.disabled = true;
+      updateHUD();
+      showCelebration('Ripple chain started. Consider closing the app for an IRL moment.');
+    }
+    function simulateRipple() {
+      const weave = document.getElementById('weave');
+      weave.style.boxShadow = '0 0 0 4px rgba(92,78,58,0.15)';
+      setTimeout(() => weave.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)', 900);
+      essence += 5;
+      harmony = Math.min(100, harmony + 2);
+      updateHUD();
+      // Add a temporary stitch
+      const s = document.createElement('div');
+      s.className = 'stitch';
+      s.style.top = (30 + Math.random()*50) + '%';
+      s.style.left = (10 + Math.random()*30) + '%';
+      s.style.width = (15 + Math.random()*20) + '%';
+      document.querySelector('.tapestry').appendChild(s);
+      setTimeout(() => s.remove(), 2500);
+    }
+    function showBreak() {
+      const msg = document.createElement('div');
+      msg.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:white; padding:14px 20px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.1); font-size:0.9rem;';
+      msg.innerHTML = '🌬️ Breathe. OneWeave pauses here.<br><small>Return when ready for real life.</small>';
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 2600);
+    }
+    function showCelebration(text) {
+      const c = document.createElement('div');
+      c.style.cssText = 'position:fixed; top:30%; left:50%; transform:translate(-50%,-50%); background:white; padding:16px 22px; border-radius:12px; box-shadow:0 6px 24px rgba(0,0,0,0.12); max-width:240px; text-align:center; font-size:0.9rem;';
+      c.innerHTML = '✨ ' + text + '<br><button onclick="this.parentElement.remove()" style="margin-top:8px; font-size:0.8rem;">Close</button>';
+      document.body.appendChild(c);
+    }
+    // Keyboard support for demo feel
+    document.addEventListener('keydown', e => { if (e.key === 'r') simulateRipple(); if (e.key === 'b') showBreak(); });
+    updateHUD();
+    // Gentle initial pulse
+    setTimeout(() => {
+      const w = document.getElementById('weave');
+      w.style.transition = 'box-shadow 1.2s';
+      w.style.boxShadow = '0 0 0 3px rgba(74,112,67,0.12)';
+      setTimeout(() => w.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)', 1400);
+    }, 800);
+    console.log('%c[OneWeave Mock] Calm gamification preview ready. See full spec.', 'color:#888');
+  </script>
+</body>
+</html>
