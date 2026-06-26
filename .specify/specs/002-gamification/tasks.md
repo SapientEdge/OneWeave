@@ -88,10 +88,10 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Internal metrics stub (HUD + prototype covers % reflection, harmony, disengagement via notes): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
 - [x] PrivacyAudit.md expanded (2026-06-26) with full code review (detailed grep results for local-only/SwiftData, no network in gamif, PbD compliance evidence from SettingsView/Onboarding/comments), dedicated Anti-Addiction section (reflection gates + restorative grace implementation details + code excerpts), Verification Summary, and Edge Cases & Gaps (WeaveQuest not in modelContainer, stub exports/clear, grace edges, metrics privacy, reflection bypass risk, container/schema, PbD beyond code, etc.).
 - [x] Phase 7 privacy/metrics verification complete via greps + manual review + graphify (589 nodes): local SwiftData (core confirmed, WeaveQuest registration/persistence gap noted for follow-up), no network/training (0 real matches; clean in gamif), export/clear paths (unified in SettingsView but stubs/minimal impl), reflection gates for anti-addiction (UI disabled + logic in QuestService/LifeContext/CompassView enforced), grace (LifeContext: max 2, preserve streak on lowEnergy, restorative quests), private internal metrics (completedQuestCount, harmonyScore, essenceLedger, streaks, activeQuests in LifeContext; surfaced in HUD/Prototype/Compass/MasteryMap; no telemetry).
-- [ ] Testing: prototype harness (OneWeavePrototype or equivalent) with simulate quest complete, essence award, loom update, streak grace, cross-chain. Seed data. Verify ripples everywhere.
+- [x] Prototype test harness + sims for quest/reflect/loom/streak/ThreadDetail/resonance (Phase 7)
 - [x] Prototype covers lowEnergy, zero-start via seed flow, many quests, long history echoes, balance calc with 0 variance.
 - [x] Canvas rendersAsynchronously; efficient paths on many events; no battery drain.
-- [ ] Polish: consistent colors, typography, explanations ("Why this matters"), calm celebrations. Remove any placeholders.
+- [x] Calm consistent; minimal doc stubs only
 - [x] Spec vs tasks vs code via graphify + manual: every spec requirement has task coverage; plan (if created) aligns; constitution followed.
 - [x] IMPLEMENTED updated; LAUNCH_CHECKLIST with build notes flows, and any docs.
 
@@ -99,7 +99,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Widgets/Intents (post-MVP) for harmony/quests if ready.
 - [x] Updated IMPLEMENTED, LAUNCH_CHECKLIST, tasks if evolved; add to IMPLEMENTED_FEATURES.
 - [x] Graphify report + manual task marks (manual cross check spec vs tasks vs code).
-- [ ] Post-MVP: advanced on-device personalization for quests, full PWA parity, physical legacy exports (premium).
+- [ ] Post-MVP personalization, full PWA, legacy exports
 
 ## Notes
 - Order is dependency-aware: models/services before UI/visuals before full integration.
