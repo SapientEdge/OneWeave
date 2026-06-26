@@ -59,6 +59,26 @@ struct OneWeavePrototype: View {
                                     demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
                                 }
                             }
+
+                            // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
+                            Button("Show Mastery Map + Ledger") {
+                                if let ctx = contexts.first {
+                                    let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
+                                    let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
+                                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
+                            Button("Spend 10 Essence for InsightMagnifier (stub)") {
+                                if let ctx = contexts.first {
+                                    if ctx.spendEssenceForAmplifier(.insightMagnifier) {
+                                        demoNote = "Spent for amplifier! Essence now \(Int(ctx.weaveEssence)). Boost would improve suggestions."
+                                    } else {
+                                        demoNote = "Not enough essence for amplifier."
+                                    }
+                                }
+                            }
                             .buttonStyle(.bordered)
 
                             Button("Echo past weave (legacy ripple + Meaning mastery)") {
@@ -144,6 +164,26 @@ struct OneWeavePrototype: View {
                                     svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
                                     ctx.awardBonusEssence(5, reason: "resonance")
                                     demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
+                                }
+                            }
+
+                            // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
+                            Button("Show Mastery Map + Ledger") {
+                                if let ctx = contexts.first {
+                                    let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
+                                    let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
+                                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
+                            Button("Spend 10 Essence for InsightMagnifier (stub)") {
+                                if let ctx = contexts.first {
+                                    if ctx.spendEssenceForAmplifier(.insightMagnifier) {
+                                        demoNote = "Spent for amplifier! Essence now \(Int(ctx.weaveEssence)). Boost would improve suggestions."
+                                    } else {
+                                        demoNote = "Not enough essence for amplifier."
+                                    }
                                 }
                             }
                             .buttonStyle(.bordered)

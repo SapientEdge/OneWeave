@@ -327,6 +327,26 @@ final class LifeContext {
     }
     
     /// Public helper for quest completions etc to award bonus
+
+// Phase 2 essence economy stub: simple amplifiers (spend essence for temporary boosts)
+enum Amplifier: String, CaseIterable {
+    case selfFocus = "SelfFocus"
+    case insightMagnifier = "InsightMagnifier"
+    case streakShield = "StreakShield"
+}
+
+extension LifeContext {
+    func spendEssenceForAmplifier(_ amp: Amplifier, amount: Double = 10) -> Bool {
+        if weaveEssence >= amount {
+            weaveEssence -= amount
+            essenceLedger.append("-\(Int(amount)) for \(amp.rawValue) amplifier")
+            // In full: apply temporary boost (e.g. to suggestions or harmony)
+            return true
+        }
+        return false
+    }
+}
+
     func awardBonusEssence(_ amount: Double, reason: String = "weave") {
         weaveEssence += amount
         updateLevelIfNeeded()

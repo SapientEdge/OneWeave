@@ -67,3 +67,11 @@
 All features connected via events/state/gamification. Ready for production packaging and review. (See LAUNCH_CHECKLIST.md + 002-gamification tasks for remaining polish items.)
 
 (Verified post-subagent + manual: re-reads, grep for quest/reflection/essence/streak, placeholder scan ~0 in gamif paths, git diffs.)
+## Latest Gamification Progress (post-Phase 4/5 starters)
+- **Mastery & Resonance**: Cumulative gains in LifeContext (ripples + quests + harmony + cross-domain ticks). Resonance combos award bonus essence + mastery.
+- **Visual Living Loom**: SimpleLivingLoomView in Compass (nodes sized by tier 1-4, resonance connections on high harmony, state-driven shadows/pulses). ThreadRingView extended lightly.
+- **HUD/Visuals**: GamificationHUD (L# + essence + 🔥streak), mastery badges per thread, streak dots progress.
+- **Demos**: Prototype has generate/complete quests + reflection, resonance/echo buttons (cross mastery, legacy ripples). PWA has dynamic loom + streak visual.
+- **Anti-addiction/Privacy**: Reflection gate required for full quest award; grace on streaks; all local SwiftData, no externals.
+- **Verification**: Prototype tests flows; ~2 placeholders (docs only); tasks.md updated for Phases 1/4/5/6/7.
+- **PWA Sync**: Enhanced with mastery/resonance visuals, reflection modal (earlier).

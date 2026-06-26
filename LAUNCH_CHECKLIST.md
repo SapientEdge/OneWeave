@@ -92,3 +92,9 @@ Load `agent-squad-orchestrator` + `squad-repo-native-teams` + `agents-best-pract
 Example: "Register Architect, Coder, Tester, SecurityAuditor. Supervisor coordinates quest UI feature per 002 spec."
 
 Launch when checklist green. User controls final build/submit.
+## Latest Build Notes (gamification MVP)
+- Visuals: SimpleLivingLoom + mastery/streak in Compass; test in Prototype tab.
+- Mastery/Resonance: Functional in LifeContext; demo buttons show cross effects.
+- Verification: Run prototype journeys for quests + resonance + echoes. Check HUD updates.
+- Privacy: Confirmed no external calls in gamif code; all local.
+- Next for launch: Expand loom to Canvas if needed; add simple MasteryMapView stub; full ThreadDetail gamif hooks (post-MVP ok).
