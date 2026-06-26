@@ -31,6 +31,9 @@ struct MainTabView: View {
         TabView {
             NavigationStack {
                 CompassView()
+                    .navigationDestination(for: String.self) { dest in
+                        if dest == "MasteryMap" { MasteryMapView() }
+                    }
                     .environment(stateMachine)
             }
             .tabItem {

@@ -1,6 +1,10 @@
 import SwiftUI
 import SwiftData
 
+
+// Privacy: all gamification (essence, mastery, quests, loom state) is local SwiftData only.
+// No network, no external calls, no training. Export/clear works via Settings. Reflection gates anti-addiction.
+
 struct CompassView: View {
     @Environment(\\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]

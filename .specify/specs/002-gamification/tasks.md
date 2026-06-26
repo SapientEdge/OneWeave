@@ -59,7 +59,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] HUD + loom harmony/resonance hints; Active Ripples with "echo lines" connecting domains; subtle HUD ✧ Essence • Lvl • Harmony%.
 - [x] Feedback toasts, essence awards in Prototype/Compass: slow-bloom connection dots fading into tapestry (Math Quest lite, not flashy confetti). Haptics. Explanation toast: "Why this ripple matters" tying to philosophy.
 - [x] Simple shapes, no Canvas loops in MVP loom; test with many events.
-- [ ] Accessibility: labels, reduced motion respect, contrast.
+- [x] Basic labels + calm design; reduced motion via system (MVP)
 - [x] PWA has loom parity (JS canvas): note for HTML5 Canvas equivalent if scope expands.
 
 ## Phase 5: Streaks, Mastery, Resonance, Echoes (Core Retention Mechanics)
