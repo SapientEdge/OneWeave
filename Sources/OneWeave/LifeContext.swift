@@ -20,6 +20,24 @@ final class LifeContext {
     var currentStateDetail: String = ""
     var lastStateTransition: Date = Date()
     
+    // === Full Gamification (local-only, Spec Kit 002 compliant, calm & anti-addictive) ===
+    // XP/Essence tracking - earned on weaves/ripples/quests, powers level & mastery
+    var weaveEssence: Double = 0
+    var weaveLevel: Int = 1
+    // Per-thread mastery 1=Novice ... 4=Luminary (updated on impactful events)
+    var masteryTiers: [String: Int] = ["Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1]
+    var harmonyScore: Double = 0.5
+    // Streak with restorative grace (no punitive reset; lowEnergy suggests restoration)
+    var globalWeaveStreak: Int = 0
+    var lastActiveWeaveDate: Date = Date()
+    var graceDaysUsed: Int = 0
+    var maxGraceDays: Int = 2
+    
+    // Active quests and completed count for retention
+    var activeQuests: [UUID] = []
+    var completedQuestCount: Int = 0
+    var essenceLedger: [String] = []  // lightweight log: "+5 for goal complete @Self"
+    
     init() {}
 
     // Improved event-driven aggregation from TimelineEvents
@@ -86,6 +104,11 @@ final class LifeContext {
         // === Formal AppStateMachine: transitions triggered by TimelineEvents ===
         // Updates currentAppState + detail so Compass/History reflect live state with colors/animations.
         applyStateTransition(from: event)
+        
+        // === Basic Gamification: award on every ripple/weave (ties to state machine + threads) ===
+        awardEssenceForEvent(event)
+        updateMasteryFromEvent(event)
+        updateHarmonyAndStreak(event)
     }
     
     // Recompute aggregates from a batch of recent events (for full refresh)
@@ -182,6 +205,126 @@ final class LifeContext {
     /// Time since last state change (supports decay UI logic / feedback)
     var timeInCurrentState: TimeInterval {
         Date().timeIntervalSince(lastStateTransition)
+    }
+    
+    // MARK: - Basic Gamification (local only, tied to TimelineEvent + state machine)
+    
+    private func awardEssenceForEvent(_ event: TimelineEvent) {
+        var amount: Double = 2.0  // base per weave/ripple - purposeful, not grindy
+        
+        // Multipliers for cross-thread ripples (core mechanic)
+        if event.linkedThreads.count > 1 {
+            amount += Double(event.linkedThreads.count) * 1.2
+        }
+        if event.linkedThreads.count >= 3 {
+            amount += 3.0  // tasty cross-domain bonus
+        }
+        
+        // Bonus for high-impact weave types (complete, win, quest, story, habit)
+        let type = event.type.lowercased()
+        if type.contains("complete") || type.contains("win") || type.contains("quest") || type.contains("story") || type.contains("habit_complete") {
+            amount += 5.0
+        }
+        if event.affectsEnergy {
+            amount += 1.0
+        }
+        
+        weaveEssence += amount
+        
+        // Level up logic (simple thresholds)
+        updateLevelIfNeeded()
+    }
+    
+    private func updateLevelIfNeeded() {
+        let threshold = Double(weaveLevel * 25 + 10)  // e.g. L1: ~35, L2:~60 etc - scales gently
+        if weaveEssence >= threshold {
+            weaveLevel += 1
+            // Note: UI will show "Level Up!" feedback; mastery may also advance
+        }
+    }
+    
+    private func updateMasteryFromEvent(_ event: TimelineEvent) {
+        let thread = event.thread
+        guard var currentTier = masteryTiers[thread] else { return }
+        
+        let type = event.type.lowercased()
+        // Impactful actions advance mastery (not every event)
+        if type.contains("complete") || type.contains("win") || type.contains("story_captured") || type.contains("habit_complete") || type.contains("leak_fixed") || (event.linkedThreads.count > 1) {
+            if Int.random(in: 0..<3) == 0 || currentTier < 2 {  // bias early progress for prototype demo
+                masteryTiers[thread] = min(4, currentTier + 1)
+            }
+        }
+        // Also passive accum from volume
+        if (eventCount % 4 == 0) && currentTier < 3 {
+            // occasionally tick
+            if masteryTiers[thread] == currentTier {
+                masteryTiers[thread] = min(4, currentTier + 1)
+            }
+        }
+    }
+    
+    private func updateHarmonyAndStreak(_ event: TimelineEvent) {
+        // Harmony: based on active cross-domain coverage (ties to existing activeThreads)
+        let coverage = min(4, Double(activeThreads.count))
+        harmonyScore = min(1.0, 0.4 + (coverage * 0.15))
+        
+        // Streak with restorative grace (per 002 spec: no hard reset, suggest restoration on lowEnergy)
+        let now = Date()
+        let lastDay = Calendar.current.startOfDay(for: lastActiveWeaveDate)
+        let today = Calendar.current.startOfDay(for: now)
+        
+        if lastDay != today || globalWeaveStreak == 0 {
+            if energyProfile == .low && graceDaysUsed < maxGraceDays {
+                graceDaysUsed += 1
+                // Do not increment streak on grace, but preserve it
+            } else {
+                globalWeaveStreak += 1
+                graceDaysUsed = 0
+            }
+        }
+        lastActiveWeaveDate = now
+        
+        // On high harmony or cross weave -> potential highFlow state synergy
+    }
+    
+    /// Complete a quest with reflection (full reward requires reflection for anti-grind)
+    func completeQuest(_ questId: UUID, reflection: String, context: ModelContext) {
+        weaveEssence += 10  // base quest bonus
+        completedQuestCount += 1
+        activeQuests.removeAll { $0 == questId }
+        
+        // Update mastery/harmony/streak
+        let questEvent = TimelineEvent(
+            type: "quest_completed",
+            thread: "Self", // default; can be enhanced
+            summary: "Quest completed with reflection",
+            payload: ["reflection": reflection],
+            linkedThreads: ["Self"],
+            affectsEnergy: true
+        )
+        updateFromEvent(questEvent)
+        
+        // Log to ledger
+        essenceLedger.append("+\(10) for quest complete with reflection")
+        if essenceLedger.count > 20 { essenceLedger.removeFirst() }
+    }
+    
+    /// Public helper for quest completions etc to award bonus
+    func awardBonusEssence(_ amount: Double, reason: String = "weave") {
+        weaveEssence += amount
+        updateLevelIfNeeded()
+    }
+    
+    /// Computed for UI progress (tasty level badge)
+    var levelProgress: Double {
+        let threshold = Double(weaveLevel * 25 + 10)
+        let prev = Double((weaveLevel - 1) * 25 + 10)
+        let span = max(1.0, threshold - prev)
+        return max(0, min(1.0, (weaveEssence - prev) / span))
+    }
+    
+    var essenceDisplay: String {
+        "✧ \(Int(weaveEssence))"
     }
 }
 
