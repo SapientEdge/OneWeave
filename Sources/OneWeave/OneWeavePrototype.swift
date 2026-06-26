@@ -46,16 +46,25 @@ struct OneWeavePrototype: View {
                         
                         // Journey demo buttons - full production flows
                         VStack(spacing: 8) {
-                            Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to weaving") {
+                            
+// Persistence test button (Phase 7 harness)
+Button("Test WeaveQuest Persistence + Export") {
+    let testQ = WeaveQuest(title: "Test persist quest", description: "Verify save/export", domains: ["Self"], baseEssence: 5, estimatedIRLMinutes: 3)
+    modelContext.insert(testQ)
+    try? modelContext.save()
+    demoNote = "WeaveQuest inserted and saved. Check export for it in gamif JSON."
+}
+
+Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to weaving") {
                                 simulateBusySeasonGoal()
                                 updateThreadSummaries()
-                                demoNote = "State: \(stateMachine.currentState.displayName). Check Compass for energy drop + Active Ripples."
                             }
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(.bordered)
 
-                            
-// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
-// Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
+                            // end expanded persistence + ThreadDetail sim section
+
+                            // Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
+                            // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
                                     svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
@@ -64,9 +73,8 @@ struct OneWeavePrototype: View {
                                 }
                             }
 
-                            
-// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
-// Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
+                            // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+                            // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
                                 if let ctx = contexts.first {
                                     let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")

@@ -76,39 +76,77 @@ struct SettingsView: View {
         }
     }
     
-        private func exportAllData() {
-        var export = "OneWeave Full Export (Gamification + Core)
+    private func exportAllData() {
+        // Full gamif export: serializes actual WeaveQuest objects (with status, reflection, etc.),
+        // masteryTiers, full essenceLedger, streaks/grace details, LifeContext gamif aggregates.
+        // Uses JSON for persistence verification + audit completeness (see PrivacyAudit.md edge cases:
+        // quests fully included now, not stub summary; WeaveQuest in containers; clear already covers).
+        // All local SwiftData; no network. For verification of persistence.
+        var export: [String: Any] = [
+            "metadata": [
+                "exportedAt": ISO8601DateFormatter().string(from: Date()),
+                "app": "OneWeave",
+                "exportType": "full_gamification",
+                "privacy": "All data local SwiftData only. No cloud. PbD: data minimization, user consent/control via export/clear. See PrivacyAudit.md for full review, edge cases addressed (full WeaveQuest serialization, no dangling refs, reflection gates separate).",
+                "note": "Actual WeaveQuest list + mastery + ledger full + streaks. Full events/threads/ripples see History and Threads tabs."
+            ]
+        ]
 
-"
-        var gamif: [String: Any] = [:]
         if let ctx = contexts.first {
-            gamif["energy"] = ctx.energyProfile.rawValue
-            gamif["harmony"] = Int(ctx.harmonyScore * 100)
-            gamif["streak"] = ctx.globalWeaveStreak
-            gamif["grace_used"] = ctx.graceDaysUsed
-            gamif["essence"] = ctx.weaveEssence
-            gamif["level"] = ctx.weaveLevel
-            gamif["completed_quests"] = ctx.completedQuestCount
-            gamif["active_quests_count"] = ctx.activeQuests.count
-            gamif["mastery_tiers"] = ctx.masteryTiers
-            gamif["essence_ledger"] = Array(ctx.essenceLedger.suffix(5))
+            let streakInfo: [String: Any] = [
+                "globalWeaveStreak": ctx.globalWeaveStreak,
+                "lastActiveWeaveDate": ISO8601DateFormatter().string(from: ctx.lastActiveWeaveDate),
+                "graceDaysUsed": ctx.graceDaysUsed,
+                "maxGraceDays": ctx.maxGraceDays
+            ]
+            let gamif: [String: Any] = [
+                "energyProfile": ctx.energyProfile.rawValue,
+                "harmonyScore": ctx.harmonyScore,
+                "weaveEssence": ctx.weaveEssence,
+                "weaveLevel": ctx.weaveLevel,
+                "masteryTiers": ctx.masteryTiers,
+                "completedQuestCount": ctx.completedQuestCount,
+                "activeQuests": ctx.activeQuests.map { $0.uuidString },
+                "essenceLedgerFull": ctx.essenceLedger,
+                "streak": streakInfo,
+                "levelProgress": ctx.levelProgress
+            ]
+            export["lifeContextGamif"] = gamif
         }
-        if let qs = try? modelContext.fetch(FetchDescriptor<WeaveQuest>()) {
-            gamif["quests"] = qs.map { q in
-                ["id": q.id.uuidString, "title": q.title, "description": q.questDescription, "domains": q.domains, "base_essence": q.baseEssence, "status": q.status.rawValue, "reflection": q.reflectionNote ?? ""]
-            }
-            export += "Gamif JSON:
-"
-            if let data = try? JSONSerialization.data(withJSONObject: gamif, options: .prettyPrinted), let s = String(data: data, encoding: .utf8) {
-                export += s + "
 
-"
-            }
+        // Serialize actual WeaveQuest (full, not summary/mentions)
+        let questsData: [[String: Any]] = quests.map { q in
+            [
+                "id": q.id.uuidString,
+                "title": q.title,
+                "questDescription": q.questDescription,
+                "domains": q.domains,
+                "baseEssence": q.baseEssence,
+                "status": q.status.rawValue,
+                "estimatedIRLMinutes": q.estimatedIRLMinutes,
+                "validationHints": q.validationHints,
+                "linkedEventId": q.linkedEventId?.uuidString ?? NSNull(),
+                "reflectionNote": q.reflectionNote ?? NSNull(),
+                "completedAt": q.completedAt != nil ? ISO8601DateFormatter().string(from: q.completedAt!) : NSNull(),
+                "createdAt": ISO8601DateFormatter().string(from: q.createdAt)
+            ]
         }
-        export += "See History and Threads for full events/ripples.
-Exported at \(Date())
-Privacy: All local SwiftData. No cloud."
-        exportData = export
+        export["weaveQuests"] = questsData
+        export["weaveQuestsCount"] = quests.count
+
+        // Lightweight core for verification (privacy min)
+        export["core"] = [
+            "activeThreads": contexts.first?.activeThreads ?? [],
+            "eventCount": contexts.first?.eventCount ?? 0
+        ]
+
+        if let jsonData = try? JSONSerialization.data(withJSONObject: export, options: [.prettyPrinted, .sortedKeys]),
+           let jsonString = String(data: jsonData, encoding: .utf8) {
+            exportData = jsonString
+        } else {
+            exportData = "{\"error\": \"Failed to serialize full export\"}"
+        }
+
         showExport = true
         if hapticEnabled { generateHaptic(.success) }
     }
