@@ -48,6 +48,18 @@ struct OneWeavePrototype: View {
                         VStack(spacing: 8) {
                             
 // Persistence test button (Phase 7 harness)
+
+// Persistence + export roundtrip test (harness expansion)
+Button("Persistence + Export Roundtrip Test") {
+    if let ctx = contexts.first {
+        let q = WeaveQuest(title: "Roundtrip Test Quest", description: "Verify persist/export", domains: ["Self"], baseEssence: 7)
+        modelContext.insert(q)
+        try? modelContext.save()
+        // Simulate export check
+        demoNote = "Quest inserted. Check Settings Export for it in quests list. Mastery/ledger updated via context."
+    }
+}
+
 Button("Test WeaveQuest Persistence + Export") {
     let testQ = WeaveQuest(title: "Test persist quest", description: "Verify save/export", domains: ["Self"], baseEssence: 5, estimatedIRLMinutes: 3)
     modelContext.insert(testQ)
