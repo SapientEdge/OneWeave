@@ -78,6 +78,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
                             // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
@@ -89,6 +123,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
                             // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
@@ -114,6 +182,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             
 
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
@@ -369,6 +471,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
                             // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
@@ -383,6 +519,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             
 
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
                             Button("Show Mastery Map + Ledger") {
@@ -408,6 +578,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             
 
 // Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
+// 
+        // Phase 2 essence economy test buttons (parallel verification)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Button("Apply Gentle Decay") {
+                context.applyGentleDecay()
+                lastAction = "Gentle decay applied (if inactive)"
+            }
+            Button("Spend for InsightMagnifier") {
+                let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
+                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+            }
+            Button("Forge Custom Quest") {
+                if let forged = QuestService.shared.forgeCustomQuest(
+                    title: "Test custom: 10 min walk",
+                    description: "Walk outside and note one observation.",
+                    domains: ["Self"],
+                    estimatedIRLMinutes: 10,
+                    baseEssence: 12,
+                    context: context
+                ) {
+                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                } else {
+                    lastAction = "Forge failed (need 20 essence)"
+                }
+            }
+            Button("Echo Past Event") {
+                context.echoPastEvent()
+                lastAction = "Echo triggered +1 essence"
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
