@@ -45,7 +45,16 @@ struct SettingsView: View {
                         .font(.caption2)
                 }
                 
-                Section("Journey Preferences") {
+                
+                Section("Internal Metrics (private)") {
+                    if let ctx = contexts.first {
+                        Text("Completed quests: \(ctx.completedQuestCount) (reflections drive full mastery)")
+                        Text("Harmony: \(Int(ctx.harmonyScore * 100))%")
+                        Text("Global streak: \(ctx.globalWeaveStreak) (grace: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays))")
+                    }
+                }
+
+Section("Journey Preferences") {
                     Text("Energy thresholds and season awareness are automatic based on your threads.")
                         .font(.caption)
                 }
