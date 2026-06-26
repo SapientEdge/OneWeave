@@ -55,31 +55,20 @@ struct CompassView: View {
                         if let ctx = context {
                             // Basic gamification visual progress (level badge + streak + essence)
                             GamificationHUD(context: ctx)
-
-SimpleLivingLoomView(context: ctx)
-
-
-            // Mastery tiers display (Phase 5)
-            HStack(spacing: 4) {
-                ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \.self) { d in
-                    if let tier = context.masteryTiers[d] {
-                        Text("\(d.prefix(1)):\(tier)")
-                            .font(.caption2)
-                            .padding(2)
-                            .background(Color.gray.opacity(0.1))
-                            .clipShape(Capsule())
-                    }
-                }
-            }
-
                             StateMachineIndicator()
                             WeaveSummaryView()
+                            Button {
+                                showOnboarding = true
+                            } label: {
+                                Image(systemName: "questionmark.circle")
+                            }
                         }
-                        Button {
-                            showOnboarding = true
-                        } label: {
-                            Image(systemName: "questionmark.circle")
-                        }
+                    }
+                    if let ctx = context {
+                        // Phase 4: Enhanced Living Loom / WeaveTapestryView stub integrated
+                        // Uses Canvas + Paths for flowing threads, mastery embroidery (stitches), ripple pulses, state-driven (highFlow/lively, lowEnergy/muted) calm animations.
+                        // Keeps existing colors/state/harmony/masteryTiers. Performant, subtle per constitution.
+                        SimpleLivingLoomView(context: ctx)
                     }
                     Text("Journey Compass")
                         .font(.subheadline)

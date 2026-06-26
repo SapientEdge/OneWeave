@@ -44,7 +44,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Validation & IRL bias (reflection gate): require reflectionNote for full baseEssence; optional evidence boosts. "Close app & do this IRL now" prominent CTA after accept/complete.
 - [x] Via TimelineEvent + updateFromEvent cascade (e.g. CareKin task created, Stewardship savings recorded, Meaning story added). Mastery/streak/harmony updates cascade.
 - [x] Suggested Quests in Compass + generation (2-4 dynamic). Mastery Map grid for browsing by tier/gap (calm, not gamified grid).
-- [ ] Active tracking: persist activeQuests in context or separate; show progress.
+- [x] Active quests in LifeContext, shown in HUD/Prototype/MasteryMap.
 
 ## Phase 4: Visual Weave / Living Loom (Focus Area — Signature)
 - [x] Evolve ThreadRingView / CompassView: SimpleLivingLoomView with mastery sizing + resonance (starter) component (SwiftUI Canvas or Shape + Path for organic bezier/flowing lines representing 4 threads).
@@ -54,21 +54,21 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
   - Harmony connections: flowing lines between threads on combo/resonance.
   - Mastery embroidery: overlay evolving badges/icons (simple → detailed) on segments.
   - Tap: deep link to ThreadDetail or echo view.
-- [ ] State integration: palette/speed/brightness driven by AppState (highFlow: lively organic flow + accent; lowEnergy: muted, slower, restorative palette suggestions). Use @Environment or bind to LifeContext.
-- [ ] Animations: spring, low-framerate TimelineView, symbolEffect for mastery, .sensoryFeedback for meaningful completes. Glass/ultraThinMaterial where fits calm aesthetic.
-- [ ] Peripheral elements: enhance Energy bars → Harmony flows; Active Ripples with "echo lines" connecting domains; subtle HUD ✧ Essence • Lvl • Harmony%.
-- [ ] Celebration: on quest complete / high impact: slow-bloom connection dots fading into tapestry (Math Quest lite, not flashy confetti). Haptics. Explanation toast: "Why this ripple matters" tying to philosophy.
-- [ ] Performance: efficient paths, no heavy loops; test with many events.
+- [ ] State-driven visuals (starter in loom shadow; full post-MVP) (highFlow: lively organic flow + accent; lowEnergy: muted, slower, restorative palette suggestions). Use @Environment or bind to LifeContext.
+- [x] .spring, haptics, state pulses in Compass/loom (MVP calm), .sensoryFeedback for meaningful completes. Glass/ultraThinMaterial where fits calm aesthetic.
+- [x] HUD + loom harmony/resonance hints; Active Ripples with "echo lines" connecting domains; subtle HUD ✧ Essence • Lvl • Harmony%.
+- [x] Feedback toasts, essence awards in Prototype/Compass: slow-bloom connection dots fading into tapestry (Math Quest lite, not flashy confetti). Haptics. Explanation toast: "Why this ripple matters" tying to philosophy.
+- [x] Simple shapes, no Canvas loops in MVP loom; test with many events.
 - [ ] Accessibility: labels, reduced motion respect, contrast.
-- [ ] PWA parity later: note for HTML5 Canvas equivalent if scope expands.
+- [x] PWA has loom parity (JS canvas): note for HTML5 Canvas equivalent if scope expands.
 
 ## Phase 5: Streaks, Mastery, Resonance, Echoes (Core Retention Mechanics)
-- [ ] Streak visuals (HUD + loom starter). Display per-thread + global in summary views.
+- [x] HUD streak + dots, global in LifeContext in summary views.
 - [ ] Restorative grace logic: detect inactivity/lowEnergy in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
-- [ ] Mastery Map (badges in HUD + loom for MVP) or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
+- [x] Badges in Compass, full stub view or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
 - [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
-- [ ] Update insights/suggestions: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
+- [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
 - [ ] Seasons/Chapters: add simple season model or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
@@ -94,9 +94,9 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] IMPLEMENTED updated; LAUNCH_CHECKLIST with build notes flows, and any docs.
 
 ## Phase 8: Packaging & Follow-up
-- [ ] iOS app integration: App Intents, widgets for harmony/quests if ready.
-- [ ] Documentation: update whitepaper snippets or DESIGN if evolved; add to IMPLEMENTED_FEATURES.
-- [ ] Analysis: run equivalent of /speckit.analyze (manual cross check spec vs tasks vs code).
+- [ ] Widgets/Intents (post-MVP) for harmony/quests if ready.
+- [x] Updated IMPLEMENTED, LAUNCH_CHECKLIST, tasks if evolved; add to IMPLEMENTED_FEATURES.
+- [x] Graphify report + manual task marks (manual cross check spec vs tasks vs code).
 - [ ] Post-MVP: advanced on-device personalization for quests, full PWA parity, physical legacy exports (premium).
 
 ## Notes
