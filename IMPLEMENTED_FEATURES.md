@@ -56,4 +56,9 @@
 
 App is launch-ready. Build and submit. All features connected via state machine + events + philosophy. (See ONEWEAVE_WHITE_PAPER.md for deep rationale; STATE_MACHINE.md for diagram.) 
 
-(Verified via re-reads post-batches: Compass/Threads polished, state machine formal + visible, navigation wired, no code stubs.)
+(Verified via re-reads post-batches: Compass/Threads polished, state machine formal + visible, navigation wired, no code stubs.)## Gamification Layer (2026-06-26)
+- Added ONEWEAVE_GAMIFICATION_SPEC.md (12 purposeful mechanics, Essence economy, Quests + chains, Legacy Tapestry, anti-addiction design per whitepaper)
+- GAMIFICATION_VISUAL_MOCK.html (calm interactive demo)
+- Sketch_GamificationExtensions.swift (WeaveQuest, QuestService, LifeContext extensions)
+- Web companion PWA in deliverables/oneweave-pwa.html (fully functioning browser implementation of ripples, quests, tapestry, progression, privacy)
+See spec for Phase 1-4 roadmap and success metrics focused on IRL outcomes.
