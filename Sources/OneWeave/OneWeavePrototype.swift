@@ -31,7 +31,7 @@ struct OneWeavePrototype: View {
                         Text("OneWeave • One Journey (Production-Ready End-to-End)")
                             .font(.largeTitle.bold())
                         
-                        Text("State: \(stateMachine.currentState.displayName) | Energy: \(context.energyProfile.rawValue) | Events: \(context.eventCount)")
+                        Text("State: \(stateMachine.currentState.displayName) | Energy: \(context.energyProfile.rawValue) | Events: \(context.eventCount) | Essence: \(context.essenceDisplay) | Streak: \(context.globalWeaveStreak)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         
@@ -94,6 +94,29 @@ struct OneWeavePrototype: View {
                             }
                             .buttonStyle(.bordered)
                             .disabled(seeded)
+                            
+                            // Quest demo (MVP gamif - generate + reflect per 002 spec)
+                            Button("Generate Context-Aware Quests") {
+                                if let ctx = contexts.first {
+                                    let qs = QuestService.shared
+                                    let newQuests = qs.generateSuggestedQuests(from: ctx, recentEvents: events)
+                                    demoNote = "Generated \(newQuests.count) quests. IRL examples: \(newQuests.map { $0.title }.joined(separator: "; ")). Switch to Compass tab."
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
+                            Button("Demo: Complete Quest + Reflection (full award)") {
+                                if let ctx = contexts.first {
+                                    let qs = QuestService.shared
+                                    let demoQuest = WeaveQuest(title: "Demo quest: Reflect on today's win", description: "Note one IRL action from a recent weave and the cross-domain effect.", domains: ["Self"], baseEssence: 12, estimatedIRLMinutes: 5, validationHints: "Be specific about the action and insight.")
+                                    ctx.activeQuests.append(demoQuest.id)
+                                    let reflection = "I completed the goal IRL and it freed time for CareKin — harmony up."
+                                    qs.completeWithReflection(questId: demoQuest.id, reflection: reflection, context: ctx, modelContext: modelContext)
+                                    demoNote = "Quest complete with reflection! +10 Essence (full award). Streak: \(ctx.globalWeaveStreak). Check Compass HUD."
+                                    updateThreadSummaries()
+                                }
+                            }
+                            .buttonStyle(.borderedProminent)
                         }
                         
                         if !demoNote.isEmpty {

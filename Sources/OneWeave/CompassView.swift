@@ -15,6 +15,18 @@ struct CompassView: View {
     @State private var lastRippleCount = 0
     @State private var showOnboarding = false
     
+    // Gamification UI state for tasty feedback
+    @State private var weaveFeedback: String = ""
+    @State private var showWeaveFeedback: Bool = false
+    @State private var lastAwardedEssence: Double = 0
+
+    // Quests + reflection gate (per spec: reflection required for full award)
+    @State private var suggestedQuests: [WeaveQuest] = []
+    @State private var showQuestReflection = false
+    @State private var selectedQuest: WeaveQuest? = nil
+    @State private var reflectionText = ""
+    @State private var questService: QuestService? = QuestService.shared
+    
     private var recentEvents: [TimelineEvent] {
         Array(allEvents.prefix(8))
     }
@@ -41,6 +53,8 @@ struct CompassView: View {
                             .font(.largeTitle.bold())
                         Spacer()
                         if let ctx = context {
+                            // Basic gamification visual progress (level badge + streak + essence)
+                            GamificationHUD(context: ctx)
                             StateMachineIndicator()
                             WeaveSummaryView()
                         }
@@ -90,6 +104,66 @@ struct CompassView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    // Gamification visual progress: streak, level, essence (tied to LifeContext + events)
+                    if let ctx = context {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Weave Progress")
+                                .font(.headline.smallCaps())
+                                .foregroundStyle(.secondary)
+                            HStack(spacing: 12) {
+                                // Level badge
+                                VStack {
+                                    Text("L\(ctx.weaveLevel)")
+                                        .font(.headline.bold())
+                                        .foregroundStyle(.indigo)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 2)
+                                        .background(Capsule().fill(Color.indigo.opacity(0.15)))
+                                    Text("Level")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                                // Essence
+                                VStack(alignment: .leading) {
+                                    Text(ctx.essenceDisplay)
+                                        .font(.title3.bold())
+                                        .foregroundStyle(.purple)
+                                    ProgressView(value: ctx.levelProgress)
+                                        .tint(.purple)
+                                        .frame(width: 80)
+                                    Text("to L\(ctx.weaveLevel + 1)")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                                // Streak counter
+                                VStack {
+                                    HStack(spacing: 2) {
+                                        Text("🔥")
+                                        Text("\(ctx.globalWeaveStreak)")
+                                            .font(.headline.bold())
+                                            .foregroundStyle(.orange)
+                                    }
+                                    Text("streak")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                                // Harmony
+                                VStack {
+                                    Text(String(format: "%.0f%%", ctx.harmonyScore * 100))
+                                        .font(.headline.bold())
+                                        .foregroundStyle(.green)
+                                    Text("harmony")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                            .padding(8)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                        .padding(.horizontal)
+                    }
                     
                     // Active Ripples (cross-domain, glass)
                     VStack(alignment: .leading) {
@@ -145,18 +219,103 @@ struct CompassView: View {
                                 .textFieldStyle(.roundedBorder)
                             Button("Weave") {
                                 if !quickCaptureText.isEmpty, let svc = service, let c = context {
+                                    let beforeEssence = c.weaveEssence
                                     let ev = TimelineEvent(thread: "Self", type: "quick_capture", payload: ["text": quickCaptureText], affectsEnergy: true, linkedThreads: ["CareKin", "Stewardship", "Meaning"])
                                     svc.emitEvent(thread: "Self", type: "quick_capture", payload: ["text": quickCaptureText], affectsEnergy: true, linkedThreads: ["CareKin", "Stewardship", "Meaning"])
                                     stateMachine.transition(on: ev, context: c)
+                                    let awarded = max(2.0, c.weaveEssence - beforeEssence)
                                     quickCaptureText = ""
                                     hapticTrigger.toggle()
+                                    // Refresh quests after weave (context-aware per 002 spec)
+                                    if let qs = questService {
+                                        suggestedQuests = qs.generateSuggestedQuests(from: c, recentEvents: recentEvents)
+                                    }
+                                    // Tasty feedback on weaves
+                                    let fb = "✧ +\(Int(awarded)) Essence • L\(c.weaveLevel) • 🔥\(c.globalWeaveStreak) • \(c.harmonyScore > 0.7 ? "High Harmony!" : "Ripple sent!")"
+                                    weaveFeedback = fb
+                                    showWeaveFeedback = true
+                                    lastAwardedEssence = awarded
+                                    // Auto-hide tasty toast
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                        showWeaveFeedback = false
+                                    }
                                 }
                             }
                             .buttonStyle(.borderedProminent)
                         }
+                        
+                        // Tasty feedback on weave (calm, celebratory, fades)
+                        if showWeaveFeedback && !weaveFeedback.isEmpty {
+                            Text(weaveFeedback)
+                                .font(.caption.bold())
+                                .foregroundStyle(.purple)
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 4)
+                                .background(.ultraThinMaterial)
+                                .clipShape(Capsule())
+                                .transition(.scale.combined(with: .opacity))
+                                .animation(.spring, value: showWeaveFeedback)
+                        }
                     }
                     .padding(.horizontal)
-                    
+
+                    // Quests section + reflection gate (insert after quick capture per task)
+                    // Suggested quests from QuestService; reflection required for full essence award
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Suggested Quests")
+                            .font(.headline.smallCaps())
+                            .foregroundStyle(.secondary)
+                        
+                        if suggestedQuests.isEmpty {
+                            Text("No quests yet. Capture more to generate context-aware quests.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        } else {
+                            ForEach(suggestedQuests, id: \.id) { quest in
+                                VStack(alignment: .leading, spacing: 4) {
+                                    HStack {
+                                        Text(quest.title)
+                                            .font(.subheadline.bold())
+                                        Spacer()
+                                        Text(quest.displayEssence)
+                                            .font(.caption.bold())
+                                            .foregroundStyle(.purple)
+                                    }
+                                    Text(quest.questDescription)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                    HStack {
+                                        Text("~\(quest.estimatedIRLMinutes) min IRL")
+                                            .font(.caption2)
+                                            .foregroundStyle(.secondary)
+                                        if !quest.validationHints.isEmpty {
+                                            Text("• \(quest.validationHints.prefix(40))")
+                                                .font(.caption2)
+                                                .foregroundStyle(.orange)
+                                        }
+                                        Spacer()
+                                        Button {
+                                            selectedQuest = quest
+                                            reflectionText = ""
+                                            showQuestReflection = true
+                                            hapticTrigger.toggle()
+                                        } label: {
+                                            Text("Complete & Reflect")
+                                                .font(.caption.bold())
+                                        }
+                                        .buttonStyle(.borderedProminent)
+                                        .tint(.indigo)
+                                        .sensoryFeedback(.selection, trigger: hapticTrigger)
+                                    }
+                                }
+                                .padding(10)
+                                .background(.ultraThinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+
                     // Recent Weaves
                     VStack(alignment: .leading) {
                         Text("Recent Weaves")
@@ -186,17 +345,98 @@ struct CompassView: View {
         }
         .onAppear {
             service = TimelineService(modelContext: modelContext)
+            questService = QuestService.shared
             if contexts.isEmpty {
                 let newCtx = LifeContext()
+                // initial gamif seed for first run
+                newCtx.weaveEssence = 5
+                newCtx.weaveLevel = 1
+                newCtx.globalWeaveStreak = 1
                 modelContext.insert(newCtx)
             }
             if showOnboarding == false && contexts.first != nil {
                 // Auto-show first time (simplified; production would use @AppStorage)
                 showOnboarding = true
             }
+            // Populate suggested quests (after context ready)
+            if let c = contexts.first ?? (try? modelContext.fetch(FetchDescriptor<LifeContext>())).first {
+                suggestedQuests = questService?.generateSuggestedQuests(from: c, recentEvents: recentEvents) ?? []
+            }
         }
         .sheet(isPresented: $showOnboarding) {
             OnboardingView()
+        }
+        .sheet(isPresented: $showQuestReflection) {
+            VStack(spacing: 16) {
+                if let quest = selectedQuest, let ctx = context {
+                    Text("Quest Reflection Gate")
+                        .font(.headline)
+                    Text(quest.title)
+                        .font(.title3.bold())
+                        .multilineTextAlignment(.center)
+                    Text(quest.questDescription)
+                        .font(.body)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                    
+                    Divider()
+                    
+                    Text("Your reflection (required for full award)")
+                        .font(.subheadline.bold())
+                    TextEditor(text: $reflectionText)
+                        .frame(height: 120)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.secondary.opacity(0.3), lineWidth: 1)
+                        )
+                    Text("✧ Reflection unlocks full essence. Be specific about IRL action & insight.")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        .multilineTextAlignment(.center)
+                    
+                    HStack(spacing: 12) {
+                        Button("Cancel") {
+                            showQuestReflection = false
+                            reflectionText = ""
+                        }
+                        .buttonStyle(.bordered)
+                        
+                        Button("Submit for Full Award") {
+                            let trimmed = reflectionText.trimmingCharacters(in: .whitespacesAndNewlines)
+                            if !trimmed.isEmpty, let qs = questService {
+                                let beforeEssence = ctx.weaveEssence
+                                qs.completeWithReflection(questId: quest.id, reflection: trimmed, context: ctx, modelContext: modelContext)
+                                let awarded = max(10.0, ctx.weaveEssence - beforeEssence)
+                                // Tie to existing tasty feedback + haptic
+                                let fb = "✧ Quest +\(Int(awarded)) Essence (reflected) • L\(ctx.weaveLevel) • 🔥\(ctx.globalWeaveStreak) • Ripple complete"
+                                weaveFeedback = fb
+                                showWeaveFeedback = true
+                                lastAwardedEssence = awarded
+                                hapticTrigger.toggle()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                    showWeaveFeedback = false
+                                }
+                                // Refresh quests after completion
+                                if let c = contexts.first {
+                                    suggestedQuests = qs.generateSuggestedQuests(from: c, recentEvents: recentEvents)
+                                }
+                                showQuestReflection = false
+                                reflectionText = ""
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(reflectionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    }
+                    .padding(.top)
+                } else {
+                    Text("Select a quest to reflect on.")
+                        .foregroundStyle(.secondary)
+                    Button("Close") { showQuestReflection = false }
+                        .buttonStyle(.bordered)
+                }
+            }
+            .padding()
+            .presentationDetents([.medium, .large])
         }
         .onChange(of: stateMachine.currentState) { _, _ in
             hapticTrigger.toggle()
@@ -290,4 +530,47 @@ struct WeaveSummaryView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
         }
     }
+}
+
+// Basic gamification visual components for Compass (level badge, streak, essence HUD)
+struct GamificationHUD: View {
+    let context: LifeContext
+    
+    var body: some View {
+        HStack(spacing: 6) {
+            // Level badge - tasty, compact
+            Text("L\(context.weaveLevel)")
+                .font(.caption.bold())
+                .foregroundStyle(.white)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(
+                    Capsule()
+                        .fill(LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing))
+                )
+            
+            // Essence
+            Text(context.essenceDisplay)
+                .font(.caption2.bold())
+                .foregroundStyle(.purple.opacity(0.9))
+            
+            // Streak pill
+            HStack(spacing: 2) {
+                Text("🔥\(context.globalWeaveStreak)")
+                    .font(.caption2.bold())
+                    .foregroundStyle(.orange)
+            }
+            .padding(.horizontal, 4)
+            .background(Capsule().fill(Color.orange.opacity(0.15)))
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 3)
+        .background(.ultraThinMaterial)
+        .clipShape(Capsule())
+    }
+}
+
+// Extend ThreadRingView lightly for mastery (called from existing; visual tier hint)
+extension ThreadRingView {
+    // For future: could accept mastery tier, here we just hint in color for now (prototype keeps simple)
 }
