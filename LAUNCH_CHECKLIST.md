@@ -108,3 +108,12 @@ Launch when checklist green. User controls final build/submit.
 - 24 Swift files, 25 commits on 002-gamification.
 - Prototype + PWA cover full flows (quests, resonance, echoes, mastery, loom, privacy).
 Ready for Xcode/TestFlight drop-in.
+
+## Post parallel delegations (deleg_e0ba750d + deleg_6ed55124 net + direct)
+- Visual Loom: Canvas (flowing threads, mastery embroidery, ripple pulses, state-driven, harmony resonance) in Compass.
+- ThreadDetail: Full gamif (mastery tier/progress/details, active/suggested quests, recent ripples with echo hints).
+- Global SDLC: Graphify 601 nodes (updated); squads for parallel; practices with delegation learnings (Canvas, ThreadDetail, harness).
+- Security: PrivacyAudit expanded; local-only (no externals in gamif); reflection + grace anti-addiction.
+- Testing: Prototype harness + sims (quest reflect, loom update, streak grace, ThreadDetail, resonance).
+- Tasks: MVP (Phases 1-8 core) marked; post-MVP noted.
+24 Swift files; 1 core placeholder; launch artifacts ready.
