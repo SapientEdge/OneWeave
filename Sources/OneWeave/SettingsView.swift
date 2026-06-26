@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Foundation
 
 struct SettingsView: View {
     @Environment(\\.modelContext) private var modelContext
@@ -74,21 +75,38 @@ struct SettingsView: View {
         }
     }
     
-    private func exportAllData() {
-        var export = "OneWeave Full Export (Gamification + Core)\n\n"
+        private func exportAllData() {
+        var export = "OneWeave Full Export (Gamification + Core)
+
+"
+        var gamif: [String: Any] = [:]
         if let ctx = contexts.first {
-            export += "Energy: \(ctx.energyProfile.rawValue)\n"
-            export += "Harmony: \(Int(ctx.harmonyScore * 100))%\n"
-            export += "Global Streak: \(ctx.globalWeaveStreak) (grace used: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays))\n"
-            export += "Essence: \(ctx.weaveEssence) | Level: \(ctx.weaveLevel)\n"
-            export += "Completed Quests: \(ctx.completedQuestCount)\n"
-            export += "Active Quests: \(ctx.activeQuests.count)\n"
-            export += "Essence Ledger (last 5): \(Array(ctx.essenceLedger.suffix(5)))\n\n"
-            export += "Mastery Tiers: \(ctx.masteryTiers)\n\n"
+            gamif["energy"] = ctx.energyProfile.rawValue
+            gamif["harmony"] = Int(ctx.harmonyScore * 100)
+            gamif["streak"] = ctx.globalWeaveStreak
+            gamif["grace_used"] = ctx.graceDaysUsed
+            gamif["essence"] = ctx.weaveEssence
+            gamif["level"] = ctx.weaveLevel
+            gamif["completed_quests"] = ctx.completedQuestCount
+            gamif["active_quests_count"] = ctx.activeQuests.count
+            gamif["mastery_tiers"] = ctx.masteryTiers
+            gamif["essence_ledger"] = Array(ctx.essenceLedger.suffix(5))
         }
-        // Note: full quests/events in History/Threads tabs; WeaveQuest persistence now enabled
-        export += "See History and Threads for full events/ripples/quests.\n"
-        export += "Exported at \(Date())\nPrivacy: All local SwiftData. No cloud."
+        if let qs = try? modelContext.fetch(FetchDescriptor<WeaveQuest>()) {
+            gamif["quests"] = qs.map { q in
+                ["id": q.id.uuidString, "title": q.title, "description": q.questDescription, "domains": q.domains, "base_essence": q.baseEssence, "status": q.status.rawValue, "reflection": q.reflectionNote ?? ""]
+            }
+            export += "Gamif JSON:
+"
+            if let data = try? JSONSerialization.data(withJSONObject: gamif, options: .prettyPrinted), let s = String(data: data, encoding: .utf8) {
+                export += s + "
+
+"
+            }
+        }
+        export += "See History and Threads for full events/ripples.
+Exported at \(Date())
+Privacy: All local SwiftData. No cloud."
         exportData = export
         showExport = true
         if hapticEnabled { generateHaptic(.success) }

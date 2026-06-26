@@ -14,6 +14,7 @@ struct OneWeavePrototype: View {
     @Query private var selfThreads: [BasicSelfThread]
     @Query private var careThreads: [CareKinThread]
     @Query private var meaningThreads: [MeaningThread]
+    @Query private var quests: [WeaveQuest]  // for real persistence verification in harness
     
     @State private var newGoal = ""
     @State private var service: TimelineService? = nil
