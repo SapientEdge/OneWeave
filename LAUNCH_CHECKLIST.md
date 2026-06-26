@@ -156,3 +156,10 @@ Ready for Xcode/TestFlight drop-in.
 - **Updates**: LAUNCH_CHECKLIST, tasks.md, README.md, SettingsView re-read + edited. Export already gamif-complete (v2 capable).
 - **Next**: Post-MVP for widgets full, PWA inline hardening, import UI, personalization code.
 - All re-reads of LAUNCH/IMPLEMENTED/tasks/README/Settings done as part of task.
+
+## Phase 6 Lightweight Views (2026-06-26)
+- EssenceLedgerView.swift: calm transaction list + current balance/stats.
+- QuestsView.swift: suggested/active list + reflection gate modal.
+- MasteryMapView.swift: existing domain tiers + echo practice.
+- Wired in CompassView nav + prototype demos.
+- All local, calm, reuse existing navigation patterns.
