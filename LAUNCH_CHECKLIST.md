@@ -117,3 +117,9 @@ Ready for Xcode/TestFlight drop-in.
 - Testing: Prototype harness + sims (quest reflect, loom update, streak grace, ThreadDetail, resonance).
 - Tasks: MVP (Phases 1-8 core) marked; post-MVP noted.
 24 Swift files; 1 core placeholder; launch artifacts ready.
+
+## Persistence Fix Applied (2026-06-26)
+- WeaveQuest now persisted (modelContainer + queries).
+- Export/clear gamif-complete (essence, mastery, streaks, quests, ledger).
+- PrivacyAudit expanded + verification [x] in tasks.
+- Ready for full Xcode test of persistence flows.

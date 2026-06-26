@@ -113,3 +113,11 @@ Net despite subagent tool errors: strong parallel progress.
 - Testing: Prototype harness + sims for end-to-end (quest reflect, loom update, streak, ThreadDetail, resonance).
 - Tasks 002: MVP items (Phases 1-8 core) marked; post-MVP noted.
 Net: 24 Swift files, low placeholders, launch-ready artifacts.
+
+## Persistence + Audit Close (post-deleg_0ad3f545 + direct fixes 2026-06-26)
+- WeaveQuest persistence: added to modelContainer (App + Prototype), @Query in Compass/History.
+- Settings: export now includes essence, masteryTiers, streaks, grace, active/completed quests, ledger. Clear cascades to WeaveQuest.
+- PrivacyAudit.md: expanded by subagent to 137 lines (code review greps, anti-addiction with reflection gates + grace code excerpts, verification, edge cases). Phase 7 tasks updated.
+- GLOBAL_BEST_PRACTICES: appended with fix details.
+- Placeholders: 0 core. Graphify: 601 nodes.
+- Addresses audit edge case directly.
