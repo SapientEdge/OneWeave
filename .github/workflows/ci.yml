@@ -55,6 +55,24 @@ jobs:
         echo "Sources/OneWeave count verified: $(ls Sources/OneWeave/*.swift | wc -l)"
         echo "Basic validation complete."
 
+    - name: Swift lint stub
+      run: |
+        echo "=== Swift Lint/Test Stub (macOS/Xcode or Docker required for full) ==="
+        echo "SwiftLint stub: would run 'swiftlint lint --strict --reporter github' or via action"
+        echo "  Install: brew install swiftlint (mac); or use 'norio-nomura/action-swiftlint' or 'swiftlint/swiftlint' GitHub Action"
+        echo "  For this repo: target Sources/OneWeave/*.swift + Views/ etc."
+        echo "  Linux CI fallback: manual + semgrep/grep (already in other steps); no compiler here."
+        echo "SwiftFormat / style stub: 'swiftformat --lint Sources' (macOS only in real env)"
+
+    - name: Swift test stub
+      run: |
+        echo "Swift test stub:"
+        echo "  If SPM: 'swift test --parallel' (not used; this is Xcode sources drop-in)"
+        echo "  Xcode: 'xcodebuild test -scheme OneWeave -destination platform=iOS Simulator,name=iPhone 16'"
+        echo "  Current verification: Prototype harness (OneWeavePrototype.swift) + manual flows in CI notes."
+        echo "  Full unit/integration tests recommended post-drop-in to Xcode (e.g. LifeContext, QuestService, state transitions)."
+        echo "  For CI: structure + privacy + SDLC checks substitute until macOS runner added."
+
     - name: Gamification local-only verification (no externals in new gamif code)
       run: |
         echo "Verifying new gamification code (WeaveQuest, QuestService, etc.) has NO external network calls or deps"
@@ -71,11 +89,13 @@ jobs:
 
     - name: Graphify + SDLC artifacts check (best effort)
       run: |
-        echo "Graphify (local-only code graph): run 'graphify update .' in dev env for 589+ nodes context (see graphify-out/)"
+        echo "Graphify (local-only code graph): run 'graphify update .' in dev env for latest (601 nodes, 901 edges, 42 communities as of 2026-06-26; see graphify-out/GRAPH_REPORT.md)"
         echo "Checking SDLC: .specify present, CI, squads in docs"
         ls -d .specify/specs/002-gamification .github/workflows/ci.yml 2>/dev/null && echo "SDLC artifacts: OK"
         echo "Note: Full graphify + squad formalization tracked in GLOBAL_BEST_PRACTICES.md , IMPLEMENTED_FEATURES.md and LAUNCH_CHECKLIST.md"
-        echo "CI enhanced for parallel SDLC + security verification (squads, local-only)."
+        echo "CI enhanced for parallel SDLC + security verification (squads, local-only). Graphify follow-up run in session (update + cluster-only)."
 
     - name: Summary
-      run: echo "OneWeave CI complete: validation + gamif local-only + SDLC/graphify notes. Multi-agent squads + graphify used in build process."
+      run: |
+        echo "OneWeave CI complete: validation + gamif local-only + SDLC/graphify notes. Multi-agent squads + graphify used in build process."
+        echo "Enhanced with Swift lint/test stubs + latest graphify (601 nodes)."
