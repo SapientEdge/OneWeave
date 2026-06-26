@@ -99,7 +99,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Widgets/Intents (post-MVP) for harmony/quests if ready.
 - [x] Updated IMPLEMENTED, LAUNCH_CHECKLIST, tasks if evolved; add to IMPLEMENTED_FEATURES.
 - [x] Graphify report + manual task marks (manual cross check spec vs tasks vs code).
-- [ ] Post-MVP personalization, full PWA, legacy exports
+- [ ] Post-MVP personalization, full PWA, legacy exports (Phase 8)
 
 ## Notes
 - Order is dependency-aware: models/services before UI/visuals before full integration.
