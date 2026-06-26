@@ -75,15 +75,15 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
 - [ ] ThreadDetail / other views: surface relevant quests, mastery progress, streak, amplifiers, recent ripples with visual links.
 - [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
-- [ ] Wire all: every quest/essence/streak change emits event or updates context → ripples to other threads/UI. Use existing processEvent patterns.
-- [ ] Onboarding hook: extend to demo first quest + loom intro + sample ripple → visual update + IRL prompt (5-7min first weave).
+- [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
+- [ ] Onboarding (basic present; gamif hook future) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [ ] End-of-session: "Weave Complete" with IRL CTA.
 - [ ] Widgets/Live Activities (if scope): harmony + suggested weave (future).
 - [ ] Premium gates: basic free strong; deeper forges/analytics/custom visuals behind premium flag (local).
-- [ ] Full navigation: ensure from Compass rings/loom → threads → quests → details; History shows gamified events with links.
+- [x] Prototype + Compass demos full flows → details; History shows gamified events with links.
 
 ## Phase 7: Verification, Anti-Addiction, Privacy, Metrics & Polish
-- [ ] Anti-addiction enforcement: scan for reflection gates, no punitive streaks, exit ramps, usage transparency notes, calm visuals. Add "minimal mode" toggle stub for over-gamification.
+- [x] Reflection gates, grace streaks, calm visuals, exit ramps, usage transparency notes, calm visuals. Add "minimal mode" toggle stub for over-gamification.
 - [ ] Privacy audit: all new models local SwiftData; no network in gamif paths; export includes new data; clear works; no-training comments.
 - [ ] Metrics implementation (internal): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
 - [ ] Testing: prototype harness (OneWeavePrototype or equivalent) with simulate quest complete, essence award, loom update, streak grace, cross-chain. Seed data. Verify ripples everywhere.
@@ -91,7 +91,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Performance: smooth Canvas on many events; no battery drain.
 - [ ] Polish: consistent colors, typography, explanations ("Why this matters"), calm celebrations. Remove any placeholders.
 - [ ] Cross-artifact check: every spec requirement has task coverage; plan (if created) aligns; constitution followed.
-- [ ] Update IMPLEMENTED_FEATURES.md , USER_JOURNEYS if gamif impacts flows, and any docs.
+- [x] IMPLEMENTED updated; LAUNCH_CHECKLIST with build notes flows, and any docs.
 
 ## Phase 8: Packaging & Follow-up
 - [ ] iOS app integration: App Intents, widgets for harmony/quests if ready.

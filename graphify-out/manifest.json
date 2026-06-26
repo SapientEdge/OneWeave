@@ -1,0 +1,277 @@
+{
+  "Sketch_GamificationExtensions.swift": {
+    "mtime": 1782440624.0835736,
+    "ast_hash": "7529b1016be83350e7e5c0ba7cd00d05",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/AppStateMachine.swift": {
+    "mtime": 1782434085.634051,
+    "ast_hash": "39f6e5ac735ede1ecd744a101f061b91",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/BasicSelfThread.swift": {
+    "mtime": 1782434061.680614,
+    "ast_hash": "c4145ba3f1e3bf8572c87f5f85311405",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/CareKinThread.swift": {
+    "mtime": 1782371453.5370376,
+    "ast_hash": "9575b2bb6127cef3acba29f8cc6a2922",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/CompassView.swift": {
+    "mtime": 1782470298.4397764,
+    "ast_hash": "51fb1b041419567af193174220d8aa5b",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/DataSeeder.swift": {
+    "mtime": 1782441096.0326679,
+    "ast_hash": "9c3e0c139e6f50ebb54fa9c7fbb761df",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/HistoryView.swift": {
+    "mtime": 1782434021.0988693,
+    "ast_hash": "c3bbee660bca983ab3a34b4833d0d3ff",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/InsightGenerator.swift": {
+    "mtime": 1782434061.6796138,
+    "ast_hash": "1df6a8d3190113cb9e5ba9e63abb06a3",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/LifeContext.swift": {
+    "mtime": 1782470343.9102123,
+    "ast_hash": "793d912e14ff2677b5a4c0b790312edd",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/MasteryMapView.swift": {
+    "mtime": 1782470365.0414104,
+    "ast_hash": "cad1d22d5124cbcd1d5657bd16dafbaf",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/MeaningThread.swift": {
+    "mtime": 1782434057.4645367,
+    "ast_hash": "6a676f181bc3a4513c0bafd028d6b8f4",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OnboardingView.swift": {
+    "mtime": 1782438068.4351635,
+    "ast_hash": "bad25b5d665241083544d99bac2d2a1a",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeaveApp.swift": {
+    "mtime": 1782434070.830781,
+    "ast_hash": "f589bb87bb730f3b659f98d4f29d9a9e",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeavePrototype.swift": {
+    "mtime": 1782470345.079223,
+    "ast_hash": "ae427fe6e74b82493fce97ed97fa12d0",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/QuestService.swift": {
+    "mtime": 1782466540.3708117,
+    "ast_hash": "81c55f573d00fc86a68d071a3e263623",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/SettingsView.swift": {
+    "mtime": 1782435575.2503903,
+    "ast_hash": "149711f19d7359d534734ca1464650ec",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/StateMachineIndicator.swift": {
+    "mtime": 1782437453.0868397,
+    "ast_hash": "4cb801a362952ec07be6b3f90715919f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/StewardshipThread.swift": {
+    "mtime": 1782466718.8041897,
+    "ast_hash": "a6ce6ac4773817c87ad84378f655e129",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/Thread.swift": {
+    "mtime": 1782434057.4665368,
+    "ast_hash": "080c9a991f2c3ea914a2d6539bf81135",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/ThreadDetailView.swift": {
+    "mtime": 1782433975.0650177,
+    "ast_hash": "20edd84c5407ae790260eb1bf459884f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/ThreadsOverviewView.swift": {
+    "mtime": 1782437478.2742474,
+    "ast_hash": "221fff1f8fe6bf86dda870ca40f86425",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/TimelineEvent.swift": {
+    "mtime": 1782357718.7461166,
+    "ast_hash": "08d9c5d144db2edf52ed96233387a047",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/TimelineService.swift": {
+    "mtime": 1782434023.6089153,
+    "ast_hash": "82300efdd3dba0c5711b4c5a469f7fc4",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/WeaveQuest.swift": {
+    "mtime": 1782466525.4846206,
+    "ast_hash": "9805beee13dacd68dc3a02ba7bbe2d80",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/WeaveSummaryView.swift": {
+    "mtime": 1782437986.9130106,
+    "ast_hash": "8409677b0cf06514b930685561f3a42d",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/bug_report.md": {
+    "mtime": 1782441140.7944245,
+    "ast_hash": "44e5263dd7d8e991c1b6cae2d3485ae4",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/config.yml": {
+    "mtime": 1782441132.9702923,
+    "ast_hash": "51c6f218dad62c126967ee97572bf3f5",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/feature_request.md": {
+    "mtime": 1782441150.461588,
+    "ast_hash": "ba3c30b08a1451f74d7dc5a134c142ce",
+    "semantic_hash": ""
+  },
+  ".github/ISSUE_TEMPLATE/gamification_feature.md": {
+    "mtime": 1782441150.4215872,
+    "ast_hash": "c5393716487ab2fddb90ca6fcfe648b5",
+    "semantic_hash": ""
+  },
+  ".github/pull_request_template.md": {
+    "mtime": 1782441155.1816676,
+    "ast_hash": "26eb2a55b7a20e1beb4d4c180873b39e",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1782441185.179174,
+    "ast_hash": "daa640bd68fcc6197c9f4a324a322784",
+    "semantic_hash": ""
+  },
+  ".specify/constitution.md": {
+    "mtime": 1782295250.0588987,
+    "ast_hash": "5e0af21ba0ec31c3c71e2b06c6f16353",
+    "semantic_hash": ""
+  },
+  ".specify/specs/001-oneweave/spec.md": {
+    "mtime": 1782295283.4374423,
+    "ast_hash": "c78145a946e16c7eec4d485cc61a5715",
+    "semantic_hash": ""
+  },
+  ".specify/specs/001-oneweave/tasks.md": {
+    "mtime": 1782295295.8696449,
+    "ast_hash": "c13b1cac258d063667406a18f4b30f6e",
+    "semantic_hash": ""
+  },
+  ".specify/specs/002-gamification/analysis.md": {
+    "mtime": 1782441009.1541948,
+    "ast_hash": "ec283e9cf7371e1705db41f060734482",
+    "semantic_hash": ""
+  },
+  ".specify/specs/002-gamification/checklist.md": {
+    "mtime": 1782440996.275976,
+    "ast_hash": "678ad82923fd3d055cf5a15784679a09",
+    "semantic_hash": ""
+  },
+  ".specify/specs/002-gamification/spec.md": {
+    "mtime": 1782440954.6562676,
+    "ast_hash": "aec9904e368520758df741b928d7f3fc",
+    "semantic_hash": ""
+  },
+  ".specify/specs/002-gamification/tasks.md": {
+    "mtime": 1782470317.395972,
+    "ast_hash": "58b0d8c1b1ed49e6ce26ad9227a34df9",
+    "semantic_hash": ""
+  },
+  "GAMIFICATION_VISUAL_MOCK.html": {
+    "mtime": 1782440608.5143015,
+    "ast_hash": "bb3cff476f879375070e63b494f60d9f",
+    "semantic_hash": ""
+  },
+  "IMPLEMENTED_FEATURES.md": {
+    "mtime": 1782470325.916048,
+    "ast_hash": "75aef74ff86d407e0eeff0ff887b94f2",
+    "semantic_hash": ""
+  },
+  "ITERATION_REVIEW_1.md": {
+    "mtime": 1782357704.2538903,
+    "ast_hash": "236c86717942d5601f7519fe16e8c7d3",
+    "semantic_hash": ""
+  },
+  "LAUNCH_CHECKLIST.md": {
+    "mtime": 1782470327.0740585,
+    "ast_hash": "dc900793bacb230900bcf1f47c41c90c",
+    "semantic_hash": ""
+  },
+  "MARKETING.md": {
+    "mtime": 1782382396.9997554,
+    "ast_hash": "65b43869ae802798801921ced804adc0",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_AUDIT_REPORT_2026.md": {
+    "mtime": 1782440830.7591493,
+    "ast_hash": "4a4660cb9c97c984c71aca538e910658",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_GAMIFICATION_DESIGN.md": {
+    "mtime": 1782440750.0717604,
+    "ast_hash": "306159ef1b29469605d9d06fc7541ab3",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_GAMIFICATION_IDEATION.md": {
+    "mtime": 1782441083.347453,
+    "ast_hash": "00ebcbafb2ecf4b79860fb024ad4af44",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_GAMIFICATION_SPEC.md": {
+    "mtime": 1782440578.279772,
+    "ast_hash": "19a412d6d3ff0f597d7cc3d9618ecd2a",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_MONETIZATION_RETENTION.md": {
+    "mtime": 1782441045.6228137,
+    "ast_hash": "315c5784e50ce9593e3245a89fe07d25",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_WHITE_PAPER.md": {
+    "mtime": 1782435534.6218183,
+    "ast_hash": "6ff8a6a54adb1c439e2ffd99debdcd86",
+    "semantic_hash": ""
+  },
+  "PATCH_SUGGESTIONS_AND_FIXES.md": {
+    "mtime": 1782440862.184688,
+    "ast_hash": "e0406136ee66022e63cca81948e454c4",
+    "semantic_hash": ""
+  },
+  "PRIVACY_AUDIT_AND_HARDENING_2026.md": {
+    "mtime": 1782292733.786504,
+    "ast_hash": "fdc5b3facf87d04ec40e57a657d71235",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1782382405.3139133,
+    "ast_hash": "43da1241a96d36e3d3296331c3ace72d",
+    "semantic_hash": ""
+  },
+  "STATE_MACHINE.md": {
+    "mtime": 1782433914.0578773,
+    "ast_hash": "a2829d9303f9dd6524a54c4109040c39",
+    "semantic_hash": ""
+  },
+  "USER_JOURNEYS_ONEWEAVE.md": {
+    "mtime": 1782359353.199642,
+    "ast_hash": "36bfd61758c20bcf226d86290dd404b2",
+    "semantic_hash": ""
+  },
+  "WHITE_PAPER.md": {
+    "mtime": 1782433941.5903938,
+    "ast_hash": "40171456f992d97aa3d87d11e75213ca",
+    "semantic_hash": ""
+  }
+}
