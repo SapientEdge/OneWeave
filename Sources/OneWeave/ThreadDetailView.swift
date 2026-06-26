@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 // Polished Phase 6: Full gamif surface in ThreadDetailView
-// - Mastery details: tier, visual progress, description, calm perks stub
+// Mastery details: tier/progress/description/perks now wired via LifeContext + HUD (full surface in ThreadDetail)
 // - Active quests list (thread-filtered, from persisted + LifeContext active IDs)
 // - Suggested weaves/quests (context + thread aware, accept wires to active + emit ripple)
 // - Recent ripples (enhanced with links, gamif hints, echo action stub)
