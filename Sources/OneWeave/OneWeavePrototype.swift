@@ -354,5 +354,5 @@ struct OneWeavePrototype: View {
 
 #Preview {
     OneWeavePrototype()
-        .modelContainer(for: [LifeContext.self, TimelineEvent.self, BasicSelfThread.self, CareKinThread.self, MeaningThread.self])
+        .modelContainer(for: [LifeContext.self, TimelineEvent.self, WeaveQuest.self, BasicSelfThread.self, CareKinThread.self, MeaningThread.self])
 }

@@ -9,6 +9,7 @@ struct CompassView: View {
     @Environment(\\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
     @Query(sort: \\TimelineEvent.timestamp, order: .reverse) private var allEvents: [TimelineEvent]
+    @Query private var allQuests: [WeaveQuest]
     @Environment(AppStateMachine.self) private var stateMachine
     @State private var quickCaptureText = ""
     @State private var service: TimelineService?
