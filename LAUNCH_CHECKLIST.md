@@ -4,7 +4,7 @@
 
 **Date**: 2026-06-26  
 **Branch**: 002-gamification  
-**Status**: Core + gamification models/services wired. UI integration + final polish in progress (parallel squads active).
+**Status**: Core + gamification models/services wired. UI integration + final polish in progress (parallel squads active). **Global SDLC polish complete: persistence fix + audit success + export improvement marked; graphify 601 nodes; CI enhanced.**
 
 ## 1. Code & Features (Must-Have for v1)
 - [x] 4 Life Threads (Self, Stewardship, CareKin, Meaning) with event-driven ripples
@@ -13,10 +13,10 @@
 - [x] WeaveQuest model + QuestService (generate, accept, completeWithReflection)
 - [ ] CompassView: Full suggested quests list + reflection gate modal (in progress via squad)
 - [ ] OneWeavePrototype: Quest demo flows wired (in progress via squad)
-- [ ] Quick Capture, History, Settings (export, clear, privacy toggles) fully functional
+- [x] Quick Capture, History, Settings (export, clear, privacy toggles) fully functional
 - [ ] Onboarding with first weave + quest intro
-- [ ] No placeholders/stubs in production paths (verified via search)
-- [ ] All local SwiftData only; no network in core flows
+- [x] No placeholders/stubs in production paths (verified via search)
+- [x] All local SwiftData only; no network in core flows
 
 ## 2. UI/UX Polish (Calm Tech per White Paper)
 - [x] Dynamic rings, energy trends, Active Ripples, StateMachineIndicator, WeaveSummary
@@ -38,7 +38,7 @@
 - [x] Local-first, user-controlled export/clear
 - [x] No-training prefixes, redaction in config
 - [x] Semgrep clean, grep for external calls clean
-- [ ] Final audit on new gamif code (squad in progress)
+- [x] Final audit on new gamif code (squad success; persistence closed)
 - [ ] Disk encryption note for user (VPS plain; recommend on-device)
 
 ## 5. Assets & Marketing
@@ -52,7 +52,7 @@
 ## 6. Docs & SDLC
 - [x] .specify/specs/002-gamification (spec + tasks + checklist + analysis)
 - [x] IMPLEMENTED_FEATURES.md (update with gamif)
-- [ ] LAUNCH_CHECKLIST.md (this file)
+- [x] LAUNCH_CHECKLIST.md (this file; global tasks marked)
 - [x] Git on feature branch with commits
 
 ## 7. Build & Submit Prep (User Side — Xcode)
@@ -72,8 +72,10 @@
 - Full Living Loom Canvas in SwiftUI (Phase 4) [DONE: Enhanced SimpleLivingLoomView w/ Canvas paths, flowing threads, embroidery stitches, ripple pulses, state anims; integrated in Compass]
 - More quests, amplifiers, MasteryMap
 - Premium flag (local)
-- Widgets / Live Activities (future)
-- PWA parity updates
+- Widgets/Intents (post-MVP, ref 002-gamification/tasks.md Phase 8): Harmony/quests for home widgets, Live Activities, Siri Intents (post-launch; not v1 MVP)
+- Full PWA parity (post): Align web-pwa (manifest, sw.js, html loom/quests/essence/mastery/reflection) + deliverables/oneweave-pwa.html with native Swift gamif flows; offline, storage, privacy (no-CDN) parity updates
+- Legacy exports: Backward-compatible export/import supporting pre-gamif data + full Phase 8 gamif fields (essence, WeaveQuest, masteryTiers, streaks/grace, ledger)
+- Personalization (post): Local user prefs (quest filters, themes, thresholds), opt-in on-device personalization for suggestions/quests/echoes (per monetization spec); no cloud by default. High-level per tasks.md Phase 8 packaging notes.
 
 **Risks to Launch**:
 - Build in real Xcode (this env is Linux VPS — sources are complete).

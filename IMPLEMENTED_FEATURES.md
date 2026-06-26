@@ -121,3 +121,10 @@ Net: 24 Swift files, low placeholders, launch-ready artifacts.
 - GLOBAL_BEST_PRACTICES: appended with fix details.
 - Placeholders: 0 core. Graphify: 601 nodes.
 - Addresses audit edge case directly.
+
+## Phase 8 Packaging Notes (high-level, ref .specify/specs/002-gamification/tasks.md)
+- Widgets/Intents (post-MVP): Harmony/quests surfaces for iOS home widgets, Live Activities, App Intents/Siri (Phase 8 post; not core MVP). See tasks.md Phase 8.
+- Full PWA parity: Web PWA (web-pwa manifest/sw.js + oneweave-pwa.html) to match native: full loom canvas parity, quests + reflection gate, essence/streak/mastery HUD, offline via SW, local storage upgrade; privacy hardening (inline assets, no external CDNs).
+- Legacy exports: Backward/forward compatible export (JSON) and import for pre-gamification data structures + current gamif (WeaveQuest, essenceLedger, masteryTiers, streaks+grace, activeQuests). Ensures portability across versions.
+- Personalization: Local-first (prefs for quest generation filters, UI accents, grace limits, theme); opt-in on-device personalization (e.g. rule or FoundationModels for custom quests/echo synthesis); premium gated per spec. High-level tracking only; no server-side.
+All per Phase 8 packaging/follow-up in tasks.md; post-MVP items.
