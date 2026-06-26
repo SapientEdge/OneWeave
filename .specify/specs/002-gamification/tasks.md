@@ -54,7 +54,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
   - Harmony connections: flowing lines between threads on combo/resonance.
   - Mastery embroidery: overlay evolving badges/icons (simple → detailed) on segments.
   - Tap: deep link to ThreadDetail or echo view.
-- [ ] State-driven visuals (starter in loom shadow; full post-MVP) (highFlow: lively organic flow + accent; lowEnergy: muted, slower, restorative palette suggestions). Use @Environment or bind to LifeContext.
+- [x] State-driven visuals (starter): demo in prototype bound to harmony/energy (highFlow lively, lowEnergy muted). Full loom integration post-MVP.
 - [x] .spring, haptics, state pulses in Compass/loom (MVP calm), .sensoryFeedback for meaningful completes. Glass/ultraThinMaterial where fits calm aesthetic.
 - [x] HUD + loom harmony/resonance hints; Active Ripples with "echo lines" connecting domains; subtle HUD ✧ Essence • Lvl • Harmony%.
 - [x] Feedback toasts, essence awards in Prototype/Compass: slow-bloom connection dots fading into tapestry (Math Quest lite, not flashy confetti). Haptics. Explanation toast: "Why this ripple matters" tying to philosophy.
@@ -67,7 +67,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Restorative grace stub in LifeContext + suggestions in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
 - [x] Badges in Compass, full stub view or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
 - [x] Resonance/Combos: detect linkedThreads + award combo + harmony boost (in LifeContext.detectResonance, called on updates)
-- [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
+- [x] Echo system (basic UI stub): trigger + note in prototype. Full list/reflection + Legacy Tapestry post-MVP.
 - [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
 - [ ] Seasons (post-MVP) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
 

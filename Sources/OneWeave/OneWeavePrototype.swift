@@ -612,6 +612,40 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .padding(8)
         .background(.quaternary.opacity(0.3))
 
+
+        // Starter state-driven visuals (Phase 4): bind to LifeContext energy/harmony
+        VStack(alignment: .leading, spacing: 4) {
+            Text("State-driven (starter)").font(.caption).foregroundStyle(.secondary)
+            let isHighFlow = (context.harmonyScore > 0.75 && context.energyProfile == .high)
+            let isLow = (context.energyProfile == .low || context.harmonyScore < 0.4)
+            Text(isHighFlow ? "HighFlow: lively + accent" : (isLow ? "LowEnergy: muted/restorative" : "Balanced"))
+                .font(.caption2)
+                .foregroundStyle(isHighFlow ? .green : (isLow ? .orange : .primary))
+            // Simple visual proxy (would drive Canvas alpha/speed in real loom)
+            RoundedRectangle(cornerRadius: 4)
+                .fill(isHighFlow ? .green.opacity(0.6) : (isLow ? .gray.opacity(0.4) : .blue.opacity(0.5)))
+                .frame(height: 8)
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.2))
+
+
+        // Basic Echo list stub (Phase 5): list recent + trigger echo (full UI + Legacy Tapestry post-MVP)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Echo (basic stub)").font(.caption).foregroundStyle(.secondary)
+            Button("List Past + Echo Last") {
+                // Mock recent from ledger or simple list
+                context.echoPastEvent()
+                lastAction = "Echoed past ( +1 essence, Meaning ripple). Full list UI later."
+            }
+            Text("Recent echoes/ripples shown in History/ThreadDetail (links present)")
+                .font(.caption2).foregroundStyle(.secondary)
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.2))
+
+
+
 // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
