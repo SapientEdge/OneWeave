@@ -572,6 +572,17 @@ struct GamificationHUD: View {
                 .foregroundStyle(.purple.opacity(0.9))
             
             // Streak pill
+
+            // Streak visual (Phase 5 stitched hint)
+            if context.globalWeaveStreak > 0 {
+                HStack(spacing: 1) {
+                    ForEach(0..<min(context.globalWeaveStreak, 7), id: \.self) { _ in
+                        Text("•").font(.caption2).foregroundStyle(.orange)
+                    }
+                    if context.globalWeaveStreak > 7 { Text("+\(context.globalWeaveStreak-7)").font(.caption2) }
+                }
+            }
+
             HStack(spacing: 2) {
                 Text("🔥\(context.globalWeaveStreak)")
                     .font(.caption2.bold())
