@@ -97,6 +97,8 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] IMPLEMENTED updated; LAUNCH_CHECKLIST with build notes flows, and any docs.
 
 ## Phase 8: Packaging & Follow-up
+**Core gamif MVP (Phases 0-7) + verification complete (direct + delegates net). Post-MVP items tracked below.**
+
 **Status (finalized 2026-06-26)**: Packaging notes finalized here and propagated to README.md (new dedicated section), IMPLEMENTED_FEATURES.md, LAUNCH_CHECKLIST.md. Brief PWA/legacy notes added where not present. Low-pri Phase 7 polish: metrics surface enhanced in SettingsView (added essence/level, reflected count, mastery summary, harmony detail). Export is now gamif-complete for legacy. Post-MVP items remain for impl (widgets etc); notes are complete and detailed.
 
 - [ ] Widgets/Intents (post-MVP) for harmony/quests if ready. (notes added to LAUNCH/IMPLEMENTED)
