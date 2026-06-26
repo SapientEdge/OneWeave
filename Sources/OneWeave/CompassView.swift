@@ -69,6 +69,19 @@ struct CompassView: View {
                         // Uses Canvas + Paths for flowing threads, mastery embroidery (stitches), ripple pulses, state-driven (highFlow/lively, lowEnergy/muted) calm animations.
                         // Keeps existing colors/state/harmony/masteryTiers. Performant, subtle per constitution.
                         SimpleLivingLoomView(context: ctx)
+
+            // Phase 5/6: Mastery Map entry (tap to view tiers/perks)
+            NavigationLink(value: "MasteryMap") {
+                HStack {
+                    Text("Mastery Map")
+                        .font(.caption.bold())
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption2)
+                }
+                .foregroundStyle(.secondary)
+            }
+
                     }
                     Text("Journey Compass")
                         .font(.subheadline)

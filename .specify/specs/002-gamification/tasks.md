@@ -76,7 +76,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Mastery/streak surfaced in ThreadDetailView progress, streak, amplifiers, recent ripples with visual links.
 - [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
-- [ ] Onboarding (basic present; gamif hook future) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
+- [x] Basic onboarding; gamif hook in prototype + Compass (sample quests/loom) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [x] Feedback toasts + IRL prompts in flows.
 - [ ] Widgets (post-MVP): harmony + suggested weave (future).
 - [x] All core free/local; amplifiers stub as future gate; deeper forges/analytics/custom visuals behind premium flag (local).
