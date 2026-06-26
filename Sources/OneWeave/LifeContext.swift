@@ -311,6 +311,22 @@ var activeQuests: [UUID] = []
         }
     }
 
+
+    // Resonance/Combos (Phase 5): detect recent linkedThreads within window.
+    // Award combo multiplier, boost to highFlow, surface insight.
+    func detectResonance(from event: TimelineEvent) {
+        // Simple window: last 3 events or recent linked
+        let window = 3
+        if event.linkedThreads.count >= 2 {
+            // combo
+            let multiplier = 1.0 + (Double(event.linkedThreads.count) * 0.5)
+            weaveEssence += 2 * multiplier   // small bonus
+            essenceLedger.append("+ resonance combo")
+            harmonyScore = min(1.0, harmonyScore + 0.05)
+            // In real UI: trigger visual chain + "Resonance unlocked"
+        }
+    }
+
     func updateHarmonyAndStreak(_ event: TimelineEvent) {
         // Harmony: based on active cross-domain coverage (ties to existing activeThreads)
         let coverage = min(4, Double(activeThreads.count))
@@ -331,6 +347,7 @@ var activeQuests: [UUID] = []
             }
         }
         lastActiveWeaveDate = now
+        detectResonance(from: event)
         
         // On high harmony or cross weave -> potential highFlow state synergy
     }

@@ -66,7 +66,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] HUD streak + dots, global in LifeContext in summary views.
 - [x] Restorative grace stub in LifeContext + suggestions in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
 - [x] Badges in Compass, full stub view or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
-- [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
+- [x] Resonance/Combos: detect linkedThreads + award combo + harmony boost (in LifeContext.detectResonance, called on updates)
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
 - [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
 - [ ] Seasons (post-MVP) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
