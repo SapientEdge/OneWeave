@@ -128,3 +128,9 @@ Net: 24 Swift files, low placeholders, launch-ready artifacts.
 - Legacy exports: Backward/forward compatible export (JSON) and import for pre-gamification data structures + current gamif (WeaveQuest, essenceLedger, masteryTiers, streaks+grace, activeQuests). Ensures portability across versions.
 - Personalization: Local-first (prefs for quest generation filters, UI accents, grace limits, theme); opt-in on-device personalization (e.g. rule or FoundationModels for custom quests/echo synthesis); premium gated per spec. High-level tracking only; no server-side.
 All per Phase 8 packaging/follow-up in tasks.md; post-MVP items.
+
+## Parallel update (post export delegate + direct)
+- Export: full structured JSON via @Query (quests + mastery/ledger/streaks/essence).
+- Harness: roundtrip persistence + export test button added.
+- Phase 8 notes: advanced in tasks + docs.
+- All direct after failed delegate (tool_choice/patch patterns).
