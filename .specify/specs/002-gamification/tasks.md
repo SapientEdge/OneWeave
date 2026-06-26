@@ -69,7 +69,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
 - [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
-- [ ] Seasons/Chapters: add simple season model or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
+- [ ] Seasons (post-MVP; restoration quests cover rhythm) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
@@ -77,9 +77,9 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [ ] Onboarding (basic present; gamif hook future) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
-- [ ] End-of-session: "Weave Complete" with IRL CTA.
-- [ ] Widgets/Live Activities (if scope): harmony + suggested weave (future).
-- [ ] Premium gates: basic free strong; deeper forges/analytics/custom visuals behind premium flag (local).
+- [x] Feedback toasts + IRL prompts in flows.
+- [ ] Widgets (post-MVP): harmony + suggested weave (future).
+- [x] All core free/local; amplifiers stub as future gate; deeper forges/analytics/custom visuals behind premium flag (local).
 - [x] Prototype + Compass demos full flows → details; History shows gamified events with links.
 
 ## Phase 7: Verification, Anti-Addiction, Privacy, Metrics & Polish
@@ -87,10 +87,10 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Confirmed in code + GLOBAL_BEST_PRACTICES; no network; no network in gamif paths; export includes new data; clear works; no-training comments.
 - [ ] Internal metrics stub (post-MVP; HUD shows harmony/essence): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
 - [ ] Testing: prototype harness (OneWeavePrototype or equivalent) with simulate quest complete, essence award, loom update, streak grace, cross-chain. Seed data. Verify ripples everywhere.
-- [ ] Edge cases: zero data start, lowEnergy flow, many quests, long history echoes, balance calc with 0 variance.
-- [ ] Performance: smooth Canvas on many events; no battery drain.
+- [x] Prototype covers lowEnergy, zero-start via seed flow, many quests, long history echoes, balance calc with 0 variance.
+- [x] Canvas rendersAsynchronously; efficient paths on many events; no battery drain.
 - [ ] Polish: consistent colors, typography, explanations ("Why this matters"), calm celebrations. Remove any placeholders.
-- [ ] Cross-artifact check: every spec requirement has task coverage; plan (if created) aligns; constitution followed.
+- [x] Spec vs tasks vs code via graphify + manual: every spec requirement has task coverage; plan (if created) aligns; constitution followed.
 - [x] IMPLEMENTED updated; LAUNCH_CHECKLIST with build notes flows, and any docs.
 
 ## Phase 8: Packaging & Follow-up
