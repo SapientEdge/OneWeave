@@ -71,7 +71,6 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                                     ctx.awardBonusEssence(5, reason: "resonance")
                                     demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
                                 }
-                            }
 
                             // Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
                             // Phase 2/5/6: Mastery Map + Ledger demo + spend amplifier
