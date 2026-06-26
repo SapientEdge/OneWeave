@@ -539,9 +539,10 @@ struct WeaveSummaryView: View {
 }
 
 // Basic gamification visual components for Compass (level badge, streak, essence HUD)
+// Basic gamification visual components for Compass (level badge + streak + essence HUD)
 struct GamificationHUD: View {
     let context: LifeContext
-    
+
     var body: some View {
         HStack(spacing: 6) {
             // Level badge - tasty, compact
@@ -554,13 +555,11 @@ struct GamificationHUD: View {
                     Capsule()
                         .fill(LinearGradient(colors: [.indigo, .purple], startPoint: .leading, endPoint: .trailing))
                 )
-            
+
             // Essence
             Text(context.essenceDisplay)
                 .font(.caption2.bold())
                 .foregroundStyle(.purple.opacity(0.9))
-            
-            // Streak pill
 
             // Streak visual (Phase 5 stitched hint)
             if context.globalWeaveStreak > 0 {
@@ -577,55 +576,217 @@ struct GamificationHUD: View {
                     .font(.caption2.bold())
                     .foregroundStyle(.orange)
             }
+        }
+        .padding(.horizontal, 4)
+        .background(Capsule().fill(Color.orange.opacity(0.15)))
+        .clipShape(Capsule())
+    }
+}
 
-
-// Simple Living Loom visual (Phase 4 starter per 002-tasks: 4 threads as connected shapes, mastery hints via thickness/color, state influence)
-
-// Simple Living Loom visual (Phase 4/5 starter per 002-tasks: 4 threads as connected shapes, mastery levels via size/thickness, resonance lines, state influence)
+// Phase 4: Enhanced SimpleLivingLoomView (core of WeaveTapestryView)
+// Canvas + Paths for:
+// - flowing organic threads (wavy horizontal tapestry lines, phase animated)
+// - mastery embroidery (perpendicular stitches, density + length by tier 1-4)
+// - ripple pulses (calm concentric rings on active/high-harmony, stronger in weaving/highFlow)
+// - state-driven: wave amp + opacity + pulse intensity modulated by AppState (highFlow lively, lowEnergy muted/slower feel via factors)
+// - harmony connections (subtle cross-links)
+// Uses existing LifeContext (masteryTiers, harmonyScore, activeThreads), colorForDomain, stateMachine.
+// Calm, performant (light paths, no heavy particles), glass material, subtle .linear / easeInOut anims.
 struct SimpleLivingLoomView: View {
     let context: LifeContext
     @Environment(AppStateMachine.self) private var stateMachine
-    
+
+    @State private var weavePhase: Double = 0
+    @State private var pulsePhase: Double = 0
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("Living Loom")
-                .font(.caption.bold())
-                .foregroundStyle(.secondary)
-            // Thread nodes with mastery sizing
-            HStack(spacing: 16) {
-                ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \.self) { domain in
-                    let isActive = context.activeThreads.contains(domain)
-                    let tier = context.masteryTiers[domain] ?? 1
-                    let color = colorForDomain(domain)
-                    ZStack {
-                        Circle()
-                            .fill(color.opacity(isActive ? 0.85 : 0.25))
-                            .frame(width: 22 + CGFloat(tier * 5), height: 22 + CGFloat(tier * 5))
-                        Circle()
-                            .stroke(color, lineWidth: isActive ? CGFloat(1 + tier/2) : 1)
-                            .frame(width: 22 + CGFloat(tier * 5), height: 22 + CGFloat(tier * 5))
-                        Text(String(domain.prefix(1)))
-                            .font(.caption2.bold())
-                            .foregroundStyle(isActive ? .white : color)
-                    }
-                    .shadow(color: stateMachine.currentState == .highFlow ? color.opacity(0.5) : .clear, radius: 3 + Double(tier))
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text("Living Loom")
+                    .font(.caption.bold())
+                    .foregroundStyle(.secondary)
+                
+                Button {
+                    // Present MasteryMapView (for now, demo note; wire NavigationDestination in full app)
+                    print("MasteryMap tapped - would present full map with tiers/perks")
+                } label: {
+                    Image(systemName: "map")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+                if context.harmonyScore > 0.55 {
+                    Text("Resonance • \(Int(context.harmonyScore * 100))%")
+                        .font(.caption2)
+                        .foregroundStyle(.green.opacity(0.75))
+                }
+                // calm state annotation (ViewBuilder safe)
+                if stateMachine.currentState == .highFlow {
+                    Text("✧ flow").font(.caption2).foregroundStyle(.green.opacity(0.6))
+                } else if stateMachine.currentState == .lowEnergy {
+                    Text("gentle").font(.caption2).foregroundStyle(.secondary.opacity(0.6))
+                } else if stateMachine.currentState == .weaving {
+                    Text("rippling").font(.caption2).foregroundStyle(.secondary.opacity(0.6))
                 }
             }
-            // Simple resonance connections (lines hint)
-            if context.harmonyScore > 0.6 {
-                Text("Resonance active • \(Int(context.harmonyScore * 100))% harmony")
-                    .font(.caption2)
-                    .foregroundStyle(.green.opacity(0.8))
+
+            Canvas(rendersAsynchronously: true) { gc, size in
+                let domains = ["Self", "Stewardship", "CareKin", "Meaning"]
+                let cols: [Color] = [.blue, .green, .orange, .purple]
+                let w = size.width
+                let h = size.height
+
+                let isHighFlow = stateMachine.currentState == .highFlow
+                let isLowEnergy = stateMachine.currentState == .lowEnergy
+                let flowFactor = isHighFlow ? 1.35 : (isLowEnergy ? 0.45 : 1.0)
+                let waveAmp = 4.5 * flowFactor
+                let baseAlpha = isLowEnergy ? 0.5 : 0.82
+
+                // 4 flowing thread paths (tapestry-style, horizontal organic waves)
+                for (i, domain) in domains.enumerated() {
+                    let tier = context.masteryTiers[domain] ?? 1
+                    let isActive = context.activeThreads.contains(domain)
+                    let col = cols[i]
+                    let baseY = 13.0 + Double(i) * (h / 4.15)
+                    let phaseOffset = Double(i) * 0.75
+                    let currentPhase = weavePhase + phaseOffset
+
+                    let y1 = baseY + sin(currentPhase) * (waveAmp * 0.35)
+                    let y2 = baseY + sin(currentPhase + 1.1) * (waveAmp * 0.55)
+
+                    var threadPath = Path()
+                    threadPath.move(to: CGPoint(x: 6, y: y1))
+                    let ctrlX = w * 0.48
+                    threadPath.addQuadCurve(
+                        to: CGPoint(x: w - 6, y: y2),
+                        control: CGPoint(x: ctrlX, y: baseY + sin(currentPhase + 0.55) * waveAmp * 0.9)
+                    )
+
+                    let threadWidth = 1.8 + Double(tier - 1) * 1.0 * (isActive ? 1.05 : 0.65)
+                    let alpha = baseAlpha * (isActive ? 0.92 : 0.42) * min(1.0, context.harmonyScore + 0.35)
+                    gc.stroke(
+                        threadPath,
+                        with: .color(col.opacity(alpha)),
+                        lineWidth: threadWidth
+                    )
+
+                    // Mastery embroidery stitches (perpendicular dashes, more/denser for higher tier)
+                    if tier >= 2 {
+                        let numStitches = min(5, 2 + tier)
+                        for s in 0..<numStitches {
+                            let t = Double(s + 1) / Double(numStitches + 1)
+                            let px = 6 + t * (w - 12)
+                            // approximate position on curve (linear interp sufficient for calm visual)
+                            let py = y1 + t * (y2 - y1) + sin(currentPhase + Double(s) * 0.4) * 1.5
+                            let stitchLen = 2.8 + Double(tier) * 0.6
+                            let tilt = cos(currentPhase * 1.2 + Double(s)) * 0.8
+                            let dx = 1.2 * tilt
+                            let dy = stitchLen * 0.5
+
+                            var stitch = Path()
+                            stitch.move(to: CGPoint(x: px - dx, y: py - dy))
+                            stitch.addLine(to: CGPoint(x: px + dx, y: py + dy))
+                            gc.stroke(
+                                stitch,
+                                with: .color(col.opacity(0.6 * (isActive ? 1.0 : 0.55))),
+                                lineWidth: 1.1
+                            )
+                        }
+                    }
+
+                    // Knot / node at left of each thread (sized + styled by mastery + active)
+                    let knotR = 5.5 + Double(tier) * 1.6
+                    let knotX = 6.0 + knotR * 0.25
+                    let knotY = y1
+                    let knotRect = CGRect(x: knotX - knotR, y: knotY - knotR, width: knotR * 2, height: knotR * 2)
+                    gc.fill(Path(ellipseIn: knotRect), with: .color(col.opacity(isActive ? 0.88 : 0.32)))
+                    gc.stroke(
+                        Path(ellipseIn: knotRect),
+                        with: .color(col),
+                        lineWidth: isActive ? 1.4 : 0.7
+                    )
+                    // Domain initial inside knot
+                    let letter = String(domain.prefix(1))
+                    gc.draw(
+                        Text(letter)
+                            .font(.system(size: 6.5, weight: .semibold))
+                            .foregroundStyle(isActive ? .white : col),
+                        at: CGPoint(x: knotX, y: knotY)
+                    )
+                }
+
+                // Harmony resonance: subtle flowing cross-links (calm vertical-ish ties)
+                if context.harmonyScore > 0.55 {
+                    let linkAlpha = (context.harmonyScore - 0.5) * 0.55
+                    for i in 0..<3 {
+                        var link = Path()
+                        let ya = 13.0 + Double(i) * (h / 4.15)
+                        let yb = 13.0 + Double(i + 1) * (h / 4.15)
+                        let xL = w * (0.28 + Double(i % 2) * 0.18)
+                        let wy = sin(weavePhase * 0.8 + Double(i)) * 1.5
+                        link.move(to: CGPoint(x: xL, y: ya + wy))
+                        link.addLine(to: CGPoint(x: xL + 10, y: yb - wy * 0.6))
+                        gc.stroke(
+                            link,
+                            with: .color(.gray.opacity(linkAlpha * 0.45)),
+                            lineWidth: 0.7
+                        )
+                    }
+                }
+
+                // State-driven ripple pulses (outward rings on knots for active or high harmony)
+                let shouldPulse = stateMachine.currentState == .weaving || stateMachine.currentState == .highFlow || context.harmonyScore > 0.62
+                if shouldPulse {
+                    for (i, domain) in domains.enumerated() {
+                        if context.activeThreads.contains(domain) || context.harmonyScore > 0.58 {
+                            let tier = context.masteryTiers[domain] ?? 1
+                            let col = cols[i]
+                            let baseY = 13.0 + Double(i) * (h / 4.15)
+                            let knotR = 5.5 + Double(tier) * 1.6
+                            let knotX = 6.0 + knotR * 0.25
+
+                            for p in 0..<2 {
+                                let pProg = (pulsePhase + Double(p) * 0.25).truncatingRemainder(dividingBy: 1.0)
+                                let pScale = 1.0 + pProg * (isHighFlow ? 2.1 : 1.6)
+                                let pr = knotR * pScale
+                                let pAlpha = max(0.04, (1.15 - pProg) * 0.22 * (isHighFlow ? 1.25 : (isLowEnergy ? 0.6 : 1.0)))
+                                let pRect = CGRect(x: knotX - pr, y: baseY - pr, width: pr * 2, height: pr * 2)
+                                gc.stroke(
+                                    Path(ellipseIn: pRect),
+                                    with: .color(col.opacity(pAlpha)),
+                                    lineWidth: 0.9
+                                )
+                            }
+                        }
+                    }
+                }
             }
-            Text("Mastery tiers: Lvl 1-4 per thread (cumulative from ripples/quests)")
-                .font(.caption2)
-                .foregroundStyle(.tertiary)
+            .frame(height: 88)
+            .background(Color.gray.opacity(0.025))
+            .clipShape(RoundedRectangle(cornerRadius: 7))
+            .overlay(
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(Color.gray.opacity(0.08), lineWidth: 0.5)
+            )
+            .drawingGroup()  // perf for repeated redraws on anim
+
         }
-        .padding(8)
+        .padding(6)
         .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 10))
+        .clipShape(RoundedRectangle(cornerRadius: 9))
+        .onAppear {
+            // Calm, slow organic weave animation (repeats, low cognitive load)
+            withAnimation(.linear(duration: 5.8).repeatForever(autoreverses: false)) {
+                weavePhase = 2 * .pi
+            }
+            // Subtle breathing pulse for ripples (autonomous but calm)
+            withAnimation(.easeInOut(duration: 2.4).repeatForever(autoreverses: true)) {
+                pulsePhase = 1.0
+            }
+        }
     }
-    
+
     private func colorForDomain(_ domain: String) -> Color {
         switch domain {
         case "Self": return .blue
@@ -637,18 +798,8 @@ struct SimpleLivingLoomView: View {
     }
 }
 
-
-            .padding(.horizontal, 4)
-            .background(Capsule().fill(Color.orange.opacity(0.15)))
-        }
-        .padding(.horizontal, 6)
-        .padding(.vertical, 3)
-        .background(.ultraThinMaterial)
-        .clipShape(Capsule())
-    }
-}
-
-// Extend ThreadRingView lightly for mastery (called from existing; visual tier hint)
+// Extend ThreadRingView lightly for mastery (visual tier hint kept)
 extension ThreadRingView {
     // For future: could accept mastery tier, here we just hint in color for now (prototype keeps simple)
 }
+

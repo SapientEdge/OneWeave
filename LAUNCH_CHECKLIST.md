@@ -69,7 +69,7 @@
 6. Submit for review (MVP note: gamification is foundational; more visuals in updates).
 
 ## 8. Post-Launch / Next
-- Full Living Loom Canvas in SwiftUI (Phase 4)
+- Full Living Loom Canvas in SwiftUI (Phase 4) [DONE: Enhanced SimpleLivingLoomView w/ Canvas paths, flowing threads, embroidery stitches, ripple pulses, state anims; integrated in Compass]
 - More quests, amplifiers, MasteryMap
 - Premium flag (local)
 - Widgets / Live Activities (future)

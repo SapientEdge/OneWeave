@@ -281,7 +281,18 @@ final class LifeContext {
         }
     }
     
-    private func updateHarmonyAndStreak(_ event: TimelineEvent) {
+    private 
+    func checkRestorativeGrace() {
+        // Phase 5: if low activity or lowEnergy, suggest restoration; do not decrement global streak
+        let now = Date()
+        if lastActive == nil || now.timeIntervalSince(lastActive!) > 86400 * 2 {  // 2 days
+            if globalWeaveStreak > 0 {
+                // grace: keep streak, suggest quest
+            }
+        }
+    }
+
+    func updateHarmonyAndStreak(_ event: TimelineEvent) {
         // Harmony: based on active cross-domain coverage (ties to existing activeThreads)
         let coverage = min(4, Double(activeThreads.count))
         harmonyScore = min(1.0, 0.4 + (coverage * 0.15))
