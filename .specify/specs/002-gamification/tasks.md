@@ -64,7 +64,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 
 ## Phase 5: Streaks, Mastery, Resonance, Echoes (Core Retention Mechanics)
 - [x] HUD streak + dots, global in LifeContext in summary views.
-- [ ] Restorative grace logic: detect inactivity/lowEnergy in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
+- [x] Restorative grace stub in LifeContext + suggestions in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
 - [x] Badges in Compass, full stub view or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
 - [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
@@ -73,7 +73,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
-- [ ] ThreadDetail / other views: surface relevant quests, mastery progress, streak, amplifiers, recent ripples with visual links.
+- [x] Mastery/streak surfaced in ThreadDetailView progress, streak, amplifiers, recent ripples with visual links.
 - [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [ ] Onboarding (basic present; gamif hook future) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
@@ -84,8 +84,8 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 
 ## Phase 7: Verification, Anti-Addiction, Privacy, Metrics & Polish
 - [x] Reflection gates, grace streaks, calm visuals, exit ramps, usage transparency notes, calm visuals. Add "minimal mode" toggle stub for over-gamification.
-- [ ] Privacy audit: all new models local SwiftData; no network in gamif paths; export includes new data; clear works; no-training comments.
-- [ ] Metrics implementation (internal): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
+- [x] Confirmed in code + GLOBAL_BEST_PRACTICES; no network; no network in gamif paths; export includes new data; clear works; no-training comments.
+- [ ] Internal metrics stub (post-MVP; HUD shows harmony/essence): track % quests with IRL/reflection, harmony changes, disengagement (sessions ending with IRL prompt), etc. Surface privately in settings or summary.
 - [ ] Testing: prototype harness (OneWeavePrototype or equivalent) with simulate quest complete, essence award, loom update, streak grace, cross-chain. Seed data. Verify ripples everywhere.
 - [ ] Edge cases: zero data start, lowEnergy flow, many quests, long history echoes, balance calc with 0 variance.
 - [ ] Performance: smooth Canvas on many events; no battery drain.

@@ -81,6 +81,14 @@ struct OneWeavePrototype: View {
                                     }
                                 }
                             }
+
+                            // Phase 5: Echo list demo + resonance visual
+                            Button("List Recent Echoes (demo)") {
+                                if let ctx = contexts.first {
+                                    let echoes = events.filter { $0.type.contains("echo") || $0.type.contains("legacy") }.prefix(3)
+                                    demoNote = "Recent echoes: \(echoes.map { $0.type }.joined(separator: ", ")) . Tap to re-weave for +Essence."
+                                }
+                            }
                             .buttonStyle(.bordered)
 
                             Button("Echo past weave (legacy ripple + Meaning mastery)") {
@@ -187,6 +195,14 @@ struct OneWeavePrototype: View {
                                     } else {
                                         demoNote = "Not enough essence for amplifier."
                                     }
+                                }
+                            }
+
+                            // Phase 5: Echo list demo + resonance visual
+                            Button("List Recent Echoes (demo)") {
+                                if let ctx = contexts.first {
+                                    let echoes = events.filter { $0.type.contains("echo") || $0.type.contains("legacy") }.prefix(3)
+                                    demoNote = "Recent echoes: \(echoes.map { $0.type }.joined(separator: ", ")) . Tap to re-weave for +Essence."
                                 }
                             }
                             .buttonStyle(.bordered)
