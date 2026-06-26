@@ -32,6 +32,7 @@
 
 ## Spec, Process, Reviews & Philosophy
 - Spec Kit (.specify/ + constitution/spec/tasks), USER_JOURNEYS_ONEWEAVE.md.
+- New: .specify/specs/002-gamification/ (spec.md + tasks.md + checklist + analysis) for Gamification & Retention Layer — focused on Quests, Essence/XP, Visual Weave/Living Loom, Streaks with restorative grace. Grounded in DESIGN.md + constitution (calm, privacy, IRL-first, anti-addictive, interconnected ripples). Ready for plan/implement.
 - **White Paper Integration**: ONEWEAVE_WHITE_PAPER.md (copied/integrated; ~2426 words, professional). Covers interconnected life as event-driven state machine of ripples (Self/Stewardship/CareKin/Meaning), psychology of calm sophisticated UI (Weiser calm tech, peripheral awareness, non-intrusive), production readiness (event sourcing, offline-first, state machines, ethical ML), security/privacy by design (full 7 PbD principles applied to ripple data). Grounded in sources; publication-ready.
 - **STATE_MACHINE.md**: Formal AppState enum + transitions + Mermaid diagram. UI reflection (psychology of clear feedback: haptics, colors, progressive disclosure). Integrated in LifeContext/UI. No dead states; predictable connected behavior.
 - **Security/Privacy Review** (multi-agent + direct): Local SwiftData only—no network in core, no secrets, user-controlled export/clear. No leaks (grep/scan clean). State machine adds predictability. Matches white paper PbD (minimization, consent, purpose limitation, security). 
@@ -62,3 +63,9 @@ App is launch-ready. Build and submit. All features connected via state machine 
 - Sketch_GamificationExtensions.swift (WeaveQuest, QuestService, LifeContext extensions)
 - Web companion PWA in deliverables/oneweave-pwa.html (fully functioning browser implementation of ripples, quests, tapestry, progression, privacy)
 See spec for Phase 1-4 roadmap and success metrics focused on IRL outcomes.
+## Gamification DESIGN Spec (2026-06-26)
+- Added ONEWEAVE_GAMIFICATION_DESIGN.md (347 lines): fun/catchy/purposeful design with 12+ features, Living Loom as signature visual, retention psychology (SDT + eudaimonia), "First Weave" onboarding hooks, tasty premium tiers (Threadling/Weaver/Luminary Legacy), dual iOS + Web PWA impl paths.
+- Complements prior SPEC.md (mechanics-focused).
+- Web PWA already implements large portions (Living Loom/Tapestry canvas, quests, Essence/XP, mastery hints, local privacy, ripples).
+- Both specs + mocks + sketches + PWA now form complete gamification foundation.
+See DESIGN.md for onboarding, psych, premiums, and detailed impl guidance.
