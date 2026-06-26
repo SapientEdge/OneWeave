@@ -231,6 +231,13 @@ struct OneWeavePrototype: View {
             let t = CareKinThread()
             modelContext.insert(t)
         }
+
+    // Additional quest summary helper for demo
+    private func showQuestSummary() {
+        if let ctx = contexts.first {
+            print("Quest summary: active \(ctx.activeQuests.count), completed \(ctx.completedQuestCount)")
+        }
+    }
     }
 }
 

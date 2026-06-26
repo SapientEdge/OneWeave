@@ -2,13 +2,14 @@ import Foundation
 import SwiftData
 
 @Model
-final class StewardshipThread: Thread {
+final class StewardshipThread: ThreadProtocol {
     var name: String = "Stewardship"
     var subscriptions: [String] = []
     var leaks: [String] = []
     var subscriptionMeta: [String] = [] // "cost:service"
     var recentInsights: [String] = []
     var totalPotentialSavings: Double = 0.0
+    var savingsSuggestions: [String] = []  // populated for Compass cross-suggestions (MVP gamif/launch)
     
     init() {
         // Start clean
@@ -31,7 +32,8 @@ final class StewardshipThread: Thread {
         let savingsNote = actualSavings > 0 ? "Potential savings: $\(actualSavings)/mo (annual $\(actualSavings*12))." : ""
         let insight = "Leak detected: \(serviceName) (\(reason)). \(savingsNote) \(suggestSavingsRedirect(savingsAmount: actualSavings))"
         recentInsights.append(insight)
-        
+        savingsSuggestions.append("Redirect $\(actualSavings) from \(serviceName) to IRL experience or legacy.")  // for cross suggestions (MVP launch)
+
         if let ctx = context, let svc = service {
             svc.emitEvent(
                 thread: "Stewardship",
