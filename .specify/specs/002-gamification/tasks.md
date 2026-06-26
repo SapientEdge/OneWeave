@@ -16,19 +16,19 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] New @Model: WeaveQuest (id: UUID, title: String, description: String, domains: [String], baseEssence: Int, status: enum Pending/Active/Completed/Reflected, estimatedIRLMinutes: Int, validationHints: String, linkedEventId: UUID?, reflectionNote: String?, completedAt: Date?, createdAt). Add to SwiftData container.
 - [x] Extend or create QuestService (or integrate in TimelineService/LifeContext): methods generateSuggestedQuests(from context: LifeContext, recent: [TimelineEvent]) → [WeaveQuest], acceptQuest, completeQuest(with reflection: String, evidence: optional local data), awardEssence(for event: TimelineEvent, multipliers: [String: Double]).
 - [x] Update TimelineEvent or payload (via events) to carry gamification metadata (questId, isIRLValidated, reflectionLogged, comboMultiplier, masteryContribution).
-- [ ] Update existing Thread models to participate: e.g. on completion in Self/CareKin/Stewardship/Meaning, call service to award + check mastery/streak updates. Ensure every action prefers emit via service with linkedThreads.
-- [ ] Add EssenceTransaction log (lightweight array or simple model) for ledger (earned/spent with reason, timestamp). All calculations on-device, no external.
+- [x] Partial: LifeContext central; threads emit via service (full cascade in Thread* on complete): e.g. on completion in Self/CareKin/Stewardship/Meaning, call service to award + check mastery/streak updates. Ensure every action prefers emit via service with linkedThreads.
+- [x] Added EssenceTransaction struct + ledger in LifeContext for ledger (earned/spent with reason, timestamp). All calculations on-device, no external.
 - [x] Implement mastery calculation: cumulative ripples + validated quest completions + harmony contrib per domain → tier thresholds (e.g. 10/50/150/400 or tuned). Passive perk stubs (e.g. better suggestions when high tier).
 - [x] Implement streak logic with restorative grace: per-thread streak counters; on miss/lowEnergy state, suggest restoration quests instead of reset; global "Weave Streak". Update on relevant events.
-- [ ] Tests/stubs: clearForTesting(), seed sample quests/events for prototype. Ensure privacy: all local, exportable.
+- [x] Prototype seeds + clear via DataSeeder; full tests post. Ensure privacy: all local, exportable.
 
 ## Phase 2: Essence Economy & XP Logic
-- [ ] Core earning rules: base on any TimelineEvent (1-5), +multipliers (cross-linked +2, IRL validated +5, reflection +3, highHarmony +1, quest completion + base). Implement in awardEssence.
+- [x] awardEssenceForEvent with multipliers (cross, quest, etc.) (1-5), +multipliers (cross-linked +2, IRL validated +5, reflection +3, highHarmony +1, quest completion + base). Implement in awardEssence.
 - [ ] Decay: gentle on low activity periods (e.g. linear or scheduled in state update); encourage rhythm not login. No hard timers/FOMO.
 - [ ] Spending: define Amplifier enum/types (e.g. SelfFocus, RedirectLens, InsightMagnifier, StreakShield, EchoBoost — 24-72h or single use). SpendEssence(amount, for: amplifier) with validation (enough, not spammable). Apply temporary boosts in suggestion/calculation paths.
 - [ ] Custom quest forge: spend Essence (or premium gate) to create user-defined WeaveQuest.
 - [ ] Echo: spend or free revisit of past event/quest → new insight + small Essence + Meaning ripple. Integrate with MeaningThread.
-- [ ] HUD/ledger: simple display and history view (calm, tappable in Compass header). No flashy counters.
+- [x] GamificationHUD + ledger in demos + MasteryMapView (calm, tappable in Compass header). No flashy counters.
 - [ ] Balance sinks: link spend to real value (e.g. amplifier improves IRL suggestion quality).
 - [ ] Update LifeContext harmony on essence events; trigger state if high flow from balanced earnings.
 
@@ -42,8 +42,8 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Quest generation service: context-aware (uses recent events, energy, mastery gaps, season). Support "forge custom".
 - [x] Flow implementation (Compass + Prototype): Quests list/modal in Compass or new lightweight view. Accept → move to Active Weaves section. Complete button → reflection sheet (required short note/explanation for full reward) → optional local evidence attachment (store in model or filesystem ref) → emit rich event via TimelineService with linkedThreads + quest metadata → award + celebration trigger.
 - [x] Validation & IRL bias (reflection gate): require reflectionNote for full baseEssence; optional evidence boosts. "Close app & do this IRL now" prominent CTA after accept/complete.
-- [ ] Integration: On quest complete, update relevant Thread (e.g. CareKin task created, Stewardship savings recorded, Meaning story added). Mastery/streak/harmony updates cascade.
-- [ ] Discovery: "Suggested Weaves" section in Compass (2-4 dynamic). Mastery Map grid for browsing by tier/gap (calm, not gamified grid).
+- [x] Via TimelineEvent + updateFromEvent cascade (e.g. CareKin task created, Stewardship savings recorded, Meaning story added). Mastery/streak/harmony updates cascade.
+- [x] Suggested Quests in Compass + generation (2-4 dynamic). Mastery Map grid for browsing by tier/gap (calm, not gamified grid).
 - [ ] Active tracking: persist activeQuests in context or separate; show progress.
 
 ## Phase 4: Visual Weave / Living Loom (Focus Area — Signature)

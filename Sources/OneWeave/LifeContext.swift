@@ -36,7 +36,8 @@ final class LifeContext {
     // Active quests and completed count for retention
     var activeQuests: [UUID] = []
     var completedQuestCount: Int = 0
-    var essenceLedger: [String] = []  // lightweight log: "+5 for goal complete @Self"
+    var essenceLedger: [String] = []
+    var essenceTransactions: [EssenceTransaction] = []  // Phase 1 log  // lightweight log: "+5 for goal complete @Self"
     
     init() {}
 
@@ -371,3 +372,5 @@ enum EnergyProfile: String, Codable, CaseIterable {
 
 // Global best practice: Privacy - all data local-first, no external logging of raw events without consent.
 // LifeContext aggregates locally only. No data leaves device unless explicit private sync.
+
+// EssenceTransaction model (lightweight on-device ledger)

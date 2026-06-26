@@ -5,6 +5,7 @@
 
 import SwiftUI
 import SwiftData
+// MasteryMapView stub integrated
 
 struct OneWeavePrototype: View {
     @Environment(\\.modelContext) private var modelContext
@@ -65,7 +66,8 @@ struct OneWeavePrototype: View {
                                 if let ctx = contexts.first {
                                     let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
                                     let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
-                                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
+                                    MasteryMapView().body
+                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
                                 }
                             }
                             .buttonStyle(.bordered)
@@ -172,7 +174,8 @@ struct OneWeavePrototype: View {
                                 if let ctx = contexts.first {
                                     let map = ctx.masteryTiers.map { "\($0.key): L\($0.value)" }.joined(separator: ", ")
                                     let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
-                                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
+                                    MasteryMapView().body
+                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
                                 }
                             }
                             .buttonStyle(.bordered)
