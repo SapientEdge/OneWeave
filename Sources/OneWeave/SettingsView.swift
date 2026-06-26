@@ -5,6 +5,7 @@ import Foundation
 struct SettingsView: View {
     @Environment(\\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
+    @Query private var quests: [WeaveQuest]
     
     @State private var showClearAlert = false
     @State private var showExport = false
