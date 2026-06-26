@@ -5,11 +5,11 @@ Reference: .specify/specs/002-gamification/spec.md , constitution.md , ONEWEAVE_
 All work must comply with constitution (calm, privacy-first local-only SwiftData, interconnected ripples via TimelineEvent, genuine help, IRL-first, anti-addictive design). Deliver working artifacts. Use Graphify + full context before heavy changes if codebase grows.
 
 ## Phase 0: Setup & Grounding (Pre-Implementation)
-- [ ] Confirm .specify/specs/002-gamification/spec.md passes quality (no ambiguity, testable requirements, constitution compliance). Run manual checklist equivalent: requirements measurable, edge cases (lowEnergy, reflection gate), IRL bias explicit.
-- [ ] Read/ground in: full spec.md + DESIGN.md + spec 001 + whitepaper sections on ripples/state + existing thread files (BasicSelfThread.swift streaks/habits, StewardshipThread.swift leaks/savings, CareKinThread.swift IRL/tasks, MeaningThread.swift stories) + LifeContext.swift + TimelineService.swift + CompassView.swift + ThreadRingView + StateMachine + visual mocks (GAMIFICATION_VISUAL_MOCK.html).
-- [ ] Create git branch if not already: `git checkout -b 002-gamification` (or equivalent numbered feature branch).
-- [ ] Add/update any shared types (e.g. in models) for cross-ref if needed. Ensure no-training/privacy prefixes on new code.
-- [ ] Parallel discovery: search for all current uses of "streak", "quest", "mastery", "essence", "harmony", "ripple", "Compass", "LifeContext.updateFromEvent".
+- [x] Confirm .specify/specs/002-gamification/spec.md passes quality (done) (no ambiguity, testable requirements, constitution compliance). Run manual checklist equivalent: requirements measurable, edge cases (lowEnergy, reflection gate), IRL bias explicit.
+- [x] Read/ground in: full spec.md (done, per direct + delegates) + DESIGN.md + spec 001 + whitepaper sections on ripples/state + existing thread files (BasicSelfThread.swift streaks/habits, StewardshipThread.swift leaks/savings, CareKinThread.swift IRL/tasks, MeaningThread.swift stories) + LifeContext.swift + TimelineService.swift + CompassView.swift + ThreadRingView + StateMachine + visual mocks (GAMIFICATION_VISUAL_MOCK.html).
+- [x] Create git branch if not already (002-gamification): `git checkout -b 002-gamification` (or equivalent numbered feature branch).
+- [x] Add/update any shared types (WeaveQuest, etc. done) (e.g. in models) for cross-ref if needed. Ensure no-training/privacy prefixes on new code.
+- [x] Parallel discovery: search for all current uses (done) of "streak", "quest", "mastery", "essence", "harmony", "ripple", "Compass", "LifeContext.updateFromEvent".
 
 ## Phase 1: Data Models & Core Services (Foundation, Local-Only)
 - [x] Extend LifeContext (or create supporting aggregates): add weaveEssence (Int/Double), weaveLevel (Int), masteryTiers: [String: Int] (domain → tier 0-3), harmonyScore (Double, 0-1 low variance = high), streaks (per-thread and global with lastActive, grace counters), activeQuests, completedQuestCount or similar. Update updateFromEvent() to compute on every TimelineEvent.
