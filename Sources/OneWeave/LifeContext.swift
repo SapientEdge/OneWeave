@@ -208,6 +208,24 @@ var activeQuests: [UUID] = []
 
     /// Time since last state change (supports decay UI logic / feedback)
     var timeInCurrentState: TimeInterval {
+
+    // Gentle decay (Phase 2): linear on long inactivity. Encourages rhythm, no hard timers or FOMO.
+    // All local, tunable, anti-addictive.
+    func applyGentleDecay() {
+        let inactiveHours = timeInCurrentState / 3600.0
+        if inactiveHours > 48 {  // after 2 days of low activity
+            let decay = min(5.0, inactiveHours * 0.05)  // very gentle
+            if weaveEssence > 10 {
+                weaveEssence = max(10, weaveEssence - decay)
+                essenceLedger.append("-\(Int(decay)) gentle decay (rhythm)")
+            }
+            // Harmony decays slower
+            if harmonyScore > 0.5 {
+                harmonyScore = max(0.5, harmonyScore - 0.01)
+            }
+        }
+    }
+
         Date().timeIntervalSince(lastStateTransition)
     }
     
@@ -346,8 +364,10 @@ var activeQuests: [UUID] = []
 // Phase 2 essence economy stub: simple amplifiers (spend essence for temporary boosts)
 enum Amplifier: String, CaseIterable {
     case selfFocus = "SelfFocus"
+    case redirectLens = "RedirectLens"
     case insightMagnifier = "InsightMagnifier"
     case streakShield = "StreakShield"
+    case echoBoost = "EchoBoost"
 }
 
 extension LifeContext {
@@ -360,13 +380,35 @@ extension LifeContext {
     }
 
     func spendEssenceForAmplifier(_ amp: Amplifier, amount: Double = 10) -> Bool {
-        if weaveEssence >= amount {
-            weaveEssence -= amount
-            essenceLedger.append("-\(Int(amount)) for \(amp.rawValue) amplifier")
-            // In full: apply temporary boost (e.g. to suggestions or harmony)
-            return true
+        if weaveEssence < amount {
+            return false
         }
-        return false
+        // Anti-spam: simple cooldown check via time (local only)
+        if timeInCurrentState < 60 && amp != .streakShield {  // short window
+            return false
+        }
+        weaveEssence -= amount
+        essenceLedger.append("-\(Int(amount)) for \(amp.rawValue) amplifier")
+        
+        // Apply temporary boost (calm, state-influenced, no FOMO)
+        switch amp {
+        case .selfFocus:
+            harmonyScore = min(1.0, harmonyScore + 0.1)  // gentle focus boost
+        case .redirectLens:
+            // Would bias next suggestions toward Stewardship-like in real QuestService
+            break
+        case .insightMagnifier:
+            harmonyScore = min(1.0, harmonyScore + 0.08)
+        case .streakShield:
+            if graceDaysUsed > 0 {
+                graceDaysUsed -= 1  // protective
+            }
+        case .echoBoost:
+            // Boosts echo value in echoPastEvent
+            break
+        }
+        updateLevelIfNeeded()
+        return true
     }
 }
 

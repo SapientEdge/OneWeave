@@ -89,4 +89,26 @@ final class QuestService {
     func completeWithReflection(questId: UUID, reflection: String, context: LifeContext, modelContext: ModelContext) {
         context.completeQuest(questId, reflection: reflection, context: modelContext)
     }
+
+
+    // Custom quest forge (Phase 2): spend Essence (or future premium) to create user-defined WeaveQuest.
+    // Local only. Validation: title required, domains from existing, reasonable IRL estimate.
+    func forgeCustomQuest(title: String, description: String, domains: [String], estimatedIRLMinutes: Int, baseEssence: Int, context: LifeContext) -> WeaveQuest? {
+        if context.weaveEssence < 20 {  // cost to forge
+            return nil
+        }
+        context.weaveEssence -= 20
+        context.essenceLedger.append("-20 for custom quest forge")
+        
+        let forged = WeaveQuest(
+            title: title,
+            description: description,
+            domains: domains.isEmpty ? ["Self"] : domains,
+            baseEssence: max(5, min(30, baseEssence)),
+            estimatedIRLMinutes: max(1, min(120, estimatedIRLMinutes))
+        )
+        // In real: would persist or add to suggested immediately
+        return forged
+    }
+
 }

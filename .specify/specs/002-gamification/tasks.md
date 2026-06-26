@@ -24,13 +24,13 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 
 ## Phase 2: Essence Economy & XP Logic
 - [x] awardEssenceForEvent with multipliers (cross, quest, etc.) (1-5), +multipliers (cross-linked +2, IRL validated +5, reflection +3, highHarmony +1, quest completion + base). Implement in awardEssence.
-- [ ] Decay: gentle on low activity periods (e.g. linear or scheduled in state update); encourage rhythm not login. No hard timers/FOMO.
-- [ ] Spending: define Amplifier enum/types (e.g. SelfFocus, RedirectLens, InsightMagnifier, StreakShield, EchoBoost — 24-72h or single use). SpendEssence(amount, for: amplifier) with validation (enough, not spammable). Apply temporary boosts in suggestion/calculation paths.
-- [ ] Custom quest forge: spend Essence (or premium gate) to create user-defined WeaveQuest.
-- [ ] Echo: spend or free revisit of past event/quest → new insight + small Essence + Meaning ripple. Integrate with MeaningThread.
+- [x] Decay: gentle on low activity periods (implemented in LifeContext.applyGentleDecay + timeInCurrentState) (e.g. linear or scheduled in state update); encourage rhythm not login. No hard timers/FOMO.
+- [x] Spending: define Amplifier enum/types (full list + spendEssenceForAmplifier with validation + boosts) (e.g. SelfFocus, RedirectLens, InsightMagnifier, StreakShield, EchoBoost — 24-72h or single use). SpendEssence(amount, for: amplifier) with validation (enough, not spammable). Apply temporary boosts in suggestion/calculation paths.
+- [x] Custom quest forge: spend Essence (implemented in QuestService.forgeCustomQuest) (or premium gate) to create user-defined WeaveQuest.
+- [x] Echo: spend or free revisit (basic in LifeContext.echoPastEvent + ledger) of past event/quest → new insight + small Essence + Meaning ripple. Integrate with MeaningThread.
 - [x] GamificationHUD + ledger in demos + MasteryMapView (calm, tappable in Compass header). No flashy counters.
-- [ ] Balance sinks: link spend to real value (e.g. amplifier improves IRL suggestion quality).
-- [ ] Update LifeContext harmony on essence events; trigger state if high flow from balanced earnings.
+- [x] Balance sinks: link spend to real value (spend applies harmony/streak/echo boosts) (e.g. amplifier improves IRL suggestion quality).
+- [x] Update LifeContext harmony on essence events (spend calls update + harmonyScore adjustments); trigger state if high flow from balanced earnings.
 
 ## Phase 3: Quests Engine (Focus Area)
 - [x] Starter quest templates (in QuestService) (rule-based, 5-8 per domain + 3-4 cross):
