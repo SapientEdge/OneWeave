@@ -75,11 +75,20 @@ struct SettingsView: View {
     }
     
     private func exportAllData() {
-        var export = "OneWeave Full Export\n\n"
+        var export = "OneWeave Full Export (Gamification + Core)\n\n"
         if let ctx = contexts.first {
-            export += "Energy: \(ctx.energyProfile.rawValue)\nSeason: \(ctx.values["season"] ?? "—")\n\n"
+            export += "Energy: \(ctx.energyProfile.rawValue)\n"
+            export += "Harmony: \(Int(ctx.harmonyScore * 100))%\n"
+            export += "Global Streak: \(ctx.globalWeaveStreak) (grace used: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays))\n"
+            export += "Essence: \(ctx.weaveEssence) | Level: \(ctx.weaveLevel)\n"
+            export += "Completed Quests: \(ctx.completedQuestCount)\n"
+            export += "Active Quests: \(ctx.activeQuests.count)\n"
+            export += "Essence Ledger (last 5): \(Array(ctx.essenceLedger.suffix(5)))\n\n"
+            export += "Mastery Tiers: \(ctx.masteryTiers)\n\n"
         }
-        export += "See History and Threads for full events.\nExported at \(Date())"
+        // Note: full quests/events in History/Threads tabs; WeaveQuest persistence now enabled
+        export += "See History and Threads for full events/ripples/quests.\n"
+        export += "Exported at \(Date())\nPrivacy: All local SwiftData. No cloud."
         exportData = export
         showExport = true
         if hapticEnabled { generateHaptic(.success) }
@@ -88,6 +97,7 @@ struct SettingsView: View {
     private func clearAllData() {
         try? modelContext.delete(model: LifeContext.self)
         try? modelContext.delete(model: TimelineEvent.self)
+        try? modelContext.delete(model: WeaveQuest.self)
         try? modelContext.delete(model: BasicSelfThread.self)
         try? modelContext.delete(model: StewardshipThread.self)
         try? modelContext.delete(model: CareKinThread.self)

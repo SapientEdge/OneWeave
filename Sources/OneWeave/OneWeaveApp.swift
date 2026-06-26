@@ -11,6 +11,7 @@ struct OneWeaveApp: App {
                 .modelContainer(for: [
                     LifeContext.self,
                     TimelineEvent.self,
+                    WeaveQuest.self,
                     BasicSelfThread.self,
                     StewardshipThread.self,
                     CareKinThread.self,
@@ -69,5 +70,5 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
-        .modelContainer(for: [LifeContext.self, TimelineEvent.self, BasicSelfThread.self, StewardshipThread.self, CareKinThread.self, MeaningThread.self])
+        .modelContainer(for: [LifeContext.self, TimelineEvent.self, WeaveQuest.self, BasicSelfThread.self, StewardshipThread.self, CareKinThread.self, MeaningThread.self])
 }
