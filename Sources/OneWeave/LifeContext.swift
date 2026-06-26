@@ -34,7 +34,10 @@ final class LifeContext {
     var maxGraceDays: Int = 2
     
     // Active quests and completed count for retention
-    var activeQuests: [UUID] = []
+    
+# Active quests tracking (Phase 3/6)
+# Quests persist in activeQuests array; updated on accept/complete.
+var activeQuests: [UUID] = []
     var completedQuestCount: Int = 0
     var essenceLedger: [String] = []
     var essenceTransactions: [EssenceTransaction] = []  // Phase 1 log  // lightweight log: "+5 for goal complete @Self"

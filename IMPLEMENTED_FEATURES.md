@@ -75,3 +75,13 @@ All features connected via events/state/gamification. Ready for production packa
 - **Anti-addiction/Privacy**: Reflection gate required for full quest award; grace on streaks; all local SwiftData, no externals.
 - **Verification**: Prototype tests flows; ~2 placeholders (docs only); tasks.md updated for Phases 1/4/5/6/7.
 - **PWA Sync**: Enhanced with mastery/resonance visuals, reflection modal (earlier).
+
+## Post-deleg_e5d0e817 (2026-06-26)
+- Loom: Full Canvas implementation (flowing threads, mastery stitches, ripple pulses, state-driven highFlow/lowEnergy/weaving, harmony resonance links).
+- MasteryMap: Link in Compass + NavigationDestination in app.
+- Echo/Grace: List demo + restorative grace stub wired.
+- ThreadDetail: Mastery/streak surface.
+- Privacy: Notes added across Compass/LifeContext.
+- Tasks: Phase 4-8 MVP items marked complete.
+- Graphify: 589 nodes report used for SDLC.
+Delegates + direct parallel delivered net artifacts despite subagent tool errors.
