@@ -172,7 +172,20 @@ struct ThreadDetailView: View {
         let data = threadEvents.map { event in
             "\(event.timestamp): \(event.type) - \(event.payload.values.joined()) Ripples: \(event.linkedThreads.joined())"
         }.joined(separator: "\n")
-        exportData = "OneWeave Export for \(threadName)\n\n\(data)"
+ 
+    // Phase 6: gamif surface - quests, mastery, recent ripples
+    if let ctx = try? modelContext.fetch(FetchDescriptor<LifeContext>()).first {
+        let tier = ctx.masteryTiers[thread] ?? 1
+        VStack(alignment: .leading) {
+            Text("Mastery Tier \(tier)")
+            if !ctx.activeQuests.filter({$0.domains.contains(thread)}).isEmpty {
+                Text("Active Weaves for this thread")
+            }
+        }
+        .font(.caption)
+    }
+
+       exportData = "OneWeave Export for \(threadName)\n\n\(data)"
         showExport = true
     }
 }
