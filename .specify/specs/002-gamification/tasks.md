@@ -69,7 +69,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
 - [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
-- [ ] Seasons (post-MVP; restoration quests cover rhythm) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
+- [ ] Seasons (post-MVP) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
@@ -78,7 +78,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [x] Basic onboarding; gamif hook in prototype + Compass (sample quests/loom) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [x] Feedback toasts + IRL prompts in flows.
-- [ ] Widgets (post-MVP): harmony + suggested weave (future).
+- [ ] Widgets (post-MVP) (future).
 - [x] All core free/local; amplifiers stub as future gate; deeper forges/analytics/custom visuals behind premium flag (local).
 - [x] Prototype + Compass demos full flows → details; History shows gamified events with links.
 
