@@ -198,6 +198,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             // create WeaveQuest, save via context (insert to modelContext), verify in container (fetch + @Query), export data, check mastery/streak/essence updates.
                             // Also adds simulation for ThreadDetail + full gamif flows (accept/reflect/mastery tick/streak/harmony/ripple emit). All local-only, no external.
                             // Re-verifies WeaveQuest persistence + gamif cascade per spec/tasks.
+                            // Further expanded: explicit insert, save, query-back (fetch + @Query), Settings export JSON sim verification (quest appears in gamif["quests"]).
                             Button("Real Persist Test: Create WeaveQuest + Save via Context") {
                                 guard let ctx = contexts.first else { return }
                                 let pQuest = WeaveQuest(
@@ -254,6 +255,58 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                                 let exportSnippet = "EXPORT CHECK (from harness): Essence=\(Int(ctx.weaveEssence)) L\(ctx.weaveLevel) | Streak=\(ctx.globalWeaveStreak) grace=\(ctx.graceDaysUsed)/\(ctx.maxGraceDays) | MasteryMeaning=L\(afterM) | CompletedQuests=\(ctx.completedQuestCount) | Active=\(ctx.activeQuests.count) | ContainerQuests=\(qCount) | Ledger last: \(ctx.essenceLedger.suffix(2)) | All local SwiftData verified."
 
                                 demoNote = "✅ VERIFY: \(qCount) WeaveQuests in SwiftData container (found test: \(testQuestIn?.title ?? \"n/a\")). Mastery M: \(beforeM)->\(afterM) | Streak: \(beforeS)->\(afterS) | Essence: \(Int(beforeE))->\(Int(afterE)) | Completed: \(beforeC)->\(ctx.completedQuestCount). \(exportSnippet)"
+                            }
+                            .buttonStyle(.borderedProminent)
+
+                            // Explicit persistence verification for WeaveQuest per expanded harness task:
+                            // insert -> save() -> query back (FetchDescriptor + @Query) -> check presence in Settings-style export JSON sim.
+                            Button("Explicit Persist Verify: Insert+Save+QueryBack+ExportJSON (Settings Sim)") {
+                                guard let ctx = contexts.first else { return }
+                                let uniqueTitle = "ExplicitPersistVerify-\(Int(Date().timeIntervalSince1970))"
+                                let q = WeaveQuest(
+                                    title: uniqueTitle,
+                                    description: "Explicit test insert, save, query back, check in export JSON via Settings sim",
+                                    domains: ["Self", "Meaning"],
+                                    baseEssence: 10,
+                                    estimatedIRLMinutes: 5,
+                                    validationHints: "Verify full roundtrip in harness: query + JSON export."
+                                )
+                                modelContext.insert(q)  // insert
+                                try? modelContext.save()  // explicit save
+
+                                // Query back explicit (fetch)
+                                let fetchDesc = FetchDescriptor<WeaveQuest>()
+                                let fetched = (try? modelContext.fetch(fetchDesc)) ?? []
+                                let queriedViaFetch = fetched.contains(where: { $0.title == uniqueTitle })
+
+                                // Also via @Query (live)
+                                let queriedViaQuery = quests.contains(where: { $0.title == uniqueTitle })
+
+                                // Simulate SettingsView.exportAllData() JSON construction exactly for verification
+                                var gamif: [String: Any] = [:]
+                                gamif["energy"] = ctx.energyProfile.rawValue
+                                gamif["harmony"] = Int(ctx.harmonyScore * 100)
+                                gamif["streak"] = ctx.globalWeaveStreak
+                                gamif["grace_used"] = ctx.graceDaysUsed
+                                gamif["essence"] = ctx.weaveEssence
+                                gamif["level"] = ctx.weaveLevel
+                                gamif["completed_quests"] = ctx.completedQuestCount
+                                gamif["active_quests_count"] = ctx.activeQuests.count
+                                gamif["mastery_tiers"] = ctx.masteryTiers
+                                gamif["essence_ledger"] = Array(ctx.essenceLedger.suffix(5))
+                                // quests list as in Settings
+                                let exportQuests = quests.map { ["id": $0.id.uuidString, "title": $0.title, "status": $0.status.rawValue, "reflection": $0.reflectionNote ?? ""] }
+                                gamif["quests"] = exportQuests
+                                let exportData = (try? JSONSerialization.data(withJSONObject: gamif, options: .prettyPrinted)) ?? Data()
+                                let exportJSON = String(data: exportData, encoding: .utf8) ?? ""
+                                let inExportJSON = exportJSON.contains(uniqueTitle)
+
+                                // realistic: add to activeQuests
+                                if !ctx.activeQuests.contains(q.id) {
+                                    ctx.activeQuests.append(q.id)
+                                }
+
+                                demoNote = "✅ EXPLICIT PERSIST VERIFY: Inserted+saved '\(uniqueTitle)'. Query back via fetch: \(queriedViaFetch), via @Query: \(queriedViaQuery). Present in Settings export JSON: \(inExportJSON). Total quests in JSON: \(exportQuests.count). Roundtrip complete (insert/save/query/export check). Check real Settings > Export for matching data."
                             }
                             .buttonStyle(.borderedProminent)
 

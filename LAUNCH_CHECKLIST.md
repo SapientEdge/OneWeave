@@ -125,3 +125,10 @@ Ready for Xcode/TestFlight drop-in.
 - Export/clear gamif-complete (essence, mastery, streaks, quests, ledger).
 - PrivacyAudit expanded + verification [x] in tasks.
 - Ready for full Xcode test of persistence flows.
+
+## Post latest parallel (export/harness/SDLC delegates + direct)
+- Export: full structured JSON (quests/mastery/ledger/streaks) via @Query.
+- Harness: persistence + export roundtrip + ThreadDetail sims.
+- Settings: private metrics surface.
+- Phase 7/8: heavily marked [x] + notes; 0 core placeholders.
+- Ready: Xcode drop-in for gamif MVP + verification.
