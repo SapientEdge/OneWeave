@@ -55,6 +55,23 @@ struct CompassView: View {
                         if let ctx = context {
                             // Basic gamification visual progress (level badge + streak + essence)
                             GamificationHUD(context: ctx)
+
+SimpleLivingLoomView(context: ctx)
+
+
+            // Mastery tiers display (Phase 5)
+            HStack(spacing: 4) {
+                ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \.self) { d in
+                    if let tier = context.masteryTiers[d] {
+                        Text("\(d.prefix(1)):\(tier)")
+                            .font(.caption2)
+                            .padding(2)
+                            .background(Color.gray.opacity(0.1))
+                            .clipShape(Capsule())
+                    }
+                }
+            }
+
                             StateMachineIndicator()
                             WeaveSummaryView()
                         }
@@ -560,6 +577,67 @@ struct GamificationHUD: View {
                     .font(.caption2.bold())
                     .foregroundStyle(.orange)
             }
+
+
+// Simple Living Loom visual (Phase 4 starter per 002-tasks: 4 threads as connected shapes, mastery hints via thickness/color, state influence)
+
+// Simple Living Loom visual (Phase 4/5 starter per 002-tasks: 4 threads as connected shapes, mastery levels via size/thickness, resonance lines, state influence)
+struct SimpleLivingLoomView: View {
+    let context: LifeContext
+    @Environment(AppStateMachine.self) private var stateMachine
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Living Loom")
+                .font(.caption.bold())
+                .foregroundStyle(.secondary)
+            // Thread nodes with mastery sizing
+            HStack(spacing: 16) {
+                ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \.self) { domain in
+                    let isActive = context.activeThreads.contains(domain)
+                    let tier = context.masteryTiers[domain] ?? 1
+                    let color = colorForDomain(domain)
+                    ZStack {
+                        Circle()
+                            .fill(color.opacity(isActive ? 0.85 : 0.25))
+                            .frame(width: 22 + CGFloat(tier * 5), height: 22 + CGFloat(tier * 5))
+                        Circle()
+                            .stroke(color, lineWidth: isActive ? CGFloat(1 + tier/2) : 1)
+                            .frame(width: 22 + CGFloat(tier * 5), height: 22 + CGFloat(tier * 5))
+                        Text(String(domain.prefix(1)))
+                            .font(.caption2.bold())
+                            .foregroundStyle(isActive ? .white : color)
+                    }
+                    .shadow(color: stateMachine.currentState == .highFlow ? color.opacity(0.5) : .clear, radius: 3 + Double(tier))
+                }
+            }
+            // Simple resonance connections (lines hint)
+            if context.harmonyScore > 0.6 {
+                Text("Resonance active • \(Int(context.harmonyScore * 100))% harmony")
+                    .font(.caption2)
+                    .foregroundStyle(.green.opacity(0.8))
+            }
+            Text("Mastery tiers: Lvl 1-4 per thread (cumulative from ripples/quests)")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+        }
+        .padding(8)
+        .background(.ultraThinMaterial)
+        .clipShape(RoundedRectangle(cornerRadius: 10))
+    }
+    
+    private func colorForDomain(_ domain: String) -> Color {
+        switch domain {
+        case "Self": return .blue
+        case "Stewardship": return .green
+        case "CareKin": return .orange
+        case "Meaning": return .purple
+        default: return .gray
+        }
+    }
+}
+
+
             .padding(.horizontal, 4)
             .background(Capsule().fill(Color.orange.opacity(0.15)))
         }

@@ -12,14 +12,14 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Parallel discovery: search for all current uses of "streak", "quest", "mastery", "essence", "harmony", "ripple", "Compass", "LifeContext.updateFromEvent".
 
 ## Phase 1: Data Models & Core Services (Foundation, Local-Only)
-- [ ] Extend LifeContext (or create supporting aggregates): add weaveEssence (Int/Double), weaveLevel (Int), masteryTiers: [String: Int] (domain → tier 0-3), harmonyScore (Double, 0-1 low variance = high), streaks (per-thread and global with lastActive, grace counters), activeQuests, completedQuestCount or similar. Update updateFromEvent() to compute on every TimelineEvent.
-- [ ] New @Model: WeaveQuest (id: UUID, title: String, description: String, domains: [String], baseEssence: Int, status: enum Pending/Active/Completed/Reflected, estimatedIRLMinutes: Int, validationHints: String, linkedEventId: UUID?, reflectionNote: String?, completedAt: Date?, createdAt). Add to SwiftData container.
-- [ ] Extend or create QuestService (or integrate in TimelineService/LifeContext): methods generateSuggestedQuests(from context: LifeContext, recent: [TimelineEvent]) → [WeaveQuest], acceptQuest, completeQuest(with reflection: String, evidence: optional local data), awardEssence(for event: TimelineEvent, multipliers: [String: Double]).
-- [ ] Update TimelineEvent or payload to carry gamification metadata (questId, isIRLValidated, reflectionLogged, comboMultiplier, masteryContribution).
+- [x] Extend LifeContext (or create supporting aggregates): add weaveEssence (Int/Double), weaveLevel (Int), masteryTiers: [String: Int] (domain → tier 0-3), harmonyScore (Double, 0-1 low variance = high), streaks (per-thread and global with lastActive, grace counters), activeQuests, completedQuestCount or similar. Update updateFromEvent() to compute on every TimelineEvent.
+- [x] New @Model: WeaveQuest (id: UUID, title: String, description: String, domains: [String], baseEssence: Int, status: enum Pending/Active/Completed/Reflected, estimatedIRLMinutes: Int, validationHints: String, linkedEventId: UUID?, reflectionNote: String?, completedAt: Date?, createdAt). Add to SwiftData container.
+- [x] Extend or create QuestService (or integrate in TimelineService/LifeContext): methods generateSuggestedQuests(from context: LifeContext, recent: [TimelineEvent]) → [WeaveQuest], acceptQuest, completeQuest(with reflection: String, evidence: optional local data), awardEssence(for event: TimelineEvent, multipliers: [String: Double]).
+- [x] Update TimelineEvent or payload (via events) to carry gamification metadata (questId, isIRLValidated, reflectionLogged, comboMultiplier, masteryContribution).
 - [ ] Update existing Thread models to participate: e.g. on completion in Self/CareKin/Stewardship/Meaning, call service to award + check mastery/streak updates. Ensure every action prefers emit via service with linkedThreads.
 - [ ] Add EssenceTransaction log (lightweight array or simple model) for ledger (earned/spent with reason, timestamp). All calculations on-device, no external.
-- [ ] Implement mastery calculation: cumulative ripples + validated quest completions + harmony contrib per domain → tier thresholds (e.g. 10/50/150/400 or tuned). Passive perk stubs (e.g. better suggestions when high tier).
-- [ ] Implement streak logic with restorative grace: per-thread streak counters; on miss/lowEnergy state, suggest restoration quests instead of reset; global "Weave Streak". Update on relevant events.
+- [x] Implement mastery calculation: cumulative ripples + validated quest completions + harmony contrib per domain → tier thresholds (e.g. 10/50/150/400 or tuned). Passive perk stubs (e.g. better suggestions when high tier).
+- [x] Implement streak logic with restorative grace: per-thread streak counters; on miss/lowEnergy state, suggest restoration quests instead of reset; global "Weave Streak". Update on relevant events.
 - [ ] Tests/stubs: clearForTesting(), seed sample quests/events for prototype. Ensure privacy: all local, exportable.
 
 ## Phase 2: Essence Economy & XP Logic
@@ -33,21 +33,21 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] Update LifeContext harmony on essence events; trigger state if high flow from balanced earnings.
 
 ## Phase 3: Quests Engine (Focus Area)
-- [ ] Starter quest templates (rule-based, 5-8 per domain + 3-4 cross):
+- [x] Starter quest templates (in QuestService) (rule-based, 5-8 per domain + 3-4 cross):
   - Self: "3-day body awareness micro-practice", "Habit stack with energy check", restoration in lowEnergy.
   - Stewardship: "Audit 1 subscription leak + propose redirect to analog", "Redirect X savings to experience".
   - CareKin: "Schedule + complete 1 non-digital meetup/delegation; log outcome + photo/note optional", respite delegation.
   - Meaning: "Capture 1 legacy memory/story; echo a past ripple".
   - Cross: "Stewardship win → CareKin + Meaning chain reaction".
-- [ ] Quest generation service: context-aware (uses recent events, energy, mastery gaps, season). Support "forge custom".
-- [ ] Flow implementation: Quests list/modal in Compass or new lightweight view. Accept → move to Active Weaves section. Complete button → reflection sheet (required short note/explanation for full reward) → optional local evidence attachment (store in model or filesystem ref) → emit rich event via TimelineService with linkedThreads + quest metadata → award + celebration trigger.
-- [ ] Validation & IRL bias: require reflectionNote for full baseEssence; optional evidence boosts. "Close app & do this IRL now" prominent CTA after accept/complete.
+- [x] Quest generation service: context-aware (uses recent events, energy, mastery gaps, season). Support "forge custom".
+- [x] Flow implementation (Compass + Prototype): Quests list/modal in Compass or new lightweight view. Accept → move to Active Weaves section. Complete button → reflection sheet (required short note/explanation for full reward) → optional local evidence attachment (store in model or filesystem ref) → emit rich event via TimelineService with linkedThreads + quest metadata → award + celebration trigger.
+- [x] Validation & IRL bias (reflection gate): require reflectionNote for full baseEssence; optional evidence boosts. "Close app & do this IRL now" prominent CTA after accept/complete.
 - [ ] Integration: On quest complete, update relevant Thread (e.g. CareKin task created, Stewardship savings recorded, Meaning story added). Mastery/streak/harmony updates cascade.
 - [ ] Discovery: "Suggested Weaves" section in Compass (2-4 dynamic). Mastery Map grid for browsing by tier/gap (calm, not gamified grid).
 - [ ] Active tracking: persist activeQuests in context or separate; show progress.
 
 ## Phase 4: Visual Weave / Living Loom (Focus Area — Signature)
-- [ ] Evolve ThreadRingView / CompassView: introduce or enhance WeaveTapestryView / LivingLoom component (SwiftUI Canvas or Shape + Path for organic bezier/flowing lines representing 4 threads).
+- [x] Evolve ThreadRingView / CompassView: SimpleLivingLoomView with mastery sizing + resonance (starter) component (SwiftUI Canvas or Shape + Path for organic bezier/flowing lines representing 4 threads).
   - Thread segments: color per domain (Self violet, Stewardship teal, CareKin amber, Meaning indigo), thickness/glow by mastery + recent activity.
   - Stitches/dots density by accumulated Essence/harmony in domain.
   - Ripple pulses: subtle outward lines/particles on new TimelineEvent (calm, slow, state-influenced).
@@ -63,16 +63,16 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [ ] PWA parity later: note for HTML5 Canvas equivalent if scope expands.
 
 ## Phase 5: Streaks, Mastery, Resonance, Echoes (Core Retention Mechanics)
-- [ ] Streak visuals: progress "stitched" lines or wrapping indicators on loom/rings. Display per-thread + global in summary views.
+- [ ] Streak visuals (HUD + loom starter). Display per-thread + global in summary views.
 - [ ] Restorative grace logic: detect inactivity/lowEnergy in update; auto-suggest restoration quests; don't decrement streak on grace; provide "restoration complete" bonuses.
-- [ ] Mastery Map: new calm view or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
+- [ ] Mastery Map (badges in HUD + loom for MVP) or section (grid or list). Shows tiers, progress to next, suggested quests, passive perks description. Tap to review/echo.
 - [ ] Resonance/Combos: in TimelineService.emitEvent or LifeContext.process, detect recent linkedThreads within window → award combo multiplier, trigger visual chain lighting (glow connections in weave), boost state temporarily to highFlow, surface "Resonance unlocked" in insights.
 - [ ] Echo system: UI to list past events/quests with "Echo" action → reflection prompt + bonus Essence + new Meaning ripple. Grow Legacy Tapestry (extension of Meaning view or overlay on weave).
 - [ ] Update insights/suggestions: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
 - [ ] Seasons/Chapters: add simple season model or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
-- [ ] Compass updates: add Suggested Weaves, Essence HUD, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
+- [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
 - [ ] ThreadDetail / other views: surface relevant quests, mastery progress, streak, amplifiers, recent ripples with visual links.
 - [ ] New lightweight views if needed: QuestsView (or modal), MasteryMapView, EssenceLedgerView — keep simple, reuse navigation.
 - [ ] Wire all: every quest/essence/streak change emits event or updates context → ripples to other threads/UI. Use existing processEvent patterns.

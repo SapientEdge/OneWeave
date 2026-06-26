@@ -50,6 +50,26 @@ struct OneWeavePrototype: View {
                                 demoNote = "State: \(stateMachine.currentState.displayName). Check Compass for energy drop + Active Ripples."
                             }
                             .buttonStyle(.borderedProminent)
+
+                            // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
+                            Button("Trigger Resonance (linked ripple + mastery tick)") {
+                                if let ctx = contexts.first, let svc = service {
+                                    svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
+                                    ctx.awardBonusEssence(5, reason: "resonance")
+                                    demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
+                            Button("Echo past weave (legacy ripple + Meaning mastery)") {
+                                if let ctx = contexts.first, let svc = service {
+                                    svc.emitEvent(thread: "Meaning", type: "echo_legacy", payload: ["echo": "past quest"], affectsEnergy: false, linkedThreads: [])
+                                    ctx.awardBonusEssence(3, reason: "echo")
+                                    demoNote = "Echo created! +3 Essence. Meaning mastery advanced. (Full echo UI Phase 5)"
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
                             
                             Button("Journey: Detect subscription leak (Stewardship) - full analysis, redirect to Meaning/Care") {
                                 simulateLeak()
@@ -117,6 +137,26 @@ struct OneWeavePrototype: View {
                                 }
                             }
                             .buttonStyle(.borderedProminent)
+
+                            // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
+                            Button("Trigger Resonance (linked ripple + mastery tick)") {
+                                if let ctx = contexts.first, let svc = service {
+                                    svc.emitEvent(thread: "Self", type: "resonance_combo", payload: ["linked": ["CareKin","Meaning"]], affectsEnergy: true, linkedThreads: ["CareKin", "Meaning"])
+                                    ctx.awardBonusEssence(5, reason: "resonance")
+                                    demoNote = "Resonance! +5 Essence + mastery cross-tick. Loom connections active."
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
+                            Button("Echo past weave (legacy ripple + Meaning mastery)") {
+                                if let ctx = contexts.first, let svc = service {
+                                    svc.emitEvent(thread: "Meaning", type: "echo_legacy", payload: ["echo": "past quest"], affectsEnergy: false, linkedThreads: [])
+                                    ctx.awardBonusEssence(3, reason: "echo")
+                                    demoNote = "Echo created! +3 Essence. Meaning mastery advanced. (Full echo UI Phase 5)"
+                                }
+                            }
+                            .buttonStyle(.bordered)
+
                         }
                         
                         if !demoNote.isEmpty {

@@ -248,17 +248,34 @@ final class LifeContext {
         guard var currentTier = masteryTiers[thread] else { return }
         
         let type = event.type.lowercased()
-        // Impactful actions advance mastery (not every event)
-        if type.contains("complete") || type.contains("win") || type.contains("story_captured") || type.contains("habit_complete") || type.contains("leak_fixed") || (event.linkedThreads.count > 1) {
-            if Int.random(in: 0..<3) == 0 || currentTier < 2 {  // bias early progress for prototype demo
-                masteryTiers[thread] = min(4, currentTier + 1)
-            }
+        var masteryGain = 0
+        
+        // Cumulative from impactful actions + ripples (per 002 spec: ripples + validated quests + harmony)
+        if type.contains("complete") || type.contains("win") || type.contains("quest") || type.contains("story_captured") || type.contains("habit_complete") || type.contains("leak_fixed") {
+            masteryGain += 1
         }
-        // Also passive accum from volume
-        if (eventCount % 4 == 0) && currentTier < 3 {
-            // occasionally tick
-            if masteryTiers[thread] == currentTier {
-                masteryTiers[thread] = min(4, currentTier + 1)
+        if event.linkedThreads.count > 1 {
+            masteryGain += 1  // cross-ripple bonus
+        }
+        if event.linkedThreads.count >= 3 {
+            masteryGain += 1
+        }
+        
+        // Volume + harmony contribution (passive)
+        if eventCount % 5 == 0 && harmonyScore > 0.7 {
+            masteryGain += 1
+        }
+        
+        if masteryGain > 0 {
+            masteryTiers[thread] = min(4, currentTier + masteryGain)
+        }
+        
+        // Cross-domain mastery tick for linked threads (resonance)
+        for linked in event.linkedThreads {
+            if let linkedTier = masteryTiers[linked], linkedTier < currentTier {
+                if Int.random(in: 0..<2) == 0 {
+                    masteryTiers[linked] = min(4, linkedTier + 1)
+                }
             }
         }
     }
