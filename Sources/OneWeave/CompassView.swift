@@ -132,7 +132,26 @@ struct CompassView: View {
                     // Gamification visual progress: streak, level, essence (tied to LifeContext + events)
                     if let ctx = context {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("Weave Progress")
+                            Text("Weave Progress
+                    // Season indicator (post-MVP stub, calm UI)
+                    if let ctx = context {
+                        HStack {
+                            Text("Season: \(ctx.values["season"] ?? ctx.currentSeason)")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Button("Change Season") {
+                                ctx.changeSeason(to: "Autumn")
+                                weaveFeedback = "Season shifted. Reflection gate open."
+                                showWeaveFeedback = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { showWeaveFeedback = false }
+                            }
+                            .font(.caption)
+                            .buttonStyle(.bordered)
+                        }
+                        .padding(.horizontal)
+                    }
+")
                                 .font(.headline.smallCaps())
                                 .foregroundStyle(.secondary)
                             HStack(spacing: 12) {

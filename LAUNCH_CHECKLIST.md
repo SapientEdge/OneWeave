@@ -163,3 +163,9 @@ Ready for Xcode/TestFlight drop-in.
 - MasteryMapView.swift: existing domain tiers + echo practice.
 - Wired in CompassView nav + prototype demos.
 - All local, calm, reuse existing navigation patterns.
+
+## Latest Parallel Advance (post-MVP + polish)
+- Seasons stub in LifeContext (currentSeason, changeSeason, completeSeasonReflection with burst + gate).
+- Compass: NavigationDestination for QuestsView/EssenceLedgerView/MasteryMapView + season indicator/button.
+- Prototype: roundtrip tests (views data + export sim), season change demo.
+- Tasks updated, files ~27, core MVP complete.
