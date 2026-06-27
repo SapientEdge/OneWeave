@@ -722,3 +722,14 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                 lastAction = "Roundtrip verified: " + exportData
             }
         }
+
+
+        Button("Complete All Views Roundtrip (season + ledger + quests + mastery)") {
+            if let ctx = contexts.first {
+                ctx.changeSeason(to: "Winter")
+                _ = ctx.spendEssenceForAmplifier(.insightMagnifier, amount: 5)
+                ctx.completeSeasonReflection(note: "Full roundtrip test reflection")
+                let export = "Season: \(ctx.currentSeason) Ledger: \(ctx.essenceLedger.count) Quests: \(ctx.activeQuests.count) Mastery: \(ctx.masteryTiers.values.reduce(0,+))"
+                lastAction = "Full roundtrip: " + export
+            }
+        }
