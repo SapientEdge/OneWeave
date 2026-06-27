@@ -1,8 +1,14 @@
 // OneWeaveWidgetStubs.swift
 // Phase 8 post-MVP: Harmony/Quest widgets stub + App Intents + Live Activities
-// Concrete notes implemented in docs; this is placeholder stub for Xcode target setup.
-// Requires: Widget Extension target, App Group for data sharing, import WidgetKit + AppIntents + ActivityKit
-// All local SwiftData queries via snapshot or shared container (no direct @Model in ext).
+// Concrete per tasks.md Phase 8: 
+// - Harmony Widget (small/medium via WidgetKit): TimelineProvider pulls harmonyScore, top active/suggested quest from LifeContext/@Query; mini 4-thread tapestry preview + "Open OneWeave". 
+// - Medium: 1-2 quest list with domain tags + "Accept" AppIntent deep link. 
+// - Live Activity: Active quest "IRL: 15min • +baseEssence on reflect" or streak counter with grace state. Uses ActivityKit + local push updates.
+// - Siri/App Intents: "Show my harmony", "Weave quick capture <text> for <thread>", "Complete current quest with reflection <note>" (donate shortcuts). 
+// Shared snapshot provider (OneWeaveSnapshot) e.g. export simple struct from LifeContext for widget target. 
+// Post core MVP; requires Xcode target setup for WidgetExtension (App Group for sharing snapshot JSON/UserDefaults).
+// All local-only SwiftData queries via snapshot (no direct @Model in ext). Harmony/quest focus per Phase 8 + DESIGN peripheral hooks.
+// Keep post-MVP scope. Update LAUNCH/tasks when core stable.
 
 import Foundation
 import SwiftUI
@@ -87,8 +93,80 @@ struct HarmonyWidgetView: View {
     }
 }
 
-// MARK: - Quest Widget stub (medium family)
-struct QuestWidget: Widget { /* similar provider + view for 1-2 quests + Accept intent */ }
+// MARK: - Quest Widget stub (medium family, per Phase 8 concrete)
+struct QuestWidgetProvider: TimelineProvider {
+    typealias Entry = QuestEntry
+    
+    func placeholder(in context: Context) -> QuestEntry {
+        QuestEntry(date: Date(), quests: [
+            OneWeaveQuestStub(title: "3-day body awareness", domain: "Self", estMinutes: 15, essence: 8),
+            OneWeaveQuestStub(title: "Log 1 CareKin interaction", domain: "CareKin", estMinutes: 20, essence: 12)
+        ])
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (QuestEntry) -> ()) {
+        let q = OneWeaveQuestStub(title: "Reflect on legacy story", domain: "Meaning", estMinutes: 10, essence: 15)
+        completion(QuestEntry(date: Date(), quests: [q]))
+    }
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<QuestEntry>) -> ()) {
+        let quests = [
+            OneWeaveQuestStub(title: "Audit 1 subscription leak", domain: "Stewardship", estMinutes: 5, essence: 6),
+            OneWeaveQuestStub(title: "Schedule non-digital meetup", domain: "CareKin", estMinutes: 30, essence: 10)
+        ]
+        let entry = QuestEntry(date: Date(), quests: quests)
+        let timeline = Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(30*60)))
+        completion(timeline)
+    }
+}
+
+struct OneWeaveQuestStub: Identifiable, Codable {
+    let id = UUID()
+    let title: String
+    let domain: String
+    let estMinutes: Int
+    let essence: Int
+}
+
+struct QuestEntry: TimelineEntry {
+    let date: Date
+    let quests: [OneWeaveQuestStub]
+}
+
+struct QuestWidget: Widget {
+    let kind: String = "OneWeaveQuestWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: QuestWidgetProvider()) { entry in
+            QuestWidgetView(entry: entry)
+        }
+        .configurationDisplayName("OneWeave Quests")
+        .description("Top suggested quests. Tap to accept (via AppIntent).")
+        .supportedFamilies([.systemMedium])
+    }
+}
+
+struct QuestWidgetView: View {
+    var entry: QuestEntry
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Suggested Weaves").font(.headline)
+            ForEach(entry.quests.prefix(2)) { q in
+                HStack {
+                    Text("• \(q.domain): \(q.title)")
+                        .font(.caption)
+                        .lineLimit(1)
+                    Spacer()
+                    Text("+\(q.essence)✧ \(q.estMinutes)m")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Text("Accept via app or Siri").font(.caption2).foregroundStyle(.tertiary)
+        }
+        .padding(8)
+    }
+}
 
 // MARK: - App Intents for Siri/Shortcuts
 struct LogWeaveIntent: AppIntent {
@@ -138,13 +216,15 @@ struct OneWeaveLiveActivityAttributes: ActivityAttributes {
 struct OneWeaveWidgets: WidgetBundle {
     var body: some Widget {
         HarmonyWidget()
-        // QuestWidget()
+        QuestWidget()
     }
 }
 
 // Notes:
 // - Add to Xcode: File > New > Target > Widget Extension; share app group with main OneWeave target for snapshot JSON.
 // - Privacy: All data local; widgets use on-device snapshot only.
-// - Harmony/quest focus per Phase 8 + DESIGN peripheral hooks.
+// - Harmony/quest focus per Phase 8 + DESIGN peripheral hooks. Basic stubs now include full Harmony + Quest providers/views + intents + live attrs (polished per concrete).
 // - Update after MVP when core stable. See LAUNCH_CHECKLIST + tasks.md for full concrete.
+// - Simple widget preview integrated in OneWeavePrototype.swift (sim UI using snapshot-like data from LifeContext for testing flows).
 // - For PWA parity: web equivalent via notification or home screen "widget" like add-to-home with dynamic manifest updates (future).
+// - Post-MVP: no full target setup here (Linux env); stubs + preview only.

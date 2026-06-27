@@ -129,31 +129,30 @@ struct CompassView: View {
                     }
                     .padding(.horizontal)
                     
-                    // Gamification visual progress: streak, level, essence (tied to LifeContext + events)
+                                        // Gamification visual progress: streak, level, essence (tied to LifeContext + events)
                     if let ctx = context {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("Weave Progress
-                    // Season indicator (post-MVP stub, calm UI)
-                    if let ctx = context {
-                        HStack {
-                            Text("Season: \(ctx.values["season"] ?? ctx.currentSeason)")
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                            Spacer()
-                            Button("Change Season") {
-                                ctx.changeSeason(to: "Autumn")
-                                weaveFeedback = "Season shifted. Reflection gate open."
-                                showWeaveFeedback = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { showWeaveFeedback = false }
-                            }
-                            .font(.caption)
-                            .buttonStyle(.bordered)
-                        }
-                        .padding(.horizontal)
-                    }
-")
+                            Text("Weave Progress")
                                 .font(.headline.smallCaps())
                                 .foregroundStyle(.secondary)
+
+                            // Season indicator (post-MVP stub, calm UI)
+                            HStack {
+                                Text("Season: \(ctx.values["season"] ?? ctx.currentSeason)")
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Button("Change Season") {
+                                    ctx.changeSeason(to: "Autumn")
+                                    weaveFeedback = "Season shifted. Reflection gate open."
+                                    showWeaveFeedback = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { showWeaveFeedback = false }
+                                }
+                                .font(.caption)
+                                .buttonStyle(.bordered)
+                            }
+                            .padding(.horizontal)
+
                             HStack(spacing: 12) {
                                 // Level badge
                                 VStack {
@@ -207,46 +206,9 @@ struct CompassView: View {
                         }
                         .padding(.horizontal)
                     }
-                    
-                    // 
-                    // Navigation to lightweight views (Phase 6)
-                    HStack(spacing: 12) {
-                        NavigationLink(value: "QuestsView") {
-                            Label("Quests", systemImage: "list.bullet.rectangle")
-                                .font(.caption)
-                        }
-                        NavigationLink(value: "EssenceLedgerView") {
-                            Label("Ledger", systemImage: "list.bullet")
-                                .font(.caption)
-                        }
-                        NavigationLink(value: "MasteryMapView") {
-                            Label("Mastery", systemImage: "map")
-                                .font(.caption)
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    // Active Ripples (cross-domain, glass)
+// Active Ripples (cross-domain, glass)
                     VStack(alignment: .leading) {
-                        Text("
-                    // Navigation to lightweight views (Phase 6)
-                    HStack(spacing: 12) {
-                        NavigationLink(value: "QuestsView") {
-                            Label("Quests", systemImage: "list.bullet.rectangle")
-                                .font(.caption)
-                        }
-                        NavigationLink(value: "EssenceLedgerView") {
-                            Label("Ledger", systemImage: "list.bullet")
-                                .font(.caption)
-                        }
-                        NavigationLink(value: "MasteryMapView") {
-                            Label("Mastery", systemImage: "map")
-                                .font(.caption)
-                        }
-                    }
-                    .padding(.horizontal)
-
-                    // Active Ripples")
+                        Text("Active Ripples")
                             .font(.headline.smallCaps())
                         if recentEvents.isEmpty {
                             Text("No ripples yet. Capture something to start the weave.")
@@ -266,7 +228,24 @@ struct CompassView: View {
                             }
                         }
                     }
+                    
+                    // Navigation to lightweight views (Phase 6 polish)
+                    HStack(spacing: 12) {
+                        NavigationLink(value: "QuestsView") {
+                            Label("Quests", systemImage: "list.bullet.rectangle")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "EssenceLedgerView") {
+                            Label("Ledger", systemImage: "list.bullet")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "MasteryMapView") {
+                            Label("Mastery", systemImage: "map")
+                                .font(.caption)
+                        }
+                    }
                     .padding(.horizontal)
+.padding(.horizontal)
                     
                     // Insight + suggestions (sophisticated, low load)
                     VStack(alignment: .leading, spacing: 8) {
@@ -419,6 +398,7 @@ struct CompassView: View {
                 }
             }
         }
+        
         .navigationDestination(for: String.self) { value in
             switch value {
             case "QuestsView":
@@ -431,7 +411,7 @@ struct CompassView: View {
                 ThreadDetailView(threadName: value)
             }
         }
-        .onAppear {
+.onAppear {
             service = TimelineService(modelContext: modelContext)
             questService = QuestService.shared
             if contexts.isEmpty {
@@ -857,31 +837,4 @@ struct SimpleLivingLoomView: View {
         .padding(6)
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 9))
-        .onAppear {
-            // Calm, slow organic weave animation (repeats, low cognitive load)
-            withAnimation(.linear(duration: 5.8).repeatForever(autoreverses: false)) {
-                weavePhase = 2 * .pi
-            }
-            // Subtle breathing pulse for ripples (autonomous but calm)
-            withAnimation(.easeInOut(duration: 2.4).repeatForever(autoreverses: true)) {
-                pulsePhase = 1.0
-            }
-        }
-    }
-
-    private func colorForDomain(_ domain: String) -> Color {
-        switch domain {
-        case "Self": return .blue
-        case "Stewardship": return .green
-        case "CareKin": return .orange
-        case "Meaning": return .purple
-        default: return .gray
-        }
-    }
-}
-
-// Extend ThreadRingView lightly for mastery (visual tier hint kept)
-extension ThreadRingView {
-    // For future: could accept mastery tier, here we just hint in color for now (prototype keeps simple)
-}
-
+        

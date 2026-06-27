@@ -72,7 +72,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Seasons (post-MVP stub): currentSeason + changeSeason + completeSeasonReflection in LifeContext (gate + burst + summary event). Prototype demo + Compass values support.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
-- [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
+- [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure. (NavigationDestination + links for Quests/EssenceLedger/Mastery + season change UI polished)
 - [x] Mastery/streak surfaced in ThreadDetailView progress, streak, amplifiers, recent ripples with visual links.
 - [x] New lightweight views: ... Full nav in Compass (NavigationDestination wired for QuestsView/EssenceLedgerView/MasteryMapView).
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
@@ -105,6 +105,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
   - Concrete: Harmony Widget (small/medium via WidgetKit): TimelineProvider pulls harmonyScore, top active/suggested quest from LifeContext/@Query; mini 4-thread tapestry preview + "Open OneWeave" . Medium: 1-2 quest list with domain tags + "Accept" AppIntent deep link. 
   - Live Activity: Active quest "IRL: 15min • +baseEssence on reflect" or streak counter with grace state. Uses ActivityKit + push updates from app (local).
   - Siri/App Intents: "Show my harmony", "Weave quick capture <text> for <thread>", "Complete current quest with reflection <note>" (donate shortcuts). Stub OneWeaveAppIntents.swift with @AppIntent structs.
+  **Progress (2026-06-27 polish)**: Basic harmony/quest widget stubs + providers/views + snapshot struct + AppIntents/LiveActivity added/polished in OneWeaveWidgetStubs.swift. Simple widget preview (Harmony + Quest sims w/ real LifeContext data + mini tapestry) integrated in prototype. Updated LAUNCH_CHECKLIST + this tasks + stubs notes. Still post-MVP (stubs only, no extension target).
   - Harmony/quest widgets stub: Shared snapshot provider (e.g. export simple struct from LifeContext for widget target). Post core MVP; requires Xcode target setup for WidgetExtension. Notes in DESIGN for peripheral.
 - [x] Updated IMPLEMENTED, LAUNCH_CHECKLIST, tasks if evolved; add to IMPLEMENTED_FEATURES. (PWA/legacy briefs also in README.md)
 - [x] Graphify report + manual task marks (manual cross check spec vs tasks vs code; 601 nodes). Global SDLC: re-read GLOBAL_BEST_PRACTICES.md + ci.yml before edits; updated with persistence/export/audit fixes, graphify usage, Phase 7/8 progress noted. Basic Swift model/container lint stub added to CI.

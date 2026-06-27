@@ -507,7 +507,66 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         }
         .padding(6)
         .background(.quaternary.opacity(0.2))
+        .padding(6)
+        .background(.quaternary.opacity(0.2))
+        // Phase 8 post-MVP: Simple widget preview in prototype (sim only; mimics HarmonyWidgetView + QuestWidgetView using LifeContext snapshot data)
+        // This allows testing widget data shapes in harness without full WidgetKit target. Uses same fields as OneWeaveSnapshot.
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Widget Preview (Phase 8 stub)").font(.caption).foregroundStyle(.secondary)
+            // Harmony widget sim (small family style)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Harmony \(Int(context.harmonyScore * 100))%")
+                    .font(.headline)
+                Text("L\(context.weaveLevel) • 🔥\(context.globalWeaveStreak) (grace \(context.graceDaysUsed))")
+                    .font(.caption)
+                if let topQ = context.activeQuests.first {
+                    Text("Quest: \(topQ.title)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                } else {
+                    Text("Quest: (no active)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+                // Mini 4-thread tapestry preview stub (per Phase 8)
+                HStack(spacing: 3) {
+                    ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \\.self) { d in
+                        let tier = context.masteryTiers[d] ?? 1
+                        Circle()
+                            .fill(Color(hue: tier == 0 ? 0.7 : 0.55, saturation: 0.6 + Double(tier)*0.1, brightness: 0.8))
+                            .frame(width: 7 + CGFloat(tier), height: 7 + CGFloat(tier))
+                    }
+                }
+                Text("Tap opens OneWeave").font(.caption2).foregroundStyle(.tertiary)
+            }
+            .padding(6)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
 
+            // Quest widget sim (medium)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Suggested Weaves").font(.subheadline)
+                // Use up to 2 from active or suggested (sim)
+                let simQuests = context.activeQuests.prefix(2)
+                if simQuests.isEmpty {
+                    Text("• Self: 3-day body awareness  +8✧ 15m").font(.caption)
+                    Text("• CareKin: Log interaction  +12✧ 20m").font(.caption)
+                } else {
+                    ForEach(Array(simQuests)) { q in
+                        Text("• \(q.domains.first ?? \"Cross\"): \(q.title)  +\(q.baseEssence)✧ \(q.estimatedIRLMinutes)m")
+                            .font(.caption)
+                            .lineLimit(1)
+                    }
+                }
+                Text("Accept via AppIntent or app").font(.caption2).foregroundStyle(.tertiary)
+            }
+            .padding(6)
+            .background(Color(.secondarySystemBackground))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.2))
 
         // Basic Echo list stub (Phase 5): list recent + trigger echo (full UI + Legacy Tapestry post-MVP)
         VStack(alignment: .leading, spacing: 4) {

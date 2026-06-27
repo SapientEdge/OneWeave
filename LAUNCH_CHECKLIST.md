@@ -76,6 +76,7 @@
   **Concrete notes (harmony/quest widgets stub)**: 
   - Harmony Widget (small/medium): WidgetKit TimelineProvider queries LifeContext for harmonyScore (0-1), top suggested quest title (from activeQuests or QuestService), mini 4-thread preview (simple bezier or symbols). Tap opens app to Compass. 
   - Quest Widget: Up to 2 suggested quests w/ domain color, est. IRL min, "Accept" button via AppIntent (deep links to accept flow).
+  **Progress (polish update)**: Basic full stubs implemented in OneWeaveWidgetStubs.swift (HarmonyWidget + QuestWidgetProvider/View + snapshot + intents + LiveActivity attrs). Simple interactive widget preview (Harmony + Quest sims using real context data + mini tapestry) integrated in OneWeavePrototype.swift. Notes updated in stubs + tasks. Still post-MVP (no Xcode widget target yet; Linux sim only).
   - Live Activities: For active quest progress ("Do IRL: 12min left • full award on reflect") or global streak + grace indicator. Local ActivityKit updates.
   - Siri/App Intents: "OneWeave log weave", "Show harmony score", "Complete quest <note for reflection>". Stub: OneWeaveAppIntents.swift with structs conforming to AppIntent + WidgetConfiguration if applicable. Shared data via app group or snapshot export from LifeContext (no direct model access in widget ext). Post-MVP after MVP stability; requires adding Widget Extension target in Xcode.
 - Full PWA parity (post): 
