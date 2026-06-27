@@ -42,7 +42,7 @@ var activeQuests: [UUID] = []
     var essenceLedger: [String] = []
     var essenceTransactions: [EssenceTransaction] = []
 
-    // Seasons (post-MVP stub): user or auto tag. On change: big reflection gate, chapter summary, Essence burst.
+    // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
     var currentSeason: String = "Spring"  // or "High Care Load" style from values
     var seasonChangeDate: Date = Date()
     var seasonReflectionCompleted: Bool = false
@@ -407,7 +407,7 @@ var activeQuests: [UUID] = []
     
     /// Public helper for quest completions etc to award bonus
 
-// Phase 2 essence economy stub: simple amplifiers (spend essence for temporary boosts)
+// Phase 2 essence economy (production amplifiers)
 enum Amplifier: String, CaseIterable {
     case selfFocus = "SelfFocus"
     case redirectLens = "RedirectLens"

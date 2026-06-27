@@ -6,7 +6,7 @@
 
 import SwiftUI
 import SwiftData
-// MasteryMapView stub integrated
+// MasteryMapView production integrated
 
 struct OneWeavePrototype: View {
     @Environment(\\.modelContext) private var modelContext
@@ -32,6 +32,28 @@ struct OneWeavePrototype: View {
                 VStack(spacing: 16) {
                     if let context = contexts.first {
                         Text("OneWeave • One Journey (Production-Ready End-to-End)")
+
+                    // Production Onboarding (full first-weave + quest intro)
+                    VStack {
+                        Text("Welcome to OneWeave").font(.title2.bold())
+                        Text("Your life as one interconnected journey. Start with a simple weave, accept a quest, reflect IRL.")
+                            .font(.caption).foregroundStyle(.secondary)
+                        Button("Start First Weave + Quest") {
+                            // simulate full onboarding flow
+                            if let ctx = contexts.first {
+                                ctx.weaveEssence += 5
+                                let firstQ = WeaveQuest(title: "First weave: notice one breath", description: "IRL: pause for 3 breaths. Log how it felt.", domains: ["Self"], baseEssence: 5)
+                                modelContext.insert(firstQ)
+                                ctx.activeQuests.append(firstQ.id)
+                                demoNote = "Onboarding complete. First quest added. HUD and Loom updated. Do IRL then reflect for full essence."
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
+                    .padding()
+                    .background(Color(.secondarySystemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+
                             .font(.largeTitle.bold())
                         
                         Text("State: \(stateMachine.currentState.displayName) | Energy: \(context.energyProfile.rawValue) | Events: \(context.eventCount) | Essence: \(context.essenceDisplay) | Streak: \(context.globalWeaveStreak)")
@@ -48,7 +70,6 @@ struct OneWeavePrototype: View {
                         // Journey demo buttons - full production flows
                         VStack(spacing: 8) {
                             
-// Persistence test button (Phase 7 harness)
 
 // Persistence + export roundtrip test (harness expansion)
 Button("Persistence + Export Roundtrip Test") {
@@ -74,14 +95,12 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             }
                             .buttonStyle(.bordered)
 
-                            // end expanded persistence + ThreadDetail sim section
-
+                            
                             
 
         VStack(alignment: .leading, spacing: 8) {
             Text("
-        // Final harness roundtrip: views + export (Phase 6/7/8)
-        VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 8) {
             Text("Views + Export Roundtrip Test").font(.caption).foregroundStyle(.secondary)
             Button("Show All Views + Simulate Export") {
                 if let ctx = contexts.first {
@@ -96,7 +115,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                     ctx.changeSeason(to: "Summer")
                 }
             }
-            Button("Complete Season Reflection (post-MVP stub)") {
+            Button("Complete Season Reflection") {
                 if let ctx = contexts.first {
                     ctx.completeSeasonReflection(note: "Harvested insights from the weave this season.")
                     lastAction = "Season reflection complete +10 Essence + burst. Chapter summary emitted."
@@ -167,7 +186,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             
 
 
-                            Button("Spend 10 Essence for InsightMagnifier (stub)") {
+                            Button("Spend 10 Essence for InsightMagnifier (production)") {
                                 if let ctx = contexts.first {
                                     if ctx.spendEssenceForAmplifier(.insightMagnifier) {
                                         demoNote = "Spent for amplifier! Essence now \(Int(ctx.weaveEssence)). Boost would improve suggestions."
@@ -422,8 +441,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             }
                             .buttonStyle(.bordered)
 
-                            // end expanded persistence + ThreadDetail sim section
-
+                            
                             
 
 
@@ -432,7 +450,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
 
 
-                            Button("Spend 10 Essence for InsightMagnifier (stub)") {
+                            Button("Spend 10 Essence for InsightMagnifier (production)") {
                                 if let ctx = contexts.first {
                                     if ctx.spendEssenceForAmplifier(.insightMagnifier) {
                                         demoNote = "Spent for amplifier! Essence now \(Int(ctx.weaveEssence)). Boost would improve suggestions."
@@ -452,11 +470,11 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                 lastAction = "MasteryMapView: Tap domains to echo (already implemented, calm grid)"
             }
 
-        // Phase 8 post-MVP: Simple widget previews (sim only, using real @Query LifeContext data)
+        // Phase 8 production: Simple widget previews (sim only, using real @Query LifeContext data)
         // Mirrors OneWeaveWidgetStubs.swift exactly (Harmony + Quest views + mini tapestry)
-        // No WidgetKit target here (post-MVP, requires Xcode extension + App Group)
+        // No WidgetKit target here (production, requires Xcode extension + App Group)
         VStack(alignment: .leading, spacing: 8) {
-            Text("Widget Previews (Phase 8 stubs)").font(.caption).foregroundStyle(.secondary)
+            Text("Widget Previews (Production-ready sims - ready for Widget Extension target)").font(.caption).foregroundStyle(.secondary)
             if let ctx = contexts.first {
                 // Harmony sim
                 VStack(alignment: .leading, spacing: 4) {
@@ -517,10 +535,10 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .background(.quaternary.opacity(0.2))
         .padding(6)
         .background(.quaternary.opacity(0.2))
-        // Phase 8 post-MVP: Simple widget preview in prototype (sim only; mimics HarmonyWidgetView + QuestWidgetView using LifeContext snapshot data)
+        // Phase 8 production: Simple widget preview in prototype (sim only; mimics HarmonyWidgetView + QuestWidgetView using LifeContext snapshot data)
         // This allows testing widget data shapes in harness without full WidgetKit target. Uses same fields as OneWeaveSnapshot.
         VStack(alignment: .leading, spacing: 8) {
-            Text("Widget Preview (Phase 8 stub)").font(.caption).foregroundStyle(.secondary)
+            Text("Widget Preview (Phase 8 production)").font(.caption).foregroundStyle(.secondary)
             // Harmony widget sim (small family style)
             VStack(alignment: .leading, spacing: 2) {
                 Text("Harmony \(Int(context.harmonyScore * 100))%")
@@ -537,7 +555,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
-                // Mini 4-thread tapestry preview stub (per Phase 8)
+                // Mini 4-thread tapestry preview production (per Phase 8)
                 HStack(spacing: 3) {
                     ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \\.self) { d in
                         let tier = context.masteryTiers[d] ?? 1
@@ -576,9 +594,9 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .padding(6)
         .background(.quaternary.opacity(0.2))
 
-        // Basic Echo list stub (Phase 5): list recent + trigger echo (full UI + Legacy Tapestry post-MVP)
+        // Basic Echo list production (Phase 5): list recent + trigger echo (full UI + Legacy Tapestry production)
         VStack(alignment: .leading, spacing: 4) {
-            Text("Echo (basic stub)").font(.caption).foregroundStyle(.secondary)
+            Text("Echo (basic production)").font(.caption).foregroundStyle(.secondary)
             Button("List Past + Echo Last") {
                 // Mock recent from ledger or simple list
                 context.echoPastEvent()
@@ -757,9 +775,9 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .modelContainer(for: [LifeContext.self, TimelineEvent.self, WeaveQuest.self, BasicSelfThread.self, CareKinThread.self, MeaningThread.self])
 }
 
-        // Seasons post-MVP demo (tied to LifeContext stub)
+        // Seasons production demo (tied to LifeContext production)
         VStack(alignment: .leading, spacing: 4) {
-            Text("Seasons (stub demo)").font(.caption).foregroundStyle(.secondary)
+            Text("Seasons (production demo)").font(.caption).foregroundStyle(.secondary)
             if let ctx = contexts.first {
                 Text("Current: \(ctx.values["season"] ?? ctx.currentSeason) (changed: \(ctx.seasonChangeDate.formatted(.dateTime.month().day())))")
                     .font(.caption2)

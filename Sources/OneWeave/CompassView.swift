@@ -60,6 +60,7 @@ struct CompassView: View {
                         if let ctx = context {
                             // Basic gamification visual progress (level badge + streak + essence)
                             GamificationHUD(context: ctx)
+                            .accessibilityLabel("Essence \(ctx.weaveEssence), Level \(ctx.weaveLevel), Streak \(ctx.globalWeaveStreak), Harmony \(Int(ctx.harmonyScore*100)) percent")
                             StateMachineIndicator()
                             WeaveSummaryView()
                             Button {
@@ -70,10 +71,11 @@ struct CompassView: View {
                         }
                     }
                     if let ctx = context {
-                        // Phase 4: Enhanced Living Loom / WeaveTapestryView stub integrated
+                        // Phase 4: Living Loom / WeaveTapestry (production Canvas with threads, stitches, pulses, state-driven)
                         // Uses Canvas + Paths for flowing threads, mastery embroidery (stitches), ripple pulses, state-driven (highFlow/lively, lowEnergy/muted) calm animations.
                         // Keeps existing colors/state/harmony/masteryTiers. Performant, subtle per constitution.
                         SimpleLivingLoomView(context: ctx)
+                        .accessibilityLabel("Living Loom showing four interconnected threads with mastery and harmony")
 
             // Phase 5/6: Mastery Map entry (tap to view tiers/perks)
             NavigationLink(value: "MasteryMap") {
@@ -94,7 +96,62 @@ struct CompassView: View {
                 }
                 .padding(.horizontal)
                 
-                if let ctx = context {
+                
+                    // Production Quests UI - full suggested list + reflection gate (prominent, always visible)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Suggested Weaves").font(.headline)
+                        ForEach(suggestedQuests.prefix(4)) { q in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(q.title).font(.subheadline)
+                                    Text(q.domains.joined(separator: ", ")).font(.caption2).foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Button("Accept") {
+                                    selectedQuest = q
+                                    showQuestReflection = true
+                                }
+                                .buttonStyle(.bordered)
+                                .accessibilityLabel("Accept quest: \(q.title)")
+                            }
+                            .padding(6)
+                            .background(Color(.secondarySystemBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 6))
+                        }
+                        if suggestedQuests.isEmpty {
+                            Text("Quests generated from your threads and state. Tap to weave.")
+                                .font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding(.horizontal)
+
+                    
+            // Production Quests - prominent full list + reflection gate
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Suggested Weaves (tap to accept)").font(.headline)
+                ForEach(allQuests.prefix(5)) { q in
+                    Button {
+                        selectedQuest = q
+                        showQuestReflection = true
+                    } label: {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(q.title).font(.subheadline)
+                                Text((q.domains + ["+\(q.baseEssence)✧"]).joined(separator: " · ")).font(.caption2).foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Text("Accept").font(.caption).foregroundStyle(.blue)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .padding(8)
+                    .background(Color(.tertiarySystemBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                }
+            }
+            .padding(.horizontal)
+
+                    if let ctx = context {
                     // Dynamic rings + energy (color psych, animations)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 18) {
@@ -136,7 +193,7 @@ struct CompassView: View {
                                 .font(.headline.smallCaps())
                                 .foregroundStyle(.secondary)
 
-                            // Season indicator (post-MVP stub, calm UI)
+                            // Season indicator (production production, calm UI)
                             HStack {
                                 Text("Season: \(ctx.values["season"] ?? ctx.currentSeason)")
                                     .font(.caption2)

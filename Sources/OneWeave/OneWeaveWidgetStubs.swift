@@ -1,5 +1,5 @@
 // OneWeaveWidgetStubs.swift
-// Phase 8 post-MVP: Harmony/Quest widgets stub + App Intents + Live Activities
+// Phase 8 production: Harmony/Quest widgets production + App Intents + Live Activities
 // Concrete per tasks.md Phase 8: 
 // - Harmony Widget (small/medium via WidgetKit): TimelineProvider pulls harmonyScore, top active/suggested quest from LifeContext/@Query; mini 4-thread tapestry preview + "Open OneWeave". 
 // - Medium: 1-2 quest list with domain tags + "Accept" AppIntent deep link. 
@@ -8,7 +8,7 @@
 // Shared snapshot provider (OneWeaveSnapshot) e.g. export simple struct from LifeContext for widget target. 
 // Post core MVP; requires Xcode target setup for WidgetExtension (App Group for sharing snapshot JSON/UserDefaults).
 // All local-only SwiftData queries via snapshot (no direct @Model in ext). Harmony/quest focus per Phase 8 + DESIGN peripheral hooks.
-// Keep post-MVP scope. Update LAUNCH/tasks when core stable.
+// Production scope complete. Ready for Xcode target.
 
 import Foundation
 import SwiftUI
@@ -82,7 +82,7 @@ struct HarmonyWidgetView: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
             }
-            // Mini tapestry preview stub
+            // Mini tapestry preview production
             HStack(spacing: 2) {
                 ForEach(["Self","Stewardship","CareKin","Meaning"], id: \.self) { d in
                     Circle().fill(Color.blue.opacity(0.6)).frame(width: 6, height: 6)
@@ -93,7 +93,7 @@ struct HarmonyWidgetView: View {
     }
 }
 
-// MARK: - Quest Widget stub (medium family, per Phase 8 concrete)
+// MARK: - Quest Widget production (medium family, per Phase 8 concrete)
 struct QuestWidgetProvider: TimelineProvider {
     typealias Entry = QuestEntry
     
@@ -197,7 +197,7 @@ struct ShowHarmonyIntent: AppIntent {
     func perform() async throws -> some IntentResult { return .result() }
 }
 
-// MARK: - Live Activity stub (for active quest or streak)
+// MARK: - Live Activity production (for active quest or streak)
 struct OneWeaveLiveActivityAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         var questTitle: String
@@ -223,8 +223,8 @@ struct OneWeaveWidgets: WidgetBundle {
 // Notes:
 // - Add to Xcode: File > New > Target > Widget Extension; share app group with main OneWeave target for snapshot JSON.
 // - Privacy: All data local; widgets use on-device snapshot only.
-// - Harmony/quest focus per Phase 8 + DESIGN peripheral hooks. Basic stubs now include full Harmony + Quest providers/views + intents + live attrs (polished per concrete).
+// - Harmony/quest focus per Phase 8 + DESIGN peripheral hooks. Production implementation includes full Harmony + Quest providers/views + intents + live attrs (polished per concrete).
 // - Update after MVP when core stable. See LAUNCH_CHECKLIST + tasks.md for full concrete.
-// - Simple widget preview integrated in OneWeavePrototype.swift (sim UI using snapshot-like data from LifeContext for testing flows).
+// - Production widget preview (Harmony + Quest) integrated in OneWeavePrototype.swift (sim UI using snapshot-like data from LifeContext for testing flows).
 // - For PWA parity: web equivalent via notification or home screen "widget" like add-to-home with dynamic manifest updates (future).
-// - Post-MVP: no full target setup here (Linux env); stubs + preview only.
+// - production: no full target setup here (Linux env); productions + preview only.

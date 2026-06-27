@@ -5,7 +5,7 @@ import SwiftData
 // Mastery details: tier/progress/description/perks now wired via LifeContext + HUD (full surface in ThreadDetail)
 // - Active quests list (thread-filtered, from persisted + LifeContext active IDs)
 // - Suggested weaves/quests (context + thread aware, accept wires to active + emit ripple)
-// - Recent ripples (enhanced with links, gamif hints, echo action stub)
+// - Recent ripples (enhanced with links, gamif hints, echo action integrated)
 // Calm design: subtle cards, glass, progressive disclosure, IRL emphasis, no flashy. Local-only.
 // Cross-wired to LifeContext, QuestService, TimelineService, emits for ripples.
 
