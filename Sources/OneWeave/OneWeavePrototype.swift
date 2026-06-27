@@ -690,3 +690,22 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
     OneWeavePrototype()
         .modelContainer(for: [LifeContext.self, TimelineEvent.self, WeaveQuest.self, BasicSelfThread.self, CareKinThread.self, MeaningThread.self])
 }
+
+        // Seasons post-MVP demo (tied to LifeContext stub)
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Seasons (stub demo)").font(.caption).foregroundStyle(.secondary)
+            if let ctx = contexts.first {
+                Text("Current: \(ctx.values["season"] ?? ctx.currentSeason) (changed: \(ctx.seasonChangeDate.formatted(.dateTime.month().day())))")
+                    .font(.caption2)
+                Button("Change Season → Summer") {
+                    ctx.changeSeason(to: "Summer")
+                    lastAction = "Season changed to Summer +20 Essence burst. Reflection gate now available."
+                }
+                Button("Complete Season Reflection") {
+                    ctx.completeSeasonReflection(note: "Reflected on cross-thread ripples and harmony this season.")
+                    lastAction = "Season reflection +10 Essence + chapter summary event."
+                }
+            }
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.2))

@@ -364,8 +364,17 @@ struct CompassView: View {
                 }
             }
         }
-        .navigationDestination(for: String.self) { thread in
-            ThreadDetailView(threadName: thread)
+        .navigationDestination(for: String.self) { value in
+            switch value {
+            case "QuestsView":
+                QuestsView()
+            case "EssenceLedgerView":
+                EssenceLedgerView()
+            case "MasteryMapView":
+                MasteryMapView()
+            default:
+                ThreadDetailView(threadName: value)
+            }
         }
         .onAppear {
             service = TimelineService(modelContext: modelContext)
