@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneWeave — Your life. One woven story.</title>
+<style>
+  :root {
+    --self: #4a90e2;
+    --stewardship: #4caf7c;
+    --carekin: #f29040;
+    --meaning: #9c6ade;
+    --ink: #1a1d24;
+    --ink-soft: #4a5163;
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --line: #e8e5dd;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: clamp(40px, 6vw, 68px);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  h1 .accent { color: var(--self); }
+  .sub {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .cta {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 8px;
+  }
+  .cta.secondary {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  /* ===== RIPPLE DIAGRAM (top) ===== */
+  .ripple-stage {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 40px;
+  }
+  .ripple-frame {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .ripple-title {
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  /* ===== 4-THREAD COMPASS ===== */
+  .compass-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 40px 0;
+  }
+  .thread-card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    background: white;
+    text-align: center;
+  }
+  .thread-orb {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    margin: 0 auto 14px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 12px transparent; }
+  }
+  .thread-card.self .thread-orb { background: var(--self); color: rgba(74,144,226,0.3); }
+  .thread-card.stewardship .thread-orb { background: var(--stewardship); color: rgba(76,175,124,0.3); }
+  .thread-card.carekin .thread-orb { background: var(--carekin); color: rgba(242,144,64,0.3); }
+  .thread-card.meaning .thread-orb { background: var(--meaning); color: rgba(156,106,222,0.3); }
+  .thread-card h3 { font-size: 15px; margin-bottom: 4px; }
+  .thread-card p { font-size: 13px; color: var(--ink-soft); }
+  .bar {
+    height: 4px;
+    background: var(--line);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .bar > div {
+    height: 100%;
+    border-radius: 2px;
+  }
+  .thread-card.self .bar > div { background: var(--self); width: 78%; }
+  .thread-card.stewardship .bar > div { background: var(--stewardship); width: 62%; }
+  .thread-card.carekin .bar > div { background: var(--carekin); width: 88%; animation: urgent 2s ease-in-out infinite; }
+  .thread-card.meaning .bar > div { background: var(--meaning); width: 45%; }
+  @keyframes urgent {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  /* ===== ACTIVE RIPPLES ===== */
+  .ripples {
+    margin-top: 30px;
+    border-top: 1px solid var(--line);
+    padding-top: 24px;
+  }
+  .ripples h4 {
+    font-size: 13px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .ripple-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .ripple-row:last-child { border: none; }
+  .ripple-arrow {
+    font-family: monospace;
+    color: var(--ink-soft);
+    font-size: 12px;
+    min-width: 50px;
+  }
+  .ripple-from {
+    padding: 2px 10px;
+    border-radius: 100px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .ripple-from.self { background: var(--self); }
+  .ripple-from.stewardship { background: var(--stewardship); }
+  .ripple-from.carekin { background: var(--carekin); }
+  .ripple-from.meaning { background: var(--meaning); }
+  .ripple-text { flex: 1; color: var(--ink-soft); }
+  .ripple-time { font-size: 12px; color: var(--ink-soft); }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+  .section h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .section .lead {
+    text-align: center;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin: 0 auto 50px;
+    font-size: 18px;
+  }
+
+  /* ===== FEATURE GRID ===== */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .feature {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .feature .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+    background: var(--bg);
+  }
+  .feature h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .feature p {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+
+  /* ===== SACRED ECHO (hero feature) ===== */
+  .echo-stage {
+    background: linear-gradient(135deg, #1a1d24 0%, #2a2f3a 100%);
+    color: white;
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    margin: 80px auto;
+    max-width: 1100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .echo-stage::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at center, rgba(156,106,222,0.15) 0%, transparent 50%);
+    animation: rotate 30s linear infinite;
+  }
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .echo-content { position: relative; z-index: 1; }
+  .echo-stage h2 { color: white; }
+  .echo-stage .lead { color: rgba(255,255,255,0.7); }
+  .echo-card {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 28px 36px;
+    margin: 30px auto;
+    text-align: left;
+    max-width: 480px;
+  }
+  .echo-card .label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .echo-card .title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .echo-card .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .echo-card .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--meaning);
+    color: white;
+    font-size: 11px;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  /* ===== PRIVACY ===== */
+  .privacy-stage {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 50px 40px;
+    max-width: 1100px;
+    margin: 80px auto;
+  }
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+  }
+  .privacy-stat { text-align: center; }
+  .privacy-stat .num {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--self);
+    letter-spacing: -1px;
+  }
+  .privacy-stat .label {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  /* ===== COMPARISON ===== */
+  .comparison {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  th, td {
+    text-align: left;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--ink-soft);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  td.check { color: var(--stewardship); font-weight: 600; }
+  td.x { color: #cc4444; }
+  td.partial { color: var(--carekin); }
+  tr:last-child td { border-bottom: none; }
+
+  /* ===== CTA BOTTOM ===== */
+  .bottom-cta {
+    background: var(--ink);
+    color: white;
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 1100px;
+    margin: 80px auto;
+  }
+  .bottom-cta h2 { color: white; }
+  .bottom-cta p { color: rgba(255,255,255,0.7); margin-bottom: 30px; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .bottom-cta .cta {
+    background: white;
+    color: var(--ink);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-soft);
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+    margin-top: 60px;
+  }
+
+  /* ===== SVG RIPPLE GRAPH ===== */
+  svg { display: block; margin: 0 auto; }
+
+  @media (max-width: 720px) {
+    .compass-grid { grid-template-columns: repeat(2, 1fr); }
+    .privacy-grid { grid-template-columns: 1fr; gap: 20px; }
+    .hero { padding: 60px 24px 40px; }
+    .section { padding: 0 24px; }
+    .echo-stage, .privacy-stage, .bottom-cta { padding: 40px 24px; margin-left: 24px; margin-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <span class="eyebrow">Privacy-First · Local-Only · Free Tier</span>
+  <h1>Your life. <span class="accent">One woven story.</span></h1>
+  <p class="sub">The first life OS that shows you the connections. When you change one thing, OneWeave shows you the ripples through everything else.</p>
+  <a href="#features" class="cta">See how it works</a>
+  <a href="#privacy" class="cta secondary">Why privacy-first</a>
+</section>
+
+<!-- ============== COMPASS (the killer visual) ============== -->
+<section class="ripple-stage">
+  <div class="ripple-frame">
+    <div class="ripple-title">Your Journey Compass · Today</div>
+
+    <div class="compass-grid">
+      <div class="thread-card self">
+        <div class="thread-orb">⚡</div>
+        <h3>Self</h3>
+        <p>Energy & habits</p>
+        <div class="bar"><div></div></div>
+        <p style="font-size: 12px;">78% · rising</p>
+      </div>
+      <div class="thread-card stewardship">
+        <div class="thread-orb">🌿</div>
+        <h3>Stewardship</h3>
+        <p>Resources & leaks</p>
+        <div class="bar"><div></div></div>
+        <p style="font-size: 12px;">62% · steady</p>
+      </div>
+      <div class="thread-card carekin">
+        <div class="thread-orb">👨‍👩‍👧</div>
+        <h3>Care &amp; Kin</h3>
+        <p>Tasks &amp; relationships</p>
+        <div class="bar"><div></div></div>
+        <p style="font-size: 12px;">88% · high</p>
+      </div>
+      <div class="thread-card meaning">
+        <div class="thread-orb">✨</div>
+        <h3>Meaning</h3>
+        <p>Stories &amp; legacy</p>
+        <div class="bar"><div></div></div>
+        <p style="font-size: 12px;">45% · needs care</p>
+      </div>
+    </div>
+
+    <div class="ripples">
+      <h4>Active Ripples</h4>
+      <div class="ripple-row">
+        <span class="ripple-arrow">2m ago</span>
+        <span class="ripple-from self">Self</span>
+        <span class="ripple-text">You committed to a busy-season project</span>
+        <span class="ripple-from carekin">CareKin</span>
+        <span class="ripple-from stewardship">Stewardship</span>
+      </div>
+      <div class="ripple-row">
+        <span class="ripple-arrow">14m ago</span>
+        <span class="ripple-from stewardship">Stewardship</span>
+        <span class="ripple-text">Cancelled Hulu · $15/mo freed</span>
+        <span class="ripple-arrow">→</span>
+        <span class="ripple-from meaning">Meaning</span>
+        <span class="ripple-text">Story Fund +$15/mo</span>
+      </div>
+      <div class="ripple-row">
+        <span class="ripple-arrow">1h ago</span>
+        <span class="ripple-from carekin">CareKin</span>
+        <span class="ripple-text">Dad · last call 23 days ago</span>
+        <span class="ripple-arrow">→</span>
+        <span class="ripple-from meaning">Meaning</span>
+        <span class="ripple-text">Tap to call</span>
+      </div>
+      <div class="ripple-row">
+        <span class="ripple-arrow">2h ago</span>
+        <span class="ripple-from self">Self</span>
+        <span class="ripple-text">Sleep: 5.2hr · depleted</span>
+        <span class="ripple-arrow">→</span>
+        <span class="ripple-from carekin">CareKin</span>
+        <span class="ripple-text">Suggested: Weave Pause</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== THE LIVING GRAPH LOOM ============== -->
+<section class="section">
+  <h2>The Living Graph Loom</h2>
+  <p class="lead">Your life, as a breathing constellation. Tap any entity to see its relationships. Watch decisions ripple through your graph in real time.</p>
+
+  <svg viewBox="0 0 800 500" width="100%" style="max-width: 800px;">
+    <defs>
+      <radialGradient id="nodeGradSelf" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#4a90e2" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#4a90e2" stop-opacity="0.4"/>
+      </radialGradient>
+      <radialGradient id="nodeGratStew" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#4caf7c" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#4caf7c" stop-opacity="0.4"/>
+      </radialGradient>
+      <radialGradient id="nodeGratCare" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#f29040" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#f29040" stop-opacity="0.4"/>
+      </radialGradient>
+      <radialGradient id="nodeGratMean" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#9c6ade" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#9c6ade" stop-opacity="0.4"/>
+      </radialGradient>
+    </defs>
+
+    <!-- Edges (relationships) - curved bezier -->
+    <path d="M 400,150 Q 250,200 200,300" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 400,150 Q 550,200 600,300" stroke="#9c6ade" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 200,300 Q 400,380 600,300" stroke="#4caf7c" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 200,300 Q 300,400 400,400" stroke="#f29040" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 600,300 Q 500,400 400,400" stroke="#9c6ade" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 400,400 Q 400,300 400,150" stroke="#4a90e2" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="4.2s" repeatCount="indefinite"/>
+    </path>
+
+    <!-- Edge labels -->
+    <text x="280" y="220" font-family="monospace" font-size="10" fill="#4a5163">ripples_to</text>
+    <text x="490" y="220" font-family="monospace" font-size="10" fill="#4a5163">inspires</text>
+    <text x="380" y="360" font-family="monospace" font-size="10" fill="#4a5163">supports</text>
+
+    <!-- Nodes (entities) -->
+    <g>
+      <circle cx="400" cy="150" r="28" fill="url(#nodeGradSelf)"/>
+      <text x="400" y="155" font-size="11" fill="white" text-anchor="middle" font-weight="600">You</text>
+    </g>
+    <g>
+      <circle cx="200" cy="300" r="22" fill="url(#nodeGratStew)"/>
+      <text x="200" y="304" font-size="10" fill="white" text-anchor="middle" font-weight="600">Budget</text>
+    </g>
+    <g>
+      <circle cx="600" cy="300" r="22" fill="url(#nodeGratMean)"/>
+      <text x="600" y="304" font-size="10" fill="white" text-anchor="middle" font-weight="600">Story</text>
+    </g>
+    <g>
+      <circle cx="400" cy="400" r="22" fill="url(#nodeGratCare)"/>
+      <text x="400" y="404" font-size="10" fill="white" text-anchor="middle" font-weight="600">Dad</text>
+    </g>
+
+    <!-- Small nodes -->
+    <circle cx="120" cy="180" r="8" fill="#4caf7c" opacity="0.7">
+      <animate attributeName="r" values="8;10;8" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="680" cy="180" r="8" fill="#9c6ade" opacity="0.7">
+      <animate attributeName="r" values="8;10;8" dur="3.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="100" cy="380" r="8" fill="#4a90e2" opacity="0.7">
+      <animate attributeName="r" values="8;10;8" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="380" r="8" fill="#f29040" opacity="0.7">
+      <animate attributeName="r" values="8;10;8" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="450" r="8" fill="#9c6ade" opacity="0.7">
+      <animate attributeName="r" values="8;10;8" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Title -->
+    <text x="400" y="40" font-size="14" fill="#4a5163" text-anchor="middle" font-weight="500">Your Life Graph · Live</text>
+  </svg>
+</section>
+
+<!-- ============== SACRED ECHO (hero feature) ============== -->
+<section class="echo-stage">
+  <div class="echo-content">
+    <h2>Sacred Echo Vault</h2>
+    <p class="lead">Encrypted time-capsule messages. Letters, videos, voice notes — sealed with AES-256-GCM, opened only when you decide.</p>
+
+    <div class="echo-card">
+      <span class="badge">🔒 Sealed</span>
+      <div class="label">Sacred Echo</div>
+      <div class="title">To my daughter, on your wedding day</div>
+      <div style="font-size: 13px; color: rgba(255,255,255,0.7); margin: 12px 0;">
+        A video message + a letter + a key to the "Story Fund" trust.
+        Echo Decree: Give to her in private, after the father-daughter dance.
+      </div>
+      <div class="meta">
+        <span>Unlock: Aug 12, 2028</span>
+        <span>Heir: Mira</span>
+      </div>
+    </div>
+
+    <p style="margin-top: 30px; font-size: 14px; color: rgba(255,255,255,0.6);">Zero plaintext on disk. Fail-closed crypto. Your words stay yours until the moment you choose.</p>
+  </div>
+</section>
+
+<!-- ============== FEATURES ============== -->
+<section class="section" id="features">
+  <h2>23 features, one calm view</h2>
+  <p class="lead">No streaks shaming you. No infinite feeds. Just your life, connected.</p>
+
+  <div class="features">
+    <div class="feature">
+      <div class="icon">🧭</div>
+      <h3>Journey Compass</h3>
+      <p>Living visual of all four threads with energy bars, recent trends, and Active Ripples showing what's affecting what, right now.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🕸️</div>
+      <h3>Living Graph Loom</h3>
+      <p>Your life rendered as a breathing constellation. Tap any entity to see its relationships. Watch decisions ripple through your graph in real time.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🪦</div>
+      <h3>Sacred Echo Vault</h3>
+      <p>Encrypted time-capsule messages. Leave a letter for your daughter to open on her wedding day. AES-256-GCM. Fail-closed crypto.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">👁️</div>
+      <h3>Invisible Mentor</h3>
+      <p>Your past self, quoted back to you when you face decisions. Pure local. No LLM. No Core ML. Just your own reflections, surfaced at the moment.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🛑</div>
+      <h3>Weave Pause</h3>
+      <p>When cognitive load rises above 0.85 AND body shows depletion, OneWeave asks — gently — if you should pause. You can dismiss it.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🧠</div>
+      <h3>Cognitive Load Score</h3>
+      <p>Six components combined into a single 0-1 metric with rising/steady/falling trend detection. See overload before it breaks you.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">👨‍👩‍👧</div>
+      <h3>Family Pod</h3>
+      <p>Share with up to 6 people. Quiet hours. Cooldowns. Per-member privacy defaults. Anti-social by design.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📋</div>
+      <h3>Decision Log</h3>
+      <p>Record your reasoning and predicted outcome. Later, log the actual. Bridges back to Invisible Mentor: "Last time you decided X, you said Y."</p>
+    </div>
+    <div class="feature">
+      <div class="icon">✍️</div>
+      <h3>Quick Capture Inbox</h3>
+      <p>A single field. Type anything. Auto-classified as task, event, journal, decision, or note. Pure heuristic. No LLM. No latency.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🌅</div>
+      <h3>Morning Briefing</h3>
+      <p>Today's calendar, top priorities, echo countdowns, cognitive load. Generated locally from your own data.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🌙</div>
+      <h3>Evening Review</h3>
+      <p>What was completed, open threads, reflections written, harmony delta. Time-aware prompts based on season and time of day.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🔒</div>
+      <h3>Privacy Data Leash</h3>
+      <p>One matrix, nine integration toggles. Each gated individually. Each read live from your settings BEFORE any data access.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📱</div>
+      <h3>iOS Deep Integrations</h3>
+      <p>Calendar, Contacts, HealthKit, Reminders, Mail, Notes. All gated. All privacy-first. All reflection-protected.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🎯</div>
+      <h3>Calm Gamification</h3>
+      <p>Essence, Level, Mastery tiers, Harmony, Streaks with restorative grace (max 2 days). Reflection-gated rewards.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🌐</div>
+      <h3>Web PWA Parity</h3>
+      <p>Full feature parity in your browser. Install it. Use it offline. Same data, same privacy.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📦</div>
+      <h3>Portable Export</h3>
+      <p>Markdown, OPML, JSON. Three privacy leashes: Full / SharedOnly / PublicOnly. Checksum + manifest for integrity.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRIVACY ============== -->
+<section class="privacy-stage" id="privacy">
+  <h2>Privacy is not a feature. It's the foundation.</h2>
+  <p class="lead">Every byte stays on your device. Zero accounts. Zero cloud. Zero training on your life.</p>
+
+  <div class="privacy-grid">
+    <div class="privacy-stat">
+      <div class="num">0</div>
+      <div class="label">External API keys in the codebase</div>
+    </div>
+    <div class="privacy-stat">
+      <div class="num">0</div>
+      <div class="label">Cloud dependencies</div>
+    </div>
+    <div class="privacy-stat">
+      <div class="num">9</div>
+      <div class="label">Granular privacy toggles you control</div>
+    </div>
+    <div class="privacy-stat">
+      <div class="num">11</div>
+      <div class="label">SwiftData models, all local</div>
+    </div>
+    <div class="privacy-stat">
+      <div class="num">AES-256</div>
+      <div class="label">Encryption for Sacred Echo Vault</div>
+    </div>
+    <div class="privacy-stat">
+      <div class="num">100%</div>
+      <div class="label">On-device AI (no Core ML, no LLM, no network)</div>
+    </div>
+  </div>
+
+  <p style="text-align: center; margin-top: 30px; color: var(--ink-soft); font-size: 14px;">
+    The free tier is generous. The paid tier ($9.99/mo or $79.99/yr) adds cross-device sync via <em>your own</em> iCloud Drive — not our servers.
+  </p>
+</section>
+
+<!-- ============== COMPARISON ============== -->
+<section class="section">
+  <h2>OneWeave vs the rest</h2>
+  <p class="lead">Honest comparison. Most life apps track one thing. Weave tracks how it all connects.</p>
+
+  <div class="comparison">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>OneWeave</th>
+          <th>Day One</th>
+          <th>Reflectly</th>
+          <th>Habitica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Life Graph</td>
+          <td class="check">✓ Real graph</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+        </tr>
+        <tr>
+          <td>Cross-domain insights</td>
+          <td class="check">✓ Algorithmic</td>
+          <td class="x">—</td>
+          <td class="partial">Limited</td>
+          <td class="x">—</td>
+        </tr>
+        <tr>
+          <td>Local-only AI</td>
+          <td class="check">✓ Zero network</td>
+          <td class="x">Cloud AI</td>
+          <td class="x">Cloud AI</td>
+          <td class="partial">Some local</td>
+        </tr>
+        <tr>
+          <td>Encrypted time capsules</td>
+          <td class="check">✓ Sacred Echo</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+        </tr>
+        <tr>
+          <td>Calm gamification</td>
+          <td class="check">✓ Grace + reflection</td>
+          <td class="x">—</td>
+          <td class="partial">Streaks</td>
+          <td class="x">Punitive</td>
+        </tr>
+        <tr>
+          <td>Anti-social P2P</td>
+          <td class="check">✓ Family Pod</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+          <td class="partial">Parties</td>
+        </tr>
+        <tr>
+          <td>Privacy Data Leash</td>
+          <td class="check">✓ 9 toggles</td>
+          <td class="partial">All-or-nothing</td>
+          <td class="partial">All-or-nothing</td>
+          <td class="x">—</td>
+        </tr>
+        <tr>
+          <td>Free tier generosity</td>
+          <td class="check">✓ Full local app</td>
+          <td class="partial">Limited entries</td>
+          <td class="partial">Limited prompts</td>
+          <td class="check">Free</td>
+        </tr>
+        <tr>
+          <td>Decision Log + Mentor</td>
+          <td class="check">✓ Bridges past</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+          <td class="x">—</td>
+        </tr>
+        <tr>
+          <td>Privacy audit</td>
+          <td class="check">✓ Public</td>
+          <td class="partial">Cloud sync</td>
+          <td class="partial">Cloud sync</td>
+          <td class="partial">Optional</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============== BOTTOM CTA ============== -->
+<section class="bottom-cta">
+  <h2>The connective tissue your life was missing.</h2>
+  <p>Free to use. Privacy-first forever. Your life, woven together — the way it always should have been.</p>
+  <a href="#" class="cta">Download OneWeave</a>
+  <a href="#" class="cta secondary" style="background: transparent; color: white; border-color: rgba(255,255,255,0.3);">Read the white paper</a>
+</section>
+
+<footer>
+  <p>OneWeave · Built on a foundation of privacy, calm, and connection.</p>
+  <p style="margin-top: 8px;">Privacy Policy · Terms · Source Code (MIT) · Press kit</p>
+</footer>
+
+</body>
+</html>

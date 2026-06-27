@@ -19,6 +19,9 @@ struct CompassView: View {
     @State private var lastEnergy: Double = 0.5
     @State private var lastRippleCount = 0
     @State private var showOnboarding = false
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
+    @State private var showOracle = false
+    @State private var showBodyThread = false
     
     // Gamification UI state for tasty feedback
     @State private var weaveFeedback: String = ""
@@ -61,6 +64,13 @@ struct CompassView: View {
                             // Basic gamification visual progress (level badge + streak + essence)
                             GamificationHUD(context: ctx)
                             .accessibilityLabel("Essence \(ctx.weaveEssence), Level \(ctx.weaveLevel), Streak \(ctx.globalWeaveStreak), Harmony \(Int(ctx.harmonyScore*100)) percent")
+                            // Life Graph coherence (deeper integration)
+                            Text("Coherence \(String(format: "%.0f", ctx.lifeCoherenceScore * 100))%")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.blue)
+                                .padding(4)
+                                .background(Color.blue.opacity(0.1))
+                                .clipShape(Capsule())
                             StateMachineIndicator()
                             WeaveSummaryView()
                             Button {
@@ -76,6 +86,64 @@ struct CompassView: View {
                         // Keeps existing colors/state/harmony/masteryTiers. Performant, subtle per constitution.
                         SimpleLivingLoomView(context: ctx)
                         .accessibilityLabel("Living Loom showing four interconnected threads with mastery and harmony")
+
+                        // Deeper: Life Graph + P2P + External Integrations
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Life Graph & Connections")
+                                .font(.headline)
+                            
+                            HStack {
+                                Button("Share via Weave Circle (P2P)") {
+                                    if !ctx.lifeGraphEntities.isEmpty {
+                                        let selected = Array(ctx.lifeGraphEntities.prefix(3))
+                                        ctx.shareViaP2P(selectedEntities: selected, circleName: "Trusted Circle", reflection: "Sharing recent life patterns for reflection")
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                                
+                                Button("Import from iOS (Calendar/Contacts/Health)") {
+                                    LifeGraphiOSIntegrations.shared.importAll(context: ctx) { source, entities in
+                                        print("Imported from \(source): \(entities.count) entities")
+                                    }
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                            
+                            if !ctx.lifeGraphEntities.isEmpty {
+                                Text("\(ctx.lifeGraphEntities.count) entities in graph • \(ctx.lifeGraphRelationships.count) relationships")
+                                    .font(.caption2)
+                            }
+
+                            // Resonance Oracle: local decision simulator (creative novel feature).
+                            Button {
+                                showOracle = true
+                            } label: {
+                                Label("Resonance Oracle (simulate a decision)", systemImage: "sparkles")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.purple)
+
+                            // Body-Thread Weaver: gentle health-aware nudge.
+                            Button {
+                                showBodyThread = true
+                            } label: {
+                                Label("Body Thread (refresh from Health)", systemImage: "heart.text.square")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.pink)
+                        }
+                        .padding()
+                        .background(Color(.secondarySystemBackground))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .sheet(isPresented: $showOracle) {
+                            ResonanceOracleSheet(context: ctx)
+                        }
+                        .sheet(isPresented: $showBodyThread) {
+                            BodyThreadSheet(context: ctx)
+                        }
+
 
             // Phase 5/6: Mastery Map entry (tap to view tiers/perks)
             NavigationLink(value: "MasteryMap") {
@@ -486,8 +554,10 @@ struct CompassView: View {
                 newCtx.globalWeaveStreak = 1
                 modelContext.insert(newCtx)
             }
-            if showOnboarding == false && contexts.first != nil {
-                // Auto-show first time (simplified; production would use @AppStorage)
+            // Onboarding auto-show: show on first launch only (Round-3 finding NEMO-R3-020 + NEMO-R3-042).
+            // The original logic `showOnboarding == false && contexts.first != nil` re-triggered
+            // onboarding forever after dismiss. Now uses @AppStorage for persistence.
+            if !hasCompletedOnboarding && contexts.first != nil && !showOnboarding {
                 showOnboarding = true
             }
             // Populate suggested quests (after context ready)

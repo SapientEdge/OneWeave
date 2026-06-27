@@ -82,6 +82,8 @@ final class QuestService {
     
     func acceptQuest(_ quest: WeaveQuest, context: LifeContext, modelContext: ModelContext) {
         context.activeQuests.append(quest.id)
+    let qs = (try? modelContext.fetch(FetchDescriptor<WeaveQuest>())) ?? []
+    context.pushSnapshotToWidgets(from: qs)
         // In full: persist quest to SwiftData
     }
     

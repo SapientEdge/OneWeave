@@ -1,6 +1,24 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - File-scope supporting types
+
+/// Single essence ledger entry (audit trail for the calm, anti-addictive economy).
+public struct EssenceTransaction: Codable, Identifiable, Hashable {
+    public var id: UUID = UUID()
+    public var amount: Double
+    public var reason: String
+    public var timestamp: Date = Date()
+    public var thread: String? = nil
+
+    public init(amount: Double, reason: String, timestamp: Date = Date(), thread: String? = nil) {
+        self.amount = amount
+        self.reason = reason
+        self.timestamp = timestamp
+        self.thread = thread
+    }
+}
+
 @Model
 final class LifeContext {
     var values: [String: String] = [:]  // e.g. "season": "High Care Load", "focus": "goal name"
@@ -32,7 +50,11 @@ final class LifeContext {
     var lastActiveWeaveDate: Date = Date()
     var graceDaysUsed: Int = 0
     var maxGraceDays: Int = 2
-    
+
+    // Cognitive load previous reading (for trend computation).
+    // Stored on the model so it survives app restarts; not exported to widgets/snapshots.
+    var previousCognitiveLoadReadingJSON: String = ""
+
     // Active quests and completed count for retention
     
 // Active quests tracking (Phase 3/6)
@@ -41,9 +63,19 @@ var activeQuests: [UUID] = []
     var completedQuestCount: Int = 0
     var essenceLedger: [String] = []
     var essenceTransactions: [EssenceTransaction] = []
-
+    
     // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
     var currentSeason: String = "Spring"
+    
+    // === Life Graph Integration (from research - Tier 1 Life Graph + typed memory) ===
+    // Extends existing threads/timeline without replacement. Enables coherence, insights, Data Leash.
+    var lifeGraphEntities: [LifeEntity] = []
+    var lifeGraphRelationships: [LifeRelationship] = []
+    
+    // Fresh unique: Overall Life Coherence Score (graph + harmony fusion)
+    var lifeCoherenceScore: Double {
+        LifeGraph.buildCoherenceScore(entities: lifeGraphEntities)
+    }
 
     func pushSnapshotToWidgets(from quests: [WeaveQuest] = []) {
         let lookup = Dictionary(uniqueKeysWithValues: quests.map { ($0.id, $0) })
@@ -59,7 +91,9 @@ var activeQuests: [UUID] = []
             topQuestDomain: topQuest?.domains.first,
             activeQuestTitles: activeTitles,
             masteryTiers: masteryTiers,
-            lastUpdated: Date()
+            lastUpdated: Date(),
+            lifeCoherenceScore: lifeCoherenceScore,
+            graphEntityCount: lifeGraphEntities.count
         )
         OneWeaveSnapshotStore.shared.write(snap)
     }
@@ -72,23 +106,30 @@ var activeQuests: [UUID] = []
             let old = currentSeason
             currentSeason = newSeason
             seasonChangeDate = Date()
-            seasonReflectionCompleted = false
+            seasonReflectionCompleted = false  // gate re-arms; full +20 only on reflection commit
             values["season"] = newSeason
-            // Simulate burst + gate trigger (in real UI: show big reflection sheet)
-            weaveEssence += 20
+            // Reflection-gated burst (constitution: reflection-gated principle).
+            // Award a small immediate "transition" tick so the change isn't invisible,
+            // and stage the full +20 burst behind seasonReflectionCompleted = true.
+            weaveEssence += 2
+            essenceLedger.append("+2 season transition tick \(old) → \(newSeason) (full +20 burst pending reflection)")
         pushSnapshotToWidgets()
-            essenceLedger.append("+20 season change burst from \(old) → \(newSeason)")
             harmonyScore = min(1.0, harmonyScore + 0.1)
         }
     }
 
     func completeSeasonReflection(note: String) {
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            // Empty reflection — do nothing, do not flip the gate.
+            return
+        }
         if !seasonReflectionCompleted {
             seasonReflectionCompleted = true
             weaveEssence += 10
-            essenceLedger.append("+10 season reflection: \(note.prefix(50))")
+            essenceLedger.append("+10 season reflection: \(trimmed.prefix(50))")
             // Emit chapter summary event
-            let summaryEvent = TimelineEvent(thread: "Meaning", type: "season_chapter_summary", payload: ["season": currentSeason, "reflection": note], affectsEnergy: true)
+            let summaryEvent = TimelineEvent(thread: "Meaning", type: "season_chapter_summary", payload: ["season": currentSeason, "reflection": trimmed], affectsEnergy: true)
             updateFromEvent(summaryEvent)
         }
     }
@@ -357,7 +398,7 @@ var activeQuests: [UUID] = []
     func checkRestorativeGrace() {
         // Phase 5: if low activity or lowEnergy, suggest restoration; do not decrement global streak
         let now = Date()
-        if lastActiveWeaveDate == nil || now.timeIntervalSince(lastActiveWeaveDate) > 86400 * 2 {  // 2 days
+        if now.timeIntervalSince(lastActiveWeaveDate) > 86400 * 2 {  // 2 days
             if globalWeaveStreak > 0 {
                 // grace: keep streak, suggest quest
             }
@@ -406,25 +447,30 @@ var activeQuests: [UUID] = []
         // On high harmony or cross weave -> potential highFlow state synergy
     }
     
-    /// Complete a quest with reflection (full reward requires reflection for anti-grind)
+    /// Complete a quest with reflection. Full reward requires a non-empty reflection
+    /// (constitution: reflection-gated principle). Empty/whitespace reflection yields
+    /// the partial "engagement" reward only.
     func completeQuest(_ questId: UUID, reflection: String, context: ModelContext) {
-        weaveEssence += 10  // base quest bonus
+        let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
+        let bonus = trimmed.isEmpty ? 3 : 10
+        let reason = trimmed.isEmpty ? "quest complete (no reflection)" : "quest complete with reflection"
+        weaveEssence += bonus
         completedQuestCount += 1
         activeQuests.removeAll { $0 == questId }
-        
+
         // Update mastery/harmony/streak
         let questEvent = TimelineEvent(
             type: "quest_completed",
             thread: "Self", // default
-            summary: "Quest completed with reflection",
-            payload: ["reflection": reflection],
+            summary: "Quest completed",
+            payload: ["reflection": trimmed],  // store trimmed; never the raw input
             linkedThreads: ["Self"],
             affectsEnergy: true
         )
         updateFromEvent(questEvent)
-        
+
         // Log to ledger
-        essenceLedger.append("+\(10) for quest complete with reflection")
+        essenceLedger.append("+\(bonus) for \(reason)")
         if essenceLedger.count > 20 { essenceLedger.removeFirst() }
     }
     

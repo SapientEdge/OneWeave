@@ -5,122 +5,122 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/AppStateMachine.swift": {
-    "mtime": 1782434085.634051,
+    "mtime": 1782522773.1547215,
     "ast_hash": "39f6e5ac735ede1ecd744a101f061b91",
     "semantic_hash": ""
   },
   "Sources/OneWeave/BasicSelfThread.swift": {
-    "mtime": 1782434061.680614,
+    "mtime": 1782522773.1517215,
     "ast_hash": "c4145ba3f1e3bf8572c87f5f85311405",
     "semantic_hash": ""
   },
   "Sources/OneWeave/CareKinThread.swift": {
-    "mtime": 1782470406.144812,
+    "mtime": 1782522773.1477215,
     "ast_hash": "062e2f80ef6c0ac55fac85dd7348d04d",
     "semantic_hash": ""
   },
   "Sources/OneWeave/CompassView.swift": {
-    "mtime": 1782471252.996939,
-    "ast_hash": "9ad1f2500c9ee687dccf0fbeb42a8c4a",
+    "mtime": 1782556638.657619,
+    "ast_hash": "c618715e61bdb811efba0a2bf7673bc9",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataSeeder.swift": {
-    "mtime": 1782441096.0326679,
+    "mtime": 1782522773.1457214,
     "ast_hash": "9c3e0c139e6f50ebb54fa9c7fbb761df",
     "semantic_hash": ""
   },
   "Sources/OneWeave/HistoryView.swift": {
-    "mtime": 1782434021.0988693,
+    "mtime": 1782522773.1487215,
     "ast_hash": "c3bbee660bca983ab3a34b4833d0d3ff",
     "semantic_hash": ""
   },
   "Sources/OneWeave/InsightGenerator.swift": {
-    "mtime": 1782434061.6796138,
+    "mtime": 1782522773.1467214,
     "ast_hash": "1df6a8d3190113cb9e5ba9e63abb06a3",
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782471262.6630838,
-    "ast_hash": "a35c6cc9e012eb214dd54a86e8fcd420",
+    "mtime": 1782556198.1672635,
+    "ast_hash": "b06db25cfdd88623041c234b703d13ce",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
-    "mtime": 1782470420.376956,
+    "mtime": 1782522773.1527216,
     "ast_hash": "73b5d3148ae7a31ffc4e6d8710f11363",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MeaningThread.swift": {
-    "mtime": 1782434057.4645367,
+    "mtime": 1782522773.1527216,
     "ast_hash": "6a676f181bc3a4513c0bafd028d6b8f4",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OnboardingView.swift": {
-    "mtime": 1782438068.4351635,
+    "mtime": 1782522773.1477215,
     "ast_hash": "bad25b5d665241083544d99bac2d2a1a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeaveApp.swift": {
-    "mtime": 1782471251.8339217,
-    "ast_hash": "5b26fcc357cdbe5b04e22b44c2f4553b",
+    "mtime": 1782563966.3303764,
+    "ast_hash": "3acb8c9713065a95179e37f533984705",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeavePrototype.swift": {
-    "mtime": 1782471359.7565472,
-    "ast_hash": "2e0515d9dea6fb756418531aac40ffb6",
+    "mtime": 1782556914.0307462,
+    "ast_hash": "850248feaa729bc2107c6b1e486df832",
     "semantic_hash": ""
   },
   "Sources/OneWeave/QuestService.swift": {
-    "mtime": 1782466540.3708117,
-    "ast_hash": "81c55f573d00fc86a68d071a3e263623",
+    "mtime": 1782534279.631636,
+    "ast_hash": "e35fde51f79e8783ad502c4979e22b0a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/SettingsView.swift": {
-    "mtime": 1782435575.2503903,
-    "ast_hash": "149711f19d7359d534734ca1464650ec",
+    "mtime": 1782522773.1547215,
+    "ast_hash": "943c7d4f5aa6b524da4e5f4e75cf71b5",
     "semantic_hash": ""
   },
   "Sources/OneWeave/StateMachineIndicator.swift": {
-    "mtime": 1782437453.0868397,
+    "mtime": 1782522773.1547215,
     "ast_hash": "4cb801a362952ec07be6b3f90715919f",
     "semantic_hash": ""
   },
   "Sources/OneWeave/StewardshipThread.swift": {
-    "mtime": 1782466718.8041897,
-    "ast_hash": "a6ce6ac4773817c87ad84378f655e129",
+    "mtime": 1782522773.1527216,
+    "ast_hash": "955f09fa2d0bad291f0a2c47cbb6152f",
     "semantic_hash": ""
   },
   "Sources/OneWeave/Thread.swift": {
-    "mtime": 1782434057.4665368,
-    "ast_hash": "080c9a991f2c3ea914a2d6539bf81135",
+    "mtime": 1782522773.1507215,
+    "ast_hash": "c06986dd4dbb8ba275d0f6998b35654a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/ThreadDetailView.swift": {
-    "mtime": 1782471328.6420763,
-    "ast_hash": "91b0138e8a6fd6dce0b03c3bb569b180",
+    "mtime": 1782534189.2249417,
+    "ast_hash": "6e6483b6e2fd905fb5c74ba2e58c85a3",
     "semantic_hash": ""
   },
   "Sources/OneWeave/ThreadsOverviewView.swift": {
-    "mtime": 1782437478.2742474,
+    "mtime": 1782522773.1517215,
     "ast_hash": "221fff1f8fe6bf86dda870ca40f86425",
     "semantic_hash": ""
   },
   "Sources/OneWeave/TimelineEvent.swift": {
-    "mtime": 1782357718.7461166,
+    "mtime": 1782522773.1517215,
     "ast_hash": "08d9c5d144db2edf52ed96233387a047",
     "semantic_hash": ""
   },
   "Sources/OneWeave/TimelineService.swift": {
-    "mtime": 1782434023.6089153,
+    "mtime": 1782522773.1517215,
     "ast_hash": "82300efdd3dba0c5711b4c5a469f7fc4",
     "semantic_hash": ""
   },
   "Sources/OneWeave/WeaveQuest.swift": {
-    "mtime": 1782466525.4846206,
+    "mtime": 1782522773.1487215,
     "ast_hash": "9805beee13dacd68dc3a02ba7bbe2d80",
     "semantic_hash": ""
   },
   "Sources/OneWeave/WeaveSummaryView.swift": {
-    "mtime": 1782437986.9130106,
+    "mtime": 1782522773.1517215,
     "ast_hash": "8409677b0cf06514b930685561f3a42d",
     "semantic_hash": ""
   },
@@ -150,13 +150,13 @@
     "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1782470493.7497337,
-    "ast_hash": "f998372306b67c5634a8ef86d6404bba",
+    "mtime": 1782476730.2889113,
+    "ast_hash": "8eb7a34c95df21893b78dff269c76446",
     "semantic_hash": ""
   },
   ".specify/constitution.md": {
-    "mtime": 1782295250.0588987,
-    "ast_hash": "5e0af21ba0ec31c3c71e2b06c6f16353",
+    "mtime": 1782595517.9133332,
+    "ast_hash": "cb175379d35e326e721aa6c449715704",
     "semantic_hash": ""
   },
   ".specify/specs/001-oneweave/spec.md": {
@@ -185,8 +185,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/002-gamification/tasks.md": {
-    "mtime": 1782471360.922565,
-    "ast_hash": "fe2b847f2c7b5a9e14ac2c0c9575fcd9",
+    "mtime": 1782522750.1213493,
+    "ast_hash": "b2d5c17a01472330d366897abdf4d96f",
     "semantic_hash": ""
   },
   "GAMIFICATION_VISUAL_MOCK.html": {
@@ -195,8 +195,8 @@
     "semantic_hash": ""
   },
   "IMPLEMENTED_FEATURES.md": {
-    "mtime": 1782471362.096583,
-    "ast_hash": "4a2a53b1df5f19894ec04e8e68088221",
+    "mtime": 1782522763.1485598,
+    "ast_hash": "99c27b2e1bef0cb26c4b3defa29ea73e",
     "semantic_hash": ""
   },
   "ITERATION_REVIEW_1.md": {
@@ -205,13 +205,13 @@
     "semantic_hash": ""
   },
   "LAUNCH_CHECKLIST.md": {
-    "mtime": 1782471308.089766,
-    "ast_hash": "a7aeebc675dba1346b0d8c0a92e5f962",
+    "mtime": 1782522748.92333,
+    "ast_hash": "545b62195d8d6c836d670c2599826d4b",
     "semantic_hash": ""
   },
   "MARKETING.md": {
-    "mtime": 1782382396.9997554,
-    "ast_hash": "65b43869ae802798801921ced804adc0",
+    "mtime": 1782594743.8104544,
+    "ast_hash": "4226d9d422d39b54089676ed13a409c8",
     "semantic_hash": ""
   },
   "ONEWEAVE_AUDIT_REPORT_2026.md": {
@@ -255,8 +255,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1782382405.3139133,
-    "ast_hash": "43da1241a96d36e3d3296331c3ace72d",
+    "mtime": 1782593752.3445108,
+    "ast_hash": "1a9a8940e89c591f4a13dfc2f1455afc",
     "semantic_hash": ""
   },
   "STATE_MACHINE.md": {
@@ -275,8 +275,653 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/PrivacyAudit.md": {
-    "mtime": 1782471290.7565053,
-    "ast_hash": "61e5f88ae38fbdfdb57fb2b73542aa16",
+    "mtime": 1782471765.6558235,
+    "ast_hash": "0926e5346d44eb9f94430e61ec96a4c1",
+    "semantic_hash": ""
+  },
+  ".research/generate_manifest.py": {
+    "mtime": 1782585498.5437293,
+    "ast_hash": "97ae7a5dcf4c98ba204aec1125d0fc09",
+    "semantic_hash": ""
+  },
+  ".research/validate_all.sh": {
+    "mtime": 1782585295.224076,
+    "ast_hash": "fc68cac229abe86f7a446289c5a3b1fb",
+    "semantic_hash": ""
+  },
+  ".research/validate_cognitive_load.py": {
+    "mtime": 1782593003.0456579,
+    "ast_hash": "bfb3e8794061c625ea8e2b86a78ba92b",
+    "semantic_hash": ""
+  },
+  ".research/validate_daily_briefings.py": {
+    "mtime": 1782593101.6722639,
+    "ast_hash": "ed110fa072e51c7ee389960f6fdc6f3f",
+    "semantic_hash": ""
+  },
+  ".research/validate_decision_log.py": {
+    "mtime": 1782593278.8770747,
+    "ast_hash": "c44ec8795ddfeaaef4e4f82315434a16",
+    "semantic_hash": ""
+  },
+  ".research/validate_family_pod.py": {
+    "mtime": 1782584895.0929742,
+    "ast_hash": "00f47a4f17b75a31c61ea24096d75ed7",
+    "semantic_hash": ""
+  },
+  ".research/validate_mentor_bridge.py": {
+    "mtime": 1782584720.7071269,
+    "ast_hash": "159ccf947784157971bf584925417464",
+    "semantic_hash": ""
+  },
+  ".research/validate_portable_export.py": {
+    "mtime": 1782585057.2113042,
+    "ast_hash": "d2fe080484970aa185e064ee644e7678",
+    "semantic_hash": ""
+  },
+  ".research/validate_quick_capture.py": {
+    "mtime": 1782593417.6152294,
+    "ast_hash": "51917815d7558b3f9648b747e0778c2d",
+    "semantic_hash": ""
+  },
+  ".research/validate_relationship_decay.py": {
+    "mtime": 1782593159.5712068,
+    "ast_hash": "8b734ad77433efa05831af9b6d488aed",
+    "semantic_hash": ""
+  },
+  ".research/validate_round2_loom.py": {
+    "mtime": 1782563089.7743087,
+    "ast_hash": "32feec378801803555e30a402130d542",
+    "semantic_hash": ""
+  },
+  ".research/validate_schema_migration.py": {
+    "mtime": 1782585142.8052492,
+    "ast_hash": "c08cbbac056a20ee2c34ae6172b94c91",
+    "semantic_hash": ""
+  },
+  ".research/validate_stress.py": {
+    "mtime": 1782585271.7477841,
+    "ast_hash": "e5549d77bf019d7d17cb253c2aa43735",
+    "semantic_hash": ""
+  },
+  ".research/validate_tierA1_cache.py": {
+    "mtime": 1782560518.7919106,
+    "ast_hash": "cea4b16b12a223a0819e5437afcf3eac",
+    "semantic_hash": ""
+  },
+  ".research/validate_tierA2_integrations.py": {
+    "mtime": 1782560722.1041267,
+    "ast_hash": "f28465864074c01dd65f8422a8a88090",
+    "semantic_hash": ""
+  },
+  ".research/validate_tierA3_echo.py": {
+    "mtime": 1782561464.6881309,
+    "ast_hash": "b5365164094ed69510a29b756f5c3cf8",
+    "semantic_hash": ""
+  },
+  ".research/validate_tierA4_mentor.py": {
+    "mtime": 1782564029.6173532,
+    "ast_hash": "196e3f062bf08b13030ff7edfb0df9c2",
+    "semantic_hash": ""
+  },
+  ".research/validate_tierA5_lifecycle.py": {
+    "mtime": 1782561821.6069639,
+    "ast_hash": "cdff65b506c98b53ae5d6556d7188988",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/scripts/bash/update-agent-context.sh": {
+    "mtime": 1782210737.8790271,
+    "ast_hash": "895e47512907eb8e2868f06c2304ffc0",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/scripts/powershell/update-agent-context.ps1": {
+    "mtime": 1782210737.8790271,
+    "ast_hash": "14be3eebea65617d99b40ed38ba15dd9",
+    "semantic_hash": ""
+  },
+  ".specify/init-options.json": {
+    "mtime": 1782595489.621846,
+    "ast_hash": "077274fa81cb76aa5c1ed83cc2765998",
+    "semantic_hash": ""
+  },
+  ".specify/integration.json": {
+    "mtime": 1782595489.5788453,
+    "ast_hash": "73e1928825a3487bf084a99f7014f5fc",
+    "semantic_hash": ""
+  },
+  ".specify/integrations/copilot.manifest.json": {
+    "mtime": 1782595489.5778453,
+    "ast_hash": "2e74b8799034bd261d7c3a4acccec0bf",
+    "semantic_hash": ""
+  },
+  ".specify/integrations/speckit.manifest.json": {
+    "mtime": 1782595489.5898454,
+    "ast_hash": "8922fd6739042630df83880040ef9933",
+    "semantic_hash": ""
+  },
+  ".specify/scripts/bash/check-prerequisites.sh": {
+    "mtime": 1782595489.5838454,
+    "ast_hash": "ddffcaa289bcea05e41382525618b58e",
+    "semantic_hash": ""
+  },
+  ".specify/scripts/bash/common.sh": {
+    "mtime": 1782595489.5838454,
+    "ast_hash": "eda4c81694719220aa1f115053cbcddc",
+    "semantic_hash": ""
+  },
+  ".specify/scripts/bash/create-new-feature.sh": {
+    "mtime": 1782595489.5858455,
+    "ast_hash": "e61cae6d9125f1f765586ecca62a0b3b",
+    "semantic_hash": ""
+  },
+  ".specify/scripts/bash/setup-plan.sh": {
+    "mtime": 1782595489.5848453,
+    "ast_hash": "39835c6d789d2e385e7e71461dfc9340",
+    "semantic_hash": ""
+  },
+  ".specify/scripts/bash/setup-tasks.sh": {
+    "mtime": 1782595489.5868454,
+    "ast_hash": "ca80794ff10eb25b554393917b218f76",
+    "semantic_hash": ""
+  },
+  ".specify/workflows/workflow-registry.json": {
+    "mtime": 1782595489.620846,
+    "ast_hash": "81755842a842a3313bd2c702c81748bd",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/AppLifecycleCoordinator.swift": {
+    "mtime": 1782563960.781291,
+    "ast_hash": "3a75f4e75622a3e6c734aad4bda592f5",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/BodyThreadSheet.swift": {
+    "mtime": 1782556783.5863543,
+    "ast_hash": "37cc7f0895a76dd234b3065b8636e4cc",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/BodyThreadWeaver.swift": {
+    "mtime": 1782560458.5339677,
+    "ast_hash": "49cffd8aaee84eb47f52abf7538942b9",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/CognitiveLoad.swift": {
+    "mtime": 1782592985.3263695,
+    "ast_hash": "6ab94ae8e1a5b37734fb9345ea7f022d",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/CommandPalette.swift": {
+    "mtime": 1782556805.1917543,
+    "ast_hash": "cb564531e6424a6ee0c4e3c173c456e3",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/DailyBriefings.swift": {
+    "mtime": 1782593059.558578,
+    "ast_hash": "61479a6fa04ed5e327f1571f1307f5b6",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/DataLeashSettings.swift": {
+    "mtime": 1782556758.7968926,
+    "ast_hash": "336402de8ef93189a9968091b0c43860",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/DecisionLog.swift": {
+    "mtime": 1782593202.2778974,
+    "ast_hash": "46802719e5c301b0c3b94be8bdbad829",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/EssenceLedgerView.swift": {
+    "mtime": 1782522773.1477215,
+    "ast_hash": "a6106d9c6c658ad69239e704825317e1",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/FamilyPod.swift": {
+    "mtime": 1782584889.5068831,
+    "ast_hash": "2c967ab2f9eb6ded14b32dd6191eb0ae",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/GraphInsightGenerator.swift": {
+    "mtime": 1782563874.6579661,
+    "ast_hash": "fa2de2684bc97bb9fa9a4833d729468f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/InvisibleMentor.swift": {
+    "mtime": 1782563823.4431808,
+    "ast_hash": "3ce9bc18e332cc54249dcc64ff3b09df",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/LifeGraph.swift": {
+    "mtime": 1782563806.9759285,
+    "ast_hash": "82c5fbb9c50671f7913bc08f68e4629a",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/LifeGraphiOSIntegrations.swift": {
+    "mtime": 1782556779.1902726,
+    "ast_hash": "e73248f851fa4959c627afbfc5e3fe6e",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/LivingGraphLoom.swift": {
+    "mtime": 1782563007.4621663,
+    "ast_hash": "86782b4560cb1e581c49b86e02e6c5d0",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/LoomGeometry.swift": {
+    "mtime": 1782562969.2446444,
+    "ast_hash": "2b96bd05e50e508aae2e2045c315a843",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/MentorEchoBridge.swift": {
+    "mtime": 1782584627.8566108,
+    "ast_hash": "036eff04d7d206c5ba9eb5e9c40c2510",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeaveAPI.swift": {
+    "mtime": 1782585341.0636554,
+    "ast_hash": "da57d19c68fb046750a15922b3b982b4",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeavePrototype+GraphValidation.swift": {
+    "mtime": 1782561730.064466,
+    "ast_hash": "f83bbcde0edb3c109069469ef9d49974",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeaveSnapshotStore.swift": {
+    "mtime": 1782542710.297036,
+    "ast_hash": "0054af7cea7207c250e42f9700ceaa5f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/OneWeaveWidgetStubs.swift": {
+    "mtime": 1782534282.2466846,
+    "ast_hash": "34cc2b08fd72ae6e4547044458a1d560",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/P2PWeaveShare.swift": {
+    "mtime": 1782560458.5419679,
+    "ast_hash": "8a48ca8ceab9395d9c1009bc02ff22b2",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/PortableExport.swift": {
+    "mtime": 1782584975.9762948,
+    "ast_hash": "90a67e4a6d8c8ba62f28e31f19881974",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/QuestsView.swift": {
+    "mtime": 1782522773.1507215,
+    "ast_hash": "192329ea9d8a501c1fb8aa5e78bcda3f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/QuickCaptureInbox.swift": {
+    "mtime": 1782593383.3406947,
+    "ast_hash": "3f8284e63367376456c9421fdd99117a",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/RelationshipDecayTracker.swift": {
+    "mtime": 1782593136.796836,
+    "ast_hash": "9ef4d7496fda3fbcc0e45e8c2c2e8857",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/ResonanceOracle.swift": {
+    "mtime": 1782560453.6018908,
+    "ast_hash": "136655fd0dfe5a23bab7356387df8092",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/ResonanceOracleSheet.swift": {
+    "mtime": 1782556095.8496192,
+    "ast_hash": "25fa534bce9c38180bb92f2af0edc8ae",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/SacredEcho.swift": {
+    "mtime": 1782563893.4232543,
+    "ast_hash": "d4972f33f93bee4801304bf9b4f88b0f",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/SchemaMigrationPlan.swift": {
+    "mtime": 1782585110.683887,
+    "ast_hash": "b005e4332652ba7b9403601f3b4d7c37",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/iOSServiceIntegrations.swift": {
+    "mtime": 1782563935.081895,
+    "ast_hash": "e335989be44f02ffb02d27317eabbcd3",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.agent-context.update.agent.md": {
+    "mtime": 1782595489.626846,
+    "ast_hash": "1391ea11f478ac0163415be3d1f4cec5",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.analyze.agent.md": {
+    "mtime": 1782595489.559845,
+    "ast_hash": "d332d396a2d54ba22d965d2e9fdac3a4",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.checklist.agent.md": {
+    "mtime": 1782595489.569845,
+    "ast_hash": "96679ee57c68efd9312f93cf72c607e4",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.clarify.agent.md": {
+    "mtime": 1782595489.5618448,
+    "ast_hash": "41c9f18bbb543d34404a10709f510500",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.constitution.agent.md": {
+    "mtime": 1782595489.562845,
+    "ast_hash": "c261d72531f39c176b70427b84b9da2a",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.converge.agent.md": {
+    "mtime": 1782595489.565845,
+    "ast_hash": "54e754640bec2885c5c506389c672748",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.implement.agent.md": {
+    "mtime": 1782595489.564845,
+    "ast_hash": "4cdba0cf5e8da2de3f9ccfde191a041e",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.plan.agent.md": {
+    "mtime": 1782595489.566845,
+    "ast_hash": "ad8bb9477b6da309cd1331a92ea868d1",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.specify.agent.md": {
+    "mtime": 1782595489.571845,
+    "ast_hash": "1157b3b725f702cc6786009249e59966",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.tasks.agent.md": {
+    "mtime": 1782595489.5728452,
+    "ast_hash": "e050463840b11c6091e59a2f875b7ed6",
+    "semantic_hash": ""
+  },
+  ".github/agents/speckit.taskstoissues.agent.md": {
+    "mtime": 1782595489.5738451,
+    "ast_hash": "5411e553accc95f35cc11877b26b9049",
+    "semantic_hash": ""
+  },
+  ".github/copilot-instructions.md": {
+    "mtime": 1782595489.5768452,
+    "ast_hash": "af2a4aa2afc255f108b61414df63a311",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.agent-context.update.prompt.md": {
+    "mtime": 1782595489.626846,
+    "ast_hash": "77c73697e5d7bffc49d77bffa589ea35",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.analyze.prompt.md": {
+    "mtime": 1782595489.5738451,
+    "ast_hash": "0cd82ee275db7f73f5e60343b70954f9",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.checklist.prompt.md": {
+    "mtime": 1782595489.574845,
+    "ast_hash": "8b79e7ef8b48e72aa4b34acef4852a92",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.clarify.prompt.md": {
+    "mtime": 1782595489.5738451,
+    "ast_hash": "a7b84b367689eb31cd3f261e3b1a5e85",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.constitution.prompt.md": {
+    "mtime": 1782595489.5738451,
+    "ast_hash": "cd1bdad85a29b677c6a1b5b7c7643646",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.converge.prompt.md": {
+    "mtime": 1782595489.574845,
+    "ast_hash": "75429daa5c7ace7a7b138122364f3bec",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.implement.prompt.md": {
+    "mtime": 1782595489.574845,
+    "ast_hash": "ce5eb21edc17589b0104a6d1dc1088c0",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.plan.prompt.md": {
+    "mtime": 1782595489.574845,
+    "ast_hash": "74a8d530f3907d2b5b6e4fbe2e62c455",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.specify.prompt.md": {
+    "mtime": 1782595489.574845,
+    "ast_hash": "425897f1f0f25391189e9da3a207675b",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.tasks.prompt.md": {
+    "mtime": 1782595489.5758452,
+    "ast_hash": "55143387f8a50eb39442aeba4258516e",
+    "semantic_hash": ""
+  },
+  ".github/prompts/speckit.taskstoissues.prompt.md": {
+    "mtime": 1782595489.5758452,
+    "ast_hash": "59bc2969804d13469c73959482a49e79",
+    "semantic_hash": ""
+  },
+  ".research/AGENT_SQUAD_PROMPTS.md": {
+    "mtime": 1782555735.274812,
+    "ast_hash": "c5c9bb973b59317f74a228d0d8b27130",
+    "semantic_hash": ""
+  },
+  ".research/DEEPER_P2P_EXTERNAL_INTEGRATIONS_PLAN.md": {
+    "mtime": 1782544101.9693804,
+    "ast_hash": "66dd83a55f59a9c9d201b97057c95ad0",
+    "semantic_hash": ""
+  },
+  ".research/MARKET_RESEARCH_ROUND_2.md": {
+    "mtime": 1782563524.1376402,
+    "ast_hash": "713699ab6b11876951ce51dac1c04927",
+    "semantic_hash": ""
+  },
+  ".research/MARKET_RESEARCH_ROUND_3.md": {
+    "mtime": 1782593652.6929288,
+    "ast_hash": "d46acf918627d3833c0748cacbc2eb11",
+    "semantic_hash": ""
+  },
+  ".research/NO_TRAINING_PROMPT.md": {
+    "mtime": 1782555735.275812,
+    "ast_hash": "79c1eaea92de089857af1e703ae8c6db",
+    "semantic_hash": ""
+  },
+  ".research/ONEWEAVE_ENHANCEMENT_PLAN.md": {
+    "mtime": 1782537091.6736016,
+    "ast_hash": "3794d49069cb8ec6bfe5aee5838d4001",
+    "semantic_hash": ""
+  },
+  ".research/ORGANIZED_STATUS_NOTES_TASKS.md": {
+    "mtime": 1782553484.012124,
+    "ast_hash": "a44a93e251593fa9020e24c71fee0893",
+    "semantic_hash": ""
+  },
+  ".research/TIER_B_PLAYBOOK.md": {
+    "mtime": 1782563593.5006835,
+    "ast_hash": "54d2c28d3167b8cbdf56d2a3c151e1b9",
+    "semantic_hash": ""
+  },
+  ".research/build_log.md": {
+    "mtime": 1782593781.2479708,
+    "ast_hash": "ec534aff61c514aea7b7758b6fedfb6b",
+    "semantic_hash": ""
+  },
+  ".research/doc_2f73ffd6e078_iOS_P2P_Messaging_Implementation_Guide_Privacy_First,_Serverless.md": {
+    "mtime": 1782537089.510566,
+    "ast_hash": "f4fd73e998836afadabeb92f51a9213a",
+    "semantic_hash": ""
+  },
+  ".research/doc_468dee8374d0_Unified_Life_OS:_Comprehensive_Research_&_Strategic_Blueprint_2025.md": {
+    "mtime": 1782537089.510566,
+    "ast_hash": "9cc8cc82d19406a8ab745fed79b4c39b",
+    "semantic_hash": ""
+  },
+  ".research/doc_79e4820e4dc0_Privacy_First_Local_AI_Assistants_on_iOS_Market_Landscape_and_Technical.md": {
+    "mtime": 1782537089.510566,
+    "ast_hash": "bfe4b70ff3bb88aa04bda9e0c6b14907",
+    "semantic_hash": ""
+  },
+  ".research/doc_9fb9a1563ad9_Life OS: Feature Matrix & Implementation Blueprint.md": {
+    "mtime": 1782537089.510566,
+    "ast_hash": "6821ab3d4fa1f852bfc1df7aa8fc57d0",
+    "semantic_hash": ""
+  },
+  ".specify/extensions.yml": {
+    "mtime": 1782595489.627846,
+    "ast_hash": "41da053e53301452b823a35e2ff15dd1",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/README.md": {
+    "mtime": 1782210737.876027,
+    "ast_hash": "4747d48f39e763a46cbc23569e6222c4",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/agent-context-config.yml": {
+    "mtime": 1782595489.6288462,
+    "ast_hash": "6e5e687222b305345455a1dc523fc160",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/commands/speckit.agent-context.update.md": {
+    "mtime": 1782210737.878027,
+    "ast_hash": "a466e6bfeb0042c2789d6ae60d43921b",
+    "semantic_hash": ""
+  },
+  ".specify/extensions/agent-context/extension.yml": {
+    "mtime": 1782210737.8790271,
+    "ast_hash": "c09cdcdf8b86381d5955182b5eac0caf",
+    "semantic_hash": ""
+  },
+  ".specify/memory/constitution.md": {
+    "mtime": 1782595489.5888455,
+    "ast_hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "semantic_hash": ""
+  },
+  ".specify/specs/003-production-readiness/checklist.md": {
+    "mtime": 1782595599.8197367,
+    "ast_hash": "7aff669d9c505d17116e472f681c1ff7",
+    "semantic_hash": ""
+  },
+  ".specify/specs/003-production-readiness/plan.md": {
+    "mtime": 1782595631.2612731,
+    "ast_hash": "3b17c461c1c46d8d88f7fe2811558725",
+    "semantic_hash": ""
+  },
+  ".specify/specs/003-production-readiness/spec.md": {
+    "mtime": 1782595584.965483,
+    "ast_hash": "8b3cd3d3597154791ff8eb40a34e699f",
+    "semantic_hash": ""
+  },
+  ".specify/specs/003-production-readiness/tasks.md": {
+    "mtime": 1782595662.4728043,
+    "ast_hash": "48e69b1771a447690a551966ae7fb519",
+    "semantic_hash": ""
+  },
+  ".specify/templates/checklist-template.md": {
+    "mtime": 1782595489.5878453,
+    "ast_hash": "87c4b390cebe71d15364bcd4690a102f",
+    "semantic_hash": ""
+  },
+  ".specify/templates/constitution-template.md": {
+    "mtime": 1782595489.5888455,
+    "ast_hash": "dcefb6b60e7cb3db2e966977b6f02f18",
+    "semantic_hash": ""
+  },
+  ".specify/templates/plan-template.md": {
+    "mtime": 1782595489.5888455,
+    "ast_hash": "a32b024d46f365191b4fd540f10912c2",
+    "semantic_hash": ""
+  },
+  ".specify/templates/spec-template.md": {
+    "mtime": 1782595489.5878453,
+    "ast_hash": "45ac8538bc1220324c9f0d610145b53f",
+    "semantic_hash": ""
+  },
+  ".specify/templates/tasks-template.md": {
+    "mtime": 1782595489.5898454,
+    "ast_hash": "b8ed482dd2103953e4f871e0ed12d4bd",
+    "semantic_hash": ""
+  },
+  ".specify/workflows/speckit/workflow.yml": {
+    "mtime": 1782210737.878027,
+    "ast_hash": "eba6943b2a2f6407162ae12e0218bdac",
+    "semantic_hash": ""
+  },
+  "ARCHITECTURE.md": {
+    "mtime": 1782585389.022274,
+    "ast_hash": "bcd6de66637965142c4cc810af9cb166",
+    "semantic_hash": ""
+  },
+  "CLAUDE_COWORK_BRIEF.md": {
+    "mtime": 1782585537.1272542,
+    "ast_hash": "a69db3abed4bfc48cd0ac3089d43c434",
+    "semantic_hash": ""
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1782585435.8208892,
+    "ast_hash": "2ac023938c70a4b74d8fa335d3222640",
+    "semantic_hash": ""
+  },
+  "FEATURE_CATALOG.md": {
+    "mtime": 1782594714.4319794,
+    "ast_hash": "ad2cc1b9ce96fde8a7411c33e0232e21",
+    "semantic_hash": ""
+  },
+  "FIRST_WEEK_ON_MAC.md": {
+    "mtime": 1782593702.0427115,
+    "ast_hash": "225fcd34f13c7932051cfd13d846f620",
+    "semantic_hash": ""
+  },
+  "MANIFEST.md": {
+    "mtime": 1782593737.323272,
+    "ast_hash": "67c7947546a9823ef1aa36ca93174de6",
+    "semantic_hash": ""
+  },
+  "MARKETING_DIAGRAMS.txt": {
+    "mtime": 1782594833.1198993,
+    "ast_hash": "752da96cc119976bc046331bb2508ba4",
+    "semantic_hash": ""
+  },
+  "PRIVACY.md": {
+    "mtime": 1782585420.465686,
+    "ast_hash": "af130d6dd4ddfe45ec915fa8581509df",
+    "semantic_hash": ""
+  },
+  "PUSH_INSTRUCTIONS.md": {
+    "mtime": 1782593730.9841712,
+    "ast_hash": "fbf1c5705fa6f14143133d318b647370",
+    "semantic_hash": ""
+  },
+  "PrivacyPolicy.md": {
+    "mtime": 1782522747.739311,
+    "ast_hash": "3ed08cba0f255b6c9d65a33fcdfeaf80",
+    "semantic_hash": ""
+  },
+  "VALIDATION_REPORT.md": {
+    "mtime": 1782593773.8968537,
+    "ast_hash": "5dbc407f1da5a559eb7e14a5f61f9f56",
+    "semantic_hash": ""
+  },
+  "deliverables/oneweave-pwa.html": {
+    "mtime": 1782522702.0385733,
+    "ast_hash": "732ba6e3b025662317a749f3526004d6",
+    "semantic_hash": ""
+  },
+  "landing.html": {
+    "mtime": 1782594809.8445227,
+    "ast_hash": "6246761a2421e79ae1521e9f0266daef",
+    "semantic_hash": ""
+  },
+  "visuals_compass.png": {
+    "mtime": 1782594909.9281423,
+    "ast_hash": "a5299bd408dbb759680fc5910bae671d",
+    "semantic_hash": ""
+  },
+  "visuals_echo.png": {
+    "mtime": 1782594886.490763,
+    "ast_hash": "d3e4816b0d4cce121519bbe89c5a9d9d",
+    "semantic_hash": ""
+  },
+  "visuals_loom.png": {
+    "mtime": 1782594874.6705716,
+    "ast_hash": "9aeae99862d5be778c3f7aa0269d7d74",
     "semantic_hash": ""
   }
 }

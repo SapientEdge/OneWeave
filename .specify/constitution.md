@@ -1,23 +1,120 @@
 # OneWeave Constitution
 
+**Version:** 2.0 — Updated 2026-06-27 after Spec Kit + Graphify + Aider toolchain adoption.
+
+This constitution governs ALL OneWeave work. Every spec, plan, task, and implementation must comply.
+
+---
+
 ## Core Principles
-- **One Journey, Not Silos**: Life is interconnected. OneWeave models and surfaces real relationships between domains (health affects energy for goals, goals affect relationships and finances, etc.).
-- **Privacy-First, Zero-Trust**: All practices from GLOBAL_BEST_PRACTICES.md apply. No model training on user data. Local-first where possible. Redact PII/secrets. Provider opt-outs mandatory.
-- **Calm Intelligence**: On-device AI (Apple Intelligence/Foundation Models) used sparingly and transparently to amplify human wisdom, reduce load, and foster real-world actions (IRL connections, analog time).
-- **Fluid Threads**: Domains are fluid lenses (Self, Stewardship, Care & Kin, Meaning & Legacy), not rigid tabs. Interconnections are first-class.
-- **Genuine Help Over Features**: Solve real 2026 needs (fragmentation, loneliness, caregiver burden, digital fatigue, meaning deficit). High retention through compounding value, not gamification or addiction.
-- **Plan Rigorously, Build Real**: Use Spec Kit. Deliver working artifacts. Talk/plan before code.
+
+### 1. One Journey, Not Silos
+Life is interconnected. OneWeave models and surfaces real relationships between domains (health affects energy for goals, goals affect relationships and finances, etc.). The four Threads (Self, Stewardship, Care & Kin, Meaning & Legacy) are fluid lenses, not rigid tabs. Interconnections are first-class citizens.
+
+### 2. Privacy-First, Zero-Trust
+- All data stays on the user's device by default. Zero accounts. Zero cloud sync on free tier.
+- Sacred Echo Vault uses **AES-256-GCM + HKDF-SHA256** with fail-closed crypto (no test seed fallback; deterministic nonce fallback removed).
+- Provider opt-outs are mandatory for any LLM/agent dispatch (`/root/.hermes/scripts/oneweave_dispatch.sh` prepends `.research/NO_TRAINING_PROMPT.md`).
+- Redact PII/secrets before any external dispatch.
+- **Privacy Data Leash**: 9 integration toggles (Calendar, Contacts, HealthKit, Reminders, Mail, Notes, Body Thread, P2P, Insights). Each gated individually. Each read live from `DataLeashSettingsRecord` BEFORE any data access.
+
+### 3. Calm Intelligence
+- On-device AI used sparingly and transparently to amplify human wisdom, reduce load, and foster real-world actions (IRL connections, analog time).
+- **No Core ML, no LLM, no network** in core features (Invisible Mentor, Quick Capture, Cognitive Load, all synthesis). Pure algorithmic + user's own data.
+- No streak shaming. No bouncy animations. No "🎉". Spring animations are `.spring(response: 0.4, dampingFraction: 0.7)`. Soft and slow.
+
+### 4. Reflection-Gated Everything
+Any action that produces lasting consequence (saving an insight, completing a quest, sharing via P2P, sealing a Sacred Echo, committing via Command Palette, applying a Cross-Domain Insight) requires a **non-empty `reflectionText`** from the user. This is the moral core of the app — pause before you commit.
+
+### 5. Anti-Addictive Gamification
+- Streaks have **restorative grace** (max 2 days) and gentle decay (0.5%/day after 7-day grace). No "you lost your streak!" notifications.
+- Weave Pause triggers ONLY when cognitive load is rising AND ≥ 0.85 AND body depleted (NOT on sustained high — verified by `validate_cognitive_load.py`).
+- Mastery tiers (novice → adept → expert → master → grandmaster) require genuine mastery, not time-served.
+
+### 6. Genuine Help Over Features
+Solve real 2026 needs: fragmentation, loneliness, caregiver burden, digital fatigue, meaning deficit. High retention through compounding value, not gamification or addiction. Every feature must answer: "Does this honor what actually matters to the user?"
+
+### 7. Plan Rigorously, Build Real
+- Use Spec Kit (this directory) for every new feature branch.
+- Run Graphify on the codebase before heavy changes (`graphify . --update --wiki`).
+- Validate in Python mirrors before Mac compilation (Linux has no swiftc).
+- Deliver working artifacts. No stubs in production paths. No "TODO: implement later."
+- Talk/plan before code. Conversational first; act only on explicit approval.
+
+---
 
 ## Non-Goals
+
 - Another bloated all-in-one or Notion clone.
 - Heavy social/gamified features that increase screen time.
 - Medical/financial advice replacement.
-- Public data sharing without explicit consent.
+- Public data sharing without explicit consent (defaults are `private`).
+- Cross-device sync on free tier (paid tier uses user's own iCloud Drive).
+- Apple Health predictions or diagnosis (we surface signals, not conclusions).
+
+---
+
+## Architectural Invariants
+
+These MUST NOT change without explicit user approval and a constitution amendment:
+
+1. **App Group identifier**: `group.com.oneweave` (shared with WidgetKit extension)
+2. **Widget snapshot key**: `oneweave.snapshot.v1`
+3. **SwiftData schema versioning**: V1 → V2 → V3 with explicit migration logic in `SchemaMigrationPlan.swift`
+4. **Sacred Echo crypto**: AES-256-GCM + HKDF-SHA256, fail-closed, no plaintext reflections stored
+5. **Reflection gate**: required on every state-changing action
+6. **Privacy tier**: every `LifeEntity` has `private` / `shared` / `public`; default `private`
+7. **Data Leash**: 9 toggles, read live BEFORE integration call, fail-closed (deny if missing)
+8. **P2P encryption**: Signal Protocol via libsignal-client; STUN stun.l.google.com:19302; TURN self-hosted Coturn
+9. **iOS minimum**: iOS 17+ (SwiftData requirement)
+10. **Color convention** (for consistency across all views): Self=.blue, Stewardship=.green, CareKin=.orange, Meaning=.purple
+
+---
 
 ## Success Metrics
+
+### User-facing
 - User feels reduced fragmentation and better trade-off decisions.
 - Daily/weekly use becomes natural because it saves time/energy.
-- High willingness-to-pay via premium subscription unlocking deeper weave.
-- Privacy maintained; no training leakage.
+- High willingness-to-pay via premium subscription ($9.99/mo or $79.99/yr).
+- Privacy maintained; zero training leakage incidents.
+- Sacred Echo Vault users report the feature "changed how I think about legacy."
 
-This constitution governs all OneWeave work and inherits global best practices.
+### Engineering-facing
+- All features validated end-to-end in Python mirrors on Linux before Mac compilation.
+- Real bugs caught by validators before they reach users (target: 100%).
+- Codex Aider per-feature commits; one branch per spec; clean git history.
+- Zero external API dependencies in production paths.
+
+---
+
+## Toolchain (mandated)
+
+| Purpose | Tool | Location |
+|---|---|---|
+| Specification | Spec Kit (`specify` CLI) | `.specify/` |
+| Codebase context | Graphify (`graphify` CLI) | `graphify-out/` |
+| Implementation | Aider (per-feature commits) | `.aider.conf.yml` |
+| Validation | Python mirrors | `.research/validate_*.py` |
+| Dispatch | `oneweave_dispatch.sh` | `/root/.hermes/scripts/` |
+| Build log | `.research/build_log.md` | per-spec append |
+
+**Every new feature requires all five artifacts:**
+1. `.specify/specs/<NNN-feature>/spec.md` + `tasks.md` + `checklist.md` + `plan.md` + `analysis.md`
+2. `graphify . --update` after implementation
+3. Aider commit per task (no bundling)
+4. Python mirror tests in `.research/validate_<feature>.py`, all passing
+5. Entry in `.research/build_log.md` with timestamp + LOC + tests + bugs caught
+
+---
+
+## Constitutional Amendments
+
+Amendments require explicit user approval and update this file with version bump.
+
+- v1.0 (2026-06-24): Initial constitution.
+- v2.0 (2026-06-27): Added toolchain mandates, architectural invariants, reflection-gated principle, anti-addictive gamification details. Reflects post-Tier A/Round 2/Linux push reality.
+
+---
+
+*This constitution governs all OneWeave work and inherits global Hermes best practices.*

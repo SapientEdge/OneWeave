@@ -6,7 +6,7 @@
 // - Live Activity: Active quest "IRL: 15min • +baseEssence on reflect" or streak counter with grace state. Uses ActivityKit + local push updates.
 // - Siri/App Intents: "Show my harmony", "Weave quick capture <text> for <thread>", "Complete current quest with reflection <note>" (donate shortcuts). 
 // Shared snapshot provider (OneWeaveSnapshot) e.g. export simple struct from LifeContext for widget target. 
-// Post core production; requires Xcode target setup for WidgetExtension (App Group for sharing snapshot JSON/UserDefaults).
+// Post production; requires Xcode target setup for WidgetExtension (App Group for sharing snapshot JSON/UserDefaults).
 // All local-only SwiftData queries via snapshot (no direct @Model in ext). Harmony/quest focus per Phase 8 + DESIGN peripheral hooks.
 // Production scope complete. Ready for Xcode target.
 
@@ -34,7 +34,7 @@ struct HarmonyWidgetProvider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<HarmonyEntry>) -> ()) {
         let snap = OneWeaveSnapshotStore.shared.read()
-        let entry = HarmonyEntry(date: Date(), snapshot: snapshot)
+        let entry = HarmonyEntry(date: Date(), snapshot: snap)
         let timeline = Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(15*60))) // refresh 15min
         completion(timeline)
     }
@@ -184,7 +184,7 @@ struct CompleteQuestIntent: AppIntent {
 
 struct ShowHarmonyIntent: AppIntent {
     static var title: LocalizedStringResource = "Show My OneWeave Harmony"
-    func perform() async throws -> some IntentResult { return .result() }
+    func perform() async throws -> some IntentResult { /* deep link or queue in real */ return .result() }
 }
 
 // MARK: - Live Activity production (for active quest or streak)

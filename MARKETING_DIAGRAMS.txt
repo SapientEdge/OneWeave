@@ -1,0 +1,139 @@
+================================================================================
+   ___                  _
+  / _ \ _ __   ___  __| | ___  _ __ ___
+ | | | | '_ \ / _ \/ _` |/ _ \| '_ ` _ \
+ | |_| | | | |  __/ (_| | (_) | | | | | |
+  \___/|_| |_|\___|\__,_|\___/|_| |_| |_|
+
+  Your life. One woven story.
+================================================================================
+
+THE JOURNEY COMPASS (what you see at a glance)
+================================================
+
+      +--------------------+
+      |     Self (⚡)       |  ← Your energy, habits, streaks
+      |       78% ↗         |
+      +--------------------+
+              |
+       ripples_to
+              ↓
++----------+     +----------+     +----------+
+| Steward  | ←→  |   You    |  ←→ | Meaning  |
+| (🌿) 62% |     |  (⚡)    |     | (✨) 45% |
++----------+     +----------+     +----------+
+      ↕             ↕                 ↕
+   supports      with Care       inspires
+      ↓             ↓                 ↓
++----------+
+| Care&Kin |  ← Family, tasks, relationships
+| (👨‍👩‍👧) 88% |
++----------+
+
+        Active Ripples (live feed)
+        ─────────────────────────────
+        [2m] Self → CareKin + Stewardship
+              "Committed to busy-season project"
+
+        [14m] Stewardship → Meaning
+              "Cancelled Hulu · Story Fund +$15/mo"
+
+        [1h] CareKin → Meaning
+              "Dad · last call 23 days ago · Tap to call"
+
+        [2h] Self → CareKin
+              "Sleep: 5.2hr · Suggested: Weave Pause"
+
+
+THE LIVING GRAPH LOOM
+=====================
+
+                          .·•·.            ← small entity
+                       .·  ✦  ·.
+                  .·                 ·.        ← You (self)
+               ✦         ⚡ You           ✦
+           .·            /  |  \           ·.
+        .·           /    |    \            ·.
+   ✦  ·           /     |     \             ·  ✦
+    ·     🌿Budget  💜Story     ✦ ·
+   ·       (stewardship) (meaning)        ·
+    ·          \         |        /           ·
+     ·          \        |       /            ·
+      ·          \       |      /             ·
+       ·          \      |     /              ·
+        ·          \     |    /               ·
+         ·          \   |   /                ·
+          ✦          \  |  /                 ✦
+            ·         \ | /                   ·
+             ·         👨Dad                  ·
+              ·       (carekin)               ·
+               ·        ✦                    ·
+                ···✦···✦···✦···
+
+
+SACRED ECHO VAULT (the killer feature)
+======================================
+
+   ┌──────────────────────────────────────────────┐
+   │  🔒 SEALED                                    │
+   │  ────────                                     │
+   │  Sacred Echo                                  │
+   │  To my daughter, on your wedding day          │
+   │                                               │
+   │  A video + a letter + key to Story Fund trust │
+   │  Echo Decree: Give to her in private,         │
+   │                after the father-daughter dance│
+   │  ─────────────────────────────────────────    │
+   │  Unlock: Aug 12, 2028    Heir: Mira          │
+   └──────────────────────────────────────────────┘
+
+   Encryption:    AES-256-GCM
+   Key derivation: HKDF-SHA256 per-echo
+   Storage:        Zero plaintext on disk
+   States:         sealed → opened → handDelivered → released
+
+
+PRIVACY POSTURE
+===============
+
+   ┌─────────────────────────────────────────────┐
+   │   0   external API keys in the codebase      │
+   │   0   cloud dependencies                    │
+   │   9   granular privacy toggles you control   │
+   │  11   SwiftData models, all local            │
+   │ AES-256 encryption for Sacred Echo Vault     │
+   │ 100% on-device AI (no Core ML, no LLM, no net)│
+   └─────────────────────────────────────────────┘
+
+
+COMPETITIVE POSITIONING
+=======================
+
+                          OneWeave  Day One  Reflectly  Habitica
+   Life Graph                ✓        —          —         —
+   Cross-domain insights     ✓        —          limited    —
+   Local-only AI             ✓        cloud      cloud     some
+   Encrypted time capsules   ✓        —          —         —
+   Calm gamification         ✓        —          streaks   punitive
+   Anti-social P2P           ✓        —          —         parties
+   Privacy Data Leash        ✓        AON        AON       —
+   Free tier generous        ✓        limited    limited   free
+   Decision Log + Mentor     ✓        —          —         —
+   Public privacy audit      ✓        cloud      cloud     optional
+
+
+PRICING
+=======
+
+   FREE                          PAID
+   ─────                         ────
+   Full local app                Cross-device sync via YOUR iCloud
+   Unlimited journal entries     OPML + advanced export formats
+   Full graph (4 threads)        Priority support
+   Morning briefing              Future: Weave Circles cross-platform
+   Cognitive load
+   Reflection gates              $9.99/mo
+   Markdown + JSON export        $79.99/yr
+
+   No data leaves the device on the free tier.
+   Paid tier adds convenience, not features that compromise privacy.

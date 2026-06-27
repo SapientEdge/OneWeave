@@ -11,6 +11,10 @@ struct OneWeaveSnapshot: Codable, Equatable {
     var activeQuestTitles: [String]
     var masteryTiers: [String: Int]
     var lastUpdated: Date
+    
+    // Life OS enhancements (Life Graph + Coherence)
+    var lifeCoherenceScore: Double?
+    var graphEntityCount: Int?
 
     static let production = OneWeaveSnapshot(
         harmonyScore: 0.5,
@@ -22,7 +26,9 @@ struct OneWeaveSnapshot: Codable, Equatable {
         topQuestDomain: nil,
         activeQuestTitles: [],
         masteryTiers: ["Self":1, "Stewardship":1, "CareKin":1, "Meaning":1],
-        lastUpdated: Date()
+        lastUpdated: Date(),
+        lifeCoherenceScore: nil,
+        graphEntityCount: nil
     )
 }
 
@@ -38,6 +44,9 @@ final class OneWeaveSnapshotStore {
         if let data = try? JSONEncoder().encode(snapshot) {
             defaults.set(data, forKey: key)
         }
+        #if canImport(WidgetKit)
+        WidgetCenter.shared.reloadAllTimelines()
+        #endif
     }
 
     func read() -> OneWeaveSnapshot {
