@@ -33,7 +33,16 @@ struct MainTabView: View {
             NavigationStack {
                 CompassView()
                     .navigationDestination(for: String.self) { dest in
-                        if dest == "MasteryMap" { MasteryMapView() }
+                        switch dest {
+                        case "QuestsView":
+                            QuestsView()
+                        case "EssenceLedgerView":
+                            EssenceLedgerView()
+                        case "MasteryMap", "MasteryMapView":
+                            MasteryMapView()
+                        default:
+                            ThreadDetailView(threadName: dest)
+                        }
                     }
                     .environment(stateMachine)
             }

@@ -161,3 +161,6 @@ All per Phase 8 packaging/follow-up in tasks.md (now with status header); post-M
 - Compass: NavigationDestination + NavigationLink buttons for QuestsView/EssenceLedgerView/MasteryMapView.
 - Prototype: expanded harness with views roundtrips, season change, full export sims.
 - Tasks + LAUNCH updated.
+
+- All requested polish continued: Seasons stub + Compass nav/links + prototype roundtrips/tests + clean + docs.
+- 27 Swift files. Core MVP complete per tasks. Post-MVP stubs advancing (Seasons done, Widgets delegate in progress).
