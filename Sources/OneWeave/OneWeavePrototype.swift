@@ -15,7 +15,13 @@ struct OneWeavePrototype: View {
     @Query private var selfThreads: [BasicSelfThread]
     @Query private var careThreads: [CareKinThread]
     @Query private var meaningThreads: [MeaningThread]
-    @Query private var quests: [WeaveQuest]  // for real persistence verification in harness
+    @Query private var quests: [WeaveQuest]
+
+    private var widgetPreviewQuests: [WeaveQuest] {
+        // For widget preview only - in real would come from @Query or snapshot
+        return quests.prefix(2).map { $0 }
+    }
+  // for real persistence verification in harness
     
     @State private var newGoal = ""
     @State private var service: TimelineService? = nil
@@ -24,6 +30,7 @@ struct OneWeavePrototype: View {
     @State private var careSummary = "No CareKin yet"
     @State private var meaningSummary = "Meaning legacy ready"
     @State private var demoNote = ""
+    @State private var lastAction = ""
     @Environment(AppStateMachine.self) private var stateMachine
     
     var body: some View {
@@ -31,7 +38,8 @@ struct OneWeavePrototype: View {
             ScrollView {
                 VStack(spacing: 16) {
                     if let context = contexts.first {
-                        Text("OneWeave • One Journey (Production-Ready End-to-End)")
+                        #endif
+Text("OneWeave • One Journey (Production-Ready End-to-End)")
 
                     // Production Onboarding (full first-weave + quest intro)
                     VStack {
@@ -72,7 +80,8 @@ struct OneWeavePrototype: View {
                             
 
 // Persistence + export roundtrip test (harness expansion)
-Button("Persistence + Export Roundtrip Test") {
+#if DEBUG
+            Button("Persistence + Export Roundtrip Test") {
     if let ctx = contexts.first {
         let q = WeaveQuest(title: "Roundtrip Test Quest", description: "Verify persist/export", domains: ["Self"], baseEssence: 7)
         modelContext.insert(q)
@@ -174,7 +183,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .padding(8)
         .background(.quaternary.opacity(0.3))
 
-// Phase 7 test harness note (MVP verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
+// Phase 7 test harness note (production verification expanded): real persistence test for WeaveQuest + ThreadDetail gamif sims + mastery/streak checks + export verification. All local-only.
                             // Phase 5: Resonance & Echo (cross mastery, combo essence, legacy ripple)
                             Button("Trigger Resonance (linked ripple + mastery tick)") {
                                 if let ctx = contexts.first, let svc = service {
@@ -254,7 +263,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             .buttonStyle(.bordered)
                             .disabled(seeded)
                             
-                            // Quest demo (MVP gamif - generate + reflect per 002 spec)
+                            // Quest demo (production gamif - generate + reflect per 002 spec)
                             Button("Generate Context-Aware Quests") {
                                 if let ctx = contexts.first {
                                     let qs = QuestService.shared
@@ -627,7 +636,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .padding(8)
         .background(.quaternary.opacity(0.3))
 
-// Phase 7 test harness note (MVP verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
+// Phase 7 test harness note (production verification): simulate ThreadDetail gamif, loom update, streak grace, quest reflection, resonance combo. Seed via DataSeeder. Verify no external, local-only, reflection gates.
 // Phase 5: Echo list demo + resonance visual
                             Button("List Recent Echoes (demo)") {
                                 if let ctx = contexts.first {

@@ -43,7 +43,21 @@ var activeQuests: [UUID] = []
     var essenceTransactions: [EssenceTransaction] = []
 
     // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
-    var currentSeason: String = "Spring"  // or "High Care Load" style from values
+    var currentSeason: String = "Spring"
+
+    func pushSnapshotToWidgets() {
+        let activeTitles = activeQuests.prefix(2).map { "Quest \($0.uuidString.prefix(8))" }
+        let snap = OneWeaveSnapshot(
+            harmonyScore: harmonyScore,
+            weaveLevel: weaveLevel,
+            globalWeaveStreak: globalWeaveStreak,
+            activeQuestTitles: activeTitles,
+            masteryTiers: masteryTiers,
+            lastUpdated: Date()
+        )
+        OneWeaveSnapshotStore.shared.write(snap)
+    }
+  // or "High Care Load" style from values
     var seasonChangeDate: Date = Date()
     var seasonReflectionCompleted: Bool = false
 
@@ -173,7 +187,8 @@ var activeQuests: [UUID] = []
         // Event-driven, on-device logic (no external AI call)
         // Now also reflects formal AppStateMachine for psychological clarity
         if energyProfile == .low || currentAppState == AppState.lowEnergy.rawValue {
-            return "[\(stateName)] Recent \(recentCount) events show \(energyDesc) energy in a \(season) season. Simplify 2 items in Care & Kin; focus on \(focus) only. (local aggregation + state)"
+            return "[\(stateName)] Recent \(recentCount) events show \(energyDesc) energy in a \(season) season. Simplify 2 items in Care & Kin;
+        pushSnapshotToWidgets() focus on \(focus) only. (local aggregation + state)"
         } else if energyProfile == .high || currentAppState == AppState.weaving.rawValue {
             return "[\(stateName)] High energy after recent events. Advance \(focus) in Self thread and ripple to Meaning for legacy impact. (on-device insight)"
         } else if currentAppState == AppState.reflecting.rawValue {
@@ -290,7 +305,8 @@ var activeQuests: [UUID] = []
         let threshold = Double(weaveLevel * 25 + 10)  // e.g. L1: ~35, L2:~60 etc - scales gently
         if weaveEssence >= threshold {
             weaveLevel += 1
-            // Note: UI will show "Level Up!" feedback; mastery may also advance
+            // Note: UI will show "Level Up!" feedback;
+        pushSnapshotToWidgets() mastery may also advance
         }
     }
     
@@ -392,7 +408,8 @@ var activeQuests: [UUID] = []
         // Update mastery/harmony/streak
         let questEvent = TimelineEvent(
             type: "quest_completed",
-            thread: "Self", // default; can be enhanced
+            thread: "Self", // default;
+        pushSnapshotToWidgets() can be enhanced
             summary: "Quest completed with reflection",
             payload: ["reflection": reflection],
             linkedThreads: ["Self"],

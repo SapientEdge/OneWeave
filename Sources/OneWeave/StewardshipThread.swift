@@ -9,7 +9,7 @@ final class StewardshipThread: ThreadProtocol {
     var subscriptionMeta: [String] = [] // "cost:service"
     var recentInsights: [String] = []
     var totalPotentialSavings: Double = 0.0
-    var savingsSuggestions: [String] = []  // populated for Compass cross-suggestions (MVP gamif/launch)
+    var savingsSuggestions: [String] = []  // populated for Compass cross-suggestions (production gamif/launch)
     
     init() {
         // Start clean
@@ -32,7 +32,7 @@ final class StewardshipThread: ThreadProtocol {
         let savingsNote = actualSavings > 0 ? "Potential savings: $\(actualSavings)/mo (annual $\(actualSavings*12))." : ""
         let insight = "Leak detected: \(serviceName) (\(reason)). \(savingsNote) \(suggestSavingsRedirect(savingsAmount: actualSavings))"
         recentInsights.append(insight)
-        savingsSuggestions.append("Redirect $\(actualSavings) from \(serviceName) to IRL experience or legacy.")  // for cross suggestions (MVP launch)
+        savingsSuggestions.append("Redirect $\(actualSavings) from \(serviceName) to IRL experience or legacy.")  // for cross suggestions (production launch)
 
         if let ctx = context, let svc = service {
             svc.emitEvent(

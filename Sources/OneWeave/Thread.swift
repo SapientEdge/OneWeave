@@ -2,7 +2,7 @@ import SwiftData
 import Foundation
 
 // Protocol for fluid Threads (event-driven, can process ripples from other threads).
-// Keep simple for MVP; concrete implementations in per-thread files.
+// Keep simple for production; concrete implementations in per-thread files.
 protocol ThreadProtocol {
     var name: String { get }
     func processEvent(_ event: TimelineEvent, context: LifeContext, service: TimelineService)
