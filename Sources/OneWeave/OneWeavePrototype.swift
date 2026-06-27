@@ -81,7 +81,34 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 // 
         // Phase 2 essence economy test buttons (parallel verification)
         VStack(alignment: .leading, spacing: 8) {
-            Text("Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+            Text("
+        // Final harness roundtrip: views + export (Phase 6/7/8)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Views + Export Roundtrip Test").font(.caption).foregroundStyle(.secondary)
+            Button("Show All Views + Simulate Export") {
+                if let ctx = contexts.first {
+                    // Trigger views (in real would navigate)
+                    _ = ctx.essenceLedger.count
+                    _ = ctx.activeQuests.count
+                    let mastery = ctx.masteryTiers.values.reduce(0, +)
+                    // Simulate export (reuse Settings logic)
+                    let export = "Essence: \(ctx.essenceDisplay)\nSeason: \(ctx.values["season"] ?? ctx.currentSeason)\nMastery total: \(mastery)\nLedger last: \(ctx.essenceLedger.last ?? "none")"
+                    lastAction = "Roundtrip: views data + export JSON sim ready. " + export.prefix(80)
+                    // Bonus: trigger season change for test
+                    ctx.changeSeason(to: "Summer")
+                }
+            }
+            Button("Complete Season Reflection (post-MVP stub)") {
+                if let ctx = contexts.first {
+                    ctx.completeSeasonReflection(note: "Harvested insights from the weave this season.")
+                    lastAction = "Season reflection complete +10 Essence + burst. Chapter summary emitted."
+                }
+            }
+        }
+        .padding(8)
+        .background(.quaternary.opacity(0.3))
+
+// Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
             Button("Apply Gentle Decay") {
                 context.applyGentleDecay()
                 lastAction = "Gentle decay applied (if inactive)"

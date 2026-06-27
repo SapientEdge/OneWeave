@@ -40,7 +40,38 @@ final class LifeContext {
 var activeQuests: [UUID] = []
     var completedQuestCount: Int = 0
     var essenceLedger: [String] = []
-    var essenceTransactions: [EssenceTransaction] = []  // Phase 1 log  // lightweight log: "+5 for goal complete @Self"
+    var essenceTransactions: [EssenceTransaction] = []
+
+    // Seasons (post-MVP stub): user or auto tag. On change: big reflection gate, chapter summary, Essence burst.
+    var currentSeason: String = "Spring"  // or "High Care Load" style from values
+    var seasonChangeDate: Date = Date()
+    var seasonReflectionCompleted: Bool = false
+
+    func changeSeason(to newSeason: String) {
+        if newSeason != currentSeason {
+            let old = currentSeason
+            currentSeason = newSeason
+            seasonChangeDate = Date()
+            seasonReflectionCompleted = false
+            values["season"] = newSeason
+            // Simulate burst + gate trigger (in real UI: show big reflection sheet)
+            weaveEssence += 20
+            essenceLedger.append("+20 season change burst from \(old) → \(newSeason)")
+            harmonyScore = min(1.0, harmonyScore + 0.1)
+        }
+    }
+
+    func completeSeasonReflection(note: String) {
+        if !seasonReflectionCompleted {
+            seasonReflectionCompleted = true
+            weaveEssence += 10
+            essenceLedger.append("+10 season reflection: \(note.prefix(50))")
+            // Emit chapter summary event
+            let summaryEvent = TimelineEvent(thread: "Meaning", type: "season_chapter_summary", payload: ["season": currentSeason, "reflection": note], affectsEnergy: true)
+            updateFromEvent(summaryEvent)
+        }
+    }
+  // Phase 1 log  // lightweight log: "+5 for goal complete @Self"
     
     init() {}
 

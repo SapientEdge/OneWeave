@@ -69,12 +69,12 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Resonance/Combos: detect linkedThreads + award combo + harmony boost (in LifeContext.detectResonance, called on updates)
 - [x] Echo system (basic UI stub): trigger + note in prototype. Full list/reflection + Legacy Tapestry post-MVP.
 - [x] Insights reflect state/energy; suggestions in quests: cross-thread (e.g. in Compass, ThreadDetail) to use new mechanics (e.g. "Your streak + harmony suggests this quest").
-- [ ] Seasons (post-MVP) or tag in LifeContext (user set or auto). On change/close: big reflection gate, chapter summary, Essence burst.
+- [x] Seasons (post-MVP stub): currentSeason + changeSeason + completeSeasonReflection in LifeContext (gate + burst + summary event). Prototype demo + Compass values support.
 
 ## Phase 6: UI Integration, Polish & Cross-Thread Wiring
 - [x] Compass updates: add Suggested Weaves, Essence HUD, reflection gate, WeaveTapestryView (or compose), Harmony indicator, state-aware theming. Keep minimalist, progressive disclosure.
 - [x] Mastery/streak surfaced in ThreadDetailView progress, streak, amplifiers, recent ripples with visual links.
-- [x] New lightweight views: EssenceLedgerView (simple list + stats) + QuestsView (list + reflection modal) created. MasteryMapView already solid. Wired/demoted in prototype. Full nav in Compass post-MVP.
+- [x] New lightweight views: ... Full nav in Compass (NavigationDestination wired for QuestsView/EssenceLedgerView/MasteryMapView).
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [x] Basic onboarding; gamif hook in prototype + Compass (sample quests/loom) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [x] Feedback toasts + IRL prompts in flows.
