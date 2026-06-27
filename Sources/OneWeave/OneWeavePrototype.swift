@@ -77,9 +77,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             // end expanded persistence + ThreadDetail sim section
 
                             
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
+
         VStack(alignment: .leading, spacing: 8) {
             Text("
         // Final harness roundtrip: views + export (Phase 6/7/8)
@@ -167,16 +165,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 }
 
                             
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
-        .joined(separator: ", ")
-                                    let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
-                                    MasteryMapView().body
-                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
-}
-}
-                            .buttonStyle(.bordered)
+
 
                             Button("Spend 10 Essence for InsightMagnifier (stub)") {
                                 if let ctx = contexts.first {
@@ -190,14 +179,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             
 
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
-        .prefix(3)
-                                    demoNote = "Recent echoes: \(echoes.map { $0.type }.joined(separator: ", ")) . Tap to re-weave for +Essence."
-                                }
-                            }
-                            .buttonStyle(.bordered)
+
 
                             Button("Echo past weave (legacy ripple + Meaning mastery)") {
                                 if let ctx = contexts.first, let svc = service {
@@ -443,25 +425,12 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                             // end expanded persistence + ThreadDetail sim section
 
                             
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
-        
-}
+
 
 
                             
 
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
-        .joined(separator: ", ")
-                                    let ledger = ctx.essenceLedger.suffix(5).joined(separator: "; ")
-                                    MasteryMapView().body
-                    demoNote = "Mastery: [\(map)]. Recent ledger: \(ledger). (Full map view Phase 6)"
-}
-                            }
-                            .buttonStyle(.bordered)
+
 
                             Button("Spend 10 Essence for InsightMagnifier (stub)") {
                                 if let ctx = contexts.first {
@@ -475,17 +444,56 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
                             
 
-// Phase 8: Widget stubs in OneWeaveWidgetStubs.swift (Harmony/Quest + Intents/Live Activity). See tasks.md for concrete notes. Post-MVP target.
-// 
-        // Phase 2 essence economy test buttons (parallel verification)
-        
-            }
+
             Button("Show EssenceLedgerView") {
                 lastAction = "Ledger view ready (see EssenceLedgerView.swift). Recent: \(contexts.first?.essenceLedger.suffix(2).joined(separator: "; ") ?? "none")"
             }
             Button("Show MasteryMapView (existing)") {
                 lastAction = "MasteryMapView: Tap domains to echo (already implemented, calm grid)"
             }
+
+        // Phase 8 post-MVP: Simple widget previews (sim only, using real @Query LifeContext data)
+        // Mirrors OneWeaveWidgetStubs.swift exactly (Harmony + Quest views + mini tapestry)
+        // No WidgetKit target here (post-MVP, requires Xcode extension + App Group)
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Widget Previews (Phase 8 stubs)").font(.caption).foregroundStyle(.secondary)
+            if let ctx = contexts.first {
+                // Harmony sim
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Harmony Widget").font(.caption.bold())
+                    Text("Harmony \(Int(ctx.harmonyScore * 100))%  L\(ctx.weaveLevel) • 🔥\(ctx.globalWeaveStreak)")
+                        .font(.headline)
+                    if let qid = ctx.activeQuests.first, let q = quests.first(where: { $0.id == qid }) {
+                        Text("Quest: \(q.title)").font(.caption2).foregroundStyle(.secondary)
+                    }
+                    HStack(spacing: 2) {
+                        ForEach(["Self", "Stewardship", "CareKin", "Meaning"], id: \.self) { _ in Circle().fill(.blue.opacity(0.6)).frame(width: 5, height: 5) }
+                    }
+                }
+                .padding(6)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+
+                // Quest sim
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Quest Widget").font(.caption.bold())
+                    Text("Suggested Weaves").font(.subheadline)
+                    ForEach(quests.prefix(2)) { q in
+                        HStack {
+                            Text("• \(q.domains.first ?? ""): \(q.title)").font(.caption).lineLimit(1)
+                            Spacer()
+                            Text("+\(q.baseEssence)✧ \(q.estimatedIRLMinutes)m").font(.caption2).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                .padding(6)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+            }
+        }
+        .padding(6)
+        .background(.quaternary.opacity(0.15))
+
         }
         .padding(6)
         .background(.quaternary.opacity(0.2))
