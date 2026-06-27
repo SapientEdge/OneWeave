@@ -879,3 +879,47 @@ Ready for round 3 findings integration.
 - CLAUDE-R3-13: AppShortcutsProvider missing
 - CLAUDE-R3-25: Widget Extension target doesn't exist
 - NEMO-R3-001, -002, -010, -011, -012, -013, -014, -015, -016, -017, -023, -024, -031: App Store / Xcode-side blockers
+
+---
+
+## Cycle 28 — 2026-06-27 22:50 — Pre-session-reset consolidation
+
+### Work captured before reset
+- All uncommitted changes committed (final head: `d5169e4`)
+- Master handoff doc created: `ONEWEAVE_HANDOFF_2026-06-27.md` (14.3 KB, 254 lines)
+  - TL;DR + headline numbers
+  - Full doc map (where everything lives)
+  - 23 features listed with descriptions
+  - 8 fixed bugs tabulated (cycle 27)
+  - 14 known Mac-side gaps listed
+  - Next steps in priority order
+  - 10 architectural decisions captured
+  - 4 process gaps documented
+  - Re-establishment instructions for future sessions
+- Persistent memory updated:
+  - Added OneWeave project reference (path, stack, master handoff doc)
+  - Added "Linux VPS only: needs PTY mode for interactive CLIs"
+- Tarball built: `/root/hermes-workspace/oneweave-linux-handoff-2026-06-27.tar.gz` (1.3 MB, 245 entries)
+  - 56 Swift files, 98 markdown, 17 Python validators, 3 PNGs, 3 HTML
+  - Excludes `.git`, `graphify-out/cache`, `.aider*`, `node_modules`
+
+### Branch note
+- Active branch: `002-gamification` (not `main` as compaction summary said — there is no `main` branch, only `002-gamification` and `master`)
+
+### Final commit chain
+```
+d5169e4 docs(handoff): master OneWeave handoff record — entry point for future sessions
+bd0972c chore(record): capture final round-3 claude re-dispatch output
+9245b03 fix(cycle27): Claude Code review applied — 7 high-priority fixes
+4afcae1 fix: production finish - unify snapshot, full #if DEBUG harness, real push on all paths, widget store only, no blockers
+7fbe738 fix(production): real snapshot store + widget pipeline; gate harness #if DEBUG; LifeContext push; per Grok+Claude review
+```
+
+### Tests at session end
+- `bash .research/validate_all.sh` → **16/16 suites PASS, 525+ tests green** (last verified at cycle 27 commit)
+
+### State
+- Working tree: clean
+- Branch: `002-gamification`
+- All work persisted to disk + git + tarball + persistent memory
+- Safe to reset all sessions
