@@ -208,9 +208,45 @@ struct CompassView: View {
                         .padding(.horizontal)
                     }
                     
+                    // 
+                    // Navigation to lightweight views (Phase 6)
+                    HStack(spacing: 12) {
+                        NavigationLink(value: "QuestsView") {
+                            Label("Quests", systemImage: "list.bullet.rectangle")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "EssenceLedgerView") {
+                            Label("Ledger", systemImage: "list.bullet")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "MasteryMapView") {
+                            Label("Mastery", systemImage: "map")
+                                .font(.caption)
+                        }
+                    }
+                    .padding(.horizontal)
+
                     // Active Ripples (cross-domain, glass)
                     VStack(alignment: .leading) {
-                        Text("Active Ripples")
+                        Text("
+                    // Navigation to lightweight views (Phase 6)
+                    HStack(spacing: 12) {
+                        NavigationLink(value: "QuestsView") {
+                            Label("Quests", systemImage: "list.bullet.rectangle")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "EssenceLedgerView") {
+                            Label("Ledger", systemImage: "list.bullet")
+                                .font(.caption)
+                        }
+                        NavigationLink(value: "MasteryMapView") {
+                            Label("Mastery", systemImage: "map")
+                                .font(.caption)
+                        }
+                    }
+                    .padding(.horizontal)
+
+                    // Active Ripples")
                             .font(.headline.smallCaps())
                         if recentEvents.isEmpty {
                             Text("No ripples yet. Capture something to start the weave.")
