@@ -469,6 +469,13 @@ struct CompassView: View {
             }
         }
 .onAppear {
+
+            // Bootstrap snapshot for widgets on appear
+            if let c = contexts.first {
+                let qs = (try? modelContext.fetch(FetchDescriptor<WeaveQuest>())) ?? []
+                c.pushSnapshotToWidgets(from: qs)
+            }
+
             service = TimelineService(modelContext: modelContext)
             questService = QuestService.shared
             if contexts.isEmpty {

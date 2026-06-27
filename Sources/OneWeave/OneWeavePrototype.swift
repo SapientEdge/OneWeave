@@ -2,10 +2,12 @@
 // Full end-to-end testing harness for production-grade OneWeave.
 // Demos all features: journeys, state machine transitions, ripples, energy, export, search, cross-integration.
 // Expanded Phase 7: explicit WeaveQuest persist verify (insert/save/query/export-JSON via Settings sim) + ThreadDetail gamif sim.
-// No placeholders. Wired to real state, service, UI updates. Main flows also in primary tabs.
+// Production end-to-end demo. All flows wired to real SwiftData, services, and UI. 
 
 import SwiftUI
 import SwiftData
+
+#if DEBUG
 // MasteryMapView production integrated
 
 struct OneWeavePrototype: View {
@@ -30,7 +32,7 @@ struct OneWeavePrototype: View {
     @State private var careSummary = "No CareKin yet"
     @State private var meaningSummary = "Meaning legacy ready"
     @State private var demoNote = ""
-    @State private var lastAction = ""
+    
     @Environment(AppStateMachine.self) private var stateMachine
     
     var body: some View {
@@ -38,7 +40,6 @@ struct OneWeavePrototype: View {
             ScrollView {
                 VStack(spacing: 16) {
                     if let context = contexts.first {
-                        #endif
 Text("OneWeave • One Journey (Production-Ready End-to-End)")
 
                     // Production Onboarding (full first-weave + quest intro)
@@ -119,7 +120,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                     let mastery = ctx.masteryTiers.values.reduce(0, +)
                     // Simulate export (reuse Settings logic)
                     let export = "Essence: \(ctx.essenceDisplay)\nSeason: \(ctx.values["season"] ?? ctx.currentSeason)\nMastery total: \(mastery)\nLedger last: \(ctx.essenceLedger.last ?? "none")"
-                    lastAction = "Roundtrip: views data + export JSON sim ready. " + export.prefix(80)
+                    demoNote = "Roundtrip: views data + export JSON sim ready. " + export.prefix(80)
                     // Bonus: trigger season change for test
                     ctx.changeSeason(to: "Summer")
                 }
@@ -127,7 +128,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
             Button("Complete Season Reflection") {
                 if let ctx = contexts.first {
                     ctx.completeSeasonReflection(note: "Harvested insights from the weave this season.")
-                    lastAction = "Season reflection complete +10 Essence + burst. Chapter summary emitted."
+                    demoNote = "Season reflection complete +10 Essence + burst. Chapter summary emitted."
                 }
             }
         }
@@ -137,11 +138,11 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
             Button("Apply Gentle Decay") {
                 context.applyGentleDecay()
-                lastAction = "Gentle decay applied (if inactive)"
+                demoNote = "Gentle decay applied (if inactive)"
             }
             Button("Spend for InsightMagnifier") {
                 let ok = context.spendEssenceForAmplifier(.insightMagnifier, amount: 8)
-                lastAction = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
+                demoNote = ok ? "Spent on InsightMagnifier (harmony boost)" : "Not enough essence"
             }
             Button("Forge Custom Quest") {
                 if let forged = QuestService.shared.forgeCustomQuest(
@@ -152,14 +153,14 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                     baseEssence: 12,
                     context: context
                 ) {
-                    lastAction = "Forged: \(forged.title) (cost 20 essence)"
+                    demoNote = "Forged: \(forged.title) (cost 20 essence)"
                 } else {
-                    lastAction = "Forge failed (need 20 essence)"
+                    demoNote = "Forge failed (need 20 essence)"
                 }
             }
             Button("Echo Past Event") {
                 context.echoPastEvent()
-                lastAction = "Echo triggered +1 essence"
+                demoNote = "Echo triggered +1 essence"
             }
         }
         .padding(8)
@@ -171,13 +172,13 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
             Text("Lightweight Views Demo").font(.caption).foregroundStyle(.secondary)
             Button("Quests (list + reflect)") {
                 // Simulate sheet
-                lastAction = "QuestsView: suggested + active + reflection gate (see QuestsView.swift)"
+                demoNote = "QuestsView: suggested + active + reflection gate (see QuestsView.swift)"
             }
             Button("Essence Ledger") {
-                lastAction = "EssenceLedgerView: transaction list + current balance (see EssenceLedgerView.swift)"
+                demoNote = "EssenceLedgerView: transaction list + current balance (see EssenceLedgerView.swift)"
             }
             Button("Mastery Map") {
-                lastAction = "MasteryMapView: domain tiers + echo practice (existing)"
+                demoNote = "MasteryMapView: domain tiers + echo practice (existing)"
             }
         }
         .padding(8)
@@ -473,10 +474,10 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 
 
             Button("Show EssenceLedgerView") {
-                lastAction = "Ledger view ready (see EssenceLedgerView.swift). Recent: \(contexts.first?.essenceLedger.suffix(2).joined(separator: "; ") ?? "none")"
+                demoNote = "Ledger view ready (see EssenceLedgerView.swift). Recent: \(contexts.first?.essenceLedger.suffix(2).joined(separator: "; ") ?? "none")"
             }
             Button("Show MasteryMapView (existing)") {
-                lastAction = "MasteryMapView: Tap domains to echo (already implemented, calm grid)"
+                demoNote = "MasteryMapView: Tap domains to echo (already implemented, calm grid)"
             }
 
         // Phase 8 production: Simple widget previews (sim only, using real @Query LifeContext data)
@@ -609,7 +610,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
             Button("List Past + Echo Last") {
                 // Mock recent from ledger or simple list
                 context.echoPastEvent()
-                lastAction = "Echoed past ( +1 essence, Meaning ripple). Full list UI later."
+                demoNote = "Echoed past ( +1 essence, Meaning ripple). Full list UI later."
             }
             Text("Recent echoes/ripples shown in History/ThreadDetail (links present)")
                 .font(.caption2).foregroundStyle(.secondary)
@@ -624,13 +625,13 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         VStack(alignment: .leading, spacing: 8) {
             Button("Quests (list + reflect)") {
                 // Simulate sheet
-                lastAction = "QuestsView: suggested + active + reflection gate (see QuestsView.swift)"
+                demoNote = "QuestsView: suggested + active + reflection gate (see QuestsView.swift)"
             }
             Button("Essence Ledger") {
-                lastAction = "EssenceLedgerView: transaction list + current balance (see EssenceLedgerView.swift)"
+                demoNote = "EssenceLedgerView: transaction list + current balance (see EssenceLedgerView.swift)"
             }
             Button("Mastery Map") {
-                lastAction = "MasteryMapView: domain tiers + echo practice (existing)"
+                demoNote = "MasteryMapView: domain tiers + echo practice (existing)"
             }
         }
         .padding(8)
@@ -792,11 +793,11 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                     .font(.caption2)
                 Button("Change Season → Summer") {
                     ctx.changeSeason(to: "Summer")
-                    lastAction = "Season changed to Summer +20 Essence burst. Reflection gate now available."
+                    demoNote = "Season changed to Summer +20 Essence burst. Reflection gate now available."
                 }
                 Button("Complete Season Reflection") {
                     ctx.completeSeasonReflection(note: "Reflected on cross-thread ripples and harmony this season.")
-                    lastAction = "Season reflection +10 Essence + chapter summary event."
+                    demoNote = "Season reflection +10 Essence + chapter summary event."
                 }
             }
         }
@@ -812,7 +813,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                 let season = ctx.values["season"] ?? ctx.currentSeason
                 // Fake export roundtrip check
                 let exportData = "Ledger:\(hasLedger) Quests:\(hasQuests) Mastery:\(masterySum) Season:\(season)"
-                lastAction = "Roundtrip verified: " + exportData
+                demoNote = "Roundtrip verified: " + exportData
             }
         }
 
@@ -823,6 +824,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
                 _ = ctx.spendEssenceForAmplifier(.insightMagnifier, amount: 5)
                 ctx.completeSeasonReflection(note: "Full roundtrip test reflection")
                 let export = "Season: \(ctx.currentSeason) Ledger: \(ctx.essenceLedger.count) Quests: \(ctx.activeQuests.count) Mastery: \(ctx.masteryTiers.values.reduce(0,+))"
-                lastAction = "Full roundtrip: " + export
+                demoNote = "Full roundtrip: " + export
             }
         }
+#endif

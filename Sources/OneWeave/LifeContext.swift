@@ -35,8 +35,8 @@ final class LifeContext {
     
     // Active quests and completed count for retention
     
-# Active quests tracking (Phase 3/6)
-# Quests persist in activeQuests array; updated on accept/complete.
+// Active quests tracking (Phase 3/6)
+// Quests persist in activeQuests array; updated on accept/complete.
 var activeQuests: [UUID] = []
     var completedQuestCount: Int = 0
     var essenceLedger: [String] = []
@@ -45,12 +45,18 @@ var activeQuests: [UUID] = []
     // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
     var currentSeason: String = "Spring"
 
-    func pushSnapshotToWidgets() {
-        let activeTitles = activeQuests.prefix(2).map { "Quest \($0.uuidString.prefix(8))" }
+    func pushSnapshotToWidgets(from quests: [WeaveQuest] = []) {
+        let lookup = Dictionary(uniqueKeysWithValues: quests.map { ($0.id, $0) })
+        let activeTitles = activeQuests.prefix(2).compactMap { lookup[$0]?.title }
+        let topQuest = activeQuests.first.flatMap { lookup[$0] }
         let snap = OneWeaveSnapshot(
             harmonyScore: harmonyScore,
             weaveLevel: weaveLevel,
+            weaveEssence: Int(weaveEssence),
             globalWeaveStreak: globalWeaveStreak,
+            graceDaysUsed: graceDaysUsed,
+            topQuestTitle: topQuest?.title,
+            topQuestDomain: topQuest?.domains.first,
             activeQuestTitles: activeTitles,
             masteryTiers: masteryTiers,
             lastUpdated: Date()
@@ -70,6 +76,7 @@ var activeQuests: [UUID] = []
             values["season"] = newSeason
             // Simulate burst + gate trigger (in real UI: show big reflection sheet)
             weaveEssence += 20
+        pushSnapshotToWidgets()
             essenceLedger.append("+20 season change burst from \(old) → \(newSeason)")
             harmonyScore = min(1.0, harmonyScore + 0.1)
         }
@@ -187,8 +194,7 @@ var activeQuests: [UUID] = []
         // Event-driven, on-device logic (no external AI call)
         // Now also reflects formal AppStateMachine for psychological clarity
         if energyProfile == .low || currentAppState == AppState.lowEnergy.rawValue {
-            return "[\(stateName)] Recent \(recentCount) events show \(energyDesc) energy in a \(season) season. Simplify 2 items in Care & Kin;
-        pushSnapshotToWidgets() focus on \(focus) only. (local aggregation + state)"
+            return "[\(stateName)] Recent \(recentCount) events show \(energyDesc) energy in a \(season) season. Simplify 2 items in Care & Kin; focus on \(focus) only. (local aggregation + state)"
         } else if energyProfile == .high || currentAppState == AppState.weaving.rawValue {
             return "[\(stateName)] High energy after recent events. Advance \(focus) in Self thread and ripple to Meaning for legacy impact. (on-device insight)"
         } else if currentAppState == AppState.reflecting.rawValue {
@@ -306,7 +312,7 @@ var activeQuests: [UUID] = []
         if weaveEssence >= threshold {
             weaveLevel += 1
             // Note: UI will show "Level Up!" feedback;
-        pushSnapshotToWidgets() mastery may also advance
+            // mastery may also advance
         }
     }
     
@@ -351,7 +357,7 @@ var activeQuests: [UUID] = []
     func checkRestorativeGrace() {
         // Phase 5: if low activity or lowEnergy, suggest restoration; do not decrement global streak
         let now = Date()
-        if lastActive == nil || now.timeIntervalSince(lastActive!) > 86400 * 2 {  // 2 days
+        if lastActiveWeaveDate == nil || now.timeIntervalSince(lastActiveWeaveDate) > 86400 * 2 {  // 2 days
             if globalWeaveStreak > 0 {
                 // grace: keep streak, suggest quest
             }
@@ -395,6 +401,7 @@ var activeQuests: [UUID] = []
         }
         lastActiveWeaveDate = now
         detectResonance(from: event)
+        pushSnapshotToWidgets()
         
         // On high harmony or cross weave -> potential highFlow state synergy
     }
@@ -408,8 +415,7 @@ var activeQuests: [UUID] = []
         // Update mastery/harmony/streak
         let questEvent = TimelineEvent(
             type: "quest_completed",
-            thread: "Self", // default;
-        pushSnapshotToWidgets() can be enhanced
+            thread: "Self", // default
             summary: "Quest completed with reflection",
             payload: ["reflection": reflection],
             linkedThreads: ["Self"],
@@ -437,9 +443,10 @@ extension LifeContext {
     
     // Echo (Phase 2): revisit past event/quest for insight + small essence + Meaning ripple. Integrate with MeaningThread.
     func echoPastEvent(eventId: UUID? = nil) {
-        // Placeholder: lookup past TimelineEvent, award small essence, emit resonance to Meaning.
+        // production: lookup past TimelineEvent, award small essence, emit resonance to Meaning.
         weaveEssence += 1
         essenceLedger.append("+1 for echo")
+        pushSnapshotToWidgets()
     }
 
     func spendEssenceForAmplifier(_ amp: Amplifier, amount: Double = 10) -> Bool {
@@ -451,6 +458,7 @@ extension LifeContext {
             return false
         }
         weaveEssence -= amount
+        pushSnapshotToWidgets()
         essenceLedger.append("-\(Int(amount)) for \(amp.rawValue) amplifier")
         
         // Apply temporary boost (calm, state-influenced, no FOMO)
@@ -478,6 +486,7 @@ extension LifeContext {
     func awardBonusEssence(_ amount: Double, reason: String = "weave") {
         weaveEssence += amount
         updateLevelIfNeeded()
+        pushSnapshotToWidgets()
     }
     
     /// Computed for UI progress (tasty level badge)

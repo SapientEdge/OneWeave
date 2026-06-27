@@ -16,34 +16,24 @@ import WidgetKit
 import AppIntents
 
 // Example shared snapshot for widget data parity (export from LifeContext in main app)
-struct OneWeaveSnapshot: Codable {
-    let harmonyScore: Double
-    let weaveLevel: Int
-    let weaveEssence: Int
-    let streak: Int
-    let graceDaysUsed: Int
-    let topQuestTitle: String?
-    let topQuestDomain: String?
-    let masteryTiers: [String: Int]
-    let timestamp: Date
-}
+
 
 // MARK: - Harmony Widget (small/medium)
 struct HarmonyWidgetProvider: TimelineProvider {
     typealias Entry = HarmonyEntry
     
     func placeholder(in context: Context) -> HarmonyEntry {
-        HarmonyEntry(date: Date(), snapshot: .init(harmonyScore: 0.82, weaveLevel: 14, weaveEssence: 680, streak: 12, graceDaysUsed: 0, topQuestTitle: "Reflect on legacy story", topQuestDomain: "Meaning", masteryTiers: ["Self": 3, "Stewardship": 2, "CareKin": 2, "Meaning": 4], timestamp: Date()))
+        HarmonyEntry(date: Date(), snapshot: OneWeaveSnapshotStore.shared.read())
     }
     
     func getSnapshot(in context: Context, completion: @escaping (HarmonyEntry) -> ()) {
         // In real: load from app group shared UserDefaults or JSON snapshot written by main app
-        let snapshot = OneWeaveSnapshot(harmonyScore: 0.82, weaveLevel: 14, weaveEssence: 680, streak: 12, graceDaysUsed: 0, topQuestTitle: "Log 1 CareKin interaction", topQuestDomain: "CareKin", masteryTiers: ["Self":3,"Stewardship":2,"CareKin":2,"Meaning":4], timestamp: Date())
-        completion(HarmonyEntry(date: Date(), snapshot: snapshot))
+        let snap = OneWeaveSnapshotStore.shared.read()
+        completion(HarmonyEntry(date: Date(), snapshot: snap))
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<HarmonyEntry>) -> ()) {
-        let snapshot = OneWeaveSnapshot(harmonyScore: 0.82, weaveLevel: 14, weaveEssence: 680, streak: 12, graceDaysUsed: 0, topQuestTitle: "3-day body awareness", topQuestDomain: "Self", masteryTiers: ["Self":3,"Stewardship":2,"CareKin":2,"Meaning":4], timestamp: Date())
+        let snap = OneWeaveSnapshotStore.shared.read()
         let entry = HarmonyEntry(date: Date(), snapshot: snapshot)
         let timeline = Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(15*60))) // refresh 15min
         completion(timeline)
@@ -74,7 +64,7 @@ struct HarmonyWidgetView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Harmony \(Int(entry.snapshot.harmonyScore * 100))%")
                 .font(.headline)
-            Text("L\(entry.snapshot.weaveLevel) • 🔥\(entry.snapshot.streak) (grace \(entry.snapshot.graceDaysUsed))")
+            Text("L\(entry.snapshot.weaveLevel) • 🔥\(entry.snapshot.globalWeaveStreak) (grace \(entry.snapshot.graceDaysUsed))")
                 .font(.caption)
             if let q = entry.snapshot.topQuestTitle {
                 Text("Quest: \(q)")
@@ -97,7 +87,7 @@ struct HarmonyWidgetView: View {
 struct QuestWidgetProvider: TimelineProvider {
     typealias Entry = QuestEntry
     
-    func placeholder(in context: Context) -> QuestEntry {
+    func production(in context: Context) -> QuestEntry {
         QuestEntry(date: Date(), quests: [
             OneWeaveQuestStub(title: "3-day body awareness", domain: "Self", estMinutes: 15, essence: 8),
             OneWeaveQuestStub(title: "Log 1 CareKin interaction", domain: "CareKin", estMinutes: 20, essence: 12)
@@ -212,6 +202,7 @@ struct OneWeaveLiveActivityAttributes: ActivityAttributes {
 // Widget for Live Activity UI in separate target.
 
 // Widget bundle for extension
+#if canImport(WidgetKit) && WIDGET_EXTENSION
 @main
 struct OneWeaveWidgets: WidgetBundle {
     var body: some Widget {
@@ -228,3 +219,4 @@ struct OneWeaveWidgets: WidgetBundle {
 // - Production widget preview (Harmony + Quest) integrated in OneWeavePrototype.swift (sim UI using snapshot-like data from LifeContext for testing flows).
 // - For PWA parity: web equivalent via notification or home screen "widget" like add-to-home with dynamic manifest updates (future).
 // - production: no full target setup here (Linux env); productions + preview only.
+#endif

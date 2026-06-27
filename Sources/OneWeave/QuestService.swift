@@ -88,6 +88,8 @@ final class QuestService {
     // Called from UI after reflection
     func completeWithReflection(questId: UUID, reflection: String, context: LifeContext, modelContext: ModelContext) {
         context.completeQuest(questId, reflection: reflection, context: modelContext)
+    let qs = (try? modelContext.fetch(FetchDescriptor<WeaveQuest>())) ?? []
+    context.pushSnapshotToWidgets(from: qs)
     }
 
 

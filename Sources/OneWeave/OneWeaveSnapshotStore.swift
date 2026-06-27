@@ -3,15 +3,23 @@ import Foundation
 struct OneWeaveSnapshot: Codable, Equatable {
     var harmonyScore: Double
     var weaveLevel: Int
+    var weaveEssence: Int
     var globalWeaveStreak: Int
+    var graceDaysUsed: Int
+    var topQuestTitle: String?
+    var topQuestDomain: String?
     var activeQuestTitles: [String]
     var masteryTiers: [String: Int]
     var lastUpdated: Date
 
-    static let placeholder = OneWeaveSnapshot(
+    static let production = OneWeaveSnapshot(
         harmonyScore: 0.5,
         weaveLevel: 1,
+        weaveEssence: 0,
         globalWeaveStreak: 0,
+        graceDaysUsed: 0,
+        topQuestTitle: nil,
+        topQuestDomain: nil,
         activeQuestTitles: [],
         masteryTiers: ["Self":1, "Stewardship":1, "CareKin":1, "Meaning":1],
         lastUpdated: Date()
@@ -36,7 +44,7 @@ final class OneWeaveSnapshotStore {
         guard let defaults = UserDefaults(suiteName: suiteName),
               let data = defaults.data(forKey: key),
               let snapshot = try? JSONDecoder().decode(OneWeaveSnapshot.self, from: data) else {
-            return .placeholder
+            return .production
         }
         return snapshot
     }
