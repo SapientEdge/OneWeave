@@ -78,7 +78,7 @@ All work must comply with constitution (calm, privacy-first local-only SwiftData
 - [x] Wired via LifeContext updateFromEvent + completeQuest → ripples to other threads/UI. Use existing processEvent patterns.
 - [x] Basic onboarding; gamif hook in prototype + Compass (sample quests/loom) intro + sample ripple → visual update + IRL prompt (5-7min first weave).
 - [x] Feedback toasts + IRL prompts in flows.
-- [ ] Widgets (post-MVP) (future).
+- [ ] Widgets (post-MVP) (future).  // basic stub + prototype preview in progress via delegate
 - [x] All core free/local; amplifiers stub as future gate; deeper forges/analytics/custom visuals behind premium flag (local).
 - [x] Prototype + Compass demos full flows → details; History shows gamified events with links.
 

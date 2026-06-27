@@ -156,3 +156,8 @@ All per Phase 8 packaging/follow-up in tasks.md; post-MVP items. Updated 2026-06
 - Personalization: Local-first (prefs for quest generation filters, UI accents, grace limits, theme); opt-in on-device personalization (e.g. rule or FoundationModels for custom quests/echo synthesis); premium gated per spec. High-level tracking only; no server-side.
 - Low-pri Phase 7: Metrics surface in Settings polished (essence, level, reflected count, mastery, etc.).
 All per Phase 8 packaging/follow-up in tasks.md (now with status header); post-MVP items. README.md updated with dedicated Packaging/PWA/Legacy section. LAUNCH_CHECKLIST + tasks re-read/updated.
+## Latest (post direct + parallel 2026-06-26)
+- Seasons post-MVP stub: LifeContext + Compass indicator/button + prototype demo.
+- Compass: NavigationDestination + NavigationLink buttons for QuestsView/EssenceLedgerView/MasteryMapView.
+- Prototype: expanded harness with views roundtrips, season change, full export sims.
+- Tasks + LAUNCH updated.

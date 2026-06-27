@@ -108,7 +108,7 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
         .padding(8)
         .background(.quaternary.opacity(0.3))
 
-// Phase 2 Essence Tests").font(.caption).foregroundStyle(.secondary)
+
             Button("Apply Gentle Decay") {
                 context.applyGentleDecay()
                 lastAction = "Gentle decay applied (if inactive)"
@@ -528,7 +528,6 @@ Button("Journey: Add goal (Self) in busy season - ripples to Care/Stew, state to
 // 
         // Phase 6: Lightweight views demo (full sheets for QuestsView, EssenceLedgerView, MasteryMapView)
         VStack(alignment: .leading, spacing: 8) {
-            Text("Lightweight Views Demo").font(.caption).foregroundStyle(.secondary)
             Button("Quests (list + reflect)") {
                 // Simulate sheet
                 lastAction = "QuestsView: suggested + active + reflection gate (see QuestsView.swift)"
