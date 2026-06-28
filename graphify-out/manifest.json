@@ -445,8 +445,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/CognitiveLoad.swift": {
-    "mtime": 1782596684.1658196,
-    "ast_hash": "d46bbd64bdc6356c6aca1b8984296017",
+    "mtime": 1782630184.4194796,
+    "ast_hash": "b6e635d14bd12dbf23d7b4c5a1f23b34",
     "semantic_hash": ""
   },
   "Sources/OneWeave/CommandPalette.swift": {
@@ -455,8 +455,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/DailyBriefings.swift": {
-    "mtime": 1782593059.558578,
-    "ast_hash": "61479a6fa04ed5e327f1571f1307f5b6",
+    "mtime": 1782630084.629426,
+    "ast_hash": "20f59218a7b71c2179a090e6edd05cfc",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataLeashSettings.swift": {
@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/DecisionLog.swift": {
-    "mtime": 1782593202.2778974,
-    "ast_hash": "46802719e5c301b0c3b94be8bdbad829",
+    "mtime": 1782630109.6359477,
+    "ast_hash": "203a9964fd3099497413f91bc7d04c5a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/EssenceLedgerView.swift": {
@@ -555,8 +555,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/RelationshipDecayTracker.swift": {
-    "mtime": 1782625930.4178169,
-    "ast_hash": "a8867541f16d90624c5000366af22c6f",
+    "mtime": 1782630070.7531343,
+    "ast_hash": "c8927d5efae94f8f0ac2072fc54cbc94",
     "semantic_hash": ""
   },
   "Sources/OneWeave/ResonanceOracle.swift": {
@@ -810,8 +810,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/003-production-readiness/tasks.md": {
-    "mtime": 1782626137.8492436,
-    "ast_hash": "445d04e88a1202322824a7fca164a154",
+    "mtime": 1782630297.2367213,
+    "ast_hash": "ea40de3634326065055b417697540cdd",
     "semantic_hash": ""
   },
   ".specify/templates/checklist-template.md": {
@@ -1192,6 +1192,16 @@
   "THREAT_MODEL.md": {
     "mtime": 1782624311.6187587,
     "ast_hash": "882e8f0d67d98abcd060765e8b69c4ee",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/TonalCoherence.swift": {
+    "mtime": 1782630162.3140311,
+    "ast_hash": "3b0b4df1f5a77e64e48a18ba376a5b25",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_HANDOFF_CYCLE_34.md": {
+    "mtime": 1782630273.449255,
+    "ast_hash": "c1c07c501f8d9997a720622826fa0fad",
     "semantic_hash": ""
   }
 }

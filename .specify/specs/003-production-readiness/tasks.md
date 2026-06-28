@@ -475,12 +475,12 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 
 ### Top 10 NOVEL FEATURES (T147-T156)
 
-- [ ] T147 **[Linux · S]** GLM A3 — Morning Briefing "One Neglect": surface the single thread with steepest week-over-week decay, framed as invitation. Algorithm-only; build on existing `RelationshipDecayTracker.todaysPrompts`.
+- [ ] T147 **[Linux · S]** GLM A3 — Morning Briefing "One Neglect". **SHIPPED in cycle 34** — `RelationshipDecayTracker.pickOneNeglect(...)` + `OneNeglectSuggestion.briefingText` (calm, never guilt) + `BriefingSection.oneNeglect` at priority 32 + `morningBriefing` accepts `relationshipRecords`. Validator: `validate_cycle34_glm_features.py`.
 - [ ] T148 **[Linux · S]** GLM A7 — Data Leash Guest Mode (one-tap flip). **SHIPPED in cycle 33** — `DataLeashState.enableGuestMode()` + `deviatingCategories` in `DataLeashSettings.swift`. Validator: `validate_cycle33_decay_garden.py`.
 - [ ] T149 **[Linux · S]** GLM A9 — Mastery Map: Apprentice Knots — each Mastery node shows a user-logged unresolved question. Tier advances by untying knots, not time served.
 - [ ] T150 **[Linux · S]** GLM A10 — Quiet Hours Ritual: user-defined 15–90 sec evening micro-ritual replacing the evening briefing. (Constitution §3 calm + §7 anti-addictive.)
 - [ ] T151 **[Linux · M]** GLM A1 — Threadline Decay Garden (botanical vitality model). **SHIPPED in cycle 33** — `RelationshipDecayTracker.vitality(...)` with `V₀·e^(-λ·Δt)·(1+Σκ)` + diminishing-returns boost via `sqrt`. Validator: `validate_cycle33_decay_garden.py`. Mac-side UI (leaf desaturation) deferred.
-- [ ] T152 **[Linux · M]** GLM A2 — Resonance Oracle's Unchosen Path: surface the unchosen option from a DecisionLog entry 30 days later as reflection prompt.
+- [ ] T152 **[Linux · M]** GLM A2 — Resonance Oracle's Unchosen Path. **SHIPPED in cycle 34** — `DecisionRecord.chosenOptionIndex` + `unchosenOption` computed + `DecisionMentorBridge.unchosenPathCandidates(...)` (30-365 day window) + `UnchosenPathPrompt` struct. Never a verdict; reflection-gated.
 - [ ] T153 **[Linux · M]** GLM A4 — Sacred Echo Time Capsule: AES-256-GCM reflection entry auto-unsealing on a user-defined future date.
 - [ ] T154 **[Linux · M]** GLM A6 — Invisible Mentor's "Devil's Advocate" Mode: surface the strongest counter-argument from the user's *own* past entries when forming an insight. Builds on cycle 33 Insight Provenance.
 - [ ] T155 **[Linux · M]** GLM A8 — Compass of Trade-Offs: radial view on CompassView showing this week's active trade-offs as gentle arcs.
@@ -490,7 +490,7 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 
 - [ ] T157 **[Linux · S]** GLM B2 — Insight Provenance Graph. **SHIPPED in cycle 33** — `GraphInsight.citations: [InsightCitation]` + `ruleExplanation:` now present on all 7 `GraphInsight(...)` sites. Validator: `validate_cycle33_insight_provenance.py`. Settings → Algorithm Weights UI deferred to Mac.
 - [ ] T158 **[Linux · S]** GLM B1 — Anti-Streak Decay Curve (botanical). **SHIPPED in cycle 33** as part of T151 (same `vitality()` function).
-- [ ] T159 **[Linux · M]** GLM B3 — Tonal Coherence Score: ~200-word hand-tuned lexicon, rolling 30-day centroid vector, angle θ. No Core ML.
+- [ ] T159 **[Linux · M]** GLM B3 — Tonal Coherence Score. **SHIPPED in cycle 34** — new `TonalCoherence.swift` module (287 LOC). `TonalVector` 4-dim (calm/energy/weight/openness), 51-word hand-tuned lexicon, user-extensible `userOverrides`, `vector(for:)` + `centroid(of:)` + `coherenceAngle(today:centroid:)` returning degrees via acos. Sanity: calm vs calm = 0°, calm vs stressed = 146°, calm vs joyful = 64°.
 - [ ] T160 **[Linux · M]** GLM B4 — Relationship Rhizome Index. **SHIPPED in cycle 33** — `RelationshipDecayTracker.rhizomeIndex(...)` + `RhizomeKind` (4 cases) + `RhizomeReading.nudgeText`. Validator: `validate_cycle33_decay_garden.py`. Mac UI deferred.
 - [ ] T161 **[Linux · M]** GLM B5 — Decision Reverb Half-Life: track 30/90/365-day return rates on DecisionLog entries; settled vs still-open glyph.
 
@@ -502,7 +502,7 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 - [ ] T165 **[Mac · M]** GLM C4 — Ambient hum on Loom idle (40 Hz, fades in over 8s; off by default). ⚠ Audio session coordination needed.
 - [ ] T166 **[Mac · S]** GLM C5 — Long-press as "consider" (1.5s radial fill before menu appears).
 - [ ] T167 **[Mac · S]** GLM C6 — Pull-to-refresh replaced by pull-to-reflect: dragging reveals "What are you looking for?" prompt.
-- [ ] T168 **[Linux · S]** GLM C7 — Dimming on cognitive load rise. **SHIPPED in cycle 33 partial**: `CognitiveLoadThresholds` already exists; need UI hook to desaturate 15% when score > 0.7.
+- [ ] T168 **[Linux · S]** GLM C7 — Dimming on cognitive load rise. **SHIPPED in cycle 34 (signal)** — `CognitiveLoadReading.shouldDimUI: Bool` field (true when score >= 0.70) + `CognitiveLoad.compute(...)` sets it. Mac-side saturation hook (`.saturation(0.85)`) deferred.
 - [ ] T169 **[Mac · S]** GLM C8 — Silent success: 200ms `.soft` haptic + 1-pixel inward contraction on save.
 
 ### ONE BOLD BET + STRANGEST IDEA (T170)
@@ -521,7 +521,8 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 | Phase T10: Cycle 30 multi-CLI synthesis | ✅ Complete | Linux | done (b44fb02) |
 | Phase T11: Linux-fixable apply | ✅ Complete | Linux | done (cycles 30-32) |
 | Phase T12: Spec Kit + Constitution + Handoff update | 🔄 In progress | Linux | 1 hour |
-| **Phase T13: Cycle 33 GLM-driven features** | ✅ Complete | Linux | done (insight provenance + decay garden + rhizome + guest mode + Grok A6) |
+| Phase T13: Cycle 33 GLM-driven features | ✅ Complete | Linux | done (insight provenance + decay garden + rhizome + guest mode + Grok A6) |
+| **Phase T14: Cycle 34 GLM-driven features** | ✅ Complete | Linux | done (one neglect + unchosen path + tonal coherence + cognitive load dim) |
 | Phase P1: GitHub Push | ⏳ Pending | User | 10 min |
 | Phase M1: Mac compile-blockers + build | ⏳ Pending | Mac | 6-8 hours |
 | Phase M2: iOS features + widgets + intents | ⏳ Pending | Mac | 4-6 hours |
