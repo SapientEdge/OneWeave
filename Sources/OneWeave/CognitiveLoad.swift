@@ -228,12 +228,16 @@ public enum CognitiveLoad {
         )
 
         // Stage 4: pause decision. We trigger Weave Pause only if the user is
-        // trending UP from a lower baseline. Sustained-high is intentionally
-        // not triggering — a user with a chronically heavy schedule who has
-        // adapted to it doesn't need a pause gate; they need capacity.
-        // Only an *increase* into the elevated band warrants a reflection.
+        // trending UP from a lower baseline AND the body is depleted (sleep
+        // debt or suppressed HRV). The body-depletion clause is the missing
+        // 3rd conjunct in §5 of the constitution; a busy-but-rested user who
+        // crosses 0.85 on a rising trend should NOT be gated — that would
+        // be the "nag" §5 forbids. (Cycle 41 finding A1, highest-leverage
+        // constitutional fix: 1 line, closes live §5 violation.)
+        let bodyDepleted = sleepScore >= 0.5 || hrvScore >= 0.5
         let shouldTrigger = score >= CognitiveLoadThresholds.weavePauseScore
             && trend == .rising
+            && bodyDepleted
 
         return CognitiveLoadReading(
             score: score,

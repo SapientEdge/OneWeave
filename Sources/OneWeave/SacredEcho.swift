@@ -80,6 +80,7 @@ public enum EchoError: Error, LocalizedError {
     case heirNotInWeaveCircle
     case decryptionFailed
     case cipherMissingKey
+    case secureRandomUnavailable
     case persistenceFailed(String)
 
     public var errorDescription: String? {
@@ -275,7 +276,7 @@ public enum SacredEchoCipher {
             return SymmetricKey(data: data)
         }
         // First launch: generate + store.
-        let newSeed = randomBytes(count: 32)
+        let newSeed = try randomBytes(count: 32)
         if persistToKeychain(seed: newSeed) {
             return SymmetricKey(data: newSeed)
         }
@@ -287,9 +288,18 @@ public enum SacredEchoCipher {
         throw EchoError.cipherMissingKey
         #else
         // Linux test/dev fallback — explicitly marked as not for production.
-        // This branch is ONLY for tests/development on Linux; production iOS builds go through Keychain above.
+        // Cycle 41 finding A5 (constitutional §2 / invariant #4): gate this
+        // path behind DEBUG so a non-DEBUG Linux build cannot accidentally
+        // encrypt user data with the public test seed. Production iOS
+        // builds go through Keychain above and never enter this branch.
+        #if DEBUG
         let bytes = hexToBytes(testSeedHex)
         return SymmetricKey(data: Data(bytes))
+        #else
+        // Release Linux build: fail closed rather than silently fall back
+        // to a public test key.
+        throw EchoError.cipherMissingKey
+        #endif
         #endif
     }
     /// Derive the per-echo key from the vault seed + echo id.
@@ -312,7 +322,7 @@ public enum SacredEchoCipher {
     ) throws -> (ciphertext: Data, nonce: Data, tag: Data) {
         let s = seed ?? (try vaultSeed())
         let key = perEchoKey(for: echoID, seed: s)
-        let nonceBytes = randomBytes(count: 12)
+        let nonceBytes = try randomBytes(count: 12)
         let n = try AES.GCM.Nonce(data: nonceBytes)
         let sealed = try AES.GCM.seal(Data(plaintext.utf8), using: key, nonce: n)
         // sealed.ciphertext + sealed.tag are the encrypted payload and auth tag.
@@ -341,7 +351,7 @@ public enum SacredEchoCipher {
 
     // MARK: - Internal helpers
 
-    private static func randomBytes(count: Int) -> Data {
+    private static func randomBytes(count: Int) throws -> Data {
         var bytes = Data(count: count)
         #if canImport(Security)
         let status = bytes.withUnsafeMutableBytes { ptr -> Int32 in
@@ -361,12 +371,14 @@ public enum SacredEchoCipher {
                     return bytes
                 }
             }
-            // Final fallback failed — fail closed.
-            fatalError("[SacredEcho] Cannot obtain secure random bytes for nonce generation")
+            // Final fallback failed — fail closed with a typed error
+            // (was `fatalError` per Codex cycle-41 BLOCKER).
+            throw EchoError.secureRandomUnavailable
         }
         #else
         // Linux dev harness. Per Claude cycle-24 finding #1, `read(fd, bytes, count)`
-        // does not bridge Swift Data → UnsafeMutableRawPointer.
+        // does not bridge Swift Data → UnsafeMutableRawPointer; use
+        // withUnsafeMutableBytes instead.
         let fd = open("/dev/urandom", O_RDONLY)
         if fd >= 0 {
             _ = bytes.withUnsafeMutableBytes { ptr in
@@ -374,12 +386,13 @@ public enum SacredEchoCipher {
             }
             close(fd)
         } else {
-            fatalError("[SacredEcho] Cannot open /dev/urandom")
+            // Final fallback failed — fail closed with a typed error
+            // (was `fatalError` per Codex cycle-41 BLOCKER).
+            throw EchoError.secureRandomUnavailable
         }
         #endif
         return bytes
     }
-
     private static func hexToBytes(_ hex: String) -> [UInt8] {
         var bytes: [UInt8] = []
         var index = hex.startIndex

@@ -124,7 +124,14 @@ struct MasteryMapView: View {
         // Echo enhancement: simulate review of domain -> small essence, possible mastery tick, harmony bump, new ripple event
         let oldTier = ctx.masteryTiers[domain] ?? 1
         var gain = 0.5
-        if oldTier < 4 && Int.random(in: 0..<3) == 0 {
+        // Cycle 41 finding A2: respect ApprenticeKnot cap at this mutation
+        // site (was the third of three bypass sites).
+        let cap = MasteryKnotEngine.maxTier(
+            for: domain,
+            currentTier: oldTier,
+            knots: ctx.apprenticeKnots
+        )
+        if oldTier < 4 && (cap == Int.max || cap > oldTier) && Int.random(in: 0..<3) == 0 {
             ctx.masteryTiers[domain] = min(4, oldTier + 1)
             gain = 2
         }

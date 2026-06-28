@@ -474,7 +474,14 @@ var activeQuests: [UUID] = []
         // Cross-domain mastery tick for linked threads (resonance)
         for linked in event.linkedThreads {
             if let linkedTier = masteryTiers[linked], linkedTier < currentTier {
-                if Int.random(in: 0..<2) == 0 {
+                // Cycle 41 finding A2: respect ApprenticeKnot cap at this
+                // mutation site (was the second of three bypass sites).
+                let cap = MasteryKnotEngine.maxTier(
+                    for: linked,
+                    currentTier: linkedTier,
+                    knots: apprenticeKnots
+                )
+                if Int.random(in: 0..<2) == 0 && (cap == Int.max || cap > linkedTier) {
                     masteryTiers[linked] = min(4, linkedTier + 1)
                 }
             }

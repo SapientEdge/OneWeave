@@ -118,6 +118,7 @@ public enum VoidThreadError: Error, LocalizedError {
     case emptySentence
     case sentenceTooLong(maxChars: Int)
     case decryptionFailed
+    case secureRandomUnavailable
     case persistenceFailed(String)
 
     public var errorDescription: String? {
@@ -288,8 +289,8 @@ public enum VoidCipher {
         }
 
         let id = UUID()
-        let salt = randomBytes(count: saltBytes)
-        let nonceData = randomBytes(count: nonceBytes)
+        let salt = try randomBytes(count: saltBytes)
+        let nonceData = try randomBytes(count: nonceBytes)
         let key = deriveKey(for: id, plaintext: trimmed, salt: salt)
 
         let n: AES.GCM.Nonce
@@ -378,7 +379,7 @@ public enum VoidCipher {
 
     // MARK: - Internal helpers (mirror SacredEcho.swift's pattern)
 
-    private static func randomBytes(count: Int) -> Data {
+    private static func randomBytes(count: Int) throws -> Data {
         var bytes = Data(count: count)
         #if canImport(Security)
         let status = bytes.withUnsafeMutableBytes { ptr -> Int32 in
@@ -394,7 +395,9 @@ public enum VoidCipher {
                 }
                 close(fd)
             } else {
-                fatalError("[VoidThread] Cannot obtain secure random bytes")
+                // Final fallback failed — fail closed with a typed error
+                // (was `fatalError` per Codex cycle-41 BLOCKER).
+                throw VoidThreadError.secureRandomUnavailable
             }
         }
         #else
@@ -406,7 +409,9 @@ public enum VoidCipher {
             }
             close(fd)
         } else {
-            fatalError("[VoidThread] Cannot open /dev/urandom")
+            // Final fallback failed — fail closed with a typed error
+            // (was `fatalError` per Codex cycle-41 BLOCKER).
+            throw VoidThreadError.secureRandomUnavailable
         }
         #endif
         return bytes
