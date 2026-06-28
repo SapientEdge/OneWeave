@@ -115,7 +115,11 @@ public enum PodVisibilityGrant: String, Codable, CaseIterable {
 
 public struct FamilyPodMember: Identifiable, Codable, Equatable {
     public let id: UUID
-    public let displayName: String         // human-readable
+    // T077 (GLM 5.2 round 1, cross-verified): displayName must be `var` so the
+    // sanitizer at FamilyPod.swift:427-428 can assign the trimmed name. `let`
+    // produced a compile error on every build. `lifeEntityID` stays `let` because
+    // a pod member's identity in the Life Graph must be immutable.
+    public var displayName: String         // human-readable (mutable for trim-sanitize)
     public let lifeEntityID: String        // ID into the user's Life Graph (.person entity)
     public var role: FamilyPodRole
     public var joinedAt: Date

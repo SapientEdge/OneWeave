@@ -66,7 +66,16 @@ var activeQuests: [UUID] = []
     
     // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
     var currentSeason: String = "Spring"
-    
+
+    // T076 (GLM 5.2 round 1, cross-verified by Claude opus + Grok supergrok):
+    // FamilyPod.swift:330/335/338 references `context.threads`, `context.currentSeasonName`,
+    // `context.activeAmplifierName` — none of which exist. Without these computed
+    // shims, `FamilyPodDigestBuilder.build` will not compile on Mac. Linux-side
+    // mirror validated via validate_family_pod_builder_surface.py.
+    var threads: [String] { activeThreads }
+    var currentSeasonName: String { currentSeason }
+    var activeAmplifierName: String? { nil }
+
     // === Life Graph Integration (from research - Tier 1 Life Graph + typed memory) ===
     // Extends existing threads/timeline without replacement. Enables coherence, insights, Data Leash.
     var lifeGraphEntities: [LifeEntity] = []
@@ -447,13 +456,29 @@ var activeQuests: [UUID] = []
         // On high harmony or cross weave -> potential highFlow state synergy
     }
     
-    /// Complete a quest with reflection. Full reward requires a non-empty reflection
-    /// (constitution: reflection-gated principle). Empty/whitespace reflection yields
-    /// the partial "engagement" reward only.
+    /// Complete a quest with reflection. Full reward requires both a non-empty
+    /// reflection (constitution: reflection-gated principle) AND at least
+    /// `minReflectionChars` characters of substance (constitution: anti-bypass —
+    /// prevents a 1-char "ok" from earning the full 10 essence). Empty/whitespace
+    /// reflection yields the partial "engagement" reward only. Short-but-non-empty
+    /// reflection yields partial.
+    /// T075 (GLM 5.2 round 1, cross-verified): FamilyPod enforces a 20-char gate
+    /// via `minExitReflectionChars`; completeQuest was inconsistent (accepted 1 char).
     func completeQuest(_ questId: UUID, reflection: String, context: ModelContext) {
         let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
-        let bonus = trimmed.isEmpty ? 3 : 10
-        let reason = trimmed.isEmpty ? "quest complete (no reflection)" : "quest complete with reflection"
+        let minChars = 20  // mirrors FamilyPod.minExitReflectionChars
+        let bonus: Int
+        let reason: String
+        if trimmed.isEmpty {
+            bonus = 3
+            reason = "quest complete (no reflection)"
+        } else if trimmed.count >= minChars {
+            bonus = 10
+            reason = "quest complete with reflection"
+        } else {
+            bonus = 3
+            reason = "quest complete (short reflection: \(trimmed.count)/\(minChars) chars)"
+        }
         weaveEssence += bonus
         completedQuestCount += 1
         activeQuests.removeAll { $0 == questId }

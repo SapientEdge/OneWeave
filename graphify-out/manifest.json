@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/CompassView.swift": {
-    "mtime": 1782556638.657619,
-    "ast_hash": "c618715e61bdb811efba0a2bf7673bc9",
+    "mtime": 1782596411.3873188,
+    "ast_hash": "b4de44b91d6c2279734b5419bbe9856a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataSeeder.swift": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782556198.1672635,
-    "ast_hash": "b06db25cfdd88623041c234b703d13ce",
+    "mtime": 1782596661.1744409,
+    "ast_hash": "6b04aa0a3218e13febf508b6b4ea5eca",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
@@ -355,8 +355,8 @@
     "semantic_hash": ""
   },
   ".research/validate_tierA3_echo.py": {
-    "mtime": 1782561464.6881309,
-    "ast_hash": "b5365164094ed69510a29b756f5c3cf8",
+    "mtime": 1782596393.851029,
+    "ast_hash": "eee48cee37293f9798a20826a4446ac5",
     "semantic_hash": ""
   },
   ".research/validate_tierA4_mentor.py": {
@@ -440,13 +440,13 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/BodyThreadWeaver.swift": {
-    "mtime": 1782560458.5339677,
-    "ast_hash": "49cffd8aaee84eb47f52abf7538942b9",
+    "mtime": 1782596718.1313791,
+    "ast_hash": "c002a14d89a0565131ad402141d9bfcb",
     "semantic_hash": ""
   },
   "Sources/OneWeave/CognitiveLoad.swift": {
-    "mtime": 1782592985.3263695,
-    "ast_hash": "6ab94ae8e1a5b37734fb9345ea7f022d",
+    "mtime": 1782596684.1658196,
+    "ast_hash": "d46bbd64bdc6356c6aca1b8984296017",
     "semantic_hash": ""
   },
   "Sources/OneWeave/CommandPalette.swift": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/GraphInsightGenerator.swift": {
-    "mtime": 1782563874.6579661,
-    "ast_hash": "fa2de2684bc97bb9fa9a4833d729468f",
+    "mtime": 1782596652.748302,
+    "ast_hash": "9e51c38c701d3b23a5f2fb6a71a5a14a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/InvisibleMentor.swift": {
@@ -540,8 +540,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/PortableExport.swift": {
-    "mtime": 1782584975.9762948,
-    "ast_hash": "90a67e4a6d8c8ba62f28e31f19881974",
+    "mtime": 1782596707.080197,
+    "ast_hash": "32f1ec6f28cb3e95092b8a34be108a6f",
     "semantic_hash": ""
   },
   "Sources/OneWeave/QuestsView.swift": {
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/SacredEcho.swift": {
-    "mtime": 1782563893.4232543,
-    "ast_hash": "d4972f33f93bee4801304bf9b4f88b0f",
+    "mtime": 1782596367.7725976,
+    "ast_hash": "0544238ea90f16ee72c8914a6b35abee",
     "semantic_hash": ""
   },
   "Sources/OneWeave/SchemaMigrationPlan.swift": {
@@ -740,8 +740,8 @@
     "semantic_hash": ""
   },
   ".research/build_log.md": {
-    "mtime": 1782593781.2479708,
-    "ast_hash": "ec534aff61c514aea7b7758b6fedfb6b",
+    "mtime": 1782600784.6485596,
+    "ast_hash": "7d08955b74411ea1b1daf8519d90221b",
     "semantic_hash": ""
   },
   ".research/doc_2f73ffd6e078_iOS_P2P_Messaging_Implementation_Guide_Privacy_First,_Serverless.md": {
@@ -922,6 +922,56 @@
   "visuals_loom.png": {
     "mtime": 1782594874.6705716,
     "ast_hash": "9aeae99862d5be778c3f7aa0269d7d74",
+    "semantic_hash": ""
+  },
+  ".research/REVIEW_ROUND_3_CLAUDE.md": {
+    "mtime": 1782596632.8709745,
+    "ast_hash": "9ef17a87387b1f74ba813f70d2af791a",
+    "semantic_hash": ""
+  },
+  ".research/REVIEW_ROUND_3_CLAUDE_FOCUSED.md": {
+    "mtime": 1782596144.5388958,
+    "ast_hash": "dd1c58c608d9bdcad0ff7980f7b5ef88",
+    "semantic_hash": ""
+  },
+  ".research/REVIEW_ROUND_3_GROK_FOCUSED.md": {
+    "mtime": 1782596135.542746,
+    "ast_hash": "984a609b88e3512d0c55136257740ac5",
+    "semantic_hash": ""
+  },
+  ".research/REVIEW_ROUND_3_NEMOTRON.md": {
+    "mtime": 1782596180.7564976,
+    "ast_hash": "ec858d2fd03c703198a3e57b17ac12db",
+    "semantic_hash": ""
+  },
+  ".research/REVIEW_ROUND_3_PROMPT.md": {
+    "mtime": 1782595962.4668596,
+    "ast_hash": "62854055bc68ae39c24b4960e721491b",
+    "semantic_hash": ""
+  },
+  ".research/round3/claude_output.md": {
+    "mtime": 1782597544.0627253,
+    "ast_hash": "0d94b7f604d4499fecb73e121ad5dc28",
+    "semantic_hash": ""
+  },
+  ".research/round3/grok_output.md": {
+    "mtime": 1782596187.2566056,
+    "ast_hash": "cba5f74347c8e69c32f2dff043dd67f6",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1782595920.8741632,
+    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
+    "semantic_hash": ""
+  },
+  "CONVENTIONS.md": {
+    "mtime": 1782595909.0869656,
+    "ast_hash": "65fb63e566012e40360557081162d8aa",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_HANDOFF_2026-06-27.md": {
+    "mtime": 1782600729.004657,
+    "ast_hash": "42b6a96fc16e4fb484c727a17e19f7e3",
     "semantic_hash": ""
   }
 }

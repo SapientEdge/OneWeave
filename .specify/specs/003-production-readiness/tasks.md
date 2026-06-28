@@ -224,3 +224,75 @@
 ---
 
 *Generated 2026-06-27 as part of Spec Kit adoption. Tasks are organized by phase; Mac-side tasks (M1-M6) are PENDING until user authenticates + switches to Mac.*
+
+---
+
+## Phase T07: GLM 5.2 Round-1 Findings (Linux-cross-checked, 2026-06-27)
+
+**Source**: `.research/glm_round_1/deep_review.md` (GLM 5.2 chat-completion review) cross-verified by Claude Code (opus) + Grok (supergrok). Kimi returned `LLM not set` (non-interactive OAuth missing).
+
+**Triage summary** (Claude opus verdict):
+- 3 PHANTOM findings (code doesn't exist as described) — dropped
+- 4 REDUNDANT with cycle-27 fixes — already in known gaps
+- 2 genuinely NEW Linux-fixable items → T075, T076
+- 2 Mac-needed items → T086, T087
+- 3 architectural proposals (HLC/CRDT/Sendable) → deferred design spikes T088-T090
+
+- [ ] T075 **[NEW · Linux · MEDIUM]** GLM-#5 + Claude — enforce reflection min-length on `completeQuest`. `LifeContext.swift:454-455` `let bonus = trimmed.isEmpty ? 3 : 10` accepts a 1-char reflection for full 10 essence while `FamilyPod` enforces `minExitReflectionChars = 20`. Fix: gate the `+= 10` branch behind `trimmed.count >= 20`, keep `+= 3` for shorter reflections. Add Python validator `validate_life_context_reflection_gate_matrix.py`.
+- [ ] T076 **[NEW · Linux · HIGH]** GLM-#7 + Claude + Grok — fix FamilyPod compile-blockers. `FamilyPod.swift:330/335/338` reference non-existent `LifeContext.threads`, `currentSeasonName`, `activeAmplifierName`. Add three computed properties on `LifeContext`: `var threads: [BasicSelfThread] { activeThreads }`, `var currentSeasonName: String { currentSeason.displayName }`, `var activeAmplifierName: String?` (default `nil`). Hard compile error — verified live.
+- [ ] T077 **[NEW · Linux · HIGH]** GLM-#6 + Claude + Grok — fix FamilyPodDigestEntry mutability. `FamilyPod.swift:427-428` mutates `member.displayName` (declared `let`). Change to `var`. GLM also flagged `podTitle`→`podName` but Grok confirms actual field is `amplifierName`. Verified live: `FamilyPodMember.displayName` is `let` at line 121-122.
+- [ ] T078 **[Linux · MEDIUM]** GLM-#1 + Claude — randomize SacredEcho salt (cheaper than expected). `SacredEcho.swift:281-282` `let salt = Data(echoID.uuidString.prefix(16).utf8)`. Generate 16-byte random salt at seal time, persist in `attributes["salt"]`, read back in `open()`. Keep nonce as-is. Claude notes HKDF salt being public is cryptographically acceptable (nonce is already randomized) — severity LOW not HIGH. Still cheap to do.
+- [ ] T079 **[Linux · LOW]** GLM proposal — ReflectionGate central policy object. Extract the 3/10/20-char rules into `ReflectionGate.swift` with unit tests. Consolidates T075 + scattered reflection checks (LifeContext.swift:454, FamilyPod.swift exit-reflection, CommandPalette pendingAction). Linux-fixable.
+- [ ] T080 **[Linux · MEDIUM]** Grok-#2 partial — Contacts permission ordering. `iOSServiceIntegrations.swift:155-156` has `let perm = await requestAccess()` BEFORE `guard ... leash.isAllowed(...)`. Calendar+Reminders are correct (Grok#18 already fixed). Move leash check first in Contacts path only.
+- [ ] T081 **[Linux · LOW]** Add Python validator `validate_sacred_echo_crypto.py` — assert HKDF round-trip, fail-closed vaultSeed, opened-flag immutability via stateRaw/openedAt, salt randomness (T078).
+- [ ] T082 **[Linux · LOW]** Add Python validator `validate_life_context_reflection_gate_matrix.py` — 3×3 matrix (essence {2,7,12} × length {0,5,25}); assert correct error for each cell. Validates T075.
+- [ ] T083 **[Linux · LOW]** Add Python validator `validate_family_pod_builder_surface.py` — parse FamilyPod.swift AST; assert no references to non-existent LifeContext members. Validates T076.
+- [ ] T084 **[Linux · LOW]** Add Python validator `validate_p2p_cooldown_semantics.py` — assert cooldown only advances on success. Note: GLM cited wrong file/lines (Grok confirms no `lastShareAt` at P2PWeaveShare.swift:32-34; cooldown is in `FamilyPodPolicy.nextEligiblePublish`). Validator should target correct location after reading FamilyPod.swift.
+- [ ] T085 **[Linux · DOC]** Update `.research/REVIEW_ROUND_4_GLM5.2.md` with cross-check summary (Claude + Grok verdicts), phantom-finding corrections, and the T075-T087 task list. Document that Kimi returned `LLM not set` and was skipped.
+
+- [ ] T086 **[Mac-needed · MEDIUM]** GLM-#10 + Claude + Grok — BGProcessingTask for envelope persist. `AppLifecycleCoordinator.applicationDidEnterBackground` (lines 409-420) does synchronous `mc.save()` + `makeEnvelope` + encrypt + atomic write + pushSnapshotToWidgets with no `beginBackgroundTask`/`BGTaskScheduler`. iOS can kill before flush on large graphs. Fix requires UIApplication/BGTaskScheduler — uncompilable on Linux.
+- [ ] T087 **[Mac-needed · MEDIUM]** Bundle-ID scoped snapshot key. `AppLifecyclePaths.lifeGraphFilename = "oneweave.lifegraph.v1.json"` — no per-install scoping. App Group sharing risks key collision between variants. True fix requires `Bundle.main.bundleIdentifier` — uncompilable on Linux.
+- [ ] T088 **[DEFERRED · design spike]** HLC (Hybrid Logical Clocks) for P2P ordering. Wall-clock Date is unsafe across offline-then-resync; HLC `(physical_ms, logical_counter)` bounds skew. 40-line Python reference impl. Adopt when P2P becomes load-bearing.
+- [ ] T089 **[DEFERRED · design spike]** CRDT LWW-element-set for offline share queue. `pendingShares: [P2PShare]` is a plain array; two Family-Pod members queueing offline then syncing requires merge semantics, not FIFO.
+- [ ] T090 **[DEFERRED · design spike]** `LifeContextSnapshot` Sendable value type at actor boundaries. `@Model` classes are not `Sendable` in Swift 5.9; introduces snapshot struct for actor-crossing returns. Requires Swift 6 concurrency checker to validate properly.
+
+---
+
+## Phase T08: 4-CLI Multi-Agent Round (2026-06-27)
+
+- [ ] T091 Run Grok + Claude + Kimi + Codex + GLM 5.2 in parallel on the same task; collect all outputs to `.research/round4/` and synthesize via Claude.
+- [ ] T092 Triangulate findings: items flagged by ≥3 models are HIGH; 2 models = MEDIUM; 1 model = LOW.
+- [ ] T093 Append consolidated findings to `.research/REVIEW_ROUND_4.md` with file:line citations and severity.
+
+---
+
+## Phase T09: Linux-side documentation polish
+
+- [ ] T094 Generate `graphify --wiki` output (`graphify-out/wiki/index.md`). Currently only GRAPH_REPORT.md exists; wiki is the agent-facing interface.
+- [ ] T095 Write `.research/THREAT_MODEL.md` — adversaries (curious peer, malicious peer, device forensic recovery), trust boundaries, defense layers (HKDF, AES-GCM, Data Leash, reflection gate).
+- [ ] T096 Update `ONEWEAVE_HANDOFF_2026-06-27.md` "Next Steps" → "Cycle 29 Linux work: T075-T087 applied; cycle 30 Mac handoff."
+
+---
+
+## Updated Summary
+
+| Phase | Status | Owner | Duration |
+|---|---|---|---|
+| Phase 0: Toolchain | ✅ Complete | Linux | 1 hour |
+| Phase V1: Validation | ✅ Complete | Linux | already done |
+| Phase G1: Graphify | ✅ Complete | Linux | done |
+| Phase A1: Aider | ✅ Complete | Linux | done |
+| Phase R1: Multi-Agent | 🔄 Round 1 done (GLM) | Linux | 30 min |
+| Phase T07: GLM findings apply | 🔄 In progress | Linux | ~2 hours |
+| Phase T08: 4-CLI round | ⏳ Next | Linux | 30 min |
+| Phase T09: Doc polish | ⏳ Pending | Linux | 30 min |
+| Phase P1: GitHub Push | ⏳ Pending | User | 10 min |
+| Phase M1: Xcode | ⏳ Pending | Mac | 4-6 hours |
+| Phase M2: Widgets | ⏳ Pending | Mac | 2-3 hours |
+| Phase M3: AppIntents | ⏳ Pending | Mac | 2-3 hours |
+| Phase M4: Signing | ⏳ Pending | Mac | 3-4 hours |
+| Phase M5: Submission | ⏳ Pending | Mac | 2-3 hours |
+| Phase M6: Onboarding | ⏳ Pending | Mac | 2-3 hours |
+
+**Linux T07-T09 total: ~3 hours focused work**
+**Mac total: 15-22 hours focused work**

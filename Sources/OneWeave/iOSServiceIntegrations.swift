@@ -152,8 +152,13 @@ public enum ContactsIntegration {
     @MainActor
     public static func importContacts(into context: LifeContext, leash: DataLeashState) async -> [LifeEntity] {
         #if canImport(Contacts)
+        // T080 (GLM 5.2 round 1, cross-verified by Grok supergrok):
+        // Data Leash must be checked BEFORE requesting Contacts permission
+        // (constitution #2: zero-trust privacy). Calendar + Reminders paths
+        // already do this (Grok #18 fix); Contacts was the lone outlier.
+        guard leash.isAllowed(.contacts) else { return [] }
         let perm = await requestAccess()
-        guard perm == .granted, leash.isAllowed(.contacts) else { return [] }
+        guard perm == .granted else { return [] }
 
         // Detach the heavy enumeration off the main actor. The collect closure
         // runs on a background priority task; we marshal results back at the end.
