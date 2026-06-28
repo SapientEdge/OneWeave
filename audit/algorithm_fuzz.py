@@ -26,6 +26,7 @@ from algorithm_oracle import (
     vitality, rhizome_index, tonal_distance, tonal_magnitude,
     tonal_coherence_angle, loom_distance, reflection_gate_entropy_score,
     decision_reverb_half_life, mastery_knot_max_tier, clamp,
+    computed_harmony_score,
 )
 
 
@@ -175,6 +176,26 @@ for i in range(N):
     entropy, passes = reflection_gate_entropy_score(words)
     if entropy > 0 and not (entropy <= math.log2(n) + 1e-9 if n > 0 else entropy == 0):
         check(f"GATE entropy[{i}]", False, f"H={entropy} > log2({n})")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# Property 10: Computed Harmony Score in [0, 1], deterministic
+# ──────────────────────────────────────────────────────────────────────
+for i in range(N):
+    tiers = {"Self": random.randint(1, 4), "Stewardship": random.randint(1, 4),
+             "CareKin": random.randint(1, 4), "Meaning": random.randint(1, 4)}
+    active = random.randint(0, 10)
+    days = random.uniform(0, 30) if random.random() > 0.2 else None
+    coh = random.uniform(0, 1)
+    h = computed_harmony_score(tiers, active, days, coh)
+    if math.isnan(h) or math.isinf(h):
+        check(f"HARMONY nan[{i}]", False, f"H={h}")
+    if not (0.0 <= h <= 1.0):
+        check(f"HARMONY range[{i}]", False, f"H={h} for tiers={tiers} active={active} days={days} coh={coh}")
+    # Determinism
+    h2 = computed_harmony_score(tiers, active, days, coh)
+    if h != h2:
+        check(f"HARMONY det[{i}]", False, f"{h} != {h2}")
 
 
 # ──────────────────────────────────────────────────────────────────────

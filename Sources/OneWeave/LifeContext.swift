@@ -44,10 +44,64 @@ final class LifeContext {
     var weaveLevel: Int = 1
     // Per-thread mastery 1=Novice ... 4=Luminary (updated on impactful events)
     var masteryTiers: [String: Int] = ["Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1]
+    // Stored value used for widget snapshot / persistence layer.
+    // Updated by updateHarmonyAndStreak (deterministic formula).
+    // DEPRECATED as a public value — UI should prefer `computedHarmonyScore`
+    // which derives deterministically from state. Mutating this field from
+    // elsewhere is a bug (Cycle 35 audit finding).
     var harmonyScore: Double = 0.5
+
+    /// Deterministic harmony computed from observable state.
+    ///
+    /// Formula (Cycle 36 audit fix — was an incremental counter with 6 mutation
+    /// sites across the codebase, all hardcoded nudges; risk: misleading users
+    /// and violating privacy promise of "accurate reflection"):
+    ///
+    ///   masteryBalance = 1 − σ_normalized(masteryTiers.values)
+    ///                   (low stddev across 4 domains = balanced = high score)
+    ///   activeCoverage = min(4, activeThreads.count) / 4.0
+    ///                   (user engaged across all 4 domains)
+    ///   reflectionPace = max(0, 1 − daysSinceLastReflection / 7.0)
+    ///                   (recent reflection = high score)
+    ///   graphCoherence = lifeCoherenceScore
+    ///                   (graph-level coherence, already a formula)
+    ///
+    ///   harmony = 0.35·masteryBalance + 0.25·activeCoverage
+    ///           + 0.20·reflectionPace + 0.20·graphCoherence
+    ///
+    /// All inputs are in [0,1], weights sum to 1.0, output in [0,1].
+    /// Same state → same score. Auditable. Tested via audit/algorithm_oracle.py.
+    var computedHarmonyScore: Double {
+        let tiers = masteryTiers.values.map { Double($0) }
+        let mean = tiers.isEmpty ? 1.0 : tiers.reduce(0, +) / Double(tiers.count)
+        let variance = tiers.isEmpty ? 0.0 : tiers.reduce(0) { $0 + pow($1 - mean, 2) } / Double(tiers.count)
+        let stddev = sqrt(variance)
+        // Normalize stddev: max possible stddev for tiers 1..4 is ~1.5
+        let normalizedStddev = min(1.0, stddev / 1.5)
+        let masteryBalance = 1.0 - normalizedStddev
+
+        let activeCoverage = min(4.0, Double(activeThreads.count)) / 4.0
+
+        let reflectionPace: Double
+        if let last = lastReflectionAt {
+            let days = max(0, Date().timeIntervalSince(last) / 86400)
+            reflectionPace = max(0.0, 1.0 - days / 7.0)
+        } else {
+            reflectionPace = 0.0  // never reflected
+        }
+
+        let graphCoherence = lifeCoherenceScore
+
+        let harmony = 0.35 * masteryBalance
+                    + 0.25 * activeCoverage
+                    + 0.20 * reflectionPace
+                    + 0.20 * graphCoherence
+        return min(1.0, max(0.0, harmony))
+    }
     // Streak with restorative grace (no punitive reset; lowEnergy suggests restoration)
     var globalWeaveStreak: Int = 0
     var lastActiveWeaveDate: Date = Date()
+    var lastReflectionAt: Date? = nil  // for computedHarmonyScore; populated on reflection write
     var graceDaysUsed: Int = 0
     var maxGraceDays: Int = 2
 

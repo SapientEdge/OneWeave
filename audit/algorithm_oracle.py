@@ -312,6 +312,54 @@ def decision_reverb_half_life(
     return None, "still_open", threshold
 
 
+def computed_harmony_score(
+    mastery_tiers: dict,
+    active_threads_count: int,
+    days_since_reflection: Optional[float],
+    graph_coherence: float,
+) -> float:
+    """
+    Computed Harmony Score. Mirrors LifeContext.computedHarmonyScore
+    (Cycle 36 audit fix — replaces incremental-counter bug).
+
+    Formula:
+      masteryBalance = 1 - σ_normalized(mastery_tiers.values)
+      activeCoverage = min(4, active_threads) / 4
+      reflectionPace = max(0, 1 - days_since_reflection / 7)
+      graphCoherence = graph_coherence (already a formula)
+
+      harmony = 0.35·masteryBalance + 0.25·activeCoverage
+              + 0.20·reflectionPace + 0.20·graphCoherence
+    """
+    tiers = list(mastery_tiers.values())
+    if not tiers:
+        mastery_balance = 1.0
+    else:
+        mean = sum(tiers) / len(tiers)
+        variance = sum((t - mean) ** 2 for t in tiers) / len(tiers)
+        stddev = math.sqrt(variance)
+        # Max stddev for tiers in [1, 4] is ~1.5 (e.g., [1,1,1,4])
+        normalized_stddev = min(1.0, stddev / 1.5)
+        mastery_balance = 1.0 - normalized_stddev
+
+    active_coverage = min(4, active_threads_count) / 4.0
+
+    if days_since_reflection is None:
+        reflection_pace = 0.0
+    else:
+        reflection_pace = max(0.0, 1.0 - max(0, days_since_reflection) / 7.0)
+
+    graph_coh = clamp(graph_coherence, 0, 1)
+
+    harmony = (
+        0.35 * mastery_balance
+        + 0.25 * active_coverage
+        + 0.20 * reflection_pace
+        + 0.20 * graph_coh
+    )
+    return clamp(harmony, 0, 1)
+
+
 def mastery_knot_max_tier(
     user_knots_remaining: int,
     current_tier: int,
@@ -664,6 +712,81 @@ class TestMasteryKnots(unittest.TestCase):
         self.assertEqual(max_tier, 2)
 
 
+class TestComputedHarmonyScore(unittest.TestCase):
+    """Verify computedHarmonyScore formula (Cycle 36 fix)."""
+
+    def test_balanced_tiers_full_coverage_recent_reflection(self):
+        """All tiers equal, all 4 active, fresh reflection → high harmony."""
+        h = computed_harmony_score(
+            mastery_tiers={"Self": 2, "Stewardship": 2, "CareKin": 2, "Meaning": 2},
+            active_threads_count=4,
+            days_since_reflection=1.0,
+            graph_coherence=1.0,
+        )
+        # masteryBalance: all equal → stddev=0 → balance=1.0
+        # activeCoverage: 4/4 = 1.0
+        # reflectionPace: 1 - 1/7 = 6/7 ≈ 0.857
+        # graphCoherence: 1.0
+        # 0.35*1 + 0.25*1 + 0.20*0.857 + 0.20*1 = 0.35 + 0.25 + 0.171 + 0.20 = 0.971
+        self.assertAlmostEqual(h, 0.9714, places=3)
+
+    def test_unbalanced_tiers_low_harmony(self):
+        """Tiers wildly imbalanced → low masteryBalance → low harmony."""
+        h = computed_harmony_score(
+            mastery_tiers={"Self": 4, "Stewardship": 1, "CareKin": 1, "Meaning": 1},
+            active_threads_count=1,
+            days_since_reflection=10.0,  # way past cadence
+            graph_coherence=0.1,
+        )
+        # Should be low (well below 0.5)
+        self.assertLess(h, 0.4, f"Imbalanced state should have low harmony, got {h:.3f}")
+
+    def test_never_reflected_zero_pace(self):
+        """lastReflectionAt = nil → reflectionPace = 0 → penalty."""
+        h_no_refl = computed_harmony_score(
+            mastery_tiers={"Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1},
+            active_threads_count=4,
+            days_since_reflection=None,
+            graph_coherence=1.0,
+        )
+        h_with_refl = computed_harmony_score(
+            mastery_tiers={"Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1},
+            active_threads_count=4,
+            days_since_reflection=0.0,
+            graph_coherence=1.0,
+        )
+        # no-refl should be ~0.2 lower (0.20 * 1.0)
+        self.assertAlmostEqual(h_with_refl - h_no_refl, 0.2, places=2,
+            msg=f"Reflection pace difference should be ~0.2, got {h_with_refl - h_no_refl:.3f}")
+
+    def test_in_zero_one(self):
+        """Score must always be in [0, 1]."""
+        for tiers in [
+            {"Self": 1}, {"Self": 4, "Stewardship": 4, "CareKin": 4, "Meaning": 4},
+            {"Self": 1, "Stewardship": 4, "CareKin": 1, "Meaning": 4},
+        ]:
+            for active in range(0, 10):
+                for days in [None, 0, 3.5, 7, 100]:
+                    for coh in [0, 0.5, 1.0]:
+                        h = computed_harmony_score(tiers, active, days, coh)
+                        self.assertGreaterEqual(h, 0.0,
+                            f"H={h} for tiers={tiers} active={active} days={days} coh={coh}")
+                        self.assertLessEqual(h, 1.0,
+                            f"H={h} for tiers={tiers} active={active} days={days} coh={coh}")
+
+    def test_deterministic(self):
+        """Same inputs → same output (no hidden state)."""
+        args = ({"Self": 2, "Stewardship": 3}, 3, 5.0, 0.7)
+        h1 = computed_harmony_score(*args)
+        h2 = computed_harmony_score(*args)
+        self.assertEqual(h1, h2)
+
+    def test_weights_sum_to_one(self):
+        """Sanity: weights in formula must sum to 1."""
+        # 0.35 + 0.25 + 0.20 + 0.20 = 1.0
+        self.assertAlmostEqual(0.35 + 0.25 + 0.20 + 0.20, 1.0, places=9)
+
+
 class TestLoomGeometry(unittest.TestCase):
     def test_unit_distance(self):
         d = loom_distance((0, 0), (3, 4))  # 3-4-5 triangle
@@ -791,7 +914,8 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
     for cls in [TestCognitiveLoad, TestVitality, TestRhizomeIndex,
                 TestTonalCoherence, TestReflectionGate, TestDecisionReverb,
-                TestMasteryKnots, TestLoomGeometry, TestBoundaryConditions]:
+                TestMasteryKnots, TestComputedHarmonyScore,
+                TestLoomGeometry, TestBoundaryConditions]:
         suite.addTests(loader.loadTestsFromTestCase(cls))
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)

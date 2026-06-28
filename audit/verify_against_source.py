@@ -53,6 +53,7 @@ TARGETS = [
     ("LifeGraph.swift", "calculateResonance", "0.6×self + 0.4×neighbor mean"),
     ("LifeGraph.swift", "coherenceScoreContribution", "0.4h+0.3e+0.2c+0.1r weighted"),
     ("DataLeashSettings.swift", "enableGuestMode", "flip all 9 categories to deny"),
+    ("LifeContext.swift", "computedHarmonyScore", "deterministic 4-component harmony formula"),
     # Computed properties don't use `func` — they'd need a different extractor.
     # Skipped: TonalCoherence.magnitude (var), LoomGeometry.magnitude (var)
 ]

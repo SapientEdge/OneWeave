@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782624664.549887,
-    "ast_hash": "3e97efc83cec1eac182c2c5dca1564f0",
+    "mtime": 1782638758.464023,
+    "ast_hash": "9c2c132046f506754ddb481e6a1a37a9",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
@@ -1212,6 +1212,51 @@
   "ONEWEAVE_HANDOFF_CYCLE_35.md": {
     "mtime": 1782630832.8636255,
     "ast_hash": "b3288a1ea65da50f8125f5729fe40ca5",
+    "semantic_hash": ""
+  },
+  "audit/algorithm_fuzz.py": {
+    "mtime": 1782638911.7229068,
+    "ast_hash": "4eda1b4e89f2a6265cc6d8b6928ae31e",
+    "semantic_hash": ""
+  },
+  "audit/algorithm_inventory.json": {
+    "mtime": 1782636891.144389,
+    "ast_hash": "ab42400f4daba9b7601f583545ca071f",
+    "semantic_hash": ""
+  },
+  "audit/algorithm_oracle.py": {
+    "mtime": 1782638870.710898,
+    "ast_hash": "44c28f3436f128ece2438107ea2f8655",
+    "semantic_hash": ""
+  },
+  "audit/inventory.py": {
+    "mtime": 1782636888.56935,
+    "ast_hash": "775f4dfac0a4b6c97b28ad1b75b76354",
+    "semantic_hash": ""
+  },
+  "audit/validators/validate_audit_algorithm_fuzz.py": {
+    "mtime": 1782638486.6591427,
+    "ast_hash": "795b0fdb10e06082f4bff50fd92e630e",
+    "semantic_hash": ""
+  },
+  "audit/validators/validate_audit_algorithm_oracle.py": {
+    "mtime": 1782638484.052059,
+    "ast_hash": "c7193d61698de26cc8e369b6ff44b8d6",
+    "semantic_hash": ""
+  },
+  "audit/validators/validate_audit_source_verification.py": {
+    "mtime": 1782638485.363101,
+    "ast_hash": "c5bf1d8dbacd77e46a436e52c7fdef04",
+    "semantic_hash": ""
+  },
+  "audit/verify_against_source.py": {
+    "mtime": 1782638923.2321863,
+    "ast_hash": "eaf0fe1203b94e75392b761a436e4ad3",
+    "semantic_hash": ""
+  },
+  "audit/AUDIT_REPORT.md": {
+    "mtime": 1782638432.3583615,
+    "ast_hash": "e118bb8737c0558e573c7d1394f9514c",
     "semantic_hash": ""
   }
 }
