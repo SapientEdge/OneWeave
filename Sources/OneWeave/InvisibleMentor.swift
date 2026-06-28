@@ -202,6 +202,145 @@ public enum InvisibleMentor {
         return MentorDialogue(userPrompt: prompt, candidates: Array(top))
     }
 
+    // MARK: - Cycle 35 / T154 (GLM A6): Devil's Advocate Mode
+    //
+    // When the user is forming an insight, the Mentor surfaces the strongest
+    // counter-argument from the user's *own* past entries. Embodies the
+    // Socratic tradition: the best teacher is your past self.
+    //
+    // Algorithm: find past reflections that share *domain* with the current
+    // insight but have the most *opposing stance* (lexical + harmony-impact).
+    //
+    // Returns at most `limit` counter-arguments. Each cites the user's own
+    // text — never invented, never paraphrased beyond the existing excerpt.
+    //
+    // UX: "In March you wrote the opposite. Is this growth, or forgetting?"
+    public struct DevilAdvocateCounter: Codable, Equatable, Identifiable {
+        public let id: UUID
+        public let citedReflectionID: UUID
+        public let citedTextExcerpt: String
+        public let citedDaysAgo: Int
+        public let oppositionScore: Double        // 0..1; higher = stronger counter
+        public let prompt: String                  // calm prompt asking the user to weigh both
+
+        public init(
+            id: UUID = UUID(),
+            citedReflectionID: UUID,
+            citedTextExcerpt: String,
+            citedDaysAgo: Int,
+            oppositionScore: Double,
+            prompt: String
+        ) {
+            self.id = id
+            self.citedReflectionID = citedReflectionID
+            self.citedTextExcerpt = citedTextExcerpt
+            self.citedDaysAgo = citedDaysAgo
+            self.oppositionScore = oppositionScore.clamped(to: 0...1)
+            self.prompt = prompt
+        }
+    }
+
+    /// Find counter-arguments to a current insight being formed.
+    /// `currentClaim` is the proposed insight text (e.g., "You prioritize
+    /// meaning over kin"). `pastReflections` is the user's history.
+    /// `domain` restricts the search to a specific life domain.
+    public static func devilAdvocate(
+        currentClaim: String,
+        domain: String,
+        pastReflections: [MentorInput.ReflectionSeed],
+        limit: Int = 1
+    ) -> [DevilAdvocateCounter] {
+        guard !pastReflections.isEmpty else { return [] }
+
+        let claimTokens = tokenize(currentClaim)
+        let claimPolar: Double = polarity(of: claimTokens)  // +1 if positive valence, -1 if negative
+
+        struct Scored {
+            let seed: MentorInput.ReflectionSeed
+            let opposition: Double
+            let prompt: String
+        }
+
+        var candidates: [Scored] = []
+        for seed in pastReflections {
+            // Must share domain
+            guard seed.domains.contains(domain) else { continue }
+
+            let textTokens = tokenize(seed.text)
+            guard !textTokens.isEmpty else { continue }
+
+            // Opposition: high lexical overlap but opposite polarity
+            let overlap = jaccard(claimTokens, textTokens)
+            guard overlap > 0.05 else { continue }  // must be topically related
+
+            let seedPolar = polarity(of: textTokens)
+            let polarityDistance = abs(claimPolar - seedPolar) / 2.0  // 0..1
+
+            // Score: high topical overlap * high polarity distance
+            let opposition = (overlap * 0.5 + polarityDistance * 0.5).clamped(to: 0...1)
+            guard opposition > 0.15 else { continue }  // skip weak counters
+
+            let prompt = makeDevilsAdvocatePrompt(
+                currentClaim: currentClaim,
+                pastText: seed.text,
+                daysAgo: seed.daysAgo,
+                opposition: opposition
+            )
+
+            candidates.append(Scored(seed: seed, opposition: opposition, prompt: prompt))
+        }
+
+        // Top `limit` by opposition
+        let top = candidates
+            .sorted { $0.opposition > $1.opposition }
+            .prefix(limit)
+
+        return top.map { s in
+            DevilAdvocateCounter(
+                citedReflectionID: s.seed.id,
+                citedTextExcerpt: String(s.seed.text.prefix(240)),
+                citedDaysAgo: s.seed.daysAgo,
+                oppositionScore: s.opposition,
+                prompt: s.prompt
+            )
+        }
+    }
+
+    /// Compute polarity from a token set using the TonalLexicon.
+    /// Returns a value in [-1, +1] indicating overall valence.
+    private static func polarity(of tokens: Set<String>) -> Double {
+        guard !tokens.isEmpty else { return 0 }
+        var sum = 0.0
+        var counted = 0
+        for token in tokens {
+            let v = TonalLexicon.vector(for: token)
+            // Use (calm + energy) / 2 as the polarity proxy
+            // (positive when both high, negative when both low)
+            let polar = (v.calm + v.energy) / 2.0
+            if v.magnitude > 0 {
+                sum += polar
+                counted += 1
+            }
+        }
+        return counted > 0 ? sum / Double(counted) : 0.0
+    }
+
+    /// Build the Socratic prompt. Calm; never verdict.
+    private static func makeDevilsAdvocatePrompt(
+        currentClaim: String,
+        pastText: String,
+        daysAgo: Int,
+        opposition: Double
+    ) -> String {
+        let dayWord = daysAgo == 1 ? "day" : "days"
+        let claimSnippet = currentClaim.count > 80
+            ? String(currentClaim.prefix(80)) + "..."
+            : currentClaim
+        return "\(daysAgo) \(dayWord) ago you wrote something different. " +
+            "Now you seem to be forming \"\(claimSnippet)\". " +
+            "Is this growth, or forgetting?"
+    }
+
     /// Convenience: turn a LifeContext + the user's reflection store + opened
     /// Sacred Echoes into a MentorInput. This is the only place that touches
     /// the broader app state.
