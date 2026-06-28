@@ -74,8 +74,11 @@ struct SettingsView: View {
                         Text("Completed quests: \(ctx.completedQuestCount) (reflections drive full mastery)")
                         let reflectedCount = quests.filter { ($0.reflectionNote ?? "").count > 0 }.count
                         Text("Harmony: \(Int(ctx.harmonyScore * 100))% • Reflected quests: \(reflectedCount)")
-                        // T121: surface grace/streak decay — build trust in safety net
-                        Text("Grace: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays) (decay 0.5%/day after 7d grace)")
+                        // T121: surface grace/streak decay — build trust in safety net.
+                        // Cycle 42 (B4): clarified text — OneWeave uses a 2-day restorative
+                        // grace, not a 7-day gentle decay. The 0.5%/day figure applies
+                        // to *relationship* vitality (RelationshipDecayTracker), not streaks.
+                        Text("Grace: \(ctx.graceDaysUsed)/\(ctx.maxGraceDays) (streak preserved through 2-day low-activity grace)")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                         Text("Global streak: \(ctx.globalWeaveStreak)")

@@ -187,7 +187,7 @@ A real-time load metric (0-1) combining 6 components with weighted normalization
 - **6 components:** calendar density, open quests, open threads, sleep debt, ref-days, amplifier load
 - **Weighted formula:** each component normalized 0-1, multiplied by configurable weight
 - **Trend detection:** `rising` / `steadyHigh` / `falling` / `steadyLow` with hysteresis
-- **Weave Pause:** Triggers ONLY on rising load + score ≥ 0.85 (NOT on sustained high — this was a bug we caught and fixed)
+- **Weave Pause:** Triggers ONLY on rising load + score ≥ 0.85 + body depleted (sleep debt or low HRV). NOT on sustained high — a busy-but-rested user crossing 0.85 on a rising trend is NOT gated (the body-depletion clause was added in cycle 42 to close the live §5 violation flagged by cycle 41 audit finding A1).
 - **Tests:** `validate_cognitive_load.py` — 45/45 PASS
 
 ---

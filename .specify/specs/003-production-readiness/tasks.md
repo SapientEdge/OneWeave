@@ -642,11 +642,11 @@ before it activates (constitutional commitment: no premature ML).
   - Depends on: T186
   - Sub-tasks: T187a (sandbox path), T187b (load with try?), T187c (use in CognitiveLoad only if loaded)
 
-### T190-T191 — iCloud Private Cloud Compute sync — DECISION
+### T190-T191 — iCloud / Private Cloud Compute — DECISION
 
-- [ ] T190 **[Decision]** Document decision in `CONSTITUTION_v3_DRAFT.md`: NOT implementing Private Cloud Compute sync in v1.0. Reasons: (1) SwiftData+CloudKit requires E2EE custom schema, (2) conflicts with "no server" promise in onboarding, (3) deferred to v1.1 with explicit user opt-in flow.
+- [x] T190 **[Decision]** Document decision in `CONSTITUTION_v3_DRAFT.md`: NOT implementing Private Cloud Compute sync in v1.0. Reasons: (1) SwiftData+CloudKit requires E2EE custom schema, (2) conflicts with "no server" promise in onboarding, (3) deferred to v1.1 with explicit user opt-in flow.
   - Sub-tasks: T190a (write decision doc), T190b (link from constitution)
-- [ ] T191 **[Linux · S]** Update `OnboardingView.swift:15` to explicitly say "no cloud sync by default and not available in this version" (replace existing "no cloud sync" claim with the stronger version).
+- [x] T191 **[Linux · S]** Update `OnboardingView.swift:15` to explicitly say "no cloud sync by default and not available in this version" (replace existing "no cloud sync" claim with the stronger version).
   - Depends on: T190
   - Sub-tasks: T191a (text change), T191b (PrivacyInfo.xcprivacy NSPrivacyAccessedAPITypes)
 
@@ -676,7 +676,7 @@ These are mostly Mac-side but several have Linux-fixable scaffolding.
 - [ ] T225 **[Mac · S]** T167 — Pull-to-reflect replaces pull-to-refresh.
 - [ ] T226 **[Linux · S]** T168 — Wire `CognitiveLoadReading.shouldDimUI` to root view `.saturation(0.85)` modifier.
 - [ ] T227 **[Mac · S]** T169 — Silent success: 200ms soft haptic + 1px inward contraction.
-- [ ] T228 **[Linux · M]** T170 — Void Thread: scaffold `VoidThread.swift` (entry type, HKDF-SHA256 self-deriving key, opaque storage). Mac UI deferred.
+- [x] T228 **[Linux · M]** Void Thread: scaffold `VoidThread.swift` (entry type, HKDF-SHA256 self-deriving key, opaque storage). Mac UI deferred.
 - [ ] T229 **[Linux · S]** Add `validate_cycle40_ux.py` covering all 8 micro-interactions + Void Thread crypto.
 
 ---
@@ -707,4 +707,24 @@ problem in parallel, synthesize the 5 reviews into a unified fix plan.
 **New tasks added in cycle 39**: T171-T234 (64 tasks across 3 phases, mostly Linux-fixable)
 **Cumulative total**: 537 → 601 tasks
 
-**Master task count: T001-T146 Linux + M01-M44 Mac = 190 tasks, 5-CLI cross-verified + Hermes self-review.**
+**Cycle 41 added (cross-CLI synthesis)**: identified 18 BLOCKERS + 12 HIGH
+**Cycle 42 added (constitutional compliance)**: T230-T236 (7 tasks, all Linux-fixable)
+**Cumulative after cycle 42**: 601 → 608 tasks
+
+**Master task count: T001-T236 Linux + M01-M44 Mac = 280 tasks, 5-CLI cross-verified + Hermes self-review.**
+
+---
+
+## Phase T19: Cycle 42 Constitutional Compliance (2026-06-28)
+
+**Purpose:** Close the 18 BLOCKERS + 12 HIGH identified by cycle 41 cross-CLI synthesis.
+
+- [x] T230 **[Linux · M]** Fix 8 Codex BLOCKERs verified live (keypath escapes, missing try, type mismatches).
+- [x] T231 **[Linux · M]** Apply 5 Claude HIGH constitutional patches (Weave Pause body-depletion, mastery cap at 3 bypass sites, P2P leash gate, test-seed DEBUG gate).
+- [x] T232 **[Linux · M]** Replace 4 `fatalError` calls with throwing `secureRandomUnavailable` errors (SacredEcho, VoidThread, AppLifecycle).
+- [x] T233 **[Linux · M]** Fix SwiftData migration plan (V2 missing from schema list + static `models` on all 3 versions).
+- [x] T234 **[Linux · S]** Add 3 new validators (body_depletion, mastery_cap_all_sites, season_reflection_gate).
+- [x] T235 **[Linux · S]** Fix 2 spec drifts (FEATURE_CATALOG contradiction on Weave Pause trigger, SettingsView streak decay text).
+- [x] T236 **[Linux · S]** Write ONEWEAVE_HANDOFF_CYCLE_42.md.
+
+**Result:** 45/45 validators green (was 42). 73/73 oracle tests pass. Constitutional verdict: `OVERALL: COMPLIANT`.
