@@ -374,9 +374,7 @@ public enum DecisionMentorBridge {
     }
 }
 
-/// Cycle 34 / T152 (GLM A2): one unchosen-path reflection prompt surfaced
-/// by the Resonance Oracle. The user can choose to write a reflection
-/// (then any insight / essence is awarded) or dismiss without consequence.
+/// Cycle 35 / T161 (GLM B5): one decision-reverb half-life reading.
 public struct UnchosenPathPrompt: Codable, Equatable, Identifiable {
     public let record: DecisionRecord
     public let unchosenOption: String
@@ -390,6 +388,167 @@ public struct UnchosenPathPrompt: Codable, Equatable, Identifiable {
         self.unchosenOption = unchosenOption
         self.daysAgo = daysAgo
         self.prompt = prompt
+    }
+}
+
+// MARK: - Cycle 35 / T161 (GLM B5): Decision Reverb Half-Life
+//
+// For each decision, track how often the user returns to that decision's
+// thread within 30 / 90 / 365 days. The "half-life" is when re-engagement
+// drops below 50% of the first-week return rate.
+//
+//   - First-week rate = entries referencing the decision in days 1-7
+//   - 30-day rate     = entries in days 8-30
+//   - 90-day rate     = entries in days 31-90
+//   - 365-day rate    = entries in days 91-365
+//
+// A decision is "settled" when its 30-day rate is < 50% of the first-week
+// rate. A decision is "still-open" when the 30-day rate is >= 50%.
+//
+// UX:
+//   - Settled decisions earn a quiet "anchor" glyph (⚓) in the log
+//   - Still-open ones gently re-surface at their half-life anniversary
+//   - Never awards essence or harmony without a reflection
+
+public struct DecisionReverb: Codable, Equatable {
+    public let record: DecisionRecord
+    public let firstWeekReturns: Int           // entries in days 1-7 referencing this decision
+    public let day30Returns: Int               // entries in days 8-30
+    public let day90Returns: Int               // entries in days 31-90
+    public let day365Returns: Int              // entries in days 91-365
+    public let halfLifeDays: Int?              // when 30-day rate dropped below 50% of first-week
+    public let isSettled: Bool
+    public let isStillOpen: Bool
+
+    public init(
+        record: DecisionRecord,
+        firstWeekReturns: Int,
+        day30Returns: Int,
+        day90Returns: Int,
+        day365Returns: Int,
+        halfLifeDays: Int?,
+        isSettled: Bool,
+        isStillOpen: Bool
+    ) {
+        self.record = record
+        self.firstWeekReturns = firstWeekReturns
+        self.day30Returns = day30Returns
+        self.day90Returns = day90Returns
+        self.day365Returns = day365Returns
+        self.halfLifeDays = halfLifeDays
+        self.isSettled = isSettled
+        self.isStillOpen = isStillOpen
+    }
+
+    /// Calm glyph for the decision log row. ⚓ for settled, ◇ for still-open, ○ for unrated.
+    public var glyph: String {
+        if isSettled { return "⚓" }
+        if isStillOpen { return "◇" }
+        return "○"
+    }
+}
+
+public enum DecisionReverbCalculator {
+
+    /// Compute the reverb reading for a single decision, given the list of
+    /// references (entries that mention the decision). Caller decides what
+    /// "references" means — typically TimelineEvent entries where the note
+    /// includes the decision's id or title keywords.
+    ///
+    /// The 50% threshold is the half-life definition: when the 30-day
+    /// rolling return rate drops below 50% of the first-week rate.
+    public static func reverb(
+        for record: DecisionRecord,
+        references: [Date],
+        now: Date = Date()
+    ) -> DecisionReverb {
+        let decidedAt = record.decidedAt
+        let decidedTs = decidedAt.timeIntervalSince1970
+        let nowTs = now.timeIntervalSince1970
+
+        // Each bucket: count references within that days-since-decision window.
+        let day1_7End = decidedAt.addingTimeInterval(7 * 86400)
+        let day30End = decidedAt.addingTimeInterval(30 * 86400)
+        let day90End = decidedAt.addingTimeInterval(90 * 86400)
+        let day365End = decidedAt.addingTimeInterval(365 * 86400)
+
+        var firstWeek = 0, day30 = 0, day90 = 0, day365 = 0
+        for ref in references {
+            let ts = ref.timeIntervalSince1970
+            guard ts > decidedTs else { continue }   // only post-decision refs
+            if ts <= day1_7End.timeIntervalSince1970 {
+                firstWeek += 1
+            } else if ts <= day30End.timeIntervalSince1970 {
+                day30 += 1
+            } else if ts <= day90End.timeIntervalSince1970 {
+                day90 += 1
+            } else if ts <= day365End.timeIntervalSince1970 {
+                day365 += 1
+            }
+        }
+
+        // Half-life: first day at which the rate dropped below 50% of first-week.
+        // For simplicity we use the 30-day rate vs first-week rate (per-day).
+        let firstWeekDailyRate = Double(firstWeek) / 7.0
+        let day30DailyRate = Double(day30) / 23.0   // days 8-30 = 23 days
+
+        let settledThreshold = firstWeekDailyRate * 0.5
+        let isSettled = firstWeek > 0 && day30DailyRate < settledThreshold
+        let isStillOpen = firstWeek > 0 && day30DailyRate >= settledThreshold
+
+        // Half-life approximation: which bucket did the rate first drop below 50%?
+        var halfLife: Int? = nil
+        if firstWeek > 0 {
+            if day30DailyRate < settledThreshold {
+                halfLife = 30
+            } else {
+                let day90DailyRate = Double(day90) / 60.0
+                if day90DailyRate < settledThreshold {
+                    halfLife = 90
+                } else {
+                    let day365DailyRate = Double(day365) / 275.0
+                    if day365DailyRate < settledThreshold {
+                        halfLife = 365
+                    }
+                }
+            }
+        }
+
+        return DecisionReverb(
+            record: record,
+            firstWeekReturns: firstWeek,
+            day30Returns: day30,
+            day90Returns: day90,
+            day365Returns: day365,
+            halfLifeDays: halfLife,
+            isSettled: isSettled,
+            isStillOpen: isStillOpen
+        )
+    }
+
+    /// Find decisions whose half-life anniversary is within `windowDays` of `now`.
+    /// Used to surface "still-open" decisions for gentle re-reflection at
+    /// their half-life date (e.g. 30 days after decision, 90 days after, etc.).
+    public static func halfLifeAnniversaries(
+        for records: [DecisionRecord],
+        referencesByDecisionID: [UUID: [Date]],
+        within windowDays: Int = 7,
+        now: Date = Date()
+    ) -> [(record: DecisionRecord, halfLifeDays: Int, anniversaryDate: Date)] {
+        var hits: [(DecisionRecord, Int, Date)] = []
+        for record in records {
+            let refs = referencesByDecisionID[record.id] ?? []
+            let reverb = reverb(for: record, references: refs, now: now)
+            guard let halfDays = reverb.halfLifeDays else { continue }
+            let anniversary = record.decidedAt.addingTimeInterval(Double(halfDays) * 86400)
+            let daysUntil = anniversary.timeIntervalSince(now) / 86400
+            if abs(daysUntil) <= Double(windowDays) {
+                hits.append((record, halfDays, anniversary))
+            }
+        }
+        // Soonest first
+        hits.sort { $0.2 < $1.2 }
+        return hits
     }
 }
 
