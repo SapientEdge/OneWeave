@@ -14,6 +14,67 @@ struct GraphInsight: Identifiable {
     let domains: [String]
     let suggestedAction: String?
     let essenceBonus: Double
+    /// Cycle 33 / GLM B2: every insight carries a tappable citation chain
+    /// back to the entries that produced it. The user can tap any insight
+    /// to see which LifeEntity ids, decision-log entries, and thread events
+    /// contributed. This makes algorithmic confidence *auditable* — the
+    /// privacy-first inversion of black-box AI. Default: empty chain,
+    /// backward-compatible with the existing InsightGenerator consumers.
+    let citations: [InsightCitation]
+    /// Human-readable explanation of the rule that fired (for the
+    /// Settings → Algorithm Weights screen). Empty for legacy insights.
+    let ruleExplanation: String
+
+    init(
+        title: String,
+        description: String,
+        confidence: Double,
+        domains: [String],
+        suggestedAction: String?,
+        essenceBonus: Double,
+        citations: [InsightCitation] = [],
+        ruleExplanation: String = ""
+    ) {
+        self.id = UUID()
+        self.title = title
+        self.description = description
+        self.confidence = confidence
+        self.domains = domains
+        self.suggestedAction = suggestedAction
+        self.essenceBonus = essenceBonus
+        self.citations = citations
+        self.ruleExplanation = ruleExplanation
+    }
+}
+
+/// Cycle 33 / GLM B2: a single link in an insight's citation chain.
+/// Points back to one user-owned record (entity, decision, or thread).
+public struct InsightCitation: Codable, Equatable, Identifiable {
+    public let id: UUID
+    public let kind: CitationKind
+    public let sourceID: String         // LifeEntity.id, DecisionLogEntry.id, etc.
+    public let title: String            // human-readable label for the Settings UI
+    public let contributedWeight: Double  // 0..1; how much this source contributed
+
+    public enum CitationKind: String, Codable, CaseIterable {
+        case entity       // LifeEntity (Life Graph node)
+        case decision     // DecisionLogEntry
+        case thread       // Thread event (careKin, stewardship, meaning)
+        case reflection   // Sealed reflection / Sacred Echo
+    }
+
+    public init(
+        kind: CitationKind,
+        sourceID: String,
+        title: String,
+        contributedWeight: Double = 1.0
+    ) {
+        self.id = UUID()
+        self.kind = kind
+        self.sourceID = sourceID
+        self.title = title
+        self.contributedWeight = max(0.0, min(1.0, contributedWeight))
+    }
 }
 
 // MARK: - Insight Generator State
@@ -137,13 +198,19 @@ struct GraphInsightGenerator {
         // 1. Harmony vs Quest Completion (existing data + graph)
         let highHarmonyQuests = entities.filter { $0.type == .task && $0.harmonyImpact > 0.7 }.count
         if context.harmonyScore > 0.7 && context.completedQuestCount > 5 && highHarmonyQuests > 2 {
+            // Cycle 33 / GLM B2: cite the top-3 high-harmony quest entities
+            let topQuests = entities.filter { $0.type == .task && $0.harmonyImpact > 0.7 }.prefix(3)
             insights.append(GraphInsight(
                 title: "High Harmony + Quest Momentum",
                 description: "Your harmony is strong and you're completing quests with high impact. This pattern often precedes major life coherence jumps.",
                 confidence: 0.85,
                 domains: ["wellness", "productivity"],
                 suggestedAction: "Forge a custom quest linking a CareKin thread to a Meaning goal.",
-                essenceBonus: 15
+                essenceBonus: 15,
+                citations: topQuests.map { e in
+                    InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: min(1.0, e.harmonyImpact))
+                },
+                ruleExplanation: "Fires when harmonyScore > 0.7 AND completedQuestCount > 5 AND > 2 high-harmony quests exist."
             ))
         }
         
@@ -151,13 +218,21 @@ struct GraphInsightGenerator {
         if !entities.isEmpty {
             let avgResonance = entities.reduce(0.0) { $0 + LifeGraph.calculateResonance(for: $1, allEntities: entities) } / Double(entities.count)
             if avgResonance > 0.75 {
+                // Cycle 33 / GLM B2: cite the top-5 resonance contributors
+                let topResonance = entities.sorted { a, b in
+                    LifeGraph.calculateResonance(for: a, allEntities: entities) > LifeGraph.calculateResonance(for: b, allEntities: entities)
+                }.prefix(5)
                 insights.append(GraphInsight(
                     title: "Strong Weave Resonance Detected",
                     description: "Your Life Graph shows high connection strength across threads. Relationships and events are reinforcing each other.",
                     confidence: 0.78,
                     domains: ["social", "meaning"],
                     suggestedAction: "Share a subset of high-resonance entities via Weave Circle (P2P) for reflection.",
-                    essenceBonus: 10
+                    essenceBonus: 10,
+                    citations: topResonance.map { e in
+                        InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: min(1.0, LifeGraph.calculateResonance(for: e, allEntities: entities)))
+                    },
+                    ruleExplanation: "Fires when average LifeGraph resonance across all entities > 0.75."
                 ))
             }
         }
@@ -171,19 +246,29 @@ struct GraphInsightGenerator {
                 confidence: 0.7,
                 domains: ["wellness", "stewardship"],
                 suggestedAction: "Create a 'Relationship Decay Check' quest for CareKin entities.",
-                essenceBonus: 8
+                essenceBonus: 8,
+                citations: entities.filter { $0.domains.contains("CareKin") }.prefix(3).map { e in
+                    InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: 0.5)
+                },
+                ruleExplanation: "Fires when season == Autumn AND energyProfile == .low AND graceDaysUsed > 0."
             ))
         }
         
         // 4. Coherence vs Mastery (unique fusion)
         if context.lifeCoherenceScore > 0.65 && context.masteryTiers.values.contains(where: { $0 >= 3 }) {
+            // Cycle 33 / GLM B2: cite the highest-mastery thread(s)
+            let topMastery = context.masteryTiers.filter { $0.value >= 3 }
             insights.append(GraphInsight(
                 title: "Coherence-Mastery Alignment",
                 description: "High life coherence combined with mastery progress in one or more threads. This is rare and valuable.",
                 confidence: 0.9,
                 domains: ["growth", "meaning"],
                 suggestedAction: nil,
-                essenceBonus: 20
+                essenceBonus: 20,
+                citations: topMastery.map { (thread, tier) in
+                    InsightCitation(kind: .thread, sourceID: thread, title: "\(thread) (tier \(tier))", contributedWeight: min(1.0, Double(tier) / 5.0))
+                },
+                ruleExplanation: "Fires when lifeCoherenceScore > 0.65 AND any masteryTier >= 3."
             ))
         }
         
@@ -196,7 +281,11 @@ struct GraphInsightGenerator {
                 confidence: 0.65,
                 domains: ["intelligence"],
                 suggestedAction: "Convert recent high-impact TimelineEvents into Concept entities.",
-                essenceBonus: 5
+                essenceBonus: 5,
+                citations: entities.filter { $0.memoryType == .episodic }.prefix(3).map { e in
+                    InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: 0.3)
+                },
+                ruleExplanation: "Fires when episodic entities > 60% of all entities."
             ))
         }
 
@@ -240,7 +329,12 @@ struct GraphInsightGenerator {
                     confidence: min(0.95, 0.5 + 0.1 * Double(conflicting.count)),
                     domains: Array(Set(concept.domains + conflicting.flatMap { $0.domains })),
                     suggestedAction: ritual,
-                    essenceBonus: 12  // only awarded on reflection
+                    essenceBonus: 12,  // only awarded on reflection
+                    citations: [InsightCitation(kind: .entity, sourceID: concept.id.uuidString, title: concept.title, contributedWeight: 0.7)]
+                        + conflicting.prefix(3).map { e in
+                            InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: 0.3)
+                        },
+                    ruleExplanation: "Fires when a .concept entity shares a domain with an .event/.task entity of negative harmonyImpact."
                 ))
             }
         }
@@ -263,7 +357,11 @@ struct GraphInsightGenerator {
                 confidence: 0.72,
                 domains: ["stewardship", "wellness"],
                 suggestedAction: "Ritual: name one Stewardship commitment you can soften this week, and one small CareKin or Body weave to place beside it.",
-                essenceBonus: 12
+                essenceBonus: 12,
+                citations: entities.filter { $0.domains.contains("Stewardship") && $0.harmonyImpact > 0.1 }.prefix(3).map { e in
+                    InsightCitation(kind: .entity, sourceID: e.id.uuidString, title: e.title, contributedWeight: 0.4)
+                },
+                ruleExplanation: "Fires when >= 3 Stewardship entities with harmony > 0.1 AND (body depletion OR no CareKin entities)."
             ))
         }
 
