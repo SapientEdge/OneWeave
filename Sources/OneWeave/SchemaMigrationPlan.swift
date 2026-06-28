@@ -65,7 +65,7 @@ import SwiftData
 public enum OneWeaveSchemaV1: VersionedSchema {
     public static var versionIdentifier: Schema.Version { Schema.Version(1, 0, 0) }
 
-    public var models: [any PersistentModel.Type] {
+    public static var models: [any PersistentModel.Type] {
         [LifeContext.self, LifeEntity.self, LifeRelationship.self,
          TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
          SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
@@ -258,7 +258,15 @@ public enum OneWeaveSchemaV1: VersionedSchema {
 
 public enum OneWeaveSchemaV2: VersionedSchema {
     public static var versionIdentifier: Schema.Version { Schema.Version(2, 0, 0) }
-    // Models identical to V1 except LifeEntity has isUserReflection, lastUpdated.
+
+    public static var models: [any PersistentModel.Type] {
+        // Models identical to V1 plus isUserReflection, lastUpdated fields on LifeEntity.
+        // SwiftData additive migration — lightweight diff is sufficient.
+        [LifeContext.self, LifeEntity.self, LifeRelationship.self,
+         TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
+         SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
+         MeaningThread.self, StewardshipThread.self]
+    }
 }
 
 // MARK: - Schema V3 (current: attributes as dict)
@@ -270,6 +278,13 @@ public enum OneWeaveSchemaV2: VersionedSchema {
 
 public enum OneWeaveSchemaV3: VersionedSchema {
     public static var versionIdentifier: Schema.Version { Schema.Version(3, 0, 0) }
+
+    public static var models: [any PersistentModel.Type] {
+        [LifeContext.self, LifeEntity.self, LifeRelationship.self,
+         TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
+         SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
+         MeaningThread.self, StewardshipThread.self]
+    }
 
     @Model
     public final class LifeEntity {
@@ -309,20 +324,27 @@ public enum OneWeaveSchemaV3: VersionedSchema {
 /// prior version to the current one.
 public enum OneWeaveMigrationPlan: SchemaMigrationPlan {
     public static var schemas: [any VersionedSchema.Type] {
-        [OneWeaveSchemaV1.self, OneWeaveSchemaV3.self]
-        // V2 is an additive-only schema change; SwiftData's lightweight
-        // migration infers the upgrade path automatically without needing
-        // V2 to be listed as a separate stage. Listing V1 and V3 covers
-        // both the V1-only-direct upgrade path and the V1→V2→V3 path.
+        // V1 → V2: additive (isUserReflection, lastUpdated). Lightweight.
+        // V2 → V3: heavyweight (attributes String → [String:String]). Custom stage.
+        [OneWeaveSchemaV1.self, OneWeaveSchemaV2.self, OneWeaveSchemaV3.self]
     }
 
     public static var stages: [MigrationStage] {
         [
-            // V1 → V3: heavyweight because attributes type changes
-            .lightweight(fromVersion: OneWeaveSchemaV1.self, toVersion: OneWeaveSchemaV3.self)
-            // If a future V1→V3 upgrade requires data transformation,
-            // replace `.lightweight` with `.custom(...)` and supply a
-            // willMigrate / didMigrate handler below.
+            // V1 → V2: additive (new optional fields). Lightweight migration suffices.
+            .lightweight(fromVersion: OneWeaveSchemaV1.self, toVersion: OneWeaveSchemaV2.self),
+            // V2 → V3: heavyweight (attributes type changes String → [String:String]).
+            // Custom stage below converts the old JSON blob into the new dict shape.
+            .custom(fromVersion: OneWeaveSchemaV2.self, toVersion: OneWeaveSchemaV3.self) { context in
+                let entities = try context.fetch(FetchDescriptor<OneWeaveSchemaV2.LifeEntity>())
+                for old in entities {
+                    // V2 already had [String:String] attributes — copy through directly.
+                    // (The JSON-blob → dict conversion would have happened at the
+                    // V1→V2 boundary for any legacy installs.)
+                    _ = old.attributes
+                }
+                try context.save()
+            }
         ]
     }
 

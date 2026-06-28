@@ -30,7 +30,7 @@ struct LifeEntitySnapshot: Codable {
     let memoryType: String
     let isPrivate: Bool
     let allowedCategories: [String]
-    let attributes: String  // JSON bag (e.g. HealthMetrics for Body Thread)
+    let attributes: [String: String]  // matches LifeEntity.attributes (V3+)
 }
 
 struct PendingWeaveShare {
@@ -128,9 +128,22 @@ struct P2PWeaveShare {
         from entities: [LifeEntity],
         circleName: String = "Trusted Weave Circle",
         requireReflection: Bool = true,
-        senderReflection: String? = nil
+        senderReflection: String? = nil,
+        // Cycle 41 finding A4 (constitutional §2 / invariant #7):
+        // read the live Data Leash BEFORE building any share.
+        // Default `.strictDefault` keeps it fail-closed for callers not
+        // yet updated. Call sites must pass `context.currentLeash(in:)`.
+        leash: DataLeashState = .strictDefault
     ) -> WeaveCircleShare? {
-        
+
+        // Invariant #7: read the live P2P leash FIRST. Fail closed if off.
+        // (Per-entity filter below is a soft gate; the global P2P toggle
+        // is the hard gate and was missing before cycle 41.)
+        guard leash.isAllowed(.p2p) else {
+            print("[P2P] Data Leash: P2P sharing disabled. No share created.")
+            return nil
+        }
+
         let filtered = entities.filter { entity in
             // Data Leash (Privacy Tier-1 contract):
             // - Only share entities the user has explicitly allowed.
@@ -140,12 +153,12 @@ struct P2PWeaveShare {
             let allowed = entity.allowedCategories
             return !allowed.isEmpty && allowed.contains { $0.lowercased() != "private" }
         }
-        
+
         guard !filtered.isEmpty else {
             print("[P2P] No shareable entities (Data Leash filtered)")
             return nil
         }
-        
+
         if requireReflection && senderReflection == nil {
             print("[P2P] Reflection gate: Must provide note before sharing sensitive entities")
             return nil
@@ -255,13 +268,16 @@ struct P2PWeaveShare {
 // Extension for easy sharing from LifeContext
 extension LifeContext {
     func shareViaP2P(selectedEntities: [LifeEntity], circleName: String = "My Weave Circle", reflection: String? = nil) {
+        // Cycle 41 finding A4: pass live Data Leash to the share creator.
+        let leash = currentLeash(in: nil)
         guard let share = P2PWeaveShare.createCircleShare(
             from: selectedEntities,
             circleName: circleName,
             requireReflection: true,
-            senderReflection: reflection
+            senderReflection: reflection,
+            leash: leash
         ) else { return }
-        
+
         P2PWeaveShare.queueShare(share)
         P2PWeaveShare.sendViaWebRTC(share: share, to: "trusted-peer")
         // Also offer QR: let qr = P2PWeaveShare.generateQRForShare(share)

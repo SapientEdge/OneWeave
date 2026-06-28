@@ -246,7 +246,8 @@ public struct DataLeashSettingsView: View {
 
 // MARK: - Convenience accessor for code that needs the leash state.
 
-public extension LifeContext {
+// `internal` not `public` — LifeContext is internal, so its extension must be too.
+extension LifeContext {
     /// Fetch the current DataLeashState. Caller is expected to refresh after settings changes.
     /// Nemotron finding #7: previously hardcoded to .strictDefault — now actually reads from
     /// the shared ModelContainer so user toggles are honoured by every integration call.

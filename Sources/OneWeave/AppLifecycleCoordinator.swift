@@ -259,9 +259,9 @@ public enum LifeGraphPersistence {
         // (Production could rotate this per-session via a Keychain-stored
         // envelope key id; out of scope for Tier A #5.)
         let envelopeKeyID = AppLifecycleConstants.envelopeKeyID
-        let seed = SacredEchoCipher.vaultSeed()
-        let key = SacredEchoCipher.perEchoKey(for: envelopeKeyID, seed: seed)
-        let nonceData = randomBytes(count: 12)
+        let seed = try SacredEchoCipher.vaultSeed()
+        let key = try SacredEchoCipher.perEchoKey(for: envelopeKeyID, seed: seed)
+        let nonceData = try randomBytes(count: 12)
         let n = try AES.GCM.Nonce(data: nonceData)
         let box = try AES.GCM.seal(plain, using: key, nonce: n)
         var out = Data()
@@ -338,7 +338,7 @@ public enum LifeGraphPersistence {
 
     // MARK: - Private helpers
 
-    private static func randomBytes(count: Int) -> Data {
+    private static func randomBytes(count: Int) throws -> Data {
         var bytes = Data(count: count)
         #if canImport(Security)
         let status = bytes.withUnsafeMutableBytes { ptr -> Int32 in
@@ -358,8 +358,9 @@ public enum LifeGraphPersistence {
                     return bytes
                 }
             }
-            // Final fallback failed — fail closed.
-            fatalError("[AppLifecycle] Cannot obtain secure random bytes for envelope encryption")
+            // Final fallback failed — fail closed with a typed error
+            // (was `fatalError` per Codex cycle-41 BLOCKER).
+            throw PersistenceError.secureRandomUnavailable
         }
         #else
         // Linux dev harness. Per Claude cycle-24 finding #1, `read(fd, bytes, count)`
@@ -372,7 +373,9 @@ public enum LifeGraphPersistence {
             }
             close(fd)
         } else {
-            fatalError("[AppLifecycle] Cannot open /dev/urandom")
+            // Final fallback failed — fail closed with a typed error
+            // (was `fatalError` per Codex cycle-41 BLOCKER).
+            throw PersistenceError.secureRandomUnavailable
         }
         #endif
         return bytes
@@ -381,6 +384,7 @@ public enum LifeGraphPersistence {
 
 public enum PersistenceError: Error {
     case corruptEnvelope
+    case secureRandomUnavailable
 }
 
 // MARK: - AppLifecycleCoordinator

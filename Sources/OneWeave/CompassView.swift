@@ -6,7 +6,7 @@ import SwiftData
 // No network, no external calls, no training. Export/clear works via Settings. Reflection gates anti-addiction.
 
 struct CompassView: View {
-    @Environment(\\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
     @Query(sort: \\TimelineEvent.timestamp, order: .reverse) private var allEvents: [TimelineEvent]
     @Query private var allQuests: [WeaveQuest]
@@ -718,7 +718,7 @@ struct StateMachineIndicator: View {
 }
 
 struct WeaveSummaryView: View {
-    @Environment(\\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
     @Environment(AppStateMachine.self) private var stateMachine
     

@@ -185,7 +185,7 @@ public enum ContactsIntegration {
                         .filter { !$0.isEmpty }
                         .joined(separator: " ")
                     if !name.isEmpty {
-                        results.append((name, contact.organizationName ?? ""))
+                        results.append((name, contact.organizationName))
                     }
                     if results.count >= 200 {
                         stop.pointee = true

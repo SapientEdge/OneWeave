@@ -11,7 +11,7 @@ import SwiftData
 
 struct ThreadDetailView: View {
     let threadName: String
-    @Environment(\\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
     @Query(sort: \TimelineEvent.timestamp, order: .reverse) private var allEvents: [TimelineEvent]
     @Query private var allQuests: [WeaveQuest]
@@ -453,7 +453,15 @@ struct ThreadDetailView: View {
         )
         ctx.awardBonusEssence(2, reason: "echo from \(threadName)")
         if var tier = ctx.masteryTiers["Meaning"] {
-            if Int.random(in: 0..<3) == 0 { 
+            // Cycle 41 finding A2: respect ApprenticeKnot cap at this mutation
+            // site (was the fourth of three bypass sites in the survey;
+            // originally Claude listed 3 but the Meaning ripple is a 4th).
+            let cap = MasteryKnotEngine.maxTier(
+                for: "Meaning",
+                currentTier: tier,
+                knots: ctx.apprenticeKnots
+            )
+            if (cap == Int.max || cap > tier) && Int.random(in: 0..<3) == 0 {
                 ctx.masteryTiers["Meaning"] = min(4, tier + 1)
             }
         }
