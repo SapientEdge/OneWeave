@@ -17,7 +17,11 @@ TOTAL_FAIL=0
 SUITE_COUNT=0
 SUITE_PASS=0
 
-for suite in .research/validate_*.py; do
+# Scan both .research/ (existing) and audit/validators/ (new audit wrappers)
+shopt -s nullglob
+SUITES=(.research/validate_*.py audit/validators/validate_*.py)
+shopt -u nullglob
+for suite in "${SUITES[@]}"; do
     SUITE_COUNT=$((SUITE_COUNT + 1))
     name=$(basename "$suite" .py)
     echo ""
