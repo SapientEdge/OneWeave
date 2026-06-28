@@ -55,8 +55,18 @@ public enum EchoLifecycleState: String, Codable, CaseIterable {
     case opened
     /// User opened and confirmed hand-delivery to the heir (terminal state).
     case delivered
-    /// User explicitly released the echo without opening (terminal state).
+    /// User released the echo without an heir (terminal state).
     case released
+}
+
+/// Cycle 35 / T153 (GLM A4): kind of echo. `regular` is the default —
+/// the echo auto-unseals when unlockAt passes and the user opens it.
+/// `timeCapsule` adds a *second* layer: auto-unseal also asks "has anything
+/// changed?" and requires a fresh reflection prompt before the plaintext
+/// is shown. Honors Constitution §4 (reflection-gated everything).
+public enum EchoKind: String, Codable, CaseIterable {
+    case regular
+    case timeCapsule
 }
 
 // MARK: - Echo error surface
@@ -110,6 +120,11 @@ public final class SacredEcho {
     public var openedAt: Date?
     public var stateRaw: String              // EchoLifecycleState.rawValue
 
+    /// Cycle 35 / T153 (GLM A4): kind of echo. Defaults to .regular for
+    /// backwards compatibility with echoes sealed before cycle 35. Time
+    /// capsules layer a reflection-prompt gate on top of the unlock gate.
+    public var kindRaw: String              // EchoKind.rawValue
+
     /// Encrypted reflection (base64 of ciphertext). NEVER plaintext at rest.
     public var ciphertext: Data
     /// Per-echo nonce (12 bytes for AES-GCM).
@@ -145,7 +160,8 @@ public final class SacredEcho {
         tag: Data,
         unlockAt: Date,
         heirLifeEntityID: String = "",
-        attributes: [String: String] = [:]
+        attributes: [String: String] = [:],
+        kind: EchoKind = .regular
     ) {
         self.id = id
         self.title = title
@@ -154,11 +170,19 @@ public final class SacredEcho {
         self.unlockAt = unlockAt
         self.openedAt = nil
         self.stateRaw = EchoLifecycleState.sealed.rawValue
+        self.kindRaw = kind.rawValue
         self.ciphertext = ciphertext
         self.nonce = nonce
         self.tag = tag
         self.heirLifeEntityID = heirLifeEntityID
         self.attributes = attributes
+    }
+
+    /// Cycle 35 / T153 (GLM A4): the kind of echo. Defaults to .regular
+    /// for echoes sealed before the field existed.
+    public var kind: EchoKind {
+        get { EchoKind(rawValue: kindRaw) ?? .regular }
+        set { kindRaw = newValue.rawValue }
     }
 
     /// Lifecycle state derived from wall-clock + openedAt.
@@ -655,5 +679,85 @@ public enum SacredEchoStore {
         let heirEntity = context.lifeGraphEntities.first { $0.id.uuidString == heirLifeEntityID }
         guard let entity = heirEntity else { throw EchoError.heirNotInWeaveCircle }
         guard entity.domains.contains("CareKin") else { throw EchoError.heirNotInWeaveCircle }
+    }
+
+    // MARK: - Cycle 35 / T153 (GLM A4): Time Capsule auto-unseal
+
+    /// A reflection prompt that gates the unsealing of a time-capsule echo.
+    /// The user must write a non-empty reflection answering the question
+    /// before the plaintext is decrypted and shown.
+    public struct TimeCapsuleInvite: Codable, Equatable {
+        public let echoID: UUID
+        public let echoTitle: String
+        public let prompt: String
+        public let sealedAt: Date
+        public let unlockAt: Date
+        public let yearsSinceSealed: Double
+        public let isReady: Bool
+
+        public init(
+            echoID: UUID,
+            echoTitle: String,
+            prompt: String,
+            sealedAt: Date,
+            unlockAt: Date,
+            yearsSinceSealed: Double,
+            isReady: Bool
+        ) {
+            self.echoID = echoID
+            self.echoTitle = echoTitle
+            self.prompt = prompt
+            self.sealedAt = sealedAt
+            self.unlockAt = unlockAt
+            self.yearsSinceSealed = yearsSinceSealed
+            self.isReady = isReady
+        }
+    }
+
+    /// Build the time-capsule invite for an echo. Only meaningful when
+    /// `echo.kind == .timeCapsule`. For regular echoes, returns an invite
+    /// whose `prompt` describes the standard unseal flow.
+    ///
+    /// UX: "Sealed on 2026-06-28. Opens 2027-06-28. Unseal will ask:
+    ///      has anything changed?"
+    public static func timeCapsuleInvite(
+        for echo: SacredEcho,
+        now: Date = SacredEcho.now()
+    ) -> TimeCapsuleInvite {
+        let yearsSince = now.timeIntervalSince(echo.createdAt) / (365.25 * 86400)
+        let isReady = echo.unlockAt <= now
+
+        let prompt: String
+        switch echo.kind {
+        case .timeCapsule:
+            if isReady {
+                prompt = "Sealed on \(formatDate(echo.createdAt)). Opens \(formatDate(echo.unlockAt)). " +
+                         "Unseal will ask: has anything changed?"
+            } else {
+                let days = Int(echo.unlockAt.timeIntervalSince(now) / 86400)
+                let dayWord = days == 1 ? "day" : "days"
+                prompt = "Sealed on \(formatDate(echo.createdAt)). Opens \(formatDate(echo.unlockAt)) " +
+                         "— \(days) \(dayWord) from now."
+            }
+        case .regular:
+            prompt = "Echo sealed on \(formatDate(echo.createdAt))."
+        }
+
+        return TimeCapsuleInvite(
+            echoID: echo.id,
+            echoTitle: echo.title,
+            prompt: prompt,
+            sealedAt: echo.createdAt,
+            unlockAt: echo.unlockAt,
+            yearsSinceSealed: yearsSince,
+            isReady: isReady
+        )
+    }
+
+    /// Private ISO date formatter for status text.
+    private static func formatDate(_ d: Date) -> String {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+        return f.string(from: d)
     }
 }
