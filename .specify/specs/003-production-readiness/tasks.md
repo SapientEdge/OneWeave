@@ -535,4 +535,176 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 **Cycle 30 Linux total: ~7-8 hours focused work (50 new Linux tasks T097-T146)**
 **Mac total: ~22-30 hours focused work (44 Mac tasks M01-M44)**
 
+---
+
+## Phase T16: Honest Gap Closure — Cycle 39 (2026-06-28)
+
+**Purpose**: Address the gaps identified in compound-force analysis + Apple Intelligence
+integration that preserves constitutional commitments (no LLM generation, only retrieval/embeddings).
+
+Source: user feedback 2026-06-28 (cycles 36-38 wrap-up + compound-force analysis + honest-gap list).
+
+### Task dependency graph
+
+```
+T171 (refactor LifeGraph.embeddingData hook)
+  ├─ T172 (add NLEmbedding.sentenceEmbedding for 512-dim retrieval)
+  │    └─ T173 (LifeGraph.semanticSearch rerank via cosine)
+  │         └─ T176 (QuickCapture semantic fallback)
+  ├─ T174 (Add embeddings to new reflections in fromTimelineEvent)
+  │    └─ T175 (Add embeddings to new reflections in fromQuest path)
+  └─ T178 (Telemetry: nil-safe fallback to lexical-only)
+
+T180 (Speech.framework voice capture — VoicePath.swift)
+  ├─ T181 (recognition + on-device-only assertion)
+  ├─ T182 (QuickCaptureInbox route to same classifier)
+  └─ T183 (Privacy gate: mic leash toggle + reflection gate)
+
+T184 (CreateML personal vitality model scaffold)
+  ├─ T185 (Define feature columns from LifeContext)
+  ├─ T186 (Build trainer that requires 200+ reflections before activating)
+  └─ T187 (Sandbox-bound .mlmodel + graceful skip if data sparse)
+
+T190 (iCloud Private Cloud Compute sync — design only, deferred impl)
+  └─ T191 (Decision: do not implement in v1.0)
+
+T200 (Cycle 39 validation: validators for all new code)
+  ├─ T201 (validate_cycle39_embeddings.py)
+  ├─ T202 (validate_cycle39_voice_capture.py)
+  └─ T203 (validate_cycle39_personal_model.py)
+
+T210 (Cycle 39 handoff doc)
+```
+
+### T171-T178 — On-device embeddings for semantic retrieval (no generation)
+
+**Why**: The Life Graph already has an `embeddingData: Data?` placeholder (LifeGraph.swift:29).
+Adding `NLEmbedding` (Apple-shipped, on-device, free) lets us do semantic search WITHOUT
+crossing the constitutional line into generation.
+
+- [ ] T171 **[Linux · M]** Refactor `LifeGraph.embeddingData` into a typed `LifeEmbedding` struct (512-dim `[Float]`, version, generated-at timestamp). Make all existing call sites nil-safe.
+  - Depends on: nothing
+  - Sub-tasks: T171a (struct definition), T171b (migration stub for SwiftData), T171c (update 5 call sites that read/write `embeddingData`)
+- [ ] T172 **[Linux · M]** Add `OnDeviceEmbedder.swift` wrapping `NLEmbedding.sentenceEmbedding(for: .english)`. Cache the embedder instance; expose `embed(_ text: String) -> [Float]?` with explicit nil on OOM/token-cap.
+  - Depends on: T171
+  - Sub-tasks: T172a (NLEmbedding import), T172b (thread-safety wrap with NSLock), T172c (token-cap test with 1000-token string)
+- [ ] T173 **[Linux · M]** Add `LifeGraph.semanticSearch(query:in:limit:)` using cosine similarity over embeddings, fallback to lexical if `embeddingData == nil` for >50% of corpus.
+  - Depends on: T172
+  - Sub-tasks: T173a (cosine function), T173b (fallback heuristic), T173c (top-k selection)
+- [ ] T174 **[Linux · S]** Wire `OnDeviceEmbedder.embed(...)` into `LifeEntity.fromTimelineEvent` for `isUserReflection == true` entries (use `title + summary` as text).
+  - Depends on: T172
+  - Sub-tasks: T174a (idempotency: don't re-embed if `embeddingData` already populated), T174b (background queue, not main)
+- [ ] T175 **[Linux · S]** Wire `OnDeviceEmbedder.embed(...)` into `LifeEntity.fromQuest(_:context:)` for reflections.
+  - Depends on: T172, T174
+  - Sub-tasks: T175a (reuse pattern from T174), T175b (verify dual-path coverage)
+- [ ] T176 **[Linux · S]** Update `QuickCaptureInbox` to use `semanticSearch` as a tie-breaker when lexical confidence < 0.6.
+  - Depends on: T173
+  - Sub-tasks: T176a (threshold test), T176b (preserve existing 38/38 lexical tests)
+- [ ] T177 **[Linux · M]** Update `InvisibleMentor` quote-selection to prefer semantically-similar past reflections over lexically-matched ones.
+  - Depends on: T173
+  - Sub-tasks: T177a (rerank scores), T177b (preserve "deterministic synthesizer" constitutional commitment)
+- [ ] T178 **[Linux · S]** Telemetry: when >50% of corpus has no embedding, fall back to lexical-only and surface a one-time UI hint "Search will improve as you add reflections."
+  - Depends on: T173
+  - Sub-tasks: T178a (counter), T178b (UI hint via @Published bool)
+
+### T180-T183 — Voice capture via Speech.framework
+
+**Why**: Original research doc said "text/voice/image" for Quick Capture. We have text.
+`Speech.framework` is on-device (with `requiresOnDeviceRecognition = true`).
+
+- [ ] T180 **[Mac · S]** Create `VoiceCapture.swift`. Wrap `SFSpeechRecognizer` + `AVAudioEngine`. Assert `supportsOnDeviceRecognition == true`; fail closed if not.
+  - Sub-tasks: T180a (audio session config), T180b (permission request flow), T180c (fail-closed check)
+- [ ] T181 **[Mac · S]** Add mic toggle to `DataLeashSettings` (10th category: Microphone).
+  - Depends on: T180
+  - Sub-tasks: T181a (leash state field), T181b (UI in SettingsView), T181c (validate_data_leash_privacy.py integration)
+- [ ] T182 **[Mac · S]** Wire voice transcription text into `QuickCaptureInbox.handle(_:)`.
+  - Depends on: T180, T181
+  - Sub-tasks: T182a (debounce 1s silence → commit), T182b (preserve reflection gate)
+- [ ] T183 **[Mac · S]** Add Info.plist usage strings: `NSSpeechRecognitionUsageDescription`, `NSMicrophoneUsageDescription`.
+  - Depends on: T180
+  - Sub-tasks: T183a (Info.plist entries), T183b (PrivacyInfo.xcprivacy update)
+
+### T184-T187 — CreateML personal vitality model (scaffold only)
+
+**Why**: Original user vision: "a model that evolves with the user". `CreateML` lets us
+train on the user's own data, ship inside the app sandbox. Scaffold only — needs 200+ reflections
+before it activates (constitutional commitment: no premature ML).
+
+- [ ] T184 **[Mac · L]** Add `PersonalVitalityModel.swift` with a stub trainer (`requiresMinSampleCount = 200`). Always returns nil until sample count met.
+  - Sub-tasks: T184a (CreateML import guard), T184b (feature column spec), T184c (scaffold)
+- [ ] T185 **[Mac · M]** Define feature columns: `daysSinceLastReflection`, `questCompletionRate`, `energyProfile`, `harmonyScore`, `cognitiveLoad`, `socialInteractionCount`.
+  - Depends on: T184
+  - Sub-tasks: T185a (column extractor from LifeContext), T185b (normalization)
+- [ ] T186 **[Mac · L]** Trainer: `MLTrainingSession` style — only runs in background, never on main, never logged.
+  - Depends on: T185
+  - Sub-tasks: T186a (background task gate), T186b (no-PII assertion), T186c (audit log)
+- [ ] T187 **[Mac · M]** Persist trained `.mlmodel` in app sandbox; load via `compiledMLModel`. Graceful skip if model file missing.
+  - Depends on: T186
+  - Sub-tasks: T187a (sandbox path), T187b (load with try?), T187c (use in CognitiveLoad only if loaded)
+
+### T190-T191 — iCloud Private Cloud Compute sync — DECISION
+
+- [ ] T190 **[Decision]** Document decision in `CONSTITUTION_v3_DRAFT.md`: NOT implementing Private Cloud Compute sync in v1.0. Reasons: (1) SwiftData+CloudKit requires E2EE custom schema, (2) conflicts with "no server" promise in onboarding, (3) deferred to v1.1 with explicit user opt-in flow.
+  - Sub-tasks: T190a (write decision doc), T190b (link from constitution)
+- [ ] T191 **[Linux · S]** Update `OnboardingView.swift:15` to explicitly say "no cloud sync by default and not available in this version" (replace existing "no cloud sync" claim with the stronger version).
+  - Depends on: T190
+  - Sub-tasks: T191a (text change), T191b (PrivacyInfo.xcprivacy NSPrivacyAccessedAPITypes)
+
+### T200-T203 — Cycle 39 validation
+
+- [ ] T200 **[Linux · M]** Add `validate_cycle39_embeddings.py` — verify NLEmbedding wrapper, cosine math, fallback to lexical, idempotent embedding.
+- [ ] T201 **[Linux · M]** Add `validate_cycle39_voice_capture.py` — verify VoiceCapture fail-closed logic (mocked SFSpeechRecognizer).
+- [ ] T202 **[Linux · M]** Add `validate_cycle39_personal_model.py` — verify trainer requires 200+ samples, no-PII assertion, graceful skip when model missing.
+- [ ] T203 **[Linux · S]** Update `validate_all.sh` to include all 3 new suites. Target: 44/44 suites green (was 41).
+
+### T210 — Cycle 39 handoff
+
+- [ ] T210 **[Linux · S]** Write `ONEWEAVE_HANDOFF_CYCLE_39.md` covering: T171-T187 design rationale (why NLEmbedding yes, generation no), constitutional compliance, Mac-side handoff notes for T180-T187.
+
+---
+
+## Phase T17: Calm UX Mac Polish — Cycle 40 (2026-06-28)
+
+**Purpose**: Ship the calm UX micro-interactions from the GLM C-series (T162-T169).
+These are mostly Mac-side but several have Linux-fixable scaffolding.
+
+- [ ] T220 **[Mac · S]** T162 — Breath-bounded actions: add `BreathBoundedCommit` SwiftUI modifier (4s curve before .commit()).
+- [ ] T221 **[Mac · S]** T163 — Haptic signature per thread: `HapticSignature.for(thread: ThreadKind) -> SensoryFeedback`.
+- [ ] T222 **[Mac · S]** T164 — Anti-spring for serious actions: reflection-gated commits use `.easeOut(0.6)`.
+- [ ] T223 **[Mac · M]** T165 — Ambient hum on Loom idle (40Hz, 8s fade). Mac audio session coordination.
+- [ ] T224 **[Mac · S]** T166 — Long-press as "consider" (1.5s radial fill before menu).
+- [ ] T225 **[Mac · S]** T167 — Pull-to-reflect replaces pull-to-refresh.
+- [ ] T226 **[Linux · S]** T168 — Wire `CognitiveLoadReading.shouldDimUI` to root view `.saturation(0.85)` modifier.
+- [ ] T227 **[Mac · S]** T169 — Silent success: 200ms soft haptic + 1px inward contraction.
+- [ ] T228 **[Linux · M]** T170 — Void Thread: scaffold `VoidThread.swift` (entry type, HKDF-SHA256 self-deriving key, opaque storage). Mac UI deferred.
+- [ ] T229 **[Linux · S]** Add `validate_cycle40_ux.py` covering all 8 micro-interactions + Void Thread crypto.
+
+---
+
+## Phase T18: Multi-Agent Cross-CLI Synthesis — Cycle 41 (2026-06-28)
+
+**Purpose**: Run all 5 CLIs (Claude, Codex, Grok, GLM, Nemotron) on the same
+problem in parallel, synthesize the 5 reviews into a unified fix plan.
+
+- [ ] T230 **[Linux · S]** Dispatch `round_6_prompt.md` to all 5 CLIs in parallel PTYs with the graphify code graph as context.
+- [ ] T231 **[Linux · S]** Synthesize 5 reviews into unified fix list (Claude weights constitutional, Codex weights correctness, Grok weights architecture, GLM weights creative, Nemotron weights adversarial).
+- [ ] T232 **[Linux · S]** Apply consensus fixes from T231 to OneWeave.
+- [ ] T233 **[Linux · S]** Add `validate_cycle41_consensus.py` verifying each applied fix has a test.
+- [ ] T234 **[Linux · S]** Write `MULTI_AGENT_SYNTHESIS_CYCLE_41.md` documenting the cross-CLI review pattern.
+
+---
+
+## Updated Summary (post cycle 39)
+
+| Phase | Status | Owner | Effort |
+|---|---|---|---|
+| Phase T16: Cycle 39 honest-gap closure | 🔄 In progress | Linux + Mac split | 8-12 hours |
+| Phase T17: Cycle 40 calm UX polish | ⏳ Pending | Mac | 6-10 hours |
+| Phase T18: Cycle 41 multi-agent synthesis | ⏳ Pending | Linux | 4-6 hours |
+| Phase M1-M6: Mac compile + iOS features | ⏳ Pending | Mac | 22-30 hours |
+| Phase P1: GitHub Push | ⏳ Pending | User | 10 min |
+
+**New tasks added in cycle 39**: T171-T234 (64 tasks across 3 phases, mostly Linux-fixable)
+**Cumulative total**: 537 → 601 tasks
+
 **Master task count: T001-T146 Linux + M01-M44 Mac = 190 tasks, 5-CLI cross-verified + Hermes self-review.**
