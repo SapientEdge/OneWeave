@@ -566,7 +566,12 @@ struct CompassView: View {
             }
         }
         .sheet(isPresented: $showOnboarding) {
+            // A4 (Claude round-5 audit): prevent swipe-to-dismiss so users can't
+            // accidentally re-show the onboarding on every launch. The user MUST
+            // tap "Start Weaving" to set hasCompletedOnboarding = true (and that
+            // dismisses via dismiss()). Constitution: orientation flow.
             OnboardingView()
+                .interactiveDismissDisabled(true)
         }
         .sheet(isPresented: $showQuestReflection) {
             VStack(spacing: 16) {
