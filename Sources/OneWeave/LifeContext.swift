@@ -105,6 +105,11 @@ final class LifeContext {
     var graceDaysUsed: Int = 0
     var maxGraceDays: Int = 2
 
+    // Cycle 37: Apprentice knots (T149). Open knots cap mastery tier
+    // advancement — constitutional commitment to genuine mastery > time-served.
+    // See MasteryKnot.swift for the engine. Persisted by Mac side.
+    var apprenticeKnots: [ApprenticeKnot] = []
+
     // Cognitive load previous reading (for trend computation).
     // Stored on the model so it survives app restarts; not exported to widgets/snapshots.
     var previousCognitiveLoadReadingJSON: String = ""
@@ -447,7 +452,23 @@ var activeQuests: [UUID] = []
         }
         
         if masteryGain > 0 {
-            masteryTiers[thread] = min(4, currentTier + masteryGain)
+            // Cycle 37: constitutional gate — open apprentice knots cap tier
+            // advancement. MasteryKnotEngine.maxTier() returns the highest
+            // tier reachable given current knots. This makes the system
+            // refuse to advance while a user has unresolved questions,
+            // which is the whole point of the Apprentice Knots feature.
+            let currentTier = masteryTiers[thread] ?? 1
+            let cap = MasteryKnotEngine.maxTier(
+                for: thread,
+                currentTier: currentTier,
+                knots: apprenticeKnots
+            )
+            if cap == Int.max || cap >= currentTier + masteryGain {
+                masteryTiers[thread] = min(4, currentTier + masteryGain)
+            }
+            // If cap is below the desired gain, the increment is silently
+            // dropped. UI should show "Self tier awaits N knots" via
+            // MasteryKnotEngine.tierBlockedMessage().
         }
         
         // Cross-domain mastery tick for linked threads (resonance)

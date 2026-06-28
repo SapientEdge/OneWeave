@@ -377,6 +377,45 @@ def mastery_knot_max_tier(
 
 
 # ──────────────────────────────────────────────────────────────────────
+# Cycle 37: MasteryKnotEngine.maxTier cap enforcement
+# ──────────────────────────────────────────────────────────────────────
+
+def mastery_knot_engine_max_tier(
+        open_knot_count: int,
+        current_tier: int,
+    ) -> int:
+        """
+        MasteryKnotEngine.maxTier() — the canonical cap.
+        Mirrors MasteryKnot.swift:126-143.
+
+        - 0 open knots: no cap (returns sentinel that means "no cap")
+        - 1 open knot:  cap = current_tier (can't advance past it)
+        - 2+ open knots: cap = max(0, current_tier - 1)
+        """
+        if open_knot_count == 0:
+            return 10  # sentinel for "no cap" (tiers max at 4 in practice)
+        elif open_knot_count == 1:
+            return current_tier
+        else:
+            return max(0, current_tier - 1)
+
+
+def mastery_tier_advancement_allowed(
+    current_tier: int,
+    requested_gain: int,
+    open_knot_count: int,
+) -> bool:
+        """
+        True if the requested tier increment is allowed given the knot cap.
+        Mirrors LifeContext.updateMasteryFromEvent's new gate.
+        """
+        cap = mastery_knot_engine_max_tier(open_knot_count, current_tier)
+        if cap >= 10:  # no cap sentinel
+            return True
+        return cap >= current_tier + requested_gain
+
+
+# ──────────────────────────────────────────────────────────────────────
 # TEST CASES — actual numerical assertions with golden values
 # ──────────────────────────────────────────────────────────────────────
 
@@ -787,6 +826,72 @@ class TestComputedHarmonyScore(unittest.TestCase):
         self.assertAlmostEqual(0.35 + 0.25 + 0.20 + 0.20, 1.0, places=9)
 
 
+class TestMasteryKnotEngineCap(unittest.TestCase):
+    """Cycle 37 — MasteryKnotEngine.maxTier() cap enforcement."""
+
+    def test_zero_knots_no_cap(self):
+        cap = mastery_knot_engine_max_tier(open_knot_count=0, current_tier=2)
+        self.assertEqual(cap, 10, "0 knots = no cap (sentinel 10)")
+
+    def test_one_knot_cap_at_current_tier(self):
+        """1 open knot: cap = current_tier (can't advance past)."""
+        for tier in [1, 2, 3, 4]:
+            cap = mastery_knot_engine_max_tier(open_knot_count=1, current_tier=tier)
+            self.assertEqual(cap, tier, f"1 knot at tier {tier} → cap {tier}")
+
+    def test_two_plus_knots_pull_back(self):
+        """2+ open knots: cap = max(0, current_tier - 1)."""
+        cap = mastery_knot_engine_max_tier(open_knot_count=2, current_tier=3)
+        self.assertEqual(cap, 2)
+        cap = mastery_knot_engine_max_tier(open_knot_count=3, current_tier=2)
+        self.assertEqual(cap, 1)
+        # 0 floor: tier 0 with 5 knots is still 0
+        cap = mastery_knot_engine_max_tier(open_knot_count=5, current_tier=0)
+        self.assertEqual(cap, 0)
+
+    def test_advancement_allowed_no_knots(self):
+        """No knots → any gain allowed."""
+        self.assertTrue(mastery_tier_advancement_allowed(
+            current_tier=1, requested_gain=1, open_knot_count=0))
+        self.assertTrue(mastery_tier_advancement_allowed(
+            current_tier=1, requested_gain=3, open_knot_count=0))
+
+    def test_advancement_blocked_by_one_knot(self):
+        """1 open knot at tier 1 → cannot advance to tier 2."""
+        # Tier 1, gain 1: target tier 2, cap is 1 → blocked
+        self.assertFalse(mastery_tier_advancement_allowed(
+            current_tier=1, requested_gain=1, open_knot_count=1))
+        # But tier 1, gain 0: target tier 1, cap is 1 → allowed (no-op)
+        # Note: gain 0 wouldn't normally be called, but check anyway
+        # (this case is handled upstream — gain 0 means no call)
+        # Tier 2, gain 1: target tier 3, cap is 2 → blocked
+        self.assertFalse(mastery_tier_advancement_allowed(
+            current_tier=2, requested_gain=1, open_knot_count=1))
+
+    def test_advancement_pulled_back_by_two_knots(self):
+        """2+ open knots: cap is tier-1, can advance from 1→1 only."""
+        # Tier 1, 2 knots: cap = 0, target tier 2 → blocked
+        self.assertFalse(mastery_tier_advancement_allowed(
+            current_tier=1, requested_gain=1, open_knot_count=2))
+        # Tier 2, 2 knots: cap = 1, target tier 3 → blocked
+        self.assertFalse(mastery_tier_advancement_allowed(
+            current_tier=2, requested_gain=1, open_knot_count=2))
+        # Tier 3, 2 knots: cap = 2, target tier 4 → blocked
+        self.assertFalse(mastery_tier_advancement_allowed(
+            current_tier=3, requested_gain=1, open_knot_count=2))
+
+    def test_constitutional_commitment(self):
+        """The constitutional commitment: with 1+ open knot, you cannot
+        advance your tier. This is the whole point of Apprentice Knots."""
+        # Any (currentTier, openKnots>=1, requestedGain>0) → blocked
+        for tier in [1, 2, 3]:
+            for knots in [1, 2, 3]:
+                self.assertFalse(
+                    mastery_tier_advancement_allowed(
+                        current_tier=tier, requested_gain=1, open_knot_count=knots),
+                    f"Constitutional violation: tier {tier} with {knots} knots should not advance")
+
+
 class TestRecordReflectionIdempotency(unittest.TestCase):
     """Cycle 37 — recordReflection(at:) idempotency semantics."""
 
@@ -977,7 +1082,8 @@ if __name__ == "__main__":
     suite = unittest.TestSuite()
     for cls in [TestCognitiveLoad, TestVitality, TestRhizomeIndex,
                 TestTonalCoherence, TestReflectionGate, TestDecisionReverb,
-                TestMasteryKnots, TestComputedHarmonyScore,
+                TestMasteryKnots, TestMasteryKnotEngineCap,
+                TestComputedHarmonyScore,
                 TestRecordReflectionIdempotency,
                 TestLoomGeometry, TestBoundaryConditions]:
         suite.addTests(loader.loadTestsFromTestCase(cls))
