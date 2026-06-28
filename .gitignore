@@ -80,3 +80,7 @@ desktop.ini
 # Local-only notes
 *.private.md
 TODO.private.md
+
+# CLI working folders (prompts + outputs from external coding CLIs)
+.cli/
+.research/
