@@ -59,7 +59,7 @@ struct ThreadDetailView: View {
                             Text(threadName)
                                 .font(.largeTitle.bold())
                             if let ctx = context {
-                                Text("Energy: (ctx.energyProfile.rawValue.capitalized) • Harmony (Int(ctx.harmonyScore * 100))%")
+                                Text("Energy: \(ctx.energyProfile.rawValue.capitalized) • Harmony (Int(ctx.harmonyScore * 100))%")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -77,10 +77,10 @@ struct ThreadDetailView: View {
                                 .foregroundStyle(.primary)
                             
                             HStack {
-                                Text("Tier (threadMastery): (tierName(for: threadMastery))")
+                                Text("Tier \(threadMastery): (tierName(for: threadMastery))")
                                     .font(.title3.bold())
                                 Spacer()
-                                Text("L(threadMastery)/4")
+                                Text("L\(threadMastery)/4")
                                     .font(.caption.bold())
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 2)
@@ -105,7 +105,7 @@ struct ThreadDetailView: View {
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
                             
-                            Text("Perk: (perkFor(thread: threadName, tier: threadMastery))")
+                            Text("Perk: \(perkFor(thread: threadName, tier: threadMastery))")
                                 .font(.caption)
                                 .foregroundStyle(.blue)
                                 .padding(.top, 2)
@@ -121,11 +121,11 @@ struct ThreadDetailView: View {
                         // === Active Quests List for this thread ===
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
-                                Text("Active Weaves (Quests) for (threadName)")
+                                Text("Active Weaves (Quests) for \(threadName)")
                                     .font(.headline)
                                 Spacer()
                                 if !activeThreadQuests.isEmpty {
-                                    Text("(activeThreadQuests.count) active")
+                                    Text("\(activeThreadQuests.count) active")
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
@@ -153,7 +153,7 @@ struct ThreadDetailView: View {
                         // === Suggested Weaves (per-thread + context aware) ===
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
-                                Text("Suggested Weaves for (threadName)")
+                                Text("Suggested Weaves for \(threadName)")
                                     .font(.headline)
                                 Spacer()
                                 Button("Refresh") {
@@ -186,7 +186,7 @@ struct ThreadDetailView: View {
                     
                     // Quick Action (preserved + enhanced for gamif)
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Quick Action for (threadName)")
+                        Text("Quick Action for \(threadName)")
                             .font(.headline)
                         
                         TextField("Describe weave/ripple (e.g. habit, leak fix, story, task)...", text: $inputText)
@@ -213,7 +213,7 @@ struct ThreadDetailView: View {
                     
                     // === Recent Ripples for the thread (full gamif surface) ===
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Recent Ripples for (threadName)")
+                        Text("Recent Ripples for \(threadName)")
                             .font(.headline)
                         
                         if recentRipples.isEmpty {
@@ -230,7 +230,7 @@ struct ThreadDetailView: View {
                         }
                         
                         if let ctx = context {
-                            Text("Global Streak: 🔥(ctx.globalWeaveStreak) (grace protected) • Essence: (ctx.essenceDisplay)")
+                            Text("Global Streak: 🔥\(ctx.globalWeaveStreak) (grace protected) • Essence: \(ctx.essenceDisplay)")
                                 .font(.caption2)
                                 .foregroundStyle(.tertiary)
                         }
@@ -247,7 +247,7 @@ struct ThreadDetailView: View {
                                 Text("Cross-Thread Suggestions")
                                     .font(.headline)
                                 ForEach(cross, id: \\.self) { sug in
-                                    Text("• (sug)")
+                                    Text("• \(sug)")
                                         .font(.caption)
                                 }
                             }
@@ -292,7 +292,7 @@ struct ThreadDetailView: View {
                             .foregroundStyle(.secondary)
                             .multilineTextAlignment(.center)
                         
-                        Text("✧ (quest.estimatedIRLMinutes) min IRL • Hint: (quest.validationHints)")
+                        Text("✧ \(quest.estimatedIRLMinutes) min IRL • Hint: \(quest.validationHints)")
                             .font(.caption)
                             .foregroundStyle(.orange)
                         
@@ -370,9 +370,9 @@ struct ThreadDetailView: View {
     private func perkFor(thread: String, tier: Int) -> String {
         let base = tier >= 2 ? "Improved suggestions" : "Basic tracking"
         if tier >= 3 {
-            return "(base) + restorative grace bonus in (thread)"
+            return "\(base) + restorative grace bonus in \(thread)"
         } else if tier >= 2 {
-            return "(base) for (thread) weaves"
+            return "\(base) for \(thread) weaves"
         }
         return base
     }
@@ -401,7 +401,7 @@ struct ThreadDetailView: View {
             affectsEnergy: threadName == "Self" || threadName == "CareKin",
             linkedThreads: quest.domains.filter { $0 != threadName }
         )
-        feedback = "Weave accepted: (quest.title). Close app & do IRL (~(quest.estimatedIRLMinutes)min). Then reflect here."
+        feedback = "Weave accepted: \(quest.title). Close app & do IRL (~\(quest.estimatedIRLMinutes)min). Then reflect here."
         // Refresh context
         ctx.updateFromEvent(TimelineEvent(thread: threadName, type: "quest_accepted", payload: ["title": quest.title]))
     }
@@ -435,7 +435,7 @@ struct ThreadDetailView: View {
         )
         ctx.updateFromEvent(rippleEvent)
         
-        feedback = "✧ Reflection complete! +Essence • Mastery tick in (threadName) • Ripple sent."
+        feedback = "✧ Reflection complete! +Essence • Mastery tick in \(threadName) • Ripple sent."
         showReflection = false
         reflectionText = ""
         selectedQuest = nil
@@ -451,13 +451,13 @@ struct ThreadDetailView: View {
             affectsEnergy: false,
             linkedThreads: [threadName]
         )
-        ctx.awardBonusEssence(2, reason: "echo from (threadName)")
+        ctx.awardBonusEssence(2, reason: "echo from \(threadName)")
         if var tier = ctx.masteryTiers["Meaning"] {
             if Int.random(in: 0..<3) == 0 { 
                 ctx.masteryTiers["Meaning"] = min(4, tier + 1)
             }
         }
-        feedback = "Echoed ripple from (threadName) → Meaning +2 Essence. Insight ripple created."
+        feedback = "Echoed ripple from \(threadName) → Meaning +2 Essence. Insight ripple created."
     }
     
     private func processAction() {
@@ -503,7 +503,7 @@ struct ThreadDetailView: View {
         // Update mastery/streak hook via context
         ctx.updateFromEvent(TimelineEvent(thread: threadName, type: "user_weave", payload: ["action": inputText], linkedThreads: linked, affectsEnergy: true))
         
-        feedback = "Ripple processed in (threadName). Check Mastery + suggested weaves."
+        feedback = "Ripple processed in \(threadName). Check Mastery + suggested weaves."
         inputText = ""
     }
     
@@ -516,7 +516,7 @@ struct ThreadDetailView: View {
             suggestions.append("Redirect a recent saving to a Meaning legacy action or Self restorative.")
         }
         if context.masteryTiers[thread] ?? 1 >= 2 {
-            suggestions.append("Your (thread) mastery suggests forging a cross-thread quest.")
+            suggestions.append("Your \(thread) mastery suggests forging a cross-thread quest.")
         }
         suggestions.append("Review recent ripples in Compass for harmony opportunities.")
         return suggestions
@@ -524,17 +524,17 @@ struct ThreadDetailView: View {
     
     private func exportThreadData() {
         let data = threadEvents.map { event in
-            "(event.timestamp): (event.type)@(event.thread) → (event.linkedThreads.joined(separator: ",")) | (event.payload.values.joined(separator: " • "))"
+            "\(event.timestamp): \(event.type)@\(event.thread) → (event.linkedThreads.joined(separator: ",")) | (event.payload.values.joined(separator: " • "))"
         }.joined(separator: "\n")
         
         var gamif = ""
         if let ctx = context {
             let tier = ctx.masteryTiers[threadName] ?? 1
             let active = activeThreadQuests.map { $0.title }.joined(separator: "; ")
-            gamif = "\n\nMastery Tier: (tier) ((tierName(for: tier)))\nActive Quests: (active.isEmpty ? "none" : active)\nStreak: (ctx.globalWeaveStreak) • Essence: (Int(ctx.weaveEssence))"
+            gamif = "\n\nMastery Tier: \(tier) ((tierName(for: tier)))\nActive Quests: (active.isEmpty ? "none" : active)\nStreak: \(ctx.globalWeaveStreak) • Essence: (Int\(ctx.weaveEssence))"
         }
         
-        exportData = "OneWeave Thread Export: (threadName)\n\n(data)(gamif)\n\n(Privacy: local-only export)"
+        exportData = "OneWeave Thread Export: \(threadName)\n\n\(data)\(gamif)\n\n(Privacy: local-only export)"
         showExport = true
     }
 }
@@ -547,7 +547,7 @@ struct MasteryBadge: View {
     
     var body: some View {
         VStack(spacing: 2) {
-            Text("L(tier)")
+            Text("L\(tier)")
                 .font(.caption.bold())
                 .padding(.horizontal, 10)
                 .padding(.vertical, 4)
@@ -593,7 +593,7 @@ struct QuestCard: View {
                 .foregroundStyle(.secondary)
                 .lineLimit(2)
             HStack {
-                Label("(quest.estimatedIRLMinutes)m IRL", systemImage: "figure.walk")
+                Label("\(quest.estimatedIRLMinutes)m IRL", systemImage: "figure.walk")
                     .font(.caption2)
                 Spacer()
                 Button("Reflect & Complete", action: onComplete)
@@ -621,7 +621,7 @@ struct SuggestedQuestRow: View {
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
-                    Text("~ (quest.estimatedIRLMinutes) min • (quest.displayEssence) • Tap to accept")
+                    Text("~ \(quest.estimatedIRLMinutes) min • \(quest.displayEssence) • Tap to accept")
                         .font(.caption2)
                         .foregroundStyle(.blue)
                 }
@@ -645,7 +645,7 @@ struct RippleRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("(event.type) • (event.timestamp, style: .time)")
+                Text("\(event.type) • (event.timestamp, style: .time)")
                     .font(.caption.bold())
                 Spacer()
                 if !event.linkedThreads.isEmpty {
