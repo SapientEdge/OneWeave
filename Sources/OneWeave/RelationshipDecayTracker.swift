@@ -239,6 +239,149 @@ public enum RelationshipDecayTracker {
         }
         return (overdue, severe, Double(totalDays) / Double(records.count))
     }
+
+    // MARK: - Cycle 33 / GLM A1: Threadline Decay Garden (botanical vitality model)
+    //
+    // The basic overdue-multiplier is purely subtractive: each day, more overdue.
+    // The botanical model instead models "vitality" as an exponential decay
+    // multiplied by a positive sum of care-events with diminishing returns.
+    //
+    //     V(t) = V₀ · e^(-λ·Δt) · (1 + Σ(care_event_i · κ_i))
+    //
+    // where:
+    //   - V₀ = 1.0 at the last care event
+    //   - λ = base decay rate (per day). Higher λ = faster fade.
+    //   - Δt = days since last care event
+    //   - κ_i = care-event weight with diminishing returns if clustered
+    //
+    // This produces asymmetric recovery: a long-dormant thread that gets
+    // *one* care event lifts visibly, but a thread that just got 5 care
+    // events in a row doesn't get 5× the lift (you can't binge-care).
+    //
+    // Anti-addictive: V is clamped to [0, 1]. Below 0.2 the thread is
+    // "dormant" (Threadline Decay Garden visual: leaf desaturated). The
+    // dashboard surfaces "your Care Kin thread is going dormant" — never
+    // "you lost it."
+    public static func vitality(
+        for record: RelationshipRecord,
+        careEvents: [Date] = [],        // recent care-event timestamps
+        baseDecayRate: Double = 0.005,  // 0.5%/day — matches existing decay default
+        now: Date = Date()
+    ) -> Double {
+        // Δt: days since last interaction (or since earliest careEvent if newer)
+        let lastTouch = careEvents.max() ?? record.lastInteractionAt
+        let dt = max(0, now.timeIntervalSince(lastTouch) / 86400)
+
+        // V₀ · e^(-λ·Δt)
+        let decayed = exp(-baseDecayRate * dt)
+
+        // Σ care events with diminishing returns if clustered (within 3 days)
+        // κ_i = 0.15 per event, halved for each event already in the cluster
+        let threeDays: TimeInterval = 3 * 86400
+        let sortedEvents = careEvents.sorted()
+        var sumK = 0.0
+        var lastClusteredAt: Date = .distantPast
+        for ev in sortedEvents {
+            let sincePrev = ev.timeIntervalSince(lastClusteredAt)
+            let baseK = 0.15
+            let clustered = sincePrev < threeDays
+            let k = clustered ? baseK * 0.5 : baseK
+            sumK += k
+            lastClusteredAt = ev
+        }
+
+        // (1 + Σκ) — diminishing returns via sqrt to flatten clusters
+        let boost = 1.0 + sqrt(sumK)
+
+        let raw = decayed * boost
+        return min(1.0, max(0.0, raw))
+    }
+
+    // MARK: - Cycle 33 / GLM B4: Relationship Rhizome Index
+    //
+    // Decay is one-dimensional. Relationships aren't. Some are *taproot*
+    // (long shared history, few recent interactions) — like your mother.
+    // Others are *rhizome* (many small, recent interactions) — like a
+    // colleague. The two need different IRL nudges:
+    //
+    //   - Taproot starved: "Call one person you haven't spoken to in a month."
+    //   - Rhizome noisy:  "You have 20 short touches; one long one would deepen."
+    //
+    // R = depth² / (1 + breadth)
+    //   - depth = total days span of relationship history (max 365, clamped)
+    //   - breadth = number of distinct interaction days in the last 90 days
+    //
+    // High R = taproot (deep, starved). Low R = rhizome (shallow, busy).
+    public static func rhizomeIndex(
+        for record: RelationshipRecord,
+        interactionDays: [Date] = [],   // distinct interaction dates
+        now: Date = Date()
+    ) -> RhizomeReading {
+        let oldest = interactionDays.min() ?? record.lastInteractionAt
+        let depthDays = min(365, max(0, Int(now.timeIntervalSince(oldest) / 86400)))
+        let ninetyAgo = now.addingTimeInterval(-90 * 86400)
+        let breadth = interactionDays.filter { $0 >= ninetyAgo }.count
+
+        let depthTerm = Double(depthDays * depthDays)
+        let breadthTerm = 1.0 + Double(breadth)
+        let r = depthTerm / breadthTerm
+
+        let kind: RhizomeKind
+        if depthDays >= 180 && breadth <= 2 {
+            kind = .taprootStarved
+        } else if depthDays < 90 && breadth >= 8 {
+            kind = .rhizomeNoisy
+        } else if depthDays >= 90 && breadth >= 4 {
+            kind = .balanced
+        } else {
+            kind = .developing
+        }
+
+        return RhizomeReading(
+            record: record,
+            depthDays: depthDays,
+            breadthDays: breadth,
+            index: r,
+            kind: kind
+        )
+    }
+}
+
+public enum RhizomeKind: String, Codable, CaseIterable {
+    case taprootStarved   // deep history, very few recent touches
+    case rhizomeNoisy     // shallow history, many touches
+    case balanced         // both healthy
+    case developing       // not enough data yet
+}
+
+public struct RhizomeReading: Codable, Equatable {
+    public let record: RelationshipRecord
+    public let depthDays: Int
+    public let breadthDays: Int
+    public let index: Double
+    public let kind: RhizomeKind
+
+    /// IRL nudge text matched to the kind. Never guilt-tripping.
+    public var nudgeText: String {
+        switch kind {
+        case .taprootStarved:
+            return "Deep relationship, quiet lately. One call would move it."
+        case .rhizomeNoisy:
+            return "Many small touches; one longer one would deepen this."
+        case .balanced:
+            return "Healthy mix of depth and presence."
+        case .developing:
+            return "Still learning the shape of this one."
+        }
+    }
+
+    public init(record: RelationshipRecord, depthDays: Int, breadthDays: Int, index: Double, kind: RhizomeKind) {
+        self.record = record
+        self.depthDays = depthDays
+        self.breadthDays = breadthDays
+        self.index = index
+        self.kind = kind
+    }
 }
 
 // MARK: - Convenience extension for the "days since" hint

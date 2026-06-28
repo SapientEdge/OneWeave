@@ -37,6 +37,28 @@ public struct DataLeashState: Codable, Equatable {
     public mutating func setPrivate(_ cat: IntegrationCategory, _ priv: Bool) {
         privacyLevels[cat] = priv
     }
+
+    // MARK: - Cycle 33 / GLM A7: Guest Mode (one-tap leash)
+    //
+    // A single toggle that flips all 9 categories to deny and treats every
+    // category as private. The Mac side exposes a "Guest Mode" button in
+    // Settings that triggers this. Restore requires a reflection-gated step.
+    // Used when lending the device, entering a high-risk context, or
+    // simply wanting to feel "the app forgets me for an hour."
+    public mutating func enableGuestMode() {
+        for cat in IntegrationCategory.allCases {
+            allowedCategories[cat] = false
+            privacyLevels[cat] = true
+        }
+    }
+
+    /// Returns the categories whose allowed-state differs from `strictDefault`.
+    /// Used by Settings to show "X categories are not in default state".
+    public var deviatingCategories: [IntegrationCategory] {
+        IntegrationCategory.allCases.filter { cat in
+            allowedCategories[cat] != false || privacyLevels[cat] != true
+        }
+    }
 }
 
 // MARK: - Persisted in SwiftData (so settings survive app restarts)
