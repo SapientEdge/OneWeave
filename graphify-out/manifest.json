@@ -465,8 +465,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/DecisionLog.swift": {
-    "mtime": 1782630109.6359477,
-    "ast_hash": "203a9964fd3099497413f91bc7d04c5a",
+    "mtime": 1782630623.94787,
+    "ast_hash": "ccc3d43fd8c7bacdd9954976db6f24fd",
     "semantic_hash": ""
   },
   "Sources/OneWeave/EssenceLedgerView.swift": {
@@ -485,8 +485,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/InvisibleMentor.swift": {
-    "mtime": 1782563823.4431808,
-    "ast_hash": "3ce9bc18e332cc54249dcc64ff3b09df",
+    "mtime": 1782630644.983253,
+    "ast_hash": "f9d04da9e228dc061a2b045b9c90f1aa",
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeGraph.swift": {
@@ -570,8 +570,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/SacredEcho.swift": {
-    "mtime": 1782596367.7725976,
-    "ast_hash": "0544238ea90f16ee72c8914a6b35abee",
+    "mtime": 1782630704.431329,
+    "ast_hash": "83d0f3b8ebb90208d7a9ebd0610846e8",
     "semantic_hash": ""
   },
   "Sources/OneWeave/SchemaMigrationPlan.swift": {
@@ -810,8 +810,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/003-production-readiness/tasks.md": {
-    "mtime": 1782630297.2367213,
-    "ast_hash": "ea40de3634326065055b417697540cdd",
+    "mtime": 1782630879.3994493,
+    "ast_hash": "c8c8b0c96038fec08614f9fff9f6bfb8",
     "semantic_hash": ""
   },
   ".specify/templates/checklist-template.md": {
@@ -1202,6 +1202,16 @@
   "ONEWEAVE_HANDOFF_CYCLE_34.md": {
     "mtime": 1782630273.449255,
     "ast_hash": "c1c07c501f8d9997a720622826fa0fad",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/MasteryKnot.swift": {
+    "mtime": 1782630604.3715124,
+    "ast_hash": "79a13f215e3469699d4a0aca3e0fd3f8",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_HANDOFF_CYCLE_35.md": {
+    "mtime": 1782630832.8636255,
+    "ast_hash": "b3288a1ea65da50f8125f5729fe40ca5",
     "semantic_hash": ""
   }
 }

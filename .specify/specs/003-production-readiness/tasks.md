@@ -477,12 +477,12 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 
 - [ ] T147 **[Linux · S]** GLM A3 — Morning Briefing "One Neglect". **SHIPPED in cycle 34** — `RelationshipDecayTracker.pickOneNeglect(...)` + `OneNeglectSuggestion.briefingText` (calm, never guilt) + `BriefingSection.oneNeglect` at priority 32 + `morningBriefing` accepts `relationshipRecords`. Validator: `validate_cycle34_glm_features.py`.
 - [ ] T148 **[Linux · S]** GLM A7 — Data Leash Guest Mode (one-tap flip). **SHIPPED in cycle 33** — `DataLeashState.enableGuestMode()` + `deviatingCategories` in `DataLeashSettings.swift`. Validator: `validate_cycle33_decay_garden.py`.
-- [ ] T149 **[Linux · S]** GLM A9 — Mastery Map: Apprentice Knots — each Mastery node shows a user-logged unresolved question. Tier advances by untying knots, not time served.
+- [ ] T149 **[Linux · S]** GLM A9 — Mastery Map: Apprentice Knots. **SHIPPED in cycle 35** — new `MasteryKnot.swift` module (217 LOC). `KnotState { tied, loosening, untied }` + `ApprenticeKnot` struct + `MasteryKnotEngine` with `maxTier` algorithm (0=no cap, 1=current, 2+=current-1) + `tierBlockedMessage` (calm, never guilt). Sanity: tier-cap matches expected at all open-count levels.
 - [ ] T150 **[Linux · S]** GLM A10 — Quiet Hours Ritual: user-defined 15–90 sec evening micro-ritual replacing the evening briefing. (Constitution §3 calm + §7 anti-addictive.)
 - [ ] T151 **[Linux · M]** GLM A1 — Threadline Decay Garden (botanical vitality model). **SHIPPED in cycle 33** — `RelationshipDecayTracker.vitality(...)` with `V₀·e^(-λ·Δt)·(1+Σκ)` + diminishing-returns boost via `sqrt`. Validator: `validate_cycle33_decay_garden.py`. Mac-side UI (leaf desaturation) deferred.
 - [ ] T152 **[Linux · M]** GLM A2 — Resonance Oracle's Unchosen Path. **SHIPPED in cycle 34** — `DecisionRecord.chosenOptionIndex` + `unchosenOption` computed + `DecisionMentorBridge.unchosenPathCandidates(...)` (30-365 day window) + `UnchosenPathPrompt` struct. Never a verdict; reflection-gated.
-- [ ] T153 **[Linux · M]** GLM A4 — Sacred Echo Time Capsule: AES-256-GCM reflection entry auto-unsealing on a user-defined future date.
-- [ ] T154 **[Linux · M]** GLM A6 — Invisible Mentor's "Devil's Advocate" Mode: surface the strongest counter-argument from the user's *own* past entries when forming an insight. Builds on cycle 33 Insight Provenance.
+- [ ] T153 **[Linux · M]** GLM A4 — Sacred Echo Time Capsule. **SHIPPED in cycle 35** — `EchoKind { regular, timeCapsule }` + `SacredEcho.kindRaw` field (backward-compat default) + `kind` computed + `TimeCapsuleInvite` struct + `SacredEcho.timeCapsuleInvite(for:now:)`. Reflection-prompt gate: "has anything changed?" before plaintext. Sanity: kindRaw defaults to .regular.
+- [ ] T154 **[Linux · M]** GLM A6 — Invisible Mentor's "Devil's Advocate" Mode. **SHIPPED in cycle 35** — `InvisibleMentor.devilAdvocate(currentClaim:domain:pastReflections:limit:)` + `DevilAdvocateCounter` struct. Uses TonalLexicon polarity from cycle 34 (cross-module). Socratic prompt: "Is this growth, or forgetting?"
 - [ ] T155 **[Linux · M]** GLM A8 — Compass of Trade-Offs: radial view on CompassView showing this week's active trade-offs as gentle arcs.
 - [ ] T156 **[Linux · L]** GLM A5 — P2P Weave Circle "Witness Mode": two devices, one sets intention, other sees only a colored pulse. (Mac-only — requires MultipeerConnectivity transport.)
 
@@ -492,7 +492,7 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 - [ ] T158 **[Linux · S]** GLM B1 — Anti-Streak Decay Curve (botanical). **SHIPPED in cycle 33** as part of T151 (same `vitality()` function).
 - [ ] T159 **[Linux · M]** GLM B3 — Tonal Coherence Score. **SHIPPED in cycle 34** — new `TonalCoherence.swift` module (287 LOC). `TonalVector` 4-dim (calm/energy/weight/openness), 51-word hand-tuned lexicon, user-extensible `userOverrides`, `vector(for:)` + `centroid(of:)` + `coherenceAngle(today:centroid:)` returning degrees via acos. Sanity: calm vs calm = 0°, calm vs stressed = 146°, calm vs joyful = 64°.
 - [ ] T160 **[Linux · M]** GLM B4 — Relationship Rhizome Index. **SHIPPED in cycle 33** — `RelationshipDecayTracker.rhizomeIndex(...)` + `RhizomeKind` (4 cases) + `RhizomeReading.nudgeText`. Validator: `validate_cycle33_decay_garden.py`. Mac UI deferred.
-- [ ] T161 **[Linux · M]** GLM B5 — Decision Reverb Half-Life: track 30/90/365-day return rates on DecisionLog entries; settled vs still-open glyph.
+- [ ] T161 **[Linux · M]** GLM B5 — Decision Reverb Half-Life. **SHIPPED in cycle 35** — `DecisionReverb` struct + `DecisionReverbCalculator.reverb(for:references:now:)` (50% threshold) + `halfLifeAnniversaries(for:referencesByDecisionID:within:now:)`. Glyphs: ⚓ settled / ◇ still-open / ○ unrated. Sanity: 14/3 returns → settled hl=30d; 7/12/50/100 returns → still-open hl=365d.
 
 ### Top 8 CALM-DESIGN micro-interactions (T162-T169)
 
@@ -522,7 +522,8 @@ T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
 | Phase T11: Linux-fixable apply | ✅ Complete | Linux | done (cycles 30-32) |
 | Phase T12: Spec Kit + Constitution + Handoff update | 🔄 In progress | Linux | 1 hour |
 | Phase T13: Cycle 33 GLM-driven features | ✅ Complete | Linux | done (insight provenance + decay garden + rhizome + guest mode + Grok A6) |
-| **Phase T14: Cycle 34 GLM-driven features** | ✅ Complete | Linux | done (one neglect + unchosen path + tonal coherence + cognitive load dim) |
+| Phase T14: Cycle 34 GLM-driven features | ✅ Complete | Linux | done (one neglect + unchosen path + tonal coherence + cognitive load dim) |
+| **Phase T15: Cycle 35 GLM-driven features** | ✅ Complete | Linux | done (apprentice knots + decision reverb + devil's advocate + time capsule) |
 | Phase P1: GitHub Push | ⏳ Pending | User | 10 min |
 | Phase M1: Mac compile-blockers + build | ⏳ Pending | Mac | 6-8 hours |
 | Phase M2: iOS features + widgets + intents | ⏳ Pending | Mac | 4-6 hours |
