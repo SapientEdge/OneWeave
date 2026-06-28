@@ -24,7 +24,9 @@ struct OneWeaveApp: App {
                     LifeRelationship.self,
                     DataLeashSettingsRecord.self,
                     // Sacred Echo Vault (Tier A #3) — time-capsule reflections.
-                    SacredEcho.self
+                    SacredEcho.self,
+                    // Void Thread (cycle 39 / T228) — sealed crypto entries; ciphertext-only.
+                    VoidEntry.self
                 ])
                 .environment(appStateMachine)
         }

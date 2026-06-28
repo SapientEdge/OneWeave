@@ -3,6 +3,9 @@
 <!--
   OneWeave PrivacyInfo.xcprivacy (T108/T124/T132)
   Cycle 32 (2026-06-28) — Linux-side deliverable for spec 003-production-readiness.
+  Cycle 39 (2026-06-28) — T191: added NSPrivacyAccessedAPITypes comment block
+                          clarifying that iCloud / CloudKit is intentionally NOT
+                          used in v1.0 (see CONSTITUTION_v3_DRAFT.md §11).
 
   Declares the privacy-relevant behaviors of the app to the App Store reviewer
   and to iOS 17+ privacy manifest consumers.
@@ -13,6 +16,12 @@
     - Disk space:          CA93.4  (best-effort check before persisting envelope; Mac side)
     - System boot time:    CA52.1  (used by SacredEcho.swift to compute unlockAt;
                                     Mac side consumes `Date()` indirectly)
+
+  INTENTIONALLY NOT USED in v1.0:
+    - NSPrivacyAccessedAPICategoryiCloud — no CloudKit, no Private Cloud Compute.
+      Per CONSTITUTION_v3_DRAFT.md §11 (T190/T191, cycle 39) iCloud sync is
+      deferred to v1.1 with an explicit user opt-in flow. No background data
+      leaves the device in v1.0.
 
   Tracking: false. We do not track. We do not transmit. We do not collect.
   Collected data types: empty. Nothing is collected.

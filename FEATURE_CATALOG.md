@@ -255,6 +255,13 @@ A single text field that auto-classifies input into one of 5 destinations.
 - **Offline queue** + Data Leash filter + reflection gate (writes to `pendingIntegrations` until user reviews)
 - **Auto-invalidation** of GraphInsight cache on P2P receive
 - **Family Pod layer** on top — anti-social sharing with 6-person limit
+- **iCloud sync — DEFERRED to v1.1 (Cycle 39 / T190).** v1.0 ships
+  without any CloudKit, Private Cloud Compute, or iCloud Drive
+  mirroring. See `CONSTITUTION_v3_DRAFT.md` §11 for the explicit
+  decision and the v1.1 migration plan (file-level export bundle to
+  iCloud Drive, opt-in only, reflection-gated, E2EE). The
+  `OnboardingView` line 15 copy was strengthened in cycle 39 (T191)
+  to read "No cloud sync by default and not available in this version".
 
 ---
 

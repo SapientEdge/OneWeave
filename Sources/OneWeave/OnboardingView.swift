@@ -12,7 +12,9 @@ struct OnboardingView: View {
         ("Calm, Sophisticated UI", "Peripheral awareness, not alerts. Color psychology for energy, subtle haptics, animations, glass effects. State machine visible but non-intrusive.", "brain.head.profile", .reflecting),
         ("Privacy by Design", "All local SwiftData. Export or clear anytime. No cloud, no training on your data. Follows white paper principles for well-being apps.", "lock.shield", .idle),
         // T125: explicit "what we will NEVER do" — privacy trust statement (Constitution §2)
-        ("What OneWeave Will NEVER Do", "No accounts. No cloud sync. No ads. No analytics. No 'engagement' optimization. No streak-shaming. No notification spam. Your reflection is yours — and only yours.", "hand.raised.slash", .idle),
+        // T191 (cycle 39): strengthened "no cloud sync" claim to "no cloud sync by default and
+        // not available in this version" — constitutional per CONSTITUTION_v3_DRAFT.md §11.
+        ("What OneWeave Will NEVER Do", "No accounts. No cloud sync by default and not available in this version. No ads. No analytics. No 'engagement' optimization. No streak-shaming. No notification spam. Your reflection is yours — and only yours.", "hand.raised.slash", .idle),
         ("Your State Machine", "Watch transitions: lowEnergy after stress, highFlow after wins. Use it to understand and steer your weave.", "flame", .highFlow)
     ]
 

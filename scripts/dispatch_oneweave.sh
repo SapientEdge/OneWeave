@@ -152,15 +152,16 @@ case "$CLI" in
   glm)
     # GLM (chat-completion via Ollama): no tool access. Combine prompt with
     # file inventory so GLM has context.
+    OLLAMA_BIN="$(command -v ollama || echo /usr/local/bin/ollama)"
     CONTEXT_FILE="$PROJECT_ROOT/.cli/context/file_inventory.txt"
     if [[ -f "$CONTEXT_FILE" ]]; then
       COMBINED="$(cat "$TMP_PROMPT")\n\n=== FILE INVENTORY ===\n$(cat "$CONTEXT_FILE")"
       printf '%b' "$COMBINED" \
-        | /root/.local/bin/ollama run glm-5.2:cloud - \
+        | "$OLLAMA_BIN" run glm-5.2:cloud - \
         > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] glm rc=$?" >> "$OUT_FILE"
     else
       cat "$TMP_PROMPT" \
-        | /root/.local/bin/ollama run glm-5.2:cloud - \
+        | "$OLLAMA_BIN" run glm-5.2:cloud - \
         > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] glm rc=$?" >> "$OUT_FILE"
     fi
     ;;

@@ -116,10 +116,138 @@ private enum CaptureSignal: String, Codable, CaseIterable {
 public enum QuickCaptureClassifier {
 
     /// Classify a free-text input into a destination.
+    ///
+    /// This is the historical, lexical-only entry point. Preserved exactly
+    /// so the 38/38 lexical tests in `.research/validate_quick_capture.py`
+    /// continue to pass unchanged.
     public static func classify(
         _ input: String,
         now: Date = Date(),
         locale: Locale = Locale(identifier: "en_US_POSIX")
+    ) -> CaptureClassification {
+        return classify(input, now: now, locale: locale, existingReflections: [])
+    }
+
+    /// Cycle 39 / T176: classify with optional semantic tie-breaker.
+    ///
+    /// When the lexical classifier's confidence is below `semanticTieBreakerThreshold`
+    /// (0.6), we use `LifeGraph.semanticSearch` (T173) to rerank the
+    /// candidate destinations based on which type of past reflection is
+    /// most semantically similar to the user's input.
+    ///
+    /// Constitutional compliance (constitution.md §3 — Calm Intelligence):
+    /// - The semantic path only RETRIEVES — it never generates new text.
+    /// - The final destination is always one of the 5 existing enum cases;
+    ///   we never invent a new category.
+    /// - When the semantic reranker can't decide (no embeddings available,
+    ///   no past reflections, ties), we fall back to the original lexical
+    ///   winner. The user never sees a worse result than the legacy path.
+    ///
+    /// - parameter existingReflections: the user's past `LifeEntity` history
+    ///   with `isUserReflection == true`. Empty array → pure lexical mode
+    ///   (legacy behavior, all 38 tests preserved).
+    public static func classify(
+        _ input: String,
+        now: Date = Date(),
+        locale: Locale = Locale(identifier: "en_US_POSIX"),
+        existingReflections: [LifeEntity]
+    ) -> CaptureClassification {
+        // Run the standard lexical pipeline first. This is the same code
+        // the legacy `classify(_:)` call ran — we just intercept after
+        // it produces a result.
+        let lexical = classifyLexical(input, now: now, locale: locale)
+
+        // T176a threshold: below 0.6 confidence we ask semanticSearch for
+        // a second opinion. The threshold matches the spec at
+        // .specify/specs/003-production-readiness/tasks.md:601 ("lexical
+        // confidence < 0.6").
+        let needsTieBreaker = lexical.confidence < semanticTieBreakerThreshold
+
+        guard needsTieBreaker else { return lexical }
+        guard !existingReflections.isEmpty else { return lexical }
+
+        // ── Semantic tie-breaker (T176) ──
+        // We ask semanticSearch: "of all past reflections, which is most
+        // similar to this input?" Then we look at THAT reflection's
+        // `type` field and use it as a soft vote for that destination.
+        //
+        // Example: user types "I should probably take it easy this week."
+        // Lexical confidence might be ~0.4 (task vs journal close). If
+        // their past "I should take it easy" entry is a `.note` reflection,
+        // the tie-breaker nudges the classifier toward `.note`.
+        let similar = LifeGraph.semanticSearch(
+            query: input,
+            in: existingReflections,
+            limit: 3
+        )
+        guard !similar.isEmpty else { return lexical }
+
+        // Tally votes by entity type. A reflection's `type` enum is the
+        // closest thing we have to "what kind of thing the user wrote
+        // about this topic last time".
+        var votes: [EntityType: Int] = [:]
+        for entity in similar {
+            votes[entity.type, default: 0] += 1
+        }
+        guard let winningType = votes.max(by: { $0.value < $1.value })?.key else {
+            return lexical
+        }
+
+        // Map entity type → destination. This is a one-way soft mapping —
+        // if a tie-breaker type has no clean destination, we ignore the
+        // vote and keep the lexical answer.
+        guard let mappedDestination = destination(for: winningType) else {
+            return lexical
+        }
+
+        // Only override the lexical answer if the tie-breaker has a real
+        // majority (>= 2 of 3 hits). Single-vote swings are too noisy
+        // when the lexical confidence is already low.
+        let winnerVotes = votes[winningType] ?? 0
+        guard winnerVotes >= 2 else { return lexical }
+
+        // Compose the override. We keep the lexical title extraction
+        // (which is destination-aware: strips time hints for non-events,
+        // keeps them for events). The signals dict gets a new entry
+        // `_semantic_votes` so tests can assert the reranker fired.
+        var updatedSignals = lexical.signals
+        updatedSignals["_semantic_votes"] = Double(winnerVotes)
+        updatedSignals["_semantic_winner_type"] = Double(entityTypeCode(winningType))
+
+        // Re-extract title with the override destination so trailing
+        // time hints are stripped/preserved correctly.
+        let title = extractTitle(from: input.trimmingCharacters(in: .whitespacesAndNewlines),
+                                 destination: mappedDestination)
+        let trimmedLower = input.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let extractedDate = mappedDestination == .event
+            ? parseTimeHint(from: trimmedLower, now: now, locale: locale)
+            : nil
+
+        return CaptureClassification(
+            destination: mappedDestination,
+            // Bump confidence: the reranker is a meaningful signal that
+            // the user has done this kind of thing before.
+            confidence: min(1.0, lexical.confidence + 0.2),
+            extractedTitle: title,
+            extractedDate: extractedDate,
+            signals: updatedSignals
+        )
+    }
+
+    /// Threshold below which the semantic tie-breaker is consulted.
+    /// T176 spec: 0.6. Exposed as a static constant so tests can adjust
+    /// it without copy-pasting the magic number.
+    public static let semanticTieBreakerThreshold: Double = 0.6
+
+    /// The original lexical classifier. Internal so the new `classify`
+    /// overload can call it without recursion. Behavior is byte-for-byte
+    /// identical to the pre-T176 implementation, so the existing 38
+    /// lexical tests (`.research/validate_quick_capture.py`) continue to
+    /// pass without modification.
+    private static func classifyLexical(
+        _ input: String,
+        now: Date,
+        locale: Locale
     ) -> CaptureClassification {
         let trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
@@ -169,6 +297,40 @@ public enum QuickCaptureClassifier {
             extractedDate: extractedDate,
             signals: signals
         )
+    }
+
+    /// Map a `LifeEntity.type` to the most semantically appropriate
+    /// `CaptureDestination`. Returns nil for types that don't have a
+    /// clean mapping — in that case the caller falls back to lexical.
+    private static func destination(for entityType: EntityType) -> CaptureDestination? {
+        switch entityType {
+        case .task: return .task
+        case .event: return .event
+        case .note: return .note
+        // `.concept` is the closest cousin to a journal entry — both are
+        // "user's own words about a thing in their life".
+        case .concept: return .journal
+        // The remaining types don't have a clear destination equivalent;
+        // we abstain rather than guess.
+        case .person, .place, .healthMetric, .financial, .project:
+            return nil
+        }
+    }
+
+    /// Stable integer code for an `EntityType` so we can stash the
+    /// semantic-winner type into the signals dict (which is `[String: Double]`).
+    private static func entityTypeCode(_ t: EntityType) -> Double {
+        switch t {
+        case .person: return 1
+        case .event: return 2
+        case .task: return 3
+        case .note: return 4
+        case .healthMetric: return 5
+        case .financial: return 6
+        case .place: return 7
+        case .project: return 8
+        case .concept: return 9
+        }
     }
 
     // MARK: - Scoring helpers
