@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/CompassView.swift": {
-    "mtime": 1782596411.3873188,
-    "ast_hash": "b4de44b91d6c2279734b5419bbe9856a",
+    "mtime": 1782624771.2046945,
+    "ast_hash": "8eccf954fbeb99573df8f056b77b4cf1",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataSeeder.swift": {
@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782620952.7367527,
-    "ast_hash": "7013c652b600ef204e56334caaf68d20",
+    "mtime": 1782624664.549887,
+    "ast_hash": "3e97efc83cec1eac182c2c5dca1564f0",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
@@ -60,8 +60,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeaveApp.swift": {
-    "mtime": 1782621270.5419898,
-    "ast_hash": "41baf58d6821d7ad454acc86e3f1b444",
+    "mtime": 1782624374.8828785,
+    "ast_hash": "615a68ad0d8618561c1e0cad0bade285",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeavePrototype.swift": {
@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/SettingsView.swift": {
-    "mtime": 1782620913.794111,
-    "ast_hash": "d99a9b99394e2df140c4a882a88745ea",
+    "mtime": 1782624403.2123766,
+    "ast_hash": "5345d424e8cb8d0250502a7ad7738eb0",
     "semantic_hash": ""
   },
   "Sources/OneWeave/StateMachineIndicator.swift": {
@@ -95,8 +95,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/ThreadDetailView.swift": {
-    "mtime": 1782534189.2249417,
-    "ast_hash": "6e6483b6e2fd905fb5c74ba2e58c85a3",
+    "mtime": 1782624621.564154,
+    "ast_hash": "8b7894cc2b6ba9b98811cb27c263ca27",
     "semantic_hash": ""
   },
   "Sources/OneWeave/ThreadsOverviewView.swift": {
@@ -110,8 +110,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/TimelineService.swift": {
-    "mtime": 1782522773.1517215,
-    "ast_hash": "82300efdd3dba0c5711b4c5a469f7fc4",
+    "mtime": 1782625975.5115545,
+    "ast_hash": "4366b893a5809ca91a438728510149a5",
     "semantic_hash": ""
   },
   "Sources/OneWeave/WeaveQuest.swift": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataLeashSettings.swift": {
-    "mtime": 1782620939.1955295,
-    "ast_hash": "f1c50680c37347abc84634ced78eaf15",
+    "mtime": 1782625942.9050207,
+    "ast_hash": "a1bfadc4d1ef4cd92c3103da34a4898b",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DecisionLog.swift": {
@@ -480,8 +480,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/GraphInsightGenerator.swift": {
-    "mtime": 1782596652.748302,
-    "ast_hash": "9e51c38c701d3b23a5f2fb6a71a5a14a",
+    "mtime": 1782625912.0005164,
+    "ast_hash": "db3d4dc06ea192a31d445c52f969ac93",
     "semantic_hash": ""
   },
   "Sources/OneWeave/InvisibleMentor.swift": {
@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeavePrototype+GraphValidation.swift": {
-    "mtime": 1782561730.064466,
-    "ast_hash": "f83bbcde0edb3c109069469ef9d49974",
+    "mtime": 1782624858.5541642,
+    "ast_hash": "76ededb5af38d671a37a9954e580b31e",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeaveSnapshotStore.swift": {
@@ -555,8 +555,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/RelationshipDecayTracker.swift": {
-    "mtime": 1782593136.796836,
-    "ast_hash": "9ef4d7496fda3fbcc0e45e8c2c2e8857",
+    "mtime": 1782625930.4178169,
+    "ast_hash": "a8867541f16d90624c5000366af22c6f",
     "semantic_hash": ""
   },
   "Sources/OneWeave/ResonanceOracle.swift": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/iOSServiceIntegrations.swift": {
-    "mtime": 1782620928.6793563,
-    "ast_hash": "a09f0976ad37a31d67466750e1650e11",
+    "mtime": 1782624836.5437946,
+    "ast_hash": "021cbac4aa290d745e326ae0db7ea573",
     "semantic_hash": ""
   },
   ".github/agents/speckit.agent-context.update.agent.md": {
@@ -810,8 +810,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/003-production-readiness/tasks.md": {
-    "mtime": 1782620853.7241209,
-    "ast_hash": "4016d29ac3e9a29d920c32e1477b7642",
+    "mtime": 1782626137.8492436,
+    "ast_hash": "445d04e88a1202322824a7fca164a154",
     "semantic_hash": ""
   },
   ".specify/templates/checklist-template.md": {
@@ -1155,8 +1155,8 @@
     "semantic_hash": ""
   },
   "scripts/dispatch_oneweave.sh": {
-    "mtime": 1782622033.1264782,
-    "ast_hash": "457b7addcb9c6f2ac85dfbfac15d4e7d",
+    "mtime": 1782623593.0184374,
+    "ast_hash": "3af9a38f867a9c3ce47f5c750555df0f",
     "semantic_hash": ""
   },
   "scripts/dispatch_panel.sh": {
@@ -1167,6 +1167,31 @@
   "ONEWEAVE_HANDOFF_CYCLE_31.md": {
     "mtime": 1782622886.3877537,
     "ast_hash": "bd1313085d26b3a89f73706e73f64097",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/JailbreakDetector.swift": {
+    "mtime": 1782624333.1621413,
+    "ast_hash": "79039acbc60aca927669ac5851926c9a",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/PrivateLog.swift": {
+    "mtime": 1782624344.652345,
+    "ast_hash": "543340b22980d55c5cf104646bd6c9ba",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/SessionGuard.swift": {
+    "mtime": 1782624364.014687,
+    "ast_hash": "f0ec83b8f166c240f533b08359d8444a",
+    "semantic_hash": ""
+  },
+  "ONEWEAVE_HANDOFF_CYCLE_33.md": {
+    "mtime": 1782626167.6437356,
+    "ast_hash": "2069c8084745f77819f47df4a3f27f8b",
+    "semantic_hash": ""
+  },
+  "THREAT_MODEL.md": {
+    "mtime": 1782624311.6187587,
+    "ast_hash": "882e8f0d67d98abcd060765e8b69c4ee",
     "semantic_hash": ""
   }
 }

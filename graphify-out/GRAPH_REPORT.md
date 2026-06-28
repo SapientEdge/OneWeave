@@ -1,15 +1,16 @@
-# Graph Report - .  (2026-06-28)
+# Graph Report - oneweave  (2026-06-28)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 154 files · ~186,547 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2154 nodes · 3656 edges · 146 communities (137 shown, 9 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 98 edges (avg confidence: 0.8)
+- 2259 nodes · 3840 edges · 162 communities (152 shown, 10 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 101 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8f1db699`
+- Built from commit: `62bf65fa`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,11 +67,18 @@
 - [[_COMMUNITY_Community 49|Community 49]]
 - [[_COMMUNITY_Community 50|Community 50]]
 - [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
 - [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 55|Community 55]]
 - [[_COMMUNITY_Community 56|Community 56]]
 - [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
 - [[_COMMUNITY_Community 60|Community 60]]
 - [[_COMMUNITY_Community 61|Community 61]]
+- [[_COMMUNITY_Community 62|Community 62]]
+- [[_COMMUNITY_Community 63|Community 63]]
 - [[_COMMUNITY_Community 64|Community 64]]
 - [[_COMMUNITY_Community 65|Community 65]]
 - [[_COMMUNITY_Community 66|Community 66]]
@@ -86,6 +94,7 @@
 - [[_COMMUNITY_Community 76|Community 76]]
 - [[_COMMUNITY_Community 77|Community 77]]
 - [[_COMMUNITY_Community 78|Community 78]]
+- [[_COMMUNITY_Community 79|Community 79]]
 - [[_COMMUNITY_Community 80|Community 80]]
 - [[_COMMUNITY_Community 81|Community 81]]
 - [[_COMMUNITY_Community 82|Community 82]]
@@ -98,14 +107,22 @@
 - [[_COMMUNITY_Community 89|Community 89]]
 - [[_COMMUNITY_Community 90|Community 90]]
 - [[_COMMUNITY_Community 91|Community 91]]
+- [[_COMMUNITY_Community 92|Community 92]]
+- [[_COMMUNITY_Community 93|Community 93]]
 - [[_COMMUNITY_Community 94|Community 94]]
 - [[_COMMUNITY_Community 95|Community 95]]
+- [[_COMMUNITY_Community 96|Community 96]]
+- [[_COMMUNITY_Community 97|Community 97]]
+- [[_COMMUNITY_Community 98|Community 98]]
+- [[_COMMUNITY_Community 99|Community 99]]
 - [[_COMMUNITY_Community 100|Community 100]]
 - [[_COMMUNITY_Community 101|Community 101]]
 - [[_COMMUNITY_Community 102|Community 102]]
 - [[_COMMUNITY_Community 103|Community 103]]
 - [[_COMMUNITY_Community 105|Community 105]]
 - [[_COMMUNITY_Community 106|Community 106]]
+- [[_COMMUNITY_Community 107|Community 107]]
+- [[_COMMUNITY_Community 108|Community 108]]
 - [[_COMMUNITY_Community 114|Community 114]]
 - [[_COMMUNITY_Community 115|Community 115]]
 - [[_COMMUNITY_Community 116|Community 116]]
@@ -145,73 +162,73 @@
 - [[_COMMUNITY_Community 203|Community 203]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `SwiftData` - 37 edges
-2. `Foundation` - 37 edges
-3. `View` - 34 edges
+1. `Foundation` - 39 edges
+2. `SwiftData` - 37 edges
+3. `View` - 37 edges
 4. `LifeContext` - 31 edges
-5. `SwiftUI` - 25 edges
+5. `SwiftUI` - 26 edges
 6. `OneWeave — Complete Feature Catalog` - 25 edges
 7. `String` - 23 edges
 8. `BasicSelfThread` - 22 edges
 9. `UUID` - 22 edges
-10. `CareKinThread` - 21 edges
+10. `Tasks: 003-production-readiness` - 22 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `MainTabView` --references--> `View`  [EXTRACTED]
   Sources/OneWeave/OneWeaveApp.swift → Sources/OneWeave/OneWeavePrototype.swift
-- `StateMachineIndicator` --references--> `View`  [EXTRACTED]
-  Sources/OneWeave/StateMachineIndicator.swift → Sources/OneWeave/OneWeavePrototype.swift
 - `OneWeaveApp` --calls--> `AppStateMachine`  [INFERRED]
   Sources/OneWeave/OneWeaveApp.swift → Sources/OneWeave/AppStateMachine.swift
 - `TimelineService` --calls--> `AppStateMachine`  [INFERRED]
   Sources/OneWeave/TimelineService.swift → Sources/OneWeave/AppStateMachine.swift
 - `BodyThreadSheet` --references--> `View`  [EXTRACTED]
   Sources/OneWeave/BodyThreadSheet.swift → Sources/OneWeave/OneWeavePrototype.swift
+- `CareKinThread` --inherits--> `ThreadProtocol`  [EXTRACTED]
+  Sources/OneWeave/CareKinThread.swift → Sources/OneWeave/Thread.swift
 
 ## Import Cycles
 - None detected.
 
-## Communities (146 total, 9 thin omitted)
+## Communities (162 total, 10 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.09
-Nodes (32): CryptoKit, Darwin, EchoError, alreadyOpened, cipherMissingKey, decryptionFailed, emptyReflection, heirNotInWeaveCircle (+24 more)
+Cohesion: 0.13
+Nodes (20): persistenceFailed, EchoLifecycleState, delivered, maturing, opened, openingReady, released, sealed (+12 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.31
-Nodes (6): StewardshipThread, Double, LifeContext, String, TimelineEvent, TimelineService
+Cohesion: 0.14
+Nodes (10): ObservableObject, SessionGuard, SessionHardOffRampView, SessionSoftWarningView, Bool, Date, Double, Int (+2 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.05
-Nodes (52): ActivityAttributes, AppIntent, AppIntents, CommandResult, Context, HarmonyEntry, Hashable, Identifiable (+44 more)
+Cohesion: 0.07
+Nodes (41): ActivityAttributes, AppIntent, AppIntents, Context, HarmonyEntry, Hashable, IntentResult, LocalizedStringResource (+33 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.08
-Nodes (35): BodyThreadSnapshot, CognitiveLoadReading, BodyThreadSnapshot, BriefCalendarEvent, BriefEchoCountdown, BriefingSection, bodyThread, calendar (+27 more)
+Cohesion: 0.16
+Nodes (18): BodyThreadSnapshot, CognitiveLoadReading, BriefCalendarEvent, BriefEchoCountdown, BriefQuest, DailyBriefingGenerator, EveningReview, LifeContext (+10 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.21
-Nodes (11): LifeContext, QuestService, Date, Double, Int, ModelContext, QuestStatus, String (+3 more)
+Cohesion: 0.14
+Nodes (16): LifeContext, QuestService, QuestStatus, active, archived, available, completed, Date (+8 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.10
 Nodes (32): MentorTurn, Comparable, InvisibleMentor, MentorDialogue, MentorInput, MentorTurn, OpenedEchoSeed, ReflectionSeed (+24 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.06
-Nodes (39): EntityType, MemoryType, Double, EntityType, concept, event, financial, healthMetric (+31 more)
+Cohesion: 0.07
+Nodes (35): EntityType, MemoryType, Double, EntityType, concept, event, financial, healthMetric (+27 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.04
 Nodes (47): 1.1 Get a Mac capable of Xcode 16+, 1.2 Install the toolchain, 1.3 Create a GitHub account + Apple Developer account, 1.4 Set up authentication (your choice), 1.5 Clone the OneWeave repo, 2.1 Create the Xcode project, 2.2 Move Swift files into Xcode, 2.3 Configure deployment target (+39 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.11
-Nodes (22): Amplifier, echoBoost, insightMagnifier, redirectLens, selfFocus, streakShield, EssenceTransaction, LifeContext (+14 more)
+Cohesion: 0.09
+Nodes (26): Amplifier, echoBoost, insightMagnifier, redirectLens, selfFocus, streakShield, EnergyProfile, high (+18 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.11
-Nodes (29): Calendar, Codable, FamilyPod, FamilyPodDigestBuilder, FamilyPodDigestEntry, FamilyPodDigestRedactor, FamilyPodLimits, FamilyPodMember (+21 more)
+Cohesion: 0.07
+Nodes (42): Calendar, FamilyPod, FamilyPodDigestBuilder, FamilyPodDigestEntry, FamilyPodDigestRedactor, FamilyPodError, cooldownActive, duplicateMember (+34 more)
 
 ### Community 10 - "Community 10"
 Cohesion: 0.15
@@ -226,8 +243,8 @@ Cohesion: 0.12
 Nodes (26): CoreGraphics, LoomPalette, LoomStrand, Comparable, EntitySeed, LoomGeometry, LoomInput, LoomPalette (+18 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.11
-Nodes (23): ExportManifest, EchoMarkdownRenderer, ExportLeash, fullBundle, localOnly, privateBundle, publicBundle, ExportManifest (+15 more)
+Cohesion: 0.15
+Nodes (16): ExportManifest, EchoMarkdownRenderer, ExportManifest, PortableExportBuilder, PortableExportBundle, PortableExportChecksum, PortableExportError, decryptionFailed (+8 more)
 
 ### Community 14 - "Community 14"
 Cohesion: 0.05
@@ -238,8 +255,8 @@ Cohesion: 0.28
 Nodes (6): CareKinThread, Date, LifeContext, String, TimelineEvent, TimelineService
 
 ### Community 16 - "Community 16"
-Cohesion: 0.06
-Nodes (35): Build & submission (Claude E), Cycle-30 new Python validators (Kimi A) — ALL Linux-fixable, Format: `[ID] [P?] [Story] Description`, Hermes M3 deferred / Mac, Hermes M3 Self-Review — Calm/Privacy-UX (NEW), Linux-fixable compile-blockers (Claude B1/B2 + Grok A), Linux-fixable HIG / Accessibility (Claude C), Linux-fixable privacy/deletion bugs (Claude B3 + Hermes M3) (+27 more)
+Cohesion: 0.05
+Nodes (40): Build & submission (Claude E), Cycle-30 new Python validators (Kimi A) — ALL Linux-fixable, Cycle 33 — GLM creative ideation (new tasks T147-T170), Format: `[ID] [P?] [Story] Description`, Hermes M3 deferred / Mac, Hermes M3 Self-Review — Calm/Privacy-UX (NEW), Linux-fixable compile-blockers (Claude B1/B2 + Grok A), Linux-fixable HIG / Accessibility (Claude C) (+32 more)
 
 ### Community 17 - "Community 17"
 Cohesion: 0.33
@@ -254,8 +271,8 @@ Cohesion: 0.15
 Nodes (12): 🧬 5-CLI review panel output (cycle 30), 🆕 Cycle 29/30 Linux fixes applied, 🎯 Cycle 29/30 TL;DR, 🔧 How to run this for the Mac handoff, 🎯 Linux-fixable items NOT yet applied (deferred to future cycles), 🔴 Mac-needed items (Grok A — must run `xcodebuild` first), Net code changes, OneWeave — Cycle 29/30 Update (2026-06-28) (+4 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.13
-Nodes (24): DecaySeverity, Comparable, DecaySeverity, gentle, moderate, severe, RelationshipDecayPrompt, RelationshipDecayTracker (+16 more)
+Cohesion: 0.30
+Nodes (12): DecaySeverity, RelationshipDecayPrompt, RelationshipDecayTracker, RelationshipRecord, RhizomeReading, RelationshipKind, RhizomeReading, Bool (+4 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.07
@@ -266,15 +283,15 @@ Cohesion: 0.33
 Nodes (6): CaptureSignal, decision, event, journal, note, task
 
 ### Community 23 - "Community 23"
-Cohesion: 0.12
-Nodes (19): CGPoint, CGSize, Gesture, GraphicsContext, LoomInput, LoomState, Comparable, LivingGraphLoom (+11 more)
+Cohesion: 0.13
+Nodes (18): CGPoint, CGSize, Gesture, GraphicsContext, LoomInput, LoomState, Comparable, LivingGraphLoom (+10 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.07
 Nodes (26): 10. Leak-to-Legacy Redirects (Stewardship), 11. Thread Tools & Amplifiers ("Power-Ups" — Math Quest spirit, calm execution), 12. Harmony Seasons & Life Chapters + Reflection Gates, 1. Design Principles & Non-Negotiables (The Loom Rules), 1. Essence — The Currency of Ripples (XP System), 2. The Four Threads (The Warp & Weft), 2. Weave Level & Global Progression, 3. 12+ Core Gamification Features (Catchy Names + Deep Design) (+18 more)
 
 ### Community 25 - "Community 25"
-Cohesion: 0.18
+Cohesion: 0.17
 Nodes (16): Locale, CaptureClassification, CaptureDestination, decision, event, journal, note, task (+8 more)
 
 ### Community 26 - "Community 26"
@@ -286,64 +303,64 @@ Cohesion: 0.08
 Nodes (25): 1. Initialize Analysis Context, 2. Load Artifacts (Progressive Disclosure), 3. Build Semantic Models, 4. Detection Passes (Token-Efficient Analysis), 5. Severity Assignment, 6. Produce Compact Analysis Report, 7. Provide Next Actions, 8. Offer Remediation (+17 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.15
-Nodes (15): BasicSelfThread, ThreadProtocol, TimelineEvent, Date, Int, LifeContext, String, TimelineEvent (+7 more)
+Cohesion: 0.10
+Nodes (21): BasicSelfThread, StewardshipThread, ThreadProtocol, TimelineEvent, Date, Int, LifeContext, String (+13 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.18
-Nodes (13): MasteryBadge, QuestCard, RippleRow, SuggestedQuestRow, ThreadDetailView, Color, Int, LifeContext (+5 more)
+Cohesion: 0.08
+Nodes (25): App, AppStateMachine, OneWeaveApp, MasteryBadge, QuestCard, RippleRow, SuggestedQuestRow, ThreadDetailView (+17 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.20
 Nodes (10): IntegrationCategory, bodyThread, calendar, contacts, health, insights, mail, notes (+2 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.21
-Nodes (17): Float, BasicSelfThread, CareKinThread, DataLeashSettingsRecord, LifeEntity, LifeRelationship, MeaningThread, SacredEcho (+9 more)
+Cohesion: 0.11
+Nodes (28): Float, BasicSelfThread, CareKinThread, DataLeashSettingsRecord, LifeContext, LifeEntity, LifeRelationship, MeaningThread (+20 more)
 
 ### Community 32 - "Community 32"
-Cohesion: 0.18
-Nodes (10): IntegrationCategory, DataLeashSettingsRecord, DataLeashSettingsView, DataLeashState, LifeContext, Bool, Data, Date (+2 more)
+Cohesion: 0.17
+Nodes (12): IntegrationCategory, DataLeashReflectionSheet, DataLeashSettingsRecord, DataLeashSettingsView, DataLeashState, LifeContext, Bool, Data (+4 more)
 
 ### Community 33 - "Community 33"
-Cohesion: 0.17
-Nodes (18): Comparable, DecisionLog, DecisionLogError, emptyOutcome, emptyReasoning, emptyTitle, DecisionLogStats, DecisionMentorBridge (+10 more)
+Cohesion: 0.21
+Nodes (14): Comparable, DecisionLog, DecisionLogStats, DecisionMentorBridge, DecisionRecord, Bool, ClosedRange, Date (+6 more)
 
 ### Community 34 - "Community 34"
-Cohesion: 0.16
-Nodes (7): Foundation, CrossThreadInsight, InsightGenerator, LifeContext, String, TimelineEvent, SwiftData
+Cohesion: 0.12
+Nodes (7): Foundation, EssenceLedgerView, LifecycleSceneBridge, MainTabView, LifeContext, SwiftData, SwiftUI
 
 ### Community 35 - "Community 35"
-Cohesion: 0.08
-Nodes (25): App, AppState, capturing, highFlow, idle, lowEnergy, reflecting, weaving (+17 more)
+Cohesion: 0.32
+Nodes (5): MeaningThread, LifeContext, String, TimelineEvent, TimelineService
 
 ### Community 36 - "Community 36"
-Cohesion: 0.17
-Nodes (14): InsightCacheKey, GraphInsight, GraphInsightGenerator, InsightCacheKey, OneWeavePrototype, Date, Double, Int (+6 more)
+Cohesion: 0.09
+Nodes (32): CitationKind, CommandResult, Identifiable, InsightCacheKey, InsightCitation, CommandKind, createQuest, logWeave (+24 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.13
 Nodes (13): Contacts, EventKit, HealthKit, MessageUI, CalendarIntegration, ContactsIntegration, HealthIntegration, IntegrationPermission (+5 more)
 
 ### Community 38 - "Community 38"
-Cohesion: 0.17
-Nodes (16): CompassView, GamificationHUD, StateMachineIndicator, ThreadRingView, WeaveSummaryView, QuestService, Bool, Color (+8 more)
+Cohesion: 0.15
+Nodes (17): CompassView, GamificationHUD, StateMachineIndicator, ThreadRingView, WeaveSummaryView, StateMachineIndicator, QuestService, Bool (+9 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.11
-Nodes (12): EssenceLedgerView, LifecycleSceneBridge, MainTabView, ResonanceOracleSheet, StateMachineIndicator, WeaveSummaryView, ResonanceSimulation, LifeContext (+4 more)
+Cohesion: 0.40
+Nodes (4): ResonanceOracleSheet, ResonanceSimulation, LifeContext, String
 
 ### Community 40 - "Community 40"
-Cohesion: 0.40
-Nodes (5): QuestStatus, active, archived, available, completed
+Cohesion: 0.12
+Nodes (18): Error, LocalizedError, PersistenceError, corruptEnvelope, CognitiveLoadPauseError, DecisionLogError, emptyOutcome, emptyReasoning (+10 more)
 
 ### Community 41 - "Community 41"
 Cohesion: 0.11
 Nodes (18): 1. Critical Bug Fixes (Apply Immediately - Code Won't Build/Run), 2. Encryption Patches (Core Production Requirement), 3. Consent Flow Improvements, 4. No-Leaks / Privacy Hardening Patches, 5. Completeness / Polish Patches, 6. How to Apply (Examples), 7. Additional Production Suggestions (Beyond Patches), Onboarding (OnboardingView.swift) (+10 more)
 
 ### Community 43 - "Community 43"
-Cohesion: 0.09
-Nodes (22): CaseIterable, CognitiveLoadComponent, activeAmplifierLoad, calendarDensity, hrvStress, openTaskCount, recentReflectionGap, sleepDebt (+14 more)
+Cohesion: 0.29
+Nodes (7): CognitiveLoadComponent, activeAmplifierLoad, calendarDensity, hrvStress, openTaskCount, recentReflectionGap, sleepDebt
 
 ### Community 44 - "Community 44"
 Cohesion: 0.11
@@ -363,7 +380,7 @@ Nodes (5): get_feature_paths(), get_repo_root(), _persist_feature_json(), resolv
 
 ### Community 49 - "Community 49"
 Cohesion: 0.21
-Nodes (7): HealthThread, MFMailComposeViewController, MailIntegration, NotesIntegration, Bool, DataLeashState, URL
+Nodes (7): HealthThread, MFMailComposeViewController, MailIntegration, NotesIntegration, OneWeavePrototype, DataLeashState, URL
 
 ### Community 50 - "Community 50"
 Cohesion: 0.12
@@ -373,17 +390,37 @@ Nodes (16): 1. Security & Privacy Gaps (Critical for Production), 2. Code Qualit
 Cohesion: 0.16
 Nodes (13): CrossRippleRow, EnergyIndicator, ThreadsOverviewView, BasicSelfThread, CareKinThread, Color, EnergyProfile, LifeContext (+5 more)
 
+### Community 52 - "Community 52"
+Cohesion: 0.11
+Nodes (17): Claude (round 5), Codex (round 5), Data Leash Guest Mode in detail, Git history, GLM (round 5), Grok A6 fix, Grok (round 5), Insight Provenance in detail (+9 more)
+
+### Community 53 - "Community 53"
+Cohesion: 0.12
+Nodes (16): JailbreakDetector, JailbreakIndicator, binBash, cydiaPackageList, cydiaScheme, cydiaSubstrate, fakeSandboxWrite, fridaServer (+8 more)
+
 ### Community 54 - "Community 54"
 Cohesion: 0.12
 Nodes (15): 1. Initialize Convergence Context, 2. Load Artifacts (Progressive Disclosure), 3. Build the Intent Inventory, 4. Assess the Codebase and Classify Findings, 5. Assign Severity, 6. Present the In-Session Findings Summary, 7. Append Convergence Tasks (or report converged), 8. Provide Next Actions (Handoff) (+7 more)
 
+### Community 55 - "Community 55"
+Cohesion: 0.18
+Nodes (12): ExportLeash, fullBundle, localOnly, privateBundle, publicBundle, GraphOPMLRenderer, JournalMarkdownRenderer, PortableImportPolicy (+4 more)
+
 ### Community 56 - "Community 56"
-Cohesion: 0.28
-Nodes (8): HealthThread, RemindersIntegration, Date, Double, Int, LifeContext, LifeEntity, ModelContext
+Cohesion: 0.27
+Nodes (9): HealthThread, RemindersIntegration, Bool, Date, Double, Int, LifeContext, LifeEntity (+1 more)
 
 ### Community 57 - "Community 57"
 Cohesion: 0.12
 Nodes (14): 10. Success Metrics, Guardrails & Ethics, 11. Roadmap & Next Steps, 1. Freemium Model Overview, 2. Tasty Premium Tiers (Master Loom Focus), 3. Deep Integration with Gamification, 4. Onboarding Hooks ("First Weave" Magic — 5-8 Minutes), 5. Daily Rituals & Habit Formation for Retention, 6. Retention Psychology & Broader Tactics (+6 more)
+
+### Community 58 - "Community 58"
+Cohesion: 0.17
+Nodes (14): Codable, Equatable, LifeRelationshipDTO, SacredEchoDTO, AppState, capturing, highFlow, idle (+6 more)
+
+### Community 59 - "Community 59"
+Cohesion: 0.14
+Nodes (14): CaseIterable, MemoryType, episodic, procedural, semantic, DecaySeverity, gentle, moderate (+6 more)
 
 ### Community 60 - "Community 60"
 Cohesion: 0.12
@@ -393,17 +430,25 @@ Nodes (15): Bugs caught by validators (not by me), Create a tarball (clean, no c
 Cohesion: 0.13
 Nodes (15): Apple Frameworks NOT Used (intentional), Compliance Checklist *(mandatory before implementation)*, Context, Data Model, Dependencies, Existing Enums (key), Existing SwiftData @Models (11), External Services (none in core) (+7 more)
 
+### Community 62 - "Community 62"
+Cohesion: 0.22
+Nodes (10): CognitiveLoadTrend, reflectionRequired, CognitiveLoadReading, CognitiveLoadThresholds, CognitiveLoadWeights, Comparable, LifeContext, WeavePauseGate (+2 more)
+
+### Community 63 - "Community 63"
+Cohesion: 0.15
+Nodes (12): Assets (in priority order), Change log, Mitigations (current vs. planned), OneWeave Threat Model, ❌ Out of scope, Risks the model accepts, 🚧 Scheduled, Scope (+4 more)
+
 ### Community 64 - "Community 64"
 Cohesion: 0.14
 Nodes (14): 10. Common mistakes to avoid, 11. Communication back to the Linux side, 12. Time budget, 13. When you're done, 1. The codebase at a glance, 2. What the Linux side already validated, 3. The 8-phase playbook, 4. The five privacy gates (preserve them) (+6 more)
 
 ### Community 65 - "Community 65"
-Cohesion: 0.22
+Cohesion: 0.24
 Nodes (8): QuestService, Int, LifeContext, ModelContext, String, TimelineEvent, UUID, WeaveQuest
 
 ### Community 66 - "Community 66"
-Cohesion: 0.18
-Nodes (12): QuestStatus, active, completed, pending, reflected, WeaveQuest, Bool, Date (+4 more)
+Cohesion: 0.32
+Nodes (7): WeaveQuest, Bool, Date, Int, QuestStatus, String, UUID
 
 ### Community 67 - "Community 67"
 Cohesion: 0.40
@@ -446,12 +491,16 @@ Cohesion: 0.40
 Nodes (4): QuestsView, LifeContext, String, UUID
 
 ### Community 77 - "Community 77"
-Cohesion: 0.12
-Nodes (24): CognitiveLoadTrend, CognitiveLoad, CognitiveLoadInputs, reflectionRequired, CognitiveLoadReading, CognitiveLoadThresholds, CognitiveLoadTrend, falling (+16 more)
+Cohesion: 0.29
+Nodes (7): CognitiveLoad, CognitiveLoadInputs, ClosedRange, Double, Int, LifeContext, Self
 
 ### Community 78 - "Community 78"
 Cohesion: 0.17
 Nodes (12): Cryptographic primitives, Data residency, Explicit anti-patterns, Gate 1: Reflection gate, Gate 2: Data Leash gate, Gate 3: Consent gate (isUserReflection), Gate 4: Sacred Echo unlock gate, Gate 5: Fail-closed crypto gate (+4 more)
+
+### Community 79 - "Community 79"
+Cohesion: 0.17
+Nodes (12): BriefingSection, bodyThread, calendar, cognitiveLoad, echoes, eveningPrompt, greeting, openThreads (+4 more)
 
 ### Community 80 - "Community 80"
 Cohesion: 0.18
@@ -482,8 +531,8 @@ Cohesion: 0.18
 Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME], [PRINCIPLE_3_NAME], [PRINCIPLE_4_NAME], [PRINCIPLE_5_NAME], [PROJECT_NAME] Constitution (+2 more)
 
 ### Community 87 - "Community 87"
-Cohesion: 0.08
-Nodes (27): Error, LocalizedError, PersistenceError, corruptEnvelope, CognitiveLoadPauseError, FamilyPodError, cooldownActive, duplicateMember (+19 more)
+Cohesion: 0.29
+Nodes (7): PortableImportError, bundleTooLarge, checksumMismatch, fullBundleRefused, invalidAttributesJSON, invalidOPML, unsupportedBundleVersion
 
 ### Community 88 - "Community 88"
 Cohesion: 0.27
@@ -501,13 +550,37 @@ Nodes (11): Architecture, Contributing, For Linux developers (validation only), 
 Cohesion: 0.18
 Nodes (10): Core Principles, Governance, [PRINCIPLE_1_NAME], [PRINCIPLE_2_NAME], [PRINCIPLE_3_NAME], [PRINCIPLE_4_NAME], [PRINCIPLE_5_NAME], [PROJECT_NAME] Constitution (+2 more)
 
+### Community 92 - "Community 92"
+Cohesion: 0.20
+Nodes (8): Comparable, RhizomeKind, balanced, developing, rhizomeNoisy, taprootStarved, ClosedRange, Self
+
+### Community 93 - "Community 93"
+Cohesion: 0.38
+Nodes (5): CryptoKit, Darwin, AppLifecycleConstants, Security, UUID
+
 ### Community 94 - "Community 94"
-Cohesion: 0.13
-Nodes (11): LifeContext, OneWeaveMigrationLogic, BasicSelfThread, CareKinThread, Int, LifeEntity, LifeRelationship, MeaningThread (+3 more)
+Cohesion: 0.29
+Nodes (7): CognitiveLoadTrend, falling, insufficient, rising, steady, steadyHigh, steadyLow
 
 ### Community 95 - "Community 95"
-Cohesion: 0.25
+Cohesion: 0.27
 Nodes (7): ExportSheet, SettingsView, Bool, LifeContext, String, WeaveQuest, UINotificationFeedbackGenerator
+
+### Community 96 - "Community 96"
+Cohesion: 0.29
+Nodes (7): RelationshipKind, acquaintance, closeFriend, colleague, family, friend, mentor
+
+### Community 97 - "Community 97"
+Cohesion: 0.33
+Nodes (6): TimeOfDay, afternoon, earlyMorning, evening, morning, night
+
+### Community 98 - "Community 98"
+Cohesion: 0.33
+Nodes (5): CrossThreadInsight, InsightGenerator, LifeContext, String, TimelineEvent
+
+### Community 99 - "Community 99"
+Cohesion: 0.47
+Nodes (3): PrivateLog, Int, String
 
 ### Community 100 - "Community 100"
 Cohesion: 0.20
@@ -522,16 +595,20 @@ Cohesion: 0.22
 Nodes (9): Constitution Compliance, Cross-Artifact Consistency, Mac-Side Work Demarcation, Open Questions for User, Requirements Quality, Requirements Quality Checklist: 003-production-readiness, Toolchain Adoption, Validation Coverage (+1 more)
 
 ### Community 103 - "Community 103"
-Cohesion: 0.11
-Nodes (27): Equatable, LifeEntityDTO, LifeRelationshipDTO, AppLifecycleConstants, AppLifecycleCoordinator, AppLifecyclePaths, LifeEntityDTO, LifeGraphEnvelope (+19 more)
+Cohesion: 0.12
+Nodes (22): LifeEntityDTO, LifeRelationshipDTO, AppLifecycleCoordinator, AppLifecyclePaths, LifeEntityDTO, LifeGraphEnvelope, LifeGraphPersistence, SacredEchoDTO (+14 more)
 
 ### Community 105 - "Community 105"
 Cohesion: 0.22
 Nodes (8): Anti-Addiction (Reflection Gates + Grace), Code Review (Grep + Manual - Gamification Layer Focus), Constitution / PbD Compliance, Edge Cases & Gaps Noted, Files with explicit notes, OneWeave Privacy & Security Audit (Gamification Layer), Summary, Verification Summary (Phase 7)
 
 ### Community 106 - "Community 106"
-Cohesion: 0.33
+Cohesion: 0.36
 Nodes (7): ResonanceOracle, ResonanceSimulation, Date, Double, LifeContext, ModelContext, String
+
+### Community 107 - "Community 107"
+Cohesion: 0.50
+Nodes (3): Comparable, ClosedRange, Self
 
 ### Community 114 - "Community 114"
 Cohesion: 0.22
@@ -654,24 +731,24 @@ Cohesion: 0.50
 Nodes (3): OneWeaveAPICatalog, Int, String
 
 ## Knowledge Gaps
-- **980 isolated node(s):** `update-agent-context.sh script`, `check-prerequisites.sh script`, `common.sh script`, `create-new-feature.sh script`, `setup-plan.sh script` (+975 more)
+- **1035 isolated node(s):** `update-agent-context.sh script`, `check-prerequisites.sh script`, `common.sh script`, `create-new-feature.sh script`, `setup-plan.sh script` (+1030 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Foundation` connect `Community 34` to `Community 0`, `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 9`, `Community 11`, `Community 12`, `Community 13`, `Community 20`, `Community 25`, `Community 33`, `Community 35`, `Community 36`, `Community 37`, `Community 184`, `Community 75`, `Community 77`, `Community 88`, `Community 95`, `Community 103`, `Community 106`?**
-  _High betweenness centrality (0.117) - this node is a cross-community bridge._
-- **Why does `SwiftData` connect `Community 34` to `Community 0`, `Community 2`, `Community 5`, `Community 6`, `Community 136`, `Community 8`, `Community 11`, `Community 17`, `Community 29`, `Community 32`, `Community 36`, `Community 37`, `Community 38`, `Community 39`, `Community 51`, `Community 65`, `Community 66`, `Community 75`, `Community 76`, `Community 95`, `Community 103`, `Community 106`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
-- **Why does `View` connect `Community 38` to `Community 32`, `Community 2`, `Community 67`, `Community 39`, `Community 136`, `Community 11`, `Community 76`, `Community 17`, `Community 51`, `Community 119`, `Community 23`, `Community 29`, `Community 95`?**
-  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+- **Why does `Foundation` connect `Community 34` to `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 9`, `Community 11`, `Community 12`, `Community 13`, `Community 25`, `Community 33`, `Community 37`, `Community 49`, `Community 53`, `Community 184`, `Community 62`, `Community 75`, `Community 88`, `Community 92`, `Community 93`, `Community 99`?**
+  _High betweenness centrality (0.112) - this node is a cross-community bridge._
+- **Why does `SwiftData` connect `Community 34` to `Community 32`, `Community 36`, `Community 37`, `Community 38`, `Community 6`, `Community 136`, `Community 8`, `Community 11`, `Community 76`, `Community 75`, `Community 17`, `Community 29`, `Community 51`, `Community 93`?**
+  _High betweenness centrality (0.065) - this node is a cross-community bridge._
+- **Why does `SwiftUI` connect `Community 34` to `Community 32`, `Community 1`, `Community 2`, `Community 67`, `Community 36`, `Community 38`, `Community 39`, `Community 136`, `Community 8`, `Community 11`, `Community 76`, `Community 108`, `Community 17`, `Community 29`, `Community 51`, `Community 23`, `Community 93`?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
 - **What connects `update-agent-context.sh script`, `check-prerequisites.sh script`, `common.sh script` to the rest of the system?**
-  _980 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1035 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.08734693877551021 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13363363363363365 - nodes in this community are weakly interconnected._
+- **Should `Community 1` be split into smaller, more focused modules?**
+  _Cohesion score 0.14210526315789473 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.05285592497868713 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.08489795918367347 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06666666666666667 - nodes in this community are weakly interconnected._

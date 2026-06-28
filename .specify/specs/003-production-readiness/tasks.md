@@ -461,6 +461,56 @@
 
 ---
 
+## Cycle 33 — GLM creative ideation (new tasks T147-T170)
+
+Source: `.cli/outputs/round_5_glm.md` (after stripping ANSI) — Whole-Repo Creative Ideation Report by GLM 5.2 (2026-06-28).
+
+These are *future* features — none required for shipping v1.0. They embody
+existing constitutional principles (anti-addictive gamification, privacy-first,
+calm intelligence, reflection-gated everything) but require their own design
+spikes. T147-T156 = the **10 novel features**. T157-T161 = the **5 algorithmic
+innovations** (some already shipped as cycle 33 patches — noted inline).
+T162-T169 = the **8 calm-design micro-interactions**. T170 = the **Void Thread**
+(strangest idea).
+
+### Top 10 NOVEL FEATURES (T147-T156)
+
+- [ ] T147 **[Linux · S]** GLM A3 — Morning Briefing "One Neglect": surface the single thread with steepest week-over-week decay, framed as invitation. Algorithm-only; build on existing `RelationshipDecayTracker.todaysPrompts`.
+- [ ] T148 **[Linux · S]** GLM A7 — Data Leash Guest Mode (one-tap flip). **SHIPPED in cycle 33** — `DataLeashState.enableGuestMode()` + `deviatingCategories` in `DataLeashSettings.swift`. Validator: `validate_cycle33_decay_garden.py`.
+- [ ] T149 **[Linux · S]** GLM A9 — Mastery Map: Apprentice Knots — each Mastery node shows a user-logged unresolved question. Tier advances by untying knots, not time served.
+- [ ] T150 **[Linux · S]** GLM A10 — Quiet Hours Ritual: user-defined 15–90 sec evening micro-ritual replacing the evening briefing. (Constitution §3 calm + §7 anti-addictive.)
+- [ ] T151 **[Linux · M]** GLM A1 — Threadline Decay Garden (botanical vitality model). **SHIPPED in cycle 33** — `RelationshipDecayTracker.vitality(...)` with `V₀·e^(-λ·Δt)·(1+Σκ)` + diminishing-returns boost via `sqrt`. Validator: `validate_cycle33_decay_garden.py`. Mac-side UI (leaf desaturation) deferred.
+- [ ] T152 **[Linux · M]** GLM A2 — Resonance Oracle's Unchosen Path: surface the unchosen option from a DecisionLog entry 30 days later as reflection prompt.
+- [ ] T153 **[Linux · M]** GLM A4 — Sacred Echo Time Capsule: AES-256-GCM reflection entry auto-unsealing on a user-defined future date.
+- [ ] T154 **[Linux · M]** GLM A6 — Invisible Mentor's "Devil's Advocate" Mode: surface the strongest counter-argument from the user's *own* past entries when forming an insight. Builds on cycle 33 Insight Provenance.
+- [ ] T155 **[Linux · M]** GLM A8 — Compass of Trade-Offs: radial view on CompassView showing this week's active trade-offs as gentle arcs.
+- [ ] T156 **[Linux · L]** GLM A5 — P2P Weave Circle "Witness Mode": two devices, one sets intention, other sees only a colored pulse. (Mac-only — requires MultipeerConnectivity transport.)
+
+### Top 5 ALGORITHMIC INNOVATIONS (T157-T161)
+
+- [ ] T157 **[Linux · S]** GLM B2 — Insight Provenance Graph. **SHIPPED in cycle 33** — `GraphInsight.citations: [InsightCitation]` + `ruleExplanation:` now present on all 7 `GraphInsight(...)` sites. Validator: `validate_cycle33_insight_provenance.py`. Settings → Algorithm Weights UI deferred to Mac.
+- [ ] T158 **[Linux · S]** GLM B1 — Anti-Streak Decay Curve (botanical). **SHIPPED in cycle 33** as part of T151 (same `vitality()` function).
+- [ ] T159 **[Linux · M]** GLM B3 — Tonal Coherence Score: ~200-word hand-tuned lexicon, rolling 30-day centroid vector, angle θ. No Core ML.
+- [ ] T160 **[Linux · M]** GLM B4 — Relationship Rhizome Index. **SHIPPED in cycle 33** — `RelationshipDecayTracker.rhizomeIndex(...)` + `RhizomeKind` (4 cases) + `RhizomeReading.nudgeText`. Validator: `validate_cycle33_decay_garden.py`. Mac UI deferred.
+- [ ] T161 **[Linux · M]** GLM B5 — Decision Reverb Half-Life: track 30/90/365-day return rates on DecisionLog entries; settled vs still-open glyph.
+
+### Top 8 CALM-DESIGN micro-interactions (T162-T169)
+
+- [ ] T162 **[Mac · S]** GLM C1 — Breath-bounded actions: 4-second inhale-exhale curve before save/seal/commit.
+- [ ] T163 **[Mac · S]** GLM C2 — Haptic signature per thread (Self/Stewardship/CareKin/Meaning each have distinct haptic).
+- [ ] T164 **[Mac · S]** GLM C3 — Anti-spring for serious actions: reflection-gated commits use `.easeOut(0.6)`, never spring.
+- [ ] T165 **[Mac · M]** GLM C4 — Ambient hum on Loom idle (40 Hz, fades in over 8s; off by default). ⚠ Audio session coordination needed.
+- [ ] T166 **[Mac · S]** GLM C5 — Long-press as "consider" (1.5s radial fill before menu appears).
+- [ ] T167 **[Mac · S]** GLM C6 — Pull-to-refresh replaced by pull-to-reflect: dragging reveals "What are you looking for?" prompt.
+- [ ] T168 **[Linux · S]** GLM C7 — Dimming on cognitive load rise. **SHIPPED in cycle 33 partial**: `CognitiveLoadThresholds` already exists; need UI hook to desaturate 15% when score > 0.7.
+- [ ] T169 **[Mac · S]** GLM C8 — Silent success: 200ms `.soft` haptic + 1-pixel inward contraction on save.
+
+### ONE BOLD BET + STRANGEST IDEA (T170)
+
+- [ ] T170 **[Linux · L]** GLM G — The Void Thread: an opt-in 5th thread with no entities, no decay, no Mastery; accepts only single sentences that are sealed with a key derived from the entry's own contents (HKDF on SHA-256 of plaintext). The app **cannot** read entries back unless the user re-types the exact sentence byte-for-byte. Honors §2 (zero-trust), §3 (calm), §4 (reflection-gated). Mac UI required for the re-type flow.
+
+---
+
 ## Updated Summary
 
 | Phase | Status | Owner | Effort |
@@ -468,9 +518,10 @@
 | Phase T07: GLM cycle-29 fixes | ✅ Complete | Linux | done (b96c2a1) |
 | Phase T08: 4-CLI round | ✅ Complete | Linux | done |
 | Phase T09: Doc polish | ⏳ Pending | Linux | 30 min |
-| **Phase T10: Cycle 30 multi-CLI synthesis** | 🔄 In progress | Linux | ~4 hours |
-| **Phase T11: Linux-fixable apply** | 🔄 In progress | Linux | ~6 hours |
-| Phase T12: Spec Kit + Constitution + Handoff update | ⏳ Pending | Linux | 1 hour |
+| Phase T10: Cycle 30 multi-CLI synthesis | ✅ Complete | Linux | done (b44fb02) |
+| Phase T11: Linux-fixable apply | ✅ Complete | Linux | done (cycles 30-32) |
+| Phase T12: Spec Kit + Constitution + Handoff update | 🔄 In progress | Linux | 1 hour |
+| **Phase T13: Cycle 33 GLM-driven features** | ✅ Complete | Linux | done (insight provenance + decay garden + rhizome + guest mode + Grok A6) |
 | Phase P1: GitHub Push | ⏳ Pending | User | 10 min |
 | Phase M1: Mac compile-blockers + build | ⏳ Pending | Mac | 6-8 hours |
 | Phase M2: iOS features + widgets + intents | ⏳ Pending | Mac | 4-6 hours |
