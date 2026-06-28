@@ -64,6 +64,10 @@ public struct DecisionRecord: Codable, Equatable, Identifiable {
     public let id: UUID
     public var title: String                // "Should I take the new job?"
     public var optionsConsidered: [String]   // ["Stay at current role", "Take new role"]
+    public var chosenOptionIndex: Int?       // Cycle 34 / T152: index into optionsConsidered.
+                                             // nil for decisions recorded before cycle 34.
+                                             // When non-nil + optionsConsidered.count >= 2,
+                                             // the unchosen path is the *other* option.
     public var reasoning: String             // "I want more growth and the team seems strong."
     public var expectedOutcome: String       // "More growth, similar comp."
     public var actualOutcome: String?       // Filled in later.
@@ -79,6 +83,7 @@ public struct DecisionRecord: Codable, Equatable, Identifiable {
         id: UUID = UUID(),
         title: String,
         optionsConsidered: [String] = [],
+        chosenOptionIndex: Int? = nil,
         reasoning: String,
         expectedOutcome: String = "",
         actualOutcome: String? = nil,
@@ -93,6 +98,7 @@ public struct DecisionRecord: Codable, Equatable, Identifiable {
         self.id = id
         self.title = title
         self.optionsConsidered = optionsConsidered
+        self.chosenOptionIndex = chosenOptionIndex
         self.reasoning = reasoning
         self.expectedOutcome = expectedOutcome
         self.actualOutcome = actualOutcome
@@ -103,6 +109,23 @@ public struct DecisionRecord: Codable, Equatable, Identifiable {
         self.outcomeRecordedAt = outcomeRecordedAt
         self.isPrivate = isPrivate
         self.attributes = attributes
+    }
+
+    /// Cycle 34 / T152 (GLM A2): the option the user *didn't* take.
+    /// Returns nil if the record doesn't have chosenOptionIndex or only
+    /// has one option considered (no alternative existed).
+    public var unchosenOption: String? {
+        guard let chosen = chosenOptionIndex,
+              optionsConsidered.count >= 2,
+              chosen >= 0, chosen < optionsConsidered.count
+        else { return nil }
+        // Surface *one* unchosen option (the first other one). For decisions
+        // with > 2 options, the first non-chosen is treated as the dominant
+        // alternative — the one that mattered most at decision time.
+        for (i, opt) in optionsConsidered.enumerated() where i != chosen {
+            return opt
+        }
+        return nil
     }
 
     /// Whether the decision has an outcome recorded. Public for filtering.
@@ -288,6 +311,85 @@ public enum DecisionMentorBridge {
         }
         scored.sort(by: { $0.1 > $1.1 })
         return Array(scored.prefix(limit))
+    }
+
+    // MARK: - Cycle 34 / T152 (GLM A2): Unchosen Path candidates
+    //
+    // The Resonance Oracle, 30 days after a decision was sealed, simulates
+    // *only* the option the user didn't take — and surfaces it as a
+    // reflection prompt. Never as a verdict. UX: "Had you gone the other
+    // way, what would today look like?"
+    //
+    // Returns up to `limit` decisions that:
+    //   1. Were decided at least `minAgeDays` ago (default 30)
+    //   2. Have a `chosenOptionIndex` and an `unchosenOption`
+    //   3. Have not been surfaced before (caller passes `alreadySurfacedIDs`)
+    //   4. Are not more than `maxAgeDays` old (default 365 — older decisions
+    //      get faded out to keep the ritual fresh)
+    //
+    // Surfaced as `UnchosenPathPrompt`, which the Mac side renders with a
+    // reflection CTA. Never awards essence or harmony without the user
+    // actually writing a reflection.
+    public static func unchosenPathCandidates(
+        in records: [DecisionRecord],
+        alreadySurfacedIDs: Set<UUID> = [],
+        now: Date = Date(),
+        minAgeDays: Int = 30,
+        maxAgeDays: Int = 365,
+        limit: Int = 1
+    ) -> [UnchosenPathPrompt] {
+        var candidates: [UnchosenPathPrompt] = []
+        for record in records {
+            // Skip if no unchosen option recorded
+            guard let unchosen = record.unchosenOption else { continue }
+            // Skip if already surfaced
+            if alreadySurfacedIDs.contains(record.id) { continue }
+
+            let daysAgo = Int(now.timeIntervalSince(record.decidedAt) / 86400)
+            guard daysAgo >= minAgeDays, daysAgo <= maxAgeDays else { continue }
+
+            candidates.append(UnchosenPathPrompt(
+                record: record,
+                unchosenOption: unchosen,
+                daysAgo: daysAgo,
+                prompt: makeUnchosenPathPrompt(for: record, unchosen: unchosen, daysAgo: daysAgo)
+            ))
+        }
+        // Most recent first (closer to the 30-day window is fresher).
+        candidates.sort { $0.daysAgo < $1.daysAgo }
+        return Array(candidates.prefix(limit))
+    }
+
+    /// Build the calm reflection prompt. Embodies Constitution §3 (calm) +
+    /// §4 (reflection-gated everything). Never a verdict.
+    private static func makeUnchosenPathPrompt(
+        for record: DecisionRecord,
+        unchosen: String,
+        daysAgo: Int
+    ) -> String {
+        let dayWord = daysAgo == 1 ? "day" : "days"
+        return "\(daysAgo) \(dayWord) ago you decided \"\(record.title)\" and chose " +
+            "the path you took. The other path was \"\(unchosen)\". " +
+            "Had you gone that way, what would today look like?"
+    }
+}
+
+/// Cycle 34 / T152 (GLM A2): one unchosen-path reflection prompt surfaced
+/// by the Resonance Oracle. The user can choose to write a reflection
+/// (then any insight / essence is awarded) or dismiss without consequence.
+public struct UnchosenPathPrompt: Codable, Equatable, Identifiable {
+    public let record: DecisionRecord
+    public let unchosenOption: String
+    public let daysAgo: Int
+    public let prompt: String
+
+    public var id: UUID { record.id }
+
+    public init(record: DecisionRecord, unchosenOption: String, daysAgo: Int, prompt: String) {
+        self.record = record
+        self.unchosenOption = unchosenOption
+        self.daysAgo = daysAgo
+        self.prompt = prompt
     }
 }
 
