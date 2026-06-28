@@ -4,6 +4,12 @@ import Foundation
 // This runs in the DEBUG harness only. Exercises new code with real-ish data from existing threads/quests.
 // "Validated" = logs expected outputs for coherence, resonance, insights.
 
+// B4 (Claude round-5 audit): wrap in #if DEBUG so the 4 `try!` calls in this
+// file cannot crash production. Previously claimed "DEBUG harness only" but had
+// no actual conditional compilation. Constitution §7: no stubs in production paths.
+
+#if DEBUG
+
 extension OneWeavePrototype {
     
     func validateLifeGraphAndInsights() {
@@ -417,3 +423,5 @@ extension OneWeavePrototype {
         print("=== VALIDATION COMPLETE - Graph logic exercised successfully ===\n")
     }
 }
+
+#endif  // DEBUG — B4: ensure validation harness cannot compile into production

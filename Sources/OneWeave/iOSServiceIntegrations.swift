@@ -43,7 +43,8 @@ public enum IntegrationPermission {
 
 // T114: extend to 9 categories per Constitution §2 + Invariant #7 (Privacy Data Leash: 9 integration toggles).
 // Was 6 (calendar, reminders, contacts, health, notes, mail). Added bodyThread, p2p, insights.
-public enum IntegrationCategory: String, Codable, CaseIterable {
+// B3: Identifiable so it works with .sheet(item:) for the reflection-prompt gate.
+public enum IntegrationCategory: String, Codable, CaseIterable, Identifiable {
     case calendar
     case reminders
     case contacts
@@ -53,6 +54,8 @@ public enum IntegrationCategory: String, Codable, CaseIterable {
     case bodyThread   // HealthKit Body Thread integration
     case p2p          // P2P Weave Circle / Family Pod sharing
     case insights     // Cross-domain Insight Engine
+
+    public var id: String { rawValue }
 }
 
 // MARK: - Calendar / Reminders (EventKit)

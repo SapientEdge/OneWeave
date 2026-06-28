@@ -95,7 +95,8 @@ public struct DataLeashSettingsView: View {
                 Section {
                     Toggle(isOn: Binding(
                         get: { state.isAllowed(cat) },
-                        set: { state.setAllowed(cat, $0) }
+                        // B3: route through requestToggle which gates false→true
+                        set: { requestToggle(cat, to: $0) }
                     )) {
                         Label(cat.rawValue.capitalized, systemImage: icon(for: cat))
                     }
@@ -125,7 +126,38 @@ public struct DataLeashSettingsView: View {
         }
         .navigationTitle("Data Leash")
         .onAppear(perform: load)
+        // B3: reflection prompt sheet for false→true toggles
+        .sheet(item: $pendingToggleCategory) { cat in
+            DataLeashReflectionSheet(
+                category: cat,
+                reflection: $pendingReflection,
+                onConfirm: {
+                    let trimmed = pendingReflection.trimmingCharacters(in: .whitespacesAndNewlines)
+                    // Use the central gate: validate + entropy check (Constitution §6 anti-bypass)
+                    if !trimmed.isEmpty && ReflectionGate.passesEntropyCheck(trimmed) {
+                        state.setAllowed(cat, pendingToggleValue)
+                        // Record the rationale in essenceLedger so the user can audit later
+                        if let lc = (try? modelContext.fetch(FetchDescriptor<LifeContext>()))?.first {
+                            lc.essenceLedger.append(
+                                "data_leash:\(cat.rawValue):\(Date().ISO8601Format()) — \(trimmed.prefix(80))"
+                            )
+                            try? modelContext.save()
+                        }
+                    }
+                    pendingToggleCategory = nil
+                    pendingReflection = ""
+                },
+                onCancel: {
+                    pendingToggleCategory = nil
+                    pendingReflection = ""
+                }
+            )
+        }
     }
+
+    // B3: confirmation sheet that asks the user WHY before allowing egress. The
+    // reflection is required (non-empty + passes entropy) and recorded in the
+    // essence ledger so users can audit their own past decisions.
 
     private func icon(for cat: IntegrationCategory) -> String {
         switch cat {
@@ -138,6 +170,27 @@ public struct DataLeashSettingsView: View {
         case .bodyThread: return "waveform.path.ecg"
         case .p2p:        return "person.crop.circle.dashed"
         case .insights:   return "sparkles"
+        }
+    }
+
+    // B3 (Claude round-5 audit): when the user turns a category ON (false→true),
+    // require a one-line reflection via the central ReflectionGate. The reflection
+    // is recorded as a ledger entry so the user can review what they enabled and why.
+    // Constitution §4: "lasting consequence requires a non-empty reflection".
+    // Enabling data egress is the most consequential setting in the app.
+    @State private var pendingToggleCategory: IntegrationCategory? = nil
+    @State private var pendingToggleValue: Bool = false
+    @State private var pendingReflection: String = ""
+
+    private func requestToggle(_ cat: IntegrationCategory, to value: Bool) {
+        let current = state.isAllowed(cat)
+        // Only gate false → true (enabling data egress). Disabling is always allowed.
+        if !current && value {
+            pendingToggleCategory = cat
+            pendingToggleValue = value
+            pendingReflection = ""
+        } else {
+            state.setAllowed(cat, value)
         }
     }
 
@@ -194,5 +247,82 @@ public extension LifeContext {
     /// Strict default — fail safe.
     func currentLeash() -> DataLeashState {
         .strictDefault
+    }
+}
+
+// MARK: - B3 reflection sheet
+
+/// Shown when the user toggles a data-leash category from OFF to ON.
+/// Constitution §4: lasting consequence requires a non-empty reflection.
+/// The reflection is validated through the central ReflectionGate
+/// (non-empty + passes entropy check) and recorded in the essenceLedger
+/// so the user can audit their own past decisions later.
+struct DataLeashReflectionSheet: View {
+    let category: IntegrationCategory
+    @Binding var reflection: String
+    let onConfirm: () -> Void
+    let onCancel: () -> Void
+
+    private var trimmed: String {
+        reflection.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    private var passesGate: Bool {
+        !trimmed.isEmpty && ReflectionGate.passesEntropyCheck(trimmed)
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label(category.rawValue.capitalized, systemImage: icon(for: category))
+                            .font(.headline)
+                        Text("Allowing **\(category.rawValue)** data to leave your private space is a meaningful decision.")
+                            .font(.body)
+                        Text("Take a moment. Why now? What do you hope to gain?")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Section("Your reflection") {
+                    TextEditor(text: $reflection)
+                        .frame(minHeight: 100)
+                    if !trimmed.isEmpty && !passesGate {
+                        Label("Add a few more words, with real variety. One sentence is enough.")
+                            .font(.caption2)
+                            .foregroundStyle(.orange)
+                    }
+                }
+                Section {
+                    Button("Allow and Save") { onConfirm() }
+                        .buttonStyle(.borderedProminent)
+                        .disabled(!passesGate)
+                    Button("Cancel", role: .cancel) { onCancel() }
+                }
+                Section {
+                    Text("Your reason will be recorded privately in your essence ledger, so you can revisit and revoke at any time.")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .navigationTitle("Reflection Gate")
+            .navigationBarTitleDisplayMode(.inline)
+            .interactiveDismissDisabled(true)
+        }
+        .presentationDetents([.large])
+    }
+
+    private func icon(for cat: IntegrationCategory) -> String {
+        switch cat {
+        case .calendar:   return "calendar"
+        case .reminders:  return "checklist"
+        case .contacts:   return "person.2"
+        case .health:     return "heart.fill"
+        case .notes:      return "note.text"
+        case .mail:       return "envelope"
+        case .bodyThread: return "waveform.path.ecg"
+        case .p2p:        return "person.crop.circle.dashed"
+        case .insights:   return "sparkles"
+        }
     }
 }
