@@ -469,18 +469,28 @@ var activeQuests: [UUID] = []
     /// via `minExitReflectionChars`; completeQuest was inconsistent (accepted 1 char).
     func completeQuest(_ questId: UUID, reflection: String, context: ModelContext) {
         let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
-        let minChars = 20  // mirrors FamilyPod.minExitReflectionChars
+        // A3 (Claude round-5 audit): wire central ReflectionGate. The previous
+        // local `minChars = 20` re-implemented gate logic without anti-bypass
+        // entropy check, so "aaaaaaaaaaaaaaaaaaaa" earned full reward.
+        // Constitution §5: reflection-gated everything. Constitution §6: anti-bypass.
+        let minChars = ReflectionGate.minCharsForFullReward
         let bonus: Int
         let reason: String
         if trimmed.isEmpty {
             bonus = 3
             reason = "quest complete (no reflection)"
-        } else if trimmed.count >= minChars {
+        } else if trimmed.count >= minChars && ReflectionGate.passesEntropyCheck(trimmed) {
             bonus = 10
             reason = "quest complete with reflection"
         } else {
+            // Distinguish "too short" vs "passed length but failed entropy" so
+            // the user gets a useful hint.
+            if trimmed.count < minChars {
+                reason = "quest complete (short reflection: \(trimmed.count)/\(minChars) chars)"
+            } else {
+                reason = "quest complete (low-entropy reflection: not enough variety)"
+            }
             bonus = 3
-            reason = "quest complete (short reflection: \(trimmed.count)/\(minChars) chars)"
         }
         weaveEssence += bonus
         completedQuestCount += 1

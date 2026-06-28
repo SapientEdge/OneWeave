@@ -100,6 +100,15 @@ def main():
     else:
         print(f"  [INFO] ReflectionGate.swift not yet created (T079 deferred — scattered checks used instead)")
 
+    # 5b. ReflectionGate is actually WIRED into completeQuest (A3 — Claude round-5 audit).
+    # The previous code created ReflectionGate but never called it; "aaaaaaaaaa" earned full reward.
+    lc_src = (SOURCES / "LifeContext.swift").read_text()
+    if "ReflectionGate.passesEntropyCheck" in lc_src:
+        check("ReflectionGate.passesEntropyCheck is called from completeQuest (A3)", True)
+    else:
+        check("ReflectionGate.passesEntropyCheck is called from completeQuest (A3)", False,
+              "completeQuest does not call entropy gate; low-entropy text earns full reward")
+
     # 6. Verify NO bare reflection calls without gates (sanity scan)
     bare_patterns = [
         (r"\bsave\(\s*reflection", "save(reflection)"),

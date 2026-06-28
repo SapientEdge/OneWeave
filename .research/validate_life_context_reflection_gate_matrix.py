@@ -38,9 +38,13 @@ CASES = [
 
 def main():
     src = LC_FILE.read_text()
-    # Find the bonus logic block
-    if "let minChars = 20" not in src:
-        print(f"[FAIL] LifeContext.swift does not contain `let minChars = 20` — T075 not applied")
+    # Find the bonus logic block. T075 introduced `let minChars = 20` (literal);
+    # A3 (Claude round-5 audit) refactored to use `ReflectionGate.minCharsForFullReward`.
+    # Both forms are valid; accept either.
+    has_literal_gate = "let minChars = 20" in src
+    has_gate_ref = "ReflectionGate.minCharsForFullReward" in src
+    if not (has_literal_gate or has_gate_ref):
+        print(f"[FAIL] LifeContext.swift missing reflection-gate (T075/A3): neither `let minChars = 20` nor `ReflectionGate.minCharsForFullReward` found.")
         sys.exit(1)
     if "trimmed.isEmpty" not in src:
         print(f"[FAIL] LifeContext.swift missing `trimmed.isEmpty` branch")
