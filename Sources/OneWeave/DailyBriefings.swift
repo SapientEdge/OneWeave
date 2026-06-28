@@ -73,6 +73,11 @@ public enum BriefingSection: Codable, Equatable {
     case openThreads(count: Int)
     case eveningPrompt(prompt: String)
     case quietReminder
+    /// Cycle 34 / T147 (GLM A3): "One Neglect" — the single thread with the
+    /// steepest week-over-week decay, framed as invitation, not accusation.
+    /// Embodies Constitution §3 (calm) + §7 (anti-addictive). Mac renders as
+    /// a single gentle card with optional reflection CTA.
+    case oneNeglect(threadName: String, daysSinceLastCare: Int, suggestedAction: String)
 
     /// Display priority (lower = higher priority). Used by the renderer
     /// to decide what to show first when space is tight.
@@ -85,6 +90,7 @@ public enum BriefingSection: Codable, Equatable {
         case .calendar: return 20
         case .priorities: return 25
         case .echoes: return 30
+        case .oneNeglect: return 32  // cycle 34 / T147 — single calm card after echoes
         case .openThreads: return 35
         case .yesterdayRecap: return 40
         case .eveningPrompt: return 50
@@ -210,6 +216,8 @@ public enum DailyBriefingGenerator {
         from context: LifeContext,
         weather: WeatherProvider = NullWeatherProvider(),
         cognitiveLoad: CognitiveLoadReading? = nil,
+        relationshipRecords: [RelationshipRecord] = [],
+        recentlySurfacedRelationships: [String: Date] = [:],
         now: Date = Date(),
         maxPriorities: Int = 3,
         maxCalendar: Int = 5,
@@ -299,6 +307,22 @@ public enum DailyBriefingGenerator {
             ) }
         if !echoes.isEmpty {
             sections.append(.echoes(countdowns: Array(echoes)))
+        }
+
+        // 8. One Neglect (cycle 34 / T147 / GLM A3) — single most-overdue
+        // thread, framed as invitation. Renders as a single gentle card.
+        // Lower priority than priorities/echoes so it doesn't crowd the
+        // actionable items.
+        if let neglect = RelationshipDecayTracker.pickOneNeglect(
+            records: relationshipRecords,
+            recentlySurfaced: recentlySurfacedRelationships,
+            now: now
+        ) {
+            sections.append(.oneNeglect(
+                threadName: neglect.record.displayName,
+                daysSinceLastCare: neglect.daysSinceLastInteraction,
+                suggestedAction: neglect.suggestedAction
+            ))
         }
 
         return MorningBriefing(generatedAt: now, sections: sections)

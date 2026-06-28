@@ -240,6 +240,84 @@ public enum RelationshipDecayTracker {
         return (overdue, severe, Double(totalDays) / Double(records.count))
     }
 
+    // MARK: - Cycle 34 / T147 (GLM A3): pickOneNeglect
+    //
+    // Returns the single thread with the steepest week-over-week decay,
+    // framed as invitation, not accusation. The "One Neglect" card lives
+    // on the morning briefing.
+    //
+    // Algorithm: rank records by `overdueMultiplier = daysSince / cadenceDays`.
+    // Ties broken by absolute `daysSinceLastInteraction` (older = more
+    // overdue, hence more "neglect" — but framed as care).
+    //
+    // Only overdue records (multiplier >= 1.0) qualify. None overdue → nil.
+    // Honors `RelationshipRecord.suppressionDays` so we don't repeat the
+    // same person tomorrow.
+    //
+    // Output: `OneNeglectSuggestion` with a single calm action prompt.
+    public static func pickOneNeglect(
+        records: [RelationshipRecord],
+        recentlySurfaced: [String: Date] = [:],
+        now: Date = Date()
+    ) -> OneNeglectSuggestion? {
+        var candidates: [(record: RelationshipRecord, multiplier: Double, daysSince: Int)] = []
+        for record in records {
+            // Skip recently surfaced
+            if let lastSurfaced = recentlySurfaced[record.lifeEntityID] {
+                let daysSinceSurfaced = now.timeIntervalSince(lastSurfaced) / 86400
+                if Double(daysSinceSurfaced) < Double(record.suppressionDays) {
+                    continue
+                }
+            }
+            let daysSince = max(0, Int(now.timeIntervalSince(record.lastInteractionAt) / 86400))
+            let multiplier = Double(daysSince) / Double(record.cadenceDays)
+            guard multiplier >= 1.0 else { continue }
+            candidates.append((record, multiplier, daysSince))
+        }
+        guard !candidates.isEmpty else { return nil }
+
+        // Sort by multiplier desc, then daysSince desc
+        candidates.sort { a, b in
+            if a.multiplier != b.multiplier { return a.multiplier > b.multiplier }
+            return a.daysSince > b.daysSince
+        }
+        let top = candidates[0]
+        return OneNeglectSuggestion(
+            record: top.record,
+            daysSinceLastInteraction: top.daysSince,
+            overdueMultiplier: top.multiplier,
+            suggestedAction: suggestedAction(for: top.record)
+        )
+    }
+
+    public struct OneNeglectSuggestion: Codable, Equatable {
+        public let record: RelationshipRecord
+        public let daysSinceLastInteraction: Int
+        public let overdueMultiplier: Double
+        public let suggestedAction: String
+
+        public init(
+            record: RelationshipRecord,
+            daysSinceLastInteraction: Int,
+            overdueMultiplier: Double,
+            suggestedAction: String
+        ) {
+            self.record = record
+            self.daysSinceLastInteraction = daysSinceLastInteraction
+            self.overdueMultiplier = overdueMultiplier
+            self.suggestedAction = suggestedAction
+        }
+
+        /// Calm, single-line, invitation framing. Never guilt-tripping.
+        /// Cycle 34 / T147 (GLM A3): "Today's single quiet thread: X. 3 minutes would move it."
+        public var briefingText: String {
+            let days = daysSinceLastInteraction
+            let dayWord = days == 1 ? "day" : "days"
+            return "Today's single quiet thread: \(record.displayName). " +
+                "\(days) \(dayWord) since a touch — 3 minutes would move it."
+        }
+    }
+
     // MARK: - Cycle 33 / GLM A1: Threadline Decay Garden (botanical vitality model)
     //
     // The basic overdue-multiplier is purely subtractive: each day, more overdue.
