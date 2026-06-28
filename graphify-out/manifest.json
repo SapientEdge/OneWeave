@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782609627.7538705,
-    "ast_hash": "fffadeca26a2ff85b7635723b312f865",
+    "mtime": 1782620952.7367527,
+    "ast_hash": "7013c652b600ef204e56334caaf68d20",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
@@ -55,13 +55,13 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/OnboardingView.swift": {
-    "mtime": 1782522773.1477215,
-    "ast_hash": "bad25b5d665241083544d99bac2d2a1a",
+    "mtime": 1782620972.2670746,
+    "ast_hash": "3602452530e326454937d3d58e4f28bf",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeaveApp.swift": {
-    "mtime": 1782563966.3303764,
-    "ast_hash": "3acb8c9713065a95179e37f533984705",
+    "mtime": 1782621270.5419898,
+    "ast_hash": "41baf58d6821d7ad454acc86e3f1b444",
     "semantic_hash": ""
   },
   "Sources/OneWeave/OneWeavePrototype.swift": {
@@ -75,8 +75,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/SettingsView.swift": {
-    "mtime": 1782522773.1547215,
-    "ast_hash": "943c7d4f5aa6b524da4e5f4e75cf71b5",
+    "mtime": 1782620913.794111,
+    "ast_hash": "d99a9b99394e2df140c4a882a88745ea",
     "semantic_hash": ""
   },
   "Sources/OneWeave/StateMachineIndicator.swift": {
@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   ".research/validate_all.sh": {
-    "mtime": 1782585295.224076,
-    "ast_hash": "fc68cac229abe86f7a446289c5a3b1fb",
+    "mtime": 1782621212.1360273,
+    "ast_hash": "8a78a18163d8740f23565980a7f31de3",
     "semantic_hash": ""
   },
   ".research/validate_cognitive_load.py": {
@@ -430,8 +430,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/AppLifecycleCoordinator.swift": {
-    "mtime": 1782563960.781291,
-    "ast_hash": "3a75f4e75622a3e6c734aad4bda592f5",
+    "mtime": 1782620986.0983026,
+    "ast_hash": "850c0aca820ad82f7fe710a77c3f0c9a",
     "semantic_hash": ""
   },
   "Sources/OneWeave/BodyThreadSheet.swift": {
@@ -460,8 +460,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/DataLeashSettings.swift": {
-    "mtime": 1782556758.7968926,
-    "ast_hash": "336402de8ef93189a9968091b0c43860",
+    "mtime": 1782620939.1955295,
+    "ast_hash": "f1c50680c37347abc84634ced78eaf15",
     "semantic_hash": ""
   },
   "Sources/OneWeave/DecisionLog.swift": {
@@ -535,8 +535,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/P2PWeaveShare.swift": {
-    "mtime": 1782560458.5419679,
-    "ast_hash": "8a48ca8ceab9395d9c1009bc02ff22b2",
+    "mtime": 1782620986.0973024,
+    "ast_hash": "c2dfe7cd4e7632a0f2bda71e7e8084d3",
     "semantic_hash": ""
   },
   "Sources/OneWeave/PortableExport.swift": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/iOSServiceIntegrations.swift": {
-    "mtime": 1782609635.3440068,
-    "ast_hash": "7c88a21827f0f9dfc88051a995a046ec",
+    "mtime": 1782620928.6793563,
+    "ast_hash": "a09f0976ad37a31d67466750e1650e11",
     "semantic_hash": ""
   },
   ".github/agents/speckit.agent-context.update.agent.md": {
@@ -810,8 +810,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/003-production-readiness/tasks.md": {
-    "mtime": 1782609597.5433264,
-    "ast_hash": "b53f7b976a001aefa864b37599278254",
+    "mtime": 1782620853.7241209,
+    "ast_hash": "4016d29ac3e9a29d920c32e1477b7642",
     "semantic_hash": ""
   },
   ".specify/templates/checklist-template.md": {
@@ -975,8 +975,8 @@
     "semantic_hash": ""
   },
   ".research/validate_family_pod_builder_surface.py": {
-    "mtime": 1782609675.1607182,
-    "ast_hash": "9d8ec771f00a9f603735aa86b03f6347",
+    "mtime": 1782621279.1321313,
+    "ast_hash": "d51f66a07280fc0e249cf75ba375c043",
     "semantic_hash": ""
   },
   ".research/validate_life_context_reflection_gate_matrix.py": {
@@ -1062,6 +1062,91 @@
   ".research/glm_round_1/swift_inventory.txt": {
     "mtime": 1782609147.7810752,
     "ast_hash": "6615f9d4d13a53ece48cb8493983197f",
+    "semantic_hash": ""
+  },
+  ".research/validate_app_state_machine.py": {
+    "mtime": 1782621121.2685301,
+    "ast_hash": "a67447f29c7ee58352ca5b1bbf6af6f4",
+    "semantic_hash": ""
+  },
+  ".research/validate_data_leash_privacy.py": {
+    "mtime": 1782621034.976108,
+    "ast_hash": "d3b8d8f9cd51267aeb06fd84f13474c6",
+    "semantic_hash": ""
+  },
+  ".research/validate_reflection_gate_cross_module.py": {
+    "mtime": 1782621344.4042068,
+    "ast_hash": "1a3341ef3ce7ef73e57df55cfe966458",
+    "semantic_hash": ""
+  },
+  ".research/validate_reflection_gate_policy.py": {
+    "mtime": 1782621325.413894,
+    "ast_hash": "2a9cfe8152e61f7eb92dc50e7c83f6aa",
+    "semantic_hash": ""
+  },
+  ".research/validate_streak_grace.py": {
+    "mtime": 1782621079.4938416,
+    "ast_hash": "c87b87cd1b7a4f60c0d500b2cd189d74",
+    "semantic_hash": ""
+  },
+  "Sources/OneWeave/ReflectionGate.swift": {
+    "mtime": 1782621334.7370477,
+    "ast_hash": "dc5b311bc9e1036785fb14001937f93f",
+    "semantic_hash": ""
+  },
+  ".research/round4/claude.md": {
+    "mtime": 1782620906.5359914,
+    "ast_hash": "ee4003ded8b33e03f432fee0baa32f4a",
+    "semantic_hash": ""
+  },
+  ".research/round4/codex.md": {
+    "mtime": 1782620536.5508924,
+    "ast_hash": "f316695bb3ad1cd57fdf4386d0275fc3",
+    "semantic_hash": ""
+  },
+  ".research/round4/glm.md": {
+    "mtime": 1782620681.018274,
+    "ast_hash": "2f34346418a9de3690daddb675ac96e2",
+    "semantic_hash": ""
+  },
+  ".research/round4/grok.md": {
+    "mtime": 1782620579.6296024,
+    "ast_hash": "a39e11551eb2e5c7f35009eb240d971f",
+    "semantic_hash": ""
+  },
+  ".research/round4/kimi.md": {
+    "mtime": 1782620613.5511618,
+    "ast_hash": "0670dce763d5c5ba69ace62aecf26c63",
+    "semantic_hash": ""
+  },
+  ".research/round4/prompt_claude.md": {
+    "mtime": 1782620354.5478907,
+    "ast_hash": "158de9cf745dba30790dd0a1f7166963",
+    "semantic_hash": ""
+  },
+  ".research/round4/prompt_codex.md": {
+    "mtime": 1782620354.5478907,
+    "ast_hash": "1a1c54377b45e643c398efd6098611f3",
+    "semantic_hash": ""
+  },
+  ".research/round4/prompt_glm.md": {
+    "mtime": 1782620354.5528908,
+    "ast_hash": "82e6acb63247e0835dbbc1d0e82d9f4e",
+    "semantic_hash": ""
+  },
+  ".research/round4/prompt_grok.md": {
+    "mtime": 1782620354.5418906,
+    "ast_hash": "9455de0d0a5935d836622ef40d188ad5",
+    "semantic_hash": ""
+  },
+  ".research/round4/prompt_kimi.md": {
+    "mtime": 1782620354.5518906,
+    "ast_hash": "5077e64ec27f565df105c961de27bfa5",
+    "semantic_hash": ""
+  },
+  ".research/round4/tasks_addendum.md": {
+    "mtime": 1782620849.5870526,
+    "ast_hash": "ec9b5ca755bd8d4dd5f9aad086efad73",
     "semantic_hash": ""
   }
 }
