@@ -86,6 +86,31 @@ struct SettingsView: View {
                     }
                 }
 
+                // T144: surface jailbreak status (defense-in-depth warning).
+                // Visible only if device reports indicators; otherwise hidden.
+                let jbReport = JailbreakDetector.check()
+                if jbReport.isJailbroken {
+                    Section("Device Status (advisory)") {
+                        Label(jbReport.headlineSummary, systemImage: "exclamationmark.triangle")
+                            .font(.caption)
+                            .foregroundStyle(.orange)
+                        Text("This is an advisory only. OneWeave continues to protect your data; some advanced features may show additional warnings.")
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                // T140: anti-addictive off-ramp settings (user can opt out).
+                Section("Calm & Anti-Addictive") {
+                    Toggle("Session reminder at 10 min", isOn: Binding(
+                        get: { UserDefaults.standard.bool(forKey: "sessionGuardEnabled") || UserDefaults.standard.object(forKey: "sessionGuardEnabled") == nil },
+                        set: { UserDefaults.standard.set($0, forKey: "sessionGuardEnabled") }
+                    ))
+                    Text("A non-blocking reminder appears after 10 minutes of continuous use. A more prominent off-ramp appears at 30 minutes. You can dismiss either and continue.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
                 Section("Journey Preferences") {
                     Text("Energy thresholds and season awareness are automatic based on your threads.")
                         .font(.caption)

@@ -29,6 +29,11 @@ struct OneWeaveApp: App {
                 .environment(appStateMachine)
         }
     }
+
+    // T141: anti-binge session guard. Tracks active time per session and
+    // surfaces a non-blocking warning at 10 minutes of continuous use.
+    // Constitution §1: "calm, anti-addictive". A reminder is shown; the
+    // user can dismiss and continue.
 }
 
 // Full wired navigation: NavigationStacks per tab + shared destinations for threads and events.
@@ -38,6 +43,8 @@ struct MainTabView: View {
     @Environment(AppStateMachine.self) private var stateMachine
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var sessionGuard = SessionGuard.shared
+    @State private var sessionGuardStarted = false
 
     var body: some View {
         TabView {
@@ -90,6 +97,24 @@ struct MainTabView: View {
         // the live singletons here.
         .onChange(of: scenePhase) { _, newPhase in
             LifecycleSceneBridge.route(phase: newPhase, modelContext: modelContext)
+            // T141: start/stop session timer at app foreground/background.
+            switch newPhase {
+            case .active where !sessionGuardStarted:
+                sessionGuardStarted = true
+                sessionGuard.startSession()
+            case .background:
+                sessionGuardStarted = false
+                sessionGuard.endSession()
+            default:
+                break
+            }
+        }
+        // T141: surface the 10-min soft warning + 30-min hard off-ramp.
+        .sheet(isPresented: $sessionGuard.showSoftWarning) {
+            SessionSoftWarningView(guard: sessionGuard)
+        }
+        .sheet(isPresented: $sessionGuard.showHardOffRamp) {
+            SessionHardOffRampView(guard: sessionGuard)
         }
     }
 }

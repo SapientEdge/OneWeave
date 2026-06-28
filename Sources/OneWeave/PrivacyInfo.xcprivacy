@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  OneWeave PrivacyInfo.xcprivacy (T108/T124/T132)
+  Cycle 32 (2026-06-28) — Linux-side deliverable for spec 003-production-readiness.
+
+  Declares the privacy-relevant behaviors of the app to the App Store reviewer
+  and to iOS 17+ privacy manifest consumers.
+
+  Required-reason APIs that we ACTUALLY use:
+    - UserDefaults:        CA92.1  (App-Group snapshot read for widget timeline)
+    - File timestamp:      C617.1  (atomic envelope write in AppLifecycleCoordinator)
+    - Disk space:          CA93.4  (best-effort check before persisting envelope; Mac side)
+    - System boot time:    CA52.1  (used by SacredEcho.swift to compute unlockAt;
+                                    Mac side consumes `Date()` indirectly)
+
+  Tracking: false. We do not track. We do not transmit. We do not collect.
+  Collected data types: empty. Nothing is collected.
+-->
+<plist version="1.0">
+<dict>
+    <key>NSPrivacyTracking</key>
+    <false/>
+
+    <key>NSPrivacyTrackingDomains</key>
+    <array/>
+
+    <key>NSPrivacyCollectedDataTypes</key>
+    <array/>
+
+    <key>NSPrivacyAccessedAPITypes</key>
+    <array>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>CA92.1</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>C617.1</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryDiskSpace</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>CA93.4</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array>
+                <string>CA52.1</string>
+            </array>
+        </dict>
+        <dict>
+            <key>NSPrivacyAccessedAPIType</key>
+            <string>NSPrivacyAccessedAPICategoryActiveKeyboards</string>
+            <key>NSPrivacyAccessedAPITypeReasons</key>
+            <array/>
+        </dict>
+    </array>
+</dict>
+</plist>
