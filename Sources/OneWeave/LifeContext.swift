@@ -640,6 +640,34 @@ extension LifeContext {
     }
 }
 
+// MARK: - Reflection tracking (Cycle 37 — feeds computedHarmonyScore.reflectionPace)
+
+extension LifeContext {
+    /// Mark a reflection as written. Updates `lastReflectionAt` so that
+    /// `computedHarmonyScore.reflectionPace` reflects the user's actual
+    /// reflection cadence (was previously 0 because lastReflectionAt was
+    /// never written to).
+    ///
+    /// Idempotent: writing twice in the same second updates to the latest
+    /// timestamp but doesn't artificially inflate cadence.
+    ///
+    /// Wire points (call from here when a reflection is written):
+    ///   - `LifeEntity.fromTimelineEvent` (LifeGraph.swift:114) — event.payload["reflection"]
+    ///   - `LifeEntity.fromQuest` (LifeGraph.swift:136) — quest with non-empty reflectionNote
+    ///   - `SacredEcho` opening (if user adds their own reflection)
+    ///   - `ResonanceOracle` commit reflection (Mac side)
+    public func recordReflection(at when: Date = Date()) {
+        if let last = lastReflectionAt {
+            // Only advance if newer (idempotency)
+            if when > last {
+                lastReflectionAt = when
+            }
+        } else {
+            lastReflectionAt = when
+        }
+    }
+}
+
 enum EnergyProfile: String, Codable, CaseIterable {
     case low, normal, high
 }

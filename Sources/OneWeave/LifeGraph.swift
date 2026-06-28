@@ -113,6 +113,10 @@ extension LifeEntity {
         if let reflection = event.payload["reflection"], !reflection.isEmpty {
             entity.isUserReflection = true
             entity.summary = reflection
+            // Cycle 37: feed the reflection timestamp into the LifeContext
+            // so computedHarmonyScore.reflectionPace actually reflects the
+            // user's cadence. (Was previously always 0.)
+            context.recordReflection(at: event.timestamp)
         }
         // Add relationships to active threads
         return entity
@@ -122,6 +126,13 @@ extension LifeEntity {
     // (and gate on completion). Reflection is required for the entity to be created from
     // a completed quest.
     static func fromQuest(_ quest: WeaveQuest) -> LifeEntity {
+        return fromQuest(quest, context: nil)
+    }
+
+    /// Cycle 37 overload: accepts a LifeContext so the reflection timestamp
+    /// can be recorded (feeds computedHarmonyScore.reflectionPace).
+    /// `nil` context = no recording (legacy path, tests, prototypes).
+    static func fromQuest(_ quest: WeaveQuest, context: LifeContext?) -> LifeEntity {
         let entity = LifeEntity(
             type: .task,
             title: quest.title,
@@ -139,6 +150,12 @@ extension LifeEntity {
         if quest.completedAt == nil {
             entity.isPrivate = true
             entity.summary = "[Pending reflection] " + entity.summary
+        }
+        // Cycle 37: record reflection timestamp when quest has one.
+        // Use completedAt if available, else quest creation time.
+        if entity.isUserReflection {
+            let when = quest.completedAt ?? quest.createdAt ?? Date()
+            context?.recordReflection(at: when)
         }
         return entity
     }

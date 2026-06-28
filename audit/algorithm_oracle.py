@@ -787,6 +787,69 @@ class TestComputedHarmonyScore(unittest.TestCase):
         self.assertAlmostEqual(0.35 + 0.25 + 0.20 + 0.20, 1.0, places=9)
 
 
+class TestRecordReflectionIdempotency(unittest.TestCase):
+    """Cycle 37 — recordReflection(at:) idempotency semantics."""
+
+    def test_first_call_sets_timestamp(self):
+        """Nil → Some(when) on first call."""
+        last = [None]  # mutable to simulate LifeContext
+
+        def record(when):
+            if last[0] is not None:
+                if when > last[0]:
+                    last[0] = when
+            else:
+                last[0] = when
+
+        record(when=100.0)
+        self.assertEqual(last[0], 100.0)
+
+    def test_newer_overwrites_older(self):
+        last = [50.0]
+        def record(when):
+            if last[0] is not None and when > last[0]:
+                last[0] = when
+            elif last[0] is None:
+                last[0] = when
+        record(when=100.0)
+        self.assertEqual(last[0], 100.0)
+
+    def test_older_does_not_overwrite(self):
+        """Idempotency: writing an OLDER timestamp must not move the clock back."""
+        last = [100.0]
+        def record(when):
+            if last[0] is not None and when > last[0]:
+                last[0] = when
+            elif last[0] is None:
+                last[0] = when
+        record(when=50.0)  # older
+        self.assertEqual(last[0], 100.0, "Older timestamp must not go backward")
+
+    def test_equal_does_not_change(self):
+        last = [100.0]
+        def record(when):
+            if last[0] is not None and when > last[0]:
+                last[0] = when
+            elif last[0] is None:
+                last[0] = when
+        record(when=100.0)  # equal
+        self.assertEqual(last[0], 100.0)
+
+    def test_reflection_pace_updates_after_record(self):
+        """ReflectionPace in computedHarmonyScore updates after recordReflection."""
+        # Initially no reflection
+        h_before = computed_harmony_score(
+            mastery_tiers={"Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1},
+            active_threads_count=4, days_since_reflection=None, graph_coherence=1.0)
+        # After reflection written today
+        h_after = computed_harmony_score(
+            mastery_tiers={"Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1},
+            active_threads_count=4, days_since_reflection=0.0, graph_coherence=1.0)
+        # Pace component goes 0 → 1.0, weighted at 0.20 → +0.20 to harmony
+        self.assertAlmostEqual(h_after - h_before, 0.20, places=2,
+            msg=f"Reflection cadence should boost harmony by ~0.20, got {h_after - h_before}")
+
+
 class TestLoomGeometry(unittest.TestCase):
     def test_unit_distance(self):
         d = loom_distance((0, 0), (3, 4))  # 3-4-5 triangle
@@ -915,6 +978,7 @@ if __name__ == "__main__":
     for cls in [TestCognitiveLoad, TestVitality, TestRhizomeIndex,
                 TestTonalCoherence, TestReflectionGate, TestDecisionReverb,
                 TestMasteryKnots, TestComputedHarmonyScore,
+                TestRecordReflectionIdempotency,
                 TestLoomGeometry, TestBoundaryConditions]:
         suite.addTests(loader.loadTestsFromTestCase(cls))
     runner = unittest.TextTestRunner(verbosity=2)
