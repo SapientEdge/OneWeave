@@ -84,19 +84,28 @@ public struct CognitiveLoadReading: Codable, Equatable {
     public let trend: CognitiveLoadTrend
     public let computedAt: Date
     public let shouldTriggerWeavePause: Bool
+    /// Cycle 34 / T168 (GLM C7): when true, the UI should desaturate by
+    /// ~15% over ~20 seconds before the hard Weave Pause fires at 0.85.
+    /// Embodies Constitution §3 (calm) — a soft visual exhale before a
+    /// hard pause. Mac side renders via .saturation() / .grayscale() in SwiftUI.
+    public let shouldDimUI: Bool
 
     public init(
         score: Double,
         components: [String: Double],
         trend: CognitiveLoadTrend,
         computedAt: Date,
-        shouldTriggerWeavePause: Bool
+        shouldTriggerWeavePause: Bool,
+        shouldDimUI: Bool? = nil
     ) {
         self.score = score.clamped(to: 0...1)
         self.components = components
         self.trend = trend
         self.computedAt = computedAt
         self.shouldTriggerWeavePause = shouldTriggerWeavePause
+        // Default: dim when score crosses the elevated threshold (0.70),
+        // even before the weavePause threshold (0.85).
+        self.shouldDimUI = shouldDimUI ?? (score >= CognitiveLoadThresholds.elevatedScore)
     }
 }
 
@@ -231,7 +240,8 @@ public enum CognitiveLoad {
             components: components,
             trend: trend,
             computedAt: now,
-            shouldTriggerWeavePause: shouldTrigger
+            shouldTriggerWeavePause: shouldTrigger,
+            shouldDimUI: score >= CognitiveLoadThresholds.elevatedScore
         )
     }
 
