@@ -135,6 +135,9 @@ public struct DataLeashSettingsView: View {
         case .health:     return "heart.fill"
         case .notes:      return "note.text"
         case .mail:       return "envelope"
+        case .bodyThread: return "waveform.path.ecg"
+        case .p2p:        return "person.crop.circle.dashed"
+        case .insights:   return "sparkles"
         }
     }
 

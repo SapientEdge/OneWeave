@@ -115,13 +115,18 @@ enum LifecycleSceneBridge {
             )
         )) ?? []
         if let lc = lifeContext {
+            // T106: exclude App Group container from iCloud backup (privacy-first).
+            // Called once on app launch — idempotent, safe to retry.
+            AppLifecyclePaths.markContainerExcludedFromBackup()
             AppLifecycleCoordinator.handleScenePhase(
                 phase,
                 context: lc,
                 echoes: echoes,
                 quests: quests,
                 leash: leash,
-                bodyThreadEnabled: false,  // feature flag; future toggle
+                // T116: wire bodyThreadEnabled to the data leash toggle so the feature
+                // can be enabled when user opts in. Was hardcoded false.
+                bodyThreadEnabled: leash.isAllowed(.bodyThread),
                 modelContext: modelContext
             )
         }

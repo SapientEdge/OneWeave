@@ -136,7 +136,10 @@ var activeQuests: [UUID] = []
         if !seasonReflectionCompleted {
             seasonReflectionCompleted = true
             weaveEssence += 10
-            essenceLedger.append("+10 season reflection: \(trimmed.prefix(50))")
+            // T107: strip reflection plaintext prefix from ledger entry (prevent export leak).
+            // Was leaking 50 chars of reflection plaintext into Settings export.
+            // Now logs only char count + date — no content.
+            essenceLedger.append("+10 season reflection (\(trimmed.count) chars on \(Date().formatted(date: .abbreviated, time: .omitted)))")
             // Emit chapter summary event
             let summaryEvent = TimelineEvent(thread: "Meaning", type: "season_chapter_summary", payload: ["season": currentSeason, "reflection": trimmed], affectsEnergy: true)
             updateFromEvent(summaryEvent)

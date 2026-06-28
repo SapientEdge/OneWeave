@@ -160,6 +160,19 @@ public enum AppLifecyclePaths {
         return tmp
     }
 
+    /// T106: exclude App Group container from iCloud/iTunes backup (privacy-first).
+    /// Apple retains the right to decrypt iCloud backups on legal demand; opting
+    /// out means the user's Life Graph + Sacred Echo ciphertext never leave the
+    /// device unless the user explicitly exports them.
+    /// Constitution §2 "Privacy-First, Zero-Trust" + Invariant #8 "portable data."
+    public static func markContainerExcludedFromBackup() {
+        let url = containerURL()
+        var values = URLResourceValues()
+        values.isExcludedFromBackup = true
+        var mutableURL = url
+        try? mutableURL.setResourceValues(values)
+    }
+
     public static func lifeGraphURL(encrypted: Bool) -> URL {
         containerURL().appendingPathComponent(
             encrypted ? lifeGraphEncryptedFilename : lifeGraphFilename

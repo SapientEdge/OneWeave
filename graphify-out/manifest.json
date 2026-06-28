@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/LifeContext.swift": {
-    "mtime": 1782596661.1744409,
-    "ast_hash": "6b04aa0a3218e13febf508b6b4ea5eca",
+    "mtime": 1782609627.7538705,
+    "ast_hash": "fffadeca26a2ff85b7635723b312f865",
     "semantic_hash": ""
   },
   "Sources/OneWeave/MasteryMapView.swift": {
@@ -475,8 +475,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/FamilyPod.swift": {
-    "mtime": 1782584889.5068831,
-    "ast_hash": "2c967ab2f9eb6ded14b32dd6191eb0ae",
+    "mtime": 1782609626.679851,
+    "ast_hash": "2e700e4eabebd9a81989c9361e6cf676",
     "semantic_hash": ""
   },
   "Sources/OneWeave/GraphInsightGenerator.swift": {
@@ -580,8 +580,8 @@
     "semantic_hash": ""
   },
   "Sources/OneWeave/iOSServiceIntegrations.swift": {
-    "mtime": 1782563935.081895,
-    "ast_hash": "e335989be44f02ffb02d27317eabbcd3",
+    "mtime": 1782609635.3440068,
+    "ast_hash": "7c88a21827f0f9dfc88051a995a046ec",
     "semantic_hash": ""
   },
   ".github/agents/speckit.agent-context.update.agent.md": {
@@ -810,8 +810,8 @@
     "semantic_hash": ""
   },
   ".specify/specs/003-production-readiness/tasks.md": {
-    "mtime": 1782595662.4728043,
-    "ast_hash": "48e69b1771a447690a551966ae7fb519",
+    "mtime": 1782609597.5433264,
+    "ast_hash": "b53f7b976a001aefa864b37599278254",
     "semantic_hash": ""
   },
   ".specify/templates/checklist-template.md": {
@@ -972,6 +972,96 @@
   "ONEWEAVE_HANDOFF_2026-06-27.md": {
     "mtime": 1782600729.004657,
     "ast_hash": "42b6a96fc16e4fb484c727a17e19f7e3",
+    "semantic_hash": ""
+  },
+  ".research/validate_family_pod_builder_surface.py": {
+    "mtime": 1782609675.1607182,
+    "ast_hash": "9d8ec771f00a9f603735aa86b03f6347",
+    "semantic_hash": ""
+  },
+  ".research/validate_life_context_reflection_gate_matrix.py": {
+    "mtime": 1782609675.1607182,
+    "ast_hash": "ee5fef08bb4e9cf36d5927216210b2c7",
+    "semantic_hash": ""
+  },
+  ".research/validate_sacred_echo_crypto.py": {
+    "mtime": 1782609696.1330912,
+    "ast_hash": "ebd6d482145fc7445866d4704ad376de",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/claude_review.txt": {
+    "mtime": 1782609453.7739894,
+    "ast_hash": "2a82ed286e7ee27e0602d60dd7e17cde",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/constitution_head.txt": {
+    "mtime": 1782609148.8750927,
+    "ast_hash": "ee5130e3a6518fe02f2dc4e578e176d6",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/context_bundle.txt": {
+    "mtime": 1782609203.088964,
+    "ast_hash": "c677cb03f1ebf6766a3584730e8f2247",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/cross_check_prompt.txt": {
+    "mtime": 1782609294.6404345,
+    "ast_hash": "d79a7346aaab54fcc3b2c1e10aa8f24a",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/cross_check_prompt_grok.txt": {
+    "mtime": 1782609294.6294343,
+    "ast_hash": "da9ff7db4f346e2a51b4cdc8130c8dcb",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/cross_check_prompt_kimi.txt": {
+    "mtime": 1782609294.6404345,
+    "ast_hash": "59bef33b448fbaa9b9ad11fced5051cb",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/deep_review.md": {
+    "mtime": 1782609245.9706528,
+    "ast_hash": "d55269da82da367257ecbef611edc553",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/deep_review_clean.md": {
+    "mtime": 1782609265.781971,
+    "ast_hash": "0c278057d32e8c9fc4e3be4e22688f2c",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/findings.md": {
+    "mtime": 1782609143.7070096,
+    "ast_hash": "fcfd453477190ed2352fb57f2e2c8fa7",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/focused_review.md": {
+    "mtime": 1782608599.6032429,
+    "ast_hash": "95c4a0d21940d85fd50429c495697548",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/grok_review.txt": {
+    "mtime": 1782609541.4353962,
+    "ast_hash": "de3cf690a3bf8fc54ea198855fdf756e",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/kimi_review.txt": {
+    "mtime": 1782609545.5014615,
+    "ast_hash": "09999db5872c13700372398bb953933b",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/prompt_v2.txt": {
+    "mtime": 1782608613.5404682,
+    "ast_hash": "65e163799500e2ac648b278b2cb5e86d",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/review_v2_raw.txt": {
+    "mtime": 1782609131.4288123,
+    "ast_hash": "bc2cd759a46bfca4c18f1dba33885d62",
+    "semantic_hash": ""
+  },
+  ".research/glm_round_1/swift_inventory.txt": {
+    "mtime": 1782609147.7810752,
+    "ast_hash": "6615f9d4d13a53ece48cb8493983197f",
     "semantic_hash": ""
   }
 }

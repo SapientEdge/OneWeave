@@ -41,6 +41,18 @@ def main():
             print(f"  [FAIL] LifeContext missing `var {shim}`")
             fail_n += 1
 
+    # 1b. T114: IntegrationCategory has all 9 cases (was 6)
+    ios_src = (REPO / "Sources/OneWeave/iOSServiceIntegrations.swift").read_text()
+    required_cases = ["calendar", "reminders", "contacts", "health", "notes", "mail",
+                      "bodyThread", "p2p", "insights"]
+    missing = [c for c in required_cases if f"case {c}" not in ios_src]
+    if not missing:
+        print(f"  [PASS] IntegrationCategory has all 9 cases (T114)")
+        pass_n += 1
+    else:
+        print(f"  [FAIL] IntegrationCategory missing cases: {missing}")
+        fail_n += 1
+
     # 2. Verify FamilyPod actually references those shims (so the shims are load-bearing)
     fp_src = FP_FILE.read_text()
     for ref in EXPECTED_FP_REFS:

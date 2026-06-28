@@ -29,7 +29,7 @@ for suite in .research/validate_*.py; do
     # instead of "Total: N | FAILED: 0" — handle both.
     if echo "$output" | grep -qE "OVERALL: PASS"; then
         SUITE_PASS=$((SUITE_PASS + 1))
-    elif echo "$output" | tail -3 | grep -qE "FAILED: 0\b|PASSED: [0-9]+  \|  FAILED: 0"; then
+    elif echo "$output" | tail -5 | grep -qE "FAILED: 0\b|PASSED: [0-9]+  \|  FAILED: 0"; then
         SUITE_PASS=$((SUITE_PASS + 1))
     else
         TOTAL_FAIL=1

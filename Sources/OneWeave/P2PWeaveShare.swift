@@ -1,4 +1,5 @@
 import Foundation
+import SwiftData  // T100: P2PWeaveShare uses ModelContext in drainPending/receiveAndIntegrate signatures
 import CryptoKit
 
 // Deeper P2P Weave Share - Enhanced from iOS P2P Messaging Implementation Guide
