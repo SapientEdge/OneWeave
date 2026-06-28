@@ -1,10 +1,11 @@
 # Community 95
 
-> 10 nodes
+> 11 nodes
 
 ## Key Concepts
 
 - **SettingsView** (9 connections) — `Sources/OneWeave/SettingsView.swift`
+- **SettingsView.swift** (5 connections) — `Sources/OneWeave/SettingsView.swift`
 - **ExportSheet** (4 connections) — `Sources/OneWeave/SettingsView.swift`
 - **.generateHaptic()** (4 connections) — `Sources/OneWeave/SettingsView.swift`
 - **Bool** (2 connections) — `Sources/OneWeave/SettingsView.swift`
@@ -17,8 +18,9 @@
 
 ## Relationships
 
-- [[Community 39]] (2 shared connections)
 - [[Community 34]] (2 shared connections)
+- [[Community 38]] (2 shared connections)
+- [[Community 39]] (1 shared connections)
 
 ## Source Files
 
@@ -26,7 +28,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 28 (100%)
+- EXTRACTED: 33 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,32 +1,23 @@
 # Community 47
 
-> 8 nodes
+> 2 nodes
 
 ## Key Concepts
 
-- **PodVisibilityGrant** (16 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **completedQuestCount** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **currentHarmonyScore** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **currentStreak** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **echoCountdowns** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **threadNames** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **seasonName** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
-- **amplifier** (1 connections) — `Sources/OneWeave/FamilyPod.swift`
+- **dispatch_oneweave.sh** (1 connections) — `scripts/dispatch_oneweave.sh`
+- **dispatch_oneweave.sh script** (1 connections) — `scripts/dispatch_oneweave.sh`
 
 ## Relationships
 
-- [[Community 9]] (6 shared connections)
-- [[Community 22]] (1 shared connections)
-- [[Community 25]] (1 shared connections)
-- [[Community 43]] (1 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- `Sources/OneWeave/FamilyPod.swift`
+- `scripts/dispatch_oneweave.sh`
 
 ## Audit Trail
 
-- EXTRACTED: 23 (100%)
+- EXTRACTED: 2 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

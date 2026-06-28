@@ -106,16 +106,30 @@ case "$CLI" in
   claude)
     # Claude: -p with prompt text. --add-dir so it sees project files.
     # --dangerously-skip-permissions is BLOCKED on root; omit.
-    /root/.local/bin/claude -p "$(cat "$TMP_PROMPT")" \
-      --add-dir "$PROJECT_ROOT" \
-      > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] claude rc=$?" >> "$OUT_FILE"
+    # Use --prompt-file to avoid shell-escape failures with $(cat ...).
+    if /root/.local/bin/claude --help 2>&1 | grep -q -- "--prompt-file"; then
+      /root/.local/bin/claude -p --prompt-file "$TMP_PROMPT" \
+        --add-dir "$PROJECT_ROOT" \
+        > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] claude rc=$?" >> "$OUT_FILE"
+    else
+      /root/.local/bin/claude -p "$(cat "$TMP_PROMPT")" \
+        --add-dir "$PROJECT_ROOT" \
+        > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] claude rc=$?" >> "$OUT_FILE"
+    fi
     ;;
 
   grok)
-    # Grok: --single takes the prompt as its argument
-    /root/.local/bin/grok --single "$(cat "$TMP_PROMPT")" \
-      --no-plan --cwd "$PROJECT_ROOT" \
-      > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] grok rc=$?" >> "$OUT_FILE"
+    # Grok: --prompt-file is the correct flag for file-based prompts.
+    # --single has an internal prompt-length limit and silently fails on long prompts.
+    if /root/.local/bin/grok --help 2>&1 | grep -q -- "--prompt-file"; then
+      /root/.local/bin/grok --prompt-file "$TMP_PROMPT" \
+        --no-plan --cwd "$PROJECT_ROOT" \
+        > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] grok rc=$?" >> "$OUT_FILE"
+    else
+      /root/.local/bin/grok --single "$(cat "$TMP_PROMPT")" \
+        --no-plan --cwd "$PROJECT_ROOT" \
+        > "$OUT_FILE" 2>&1 || echo "[dispatch_oneweave] grok rc=$?" >> "$OUT_FILE"
+    fi
     ;;
 
   codex)

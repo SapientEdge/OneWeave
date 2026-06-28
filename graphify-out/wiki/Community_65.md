@@ -1,6 +1,6 @@
 # Community 65
 
-> 13 nodes
+> 14 nodes
 
 ## Key Concepts
 
@@ -10,6 +10,7 @@
 - **.generateSuggestedQuests()** (4 connections) — `Sources/OneWeave/QuestService.swift`
 - **LifeContext** (4 connections) — `Sources/OneWeave/QuestService.swift`
 - **.acceptQuest()** (4 connections) — `Sources/OneWeave/QuestService.swift`
+- **QuestService.swift** (3 connections) — `Sources/OneWeave/QuestService.swift`
 - **WeaveQuest** (3 connections) — `Sources/OneWeave/QuestService.swift`
 - **ModelContext** (2 connections) — `Sources/OneWeave/QuestService.swift`
 - **String** (2 connections) — `Sources/OneWeave/QuestService.swift`
@@ -21,6 +22,7 @@
 ## Relationships
 
 - [[Community 34]] (1 shared connections)
+- [[Community 39]] (1 shared connections)
 
 ## Source Files
 
@@ -28,7 +30,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 39 (100%)
+- EXTRACTED: 42 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

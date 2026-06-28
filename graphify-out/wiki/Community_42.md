@@ -1,34 +1,24 @@
 # Community 42
 
-> 10 nodes
+> 3 nodes
 
 ## Key Concepts
 
-- **EntityType** (13 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **person** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **event** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **task** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **note** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **healthMetric** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **financial** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **place** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **project** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
-- **concept** (1 connections) — `Sources/OneWeave/LifeGraph.swift`
+- **dispatch_panel.sh** (2 connections) — `scripts/dispatch_panel.sh`
+- **dispatch_panel.sh script** (2 connections) — `scripts/dispatch_panel.sh`
+- **run_one()** (2 connections) — `scripts/dispatch_panel.sh`
 
 ## Relationships
 
-- [[Community 22]] (1 shared connections)
-- [[Community 43]] (1 shared connections)
-- [[Community 40]] (1 shared connections)
-- [[Community 6]] (1 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- `Sources/OneWeave/LifeGraph.swift`
+- `scripts/dispatch_panel.sh`
 
 ## Audit Trail
 
-- EXTRACTED: 22 (100%)
+- EXTRACTED: 6 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

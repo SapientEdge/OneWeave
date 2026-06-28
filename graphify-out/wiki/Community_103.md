@@ -1,9 +1,11 @@
 # Community 103
 
-> 41 nodes
+> 45 nodes
 
 ## Key Concepts
 
+- **Equatable** (40 connections)
+- **AppLifecycleCoordinator.swift** (16 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
 - **LifeGraphEnvelope** (16 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
 - **.handleScenePhase()** (13 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
 - **.applicationDidEnterBackground()** (9 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
@@ -27,21 +29,22 @@
 - **.randomBytes()** (5 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
 - **.route()** (5 connections) — `Sources/OneWeave/OneWeaveApp.swift`
 - **Double** (4 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
-- **AppLifecyclePaths** (4 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
-- **LifeContext** (4 connections) — `Sources/OneWeave/AppLifecycleCoordinator.swift`
-- *... and 16 more nodes in this community*
+- *... and 20 more nodes in this community*
 
 ## Relationships
 
-- [[Community 53]] (7 shared connections)
-- [[Community 0]] (5 shared connections)
-- [[Community 22]] (4 shared connections)
-- [[Community 9]] (4 shared connections)
-- [[Community 25]] (3 shared connections)
-- [[Community 49]] (3 shared connections)
-- [[Community 56]] (2 shared connections)
-- [[Community 2]] (1 shared connections)
-- [[Community 34]] (1 shared connections)
+- [[Community 9]] (9 shared connections)
+- [[Community 0]] (8 shared connections)
+- [[Community 3]] (8 shared connections)
+- [[Community 36]] (5 shared connections)
+- [[Community 12]] (5 shared connections)
+- [[Community 25]] (4 shared connections)
+- [[Community 34]] (2 shared connections)
+- [[Community 39]] (2 shared connections)
+- [[Community 45]] (2 shared connections)
+- [[Community 77]] (2 shared connections)
+- [[Community 33]] (2 shared connections)
+- [[Community 5]] (2 shared connections)
 
 ## Source Files
 
@@ -50,8 +53,8 @@
 
 ## Audit Trail
 
-- EXTRACTED: 199 (93%)
-- INFERRED: 15 (7%)
+- EXTRACTED: 258 (95%)
+- INFERRED: 15 (5%)
 - AMBIGUOUS: 0 (0%)
 
 ---

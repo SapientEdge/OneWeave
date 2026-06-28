@@ -1,6 +1,6 @@
 # Community 45
 
-> 33 nodes
+> 28 nodes
 
 ## Key Concepts
 
@@ -8,7 +8,6 @@
 - **BodyThreadReading** (9 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
 - **.weave()** (8 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
 - **.importAll()** (8 connections) — `Sources/OneWeave/LifeGraphiOSIntegrations.swift`
-- **BodyThreadSheet** (7 connections) — `Sources/OneWeave/BodyThreadSheet.swift`
 - **.refreshBodyThread()** (7 connections) — `Sources/OneWeave/LifeGraphiOSIntegrations.swift`
 - **.liveReading()** (6 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
 - **.reading()** (5 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
@@ -28,17 +27,19 @@
 - **String** (2 connections) — `Sources/OneWeave/LifeGraphiOSIntegrations.swift`
 - **LifeContext** (2 connections) — `Sources/OneWeave/LifeGraphiOSIntegrations.swift`
 - **ModelContext** (2 connections) — `Sources/OneWeave/LifeGraphiOSIntegrations.swift`
-- **LifeContext** (1 connections) — `Sources/OneWeave/BodyThreadSheet.swift`
-- *... and 8 more nodes in this community*
+- **DataLeashState** (1 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
+- **LifeContext** (1 connections) — `Sources/OneWeave/BodyThreadWeaver.swift`
+- *... and 3 more nodes in this community*
 
 ## Relationships
 
-- [[Community 34]] (7 shared connections)
-- [[Community 56]] (3 shared connections)
-- [[Community 9]] (2 shared connections)
-- [[Community 39]] (1 shared connections)
-- [[Community 22]] (1 shared connections)
+- [[Community 34]] (6 shared connections)
+- [[Community 103]] (2 shared connections)
+- [[Community 56]] (2 shared connections)
+- [[Community 17]] (1 shared connections)
+- [[Community 9]] (1 shared connections)
 - [[Community 49]] (1 shared connections)
+- [[Community 36]] (1 shared connections)
 
 ## Source Files
 
@@ -48,8 +49,8 @@
 
 ## Audit Trail
 
-- EXTRACTED: 103 (87%)
-- INFERRED: 16 (13%)
+- EXTRACTED: 92 (85%)
+- INFERRED: 16 (15%)
 - AMBIGUOUS: 0 (0%)
 
 ---

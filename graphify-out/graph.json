@@ -550,10 +550,10 @@
       "source_file": "Sources/OneWeave/WeaveSummaryView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "swiftui",
       "id": "swiftui",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": "LifeContext",
@@ -561,10 +561,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "lifecontext",
       "id": "sketch_gamificationextensions_lifecontext",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "Double",
@@ -572,10 +572,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "double",
       "id": "sketch_gamificationextensions_swift_double",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "Int",
@@ -583,10 +583,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "int",
       "id": "sketch_gamificationextensions_swift_int",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "String",
@@ -594,10 +594,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "string",
       "id": "sketch_gamificationextensions_swift_string",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": ".awardEssence()",
@@ -605,10 +605,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": ".awardessence()",
       "id": "sketch_gamificationextensions_lifecontext_awardessence",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "WeaveQuest",
@@ -616,10 +616,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "weavequest",
       "id": "sketch_gamificationextensions_weavequest",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "UUID",
@@ -627,10 +627,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "uuid",
       "id": "sketch_gamificationextensions_swift_uuid",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "QuestStatus",
@@ -638,10 +638,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "queststatus",
       "id": "sketch_gamificationextensions_swift_queststatus",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "Date",
@@ -649,10 +649,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "date",
       "id": "sketch_gamificationextensions_swift_date",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "QuestStatus",
@@ -660,10 +660,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 35,
+      "community": 40,
       "norm_label": "queststatus",
       "id": "sketch_gamificationextensions_queststatus",
-      "community_name": "Community 35"
+      "community_name": "Community 40"
     },
     {
       "label": "Codable",
@@ -671,10 +671,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 22,
+      "community": 9,
       "norm_label": "codable",
       "id": "codable",
-      "community_name": "Community 22"
+      "community_name": "Community 9"
     },
     {
       "label": "available",
@@ -682,10 +682,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 35,
+      "community": 40,
       "norm_label": "available",
       "id": "sketch_gamificationextensions_queststatus_available",
-      "community_name": "Community 35"
+      "community_name": "Community 40"
     },
     {
       "label": "active",
@@ -693,10 +693,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 35,
+      "community": 40,
       "norm_label": "active",
       "id": "sketch_gamificationextensions_queststatus_active",
-      "community_name": "Community 35"
+      "community_name": "Community 40"
     },
     {
       "label": "completed",
@@ -704,10 +704,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 35,
+      "community": 40,
       "norm_label": "completed",
       "id": "sketch_gamificationextensions_queststatus_completed",
-      "community_name": "Community 35"
+      "community_name": "Community 40"
     },
     {
       "label": "archived",
@@ -715,10 +715,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 35,
+      "community": 40,
       "norm_label": "archived",
       "id": "sketch_gamificationextensions_queststatus_archived",
-      "community_name": "Community 35"
+      "community_name": "Community 40"
     },
     {
       "label": ".init()",
@@ -726,10 +726,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": ".init()",
       "id": "sketch_gamificationextensions_weavequest_init",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "QuestService",
@@ -737,10 +737,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "questservice",
       "id": "sketch_gamificationextensions_questservice",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "ModelContext",
@@ -748,10 +748,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "modelcontext",
       "id": "sketch_gamificationextensions_swift_modelcontext",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "TimelineService",
@@ -759,10 +759,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": "timelineservice",
       "id": "sketch_gamificationextensions_swift_timelineservice",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": ".init()",
@@ -770,10 +770,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": ".init()",
       "id": "sketch_gamificationextensions_questservice_init",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": ".completeQuest()",
@@ -781,10 +781,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L61",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": ".completequest()",
       "id": "sketch_gamificationextensions_questservice_completequest",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": ".generateStarterQuests()",
@@ -792,10 +792,10 @@
       "source_file": "Sketch_GamificationExtensions.swift",
       "source_location": "L97",
       "_origin": "ast",
-      "community": 35,
+      "community": 4,
       "norm_label": ".generatestarterquests()",
       "id": "sketch_gamificationextensions_questservice_generatestarterquests",
-      "community_name": "Community 35"
+      "community_name": "Community 4"
     },
     {
       "label": "AppLifecycleCoordinator.swift",
@@ -803,10 +803,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 53,
+      "community": 103,
       "norm_label": "applifecyclecoordinator.swift",
       "id": "oneweave_applifecyclecoordinator",
-      "community_name": "Community 53"
+      "community_name": "Community 103"
     },
     {
       "label": "CryptoKit",
@@ -815,10 +815,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 53,
+      "community": 0,
       "norm_label": "cryptokit",
       "id": "cryptokit",
-      "community_name": "Community 53"
+      "community_name": "Community 0"
     },
     {
       "label": "Security",
@@ -827,10 +827,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 53,
+      "community": 0,
       "norm_label": "security",
       "id": "security",
-      "community_name": "Community 53"
+      "community_name": "Community 0"
     },
     {
       "label": "Darwin",
@@ -839,10 +839,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 53,
+      "community": 0,
       "norm_label": "darwin",
       "id": "darwin",
-      "community_name": "Community 53"
+      "community_name": "Community 0"
     },
     {
       "label": "AppLifecyclePhase",
@@ -850,10 +850,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 22,
+      "community": 18,
       "norm_label": "applifecyclephase",
       "id": "oneweave_applifecyclecoordinator_applifecyclephase",
-      "community_name": "Community 22"
+      "community_name": "Community 18"
     },
     {
       "label": "String",
@@ -872,10 +872,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 22,
+      "community": 18,
       "norm_label": "active",
       "id": "oneweave_applifecyclecoordinator_applifecyclephase_active",
-      "community_name": "Community 22"
+      "community_name": "Community 18"
     },
     {
       "label": "inactive",
@@ -883,10 +883,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 22,
+      "community": 18,
       "norm_label": "inactive",
       "id": "oneweave_applifecyclecoordinator_applifecyclephase_inactive",
-      "community_name": "Community 22"
+      "community_name": "Community 18"
     },
     {
       "label": "background",
@@ -894,10 +894,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 22,
+      "community": 18,
       "norm_label": "background",
       "id": "oneweave_applifecyclecoordinator_applifecyclephase_background",
-      "community_name": "Community 22"
+      "community_name": "Community 18"
     },
     {
       "label": "foreground",
@@ -905,10 +905,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L40",
       "_origin": "ast",
-      "community": 22,
+      "community": 18,
       "norm_label": "foreground",
       "id": "oneweave_applifecyclecoordinator_applifecyclephase_foreground",
-      "community_name": "Community 22"
+      "community_name": "Community 18"
     },
     {
       "label": "LifeGraphEnvelope",
@@ -927,10 +927,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 9,
+      "community": 103,
       "norm_label": "equatable",
       "id": "equatable",
-      "community_name": "Community 9"
+      "community_name": "Community 103"
     },
     {
       "label": "Int",
@@ -1070,10 +1070,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L124",
       "_origin": "ast",
-      "community": 53,
+      "community": 103,
       "norm_label": "applifecycleconstants",
       "id": "oneweave_applifecyclecoordinator_applifecycleconstants",
-      "community_name": "Community 53"
+      "community_name": "Community 103"
     },
     {
       "label": "UUID",
@@ -1081,10 +1081,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L130",
       "_origin": "ast",
-      "community": 53,
+      "community": 103,
       "norm_label": "uuid",
       "id": "sources_oneweave_applifecyclecoordinator_swift_uuid",
-      "community_name": "Community 53"
+      "community_name": "Community 103"
     },
     {
       "label": "AppLifecyclePaths",
@@ -1257,10 +1257,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L382",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "persistenceerror",
       "id": "oneweave_applifecyclecoordinator_persistenceerror",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "Error",
@@ -1268,10 +1268,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "error",
       "id": "error",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "corruptEnvelope",
@@ -1279,10 +1279,10 @@
       "source_file": "Sources/OneWeave/AppLifecycleCoordinator.swift",
       "source_location": "L383",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "corruptenvelope",
       "id": "oneweave_applifecyclecoordinator_persistenceerror_corruptenvelope",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "AppLifecycleCoordinator",
@@ -1400,10 +1400,10 @@
       "source_file": "Sources/OneWeave/AppStateMachine.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 35,
       "norm_label": "appstatemachine.swift",
       "id": "oneweave_appstatemachine",
-      "community_name": "Community 34"
+      "community_name": "Community 35"
     },
     {
       "label": "AppState",
@@ -1862,10 +1862,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 17,
       "norm_label": "bodythreadsheet.swift",
       "id": "oneweave_bodythreadsheet",
-      "community_name": "Community 34"
+      "community_name": "Community 17"
     },
     {
       "label": "BodyThreadSheet",
@@ -1873,10 +1873,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 45,
+      "community": 17,
       "norm_label": "bodythreadsheet",
       "id": "oneweave_bodythreadsheet_bodythreadsheet",
-      "community_name": "Community 45"
+      "community_name": "Community 17"
     },
     {
       "label": "LifeContext",
@@ -1884,10 +1884,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 45,
+      "community": 17,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_bodythreadsheet_swift_lifecontext",
-      "community_name": "Community 45"
+      "community_name": "Community 17"
     },
     {
       "label": "BodyThreadReading",
@@ -1895,10 +1895,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 45,
+      "community": 17,
       "norm_label": "bodythreadreading",
       "id": "bodythreadreading",
-      "community_name": "Community 45"
+      "community_name": "Community 17"
     },
     {
       "label": "String",
@@ -1906,10 +1906,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 45,
+      "community": 17,
       "norm_label": "string",
       "id": "sources_oneweave_bodythreadsheet_swift_string",
-      "community_name": "Community 45"
+      "community_name": "Community 17"
     },
     {
       "label": "Bool",
@@ -1917,10 +1917,10 @@
       "source_file": "Sources/OneWeave/BodyThreadSheet.swift",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 45,
+      "community": 17,
       "norm_label": "bool",
       "id": "sources_oneweave_bodythreadsheet_swift_bool",
-      "community_name": "Community 45"
+      "community_name": "Community 17"
     },
     {
       "label": ".refresh()",
@@ -2423,10 +2423,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L50",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "cognitiveloadcomponent",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "calendarDensity",
@@ -2434,10 +2434,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L51",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "calendardensity",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_calendardensity",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "openTaskCount",
@@ -2445,10 +2445,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L52",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "opentaskcount",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_opentaskcount",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "sleepDebt",
@@ -2456,10 +2456,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "sleepdebt",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_sleepdebt",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "hrvStress",
@@ -2467,10 +2467,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L54",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "hrvstress",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_hrvstress",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "recentReflectionGap",
@@ -2478,10 +2478,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "recentreflectiongap",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_recentreflectiongap",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "activeAmplifierLoad",
@@ -2489,10 +2489,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L56",
       "_origin": "ast",
-      "community": 77,
+      "community": 43,
       "norm_label": "activeamplifierload",
       "id": "oneweave_cognitiveload_cognitiveloadcomponent_activeamplifierload",
-      "community_name": "Community 77"
+      "community_name": "Community 43"
     },
     {
       "label": "CognitiveLoadWeights",
@@ -2808,10 +2808,10 @@
       "source_file": "Sources/OneWeave/CognitiveLoad.swift",
       "source_location": "L376",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "cognitiveloadpauseerror",
       "id": "oneweave_cognitiveload_cognitiveloadpauseerror",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "LocalizedError",
@@ -2819,10 +2819,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "localizederror",
       "id": "localizederror",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "reflectionRequired",
@@ -2918,10 +2918,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "commandpalette.swift",
       "id": "oneweave_commandpalette",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "CommandPaletteView",
@@ -2929,10 +2929,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "commandpaletteview",
       "id": "oneweave_commandpalette_commandpaletteview",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "LifeContext",
@@ -2940,10 +2940,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_commandpalette_swift_lifecontext",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "String",
@@ -2951,10 +2951,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "string",
       "id": "sources_oneweave_commandpalette_swift_string",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "CommandResult",
@@ -2962,10 +2962,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "commandresult",
       "id": "commandresult",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "PendingCommandAction",
@@ -2973,10 +2973,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "pendingcommandaction",
       "id": "pendingcommandaction",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": ".processCommand()",
@@ -2984,10 +2984,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L91",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": ".processcommand()",
       "id": "oneweave_commandpalette_commandpaletteview_processcommand",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": ".commitPending()",
@@ -2995,10 +2995,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L126",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": ".commitpending()",
       "id": "oneweave_commandpalette_commandpaletteview_commitpending",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "CommandResult",
@@ -3006,10 +3006,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L163",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "commandresult",
       "id": "oneweave_commandpalette_commandresult",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "Identifiable",
@@ -3017,10 +3017,10 @@
       "source_file": "",
       "source_location": "",
       "_origin": "ast",
-      "community": 9,
+      "community": 2,
       "norm_label": "identifiable",
       "id": "identifiable",
-      "community_name": "Community 9"
+      "community_name": "Community 2"
     },
     {
       "label": "Hashable",
@@ -3039,10 +3039,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L169",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "commandkind",
       "id": "oneweave_commandpalette_commandkind",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "createQuest",
@@ -3050,10 +3050,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L169",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "createquest",
       "id": "oneweave_commandpalette_commandkind_createquest",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "logWeave",
@@ -3061,10 +3061,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L169",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "logweave",
       "id": "oneweave_commandpalette_commandkind_logweave",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "PendingCommandAction",
@@ -3072,10 +3072,10 @@
       "source_file": "Sources/OneWeave/CommandPalette.swift",
       "source_location": "L171",
       "_origin": "ast",
-      "community": 18,
+      "community": 2,
       "norm_label": "pendingcommandaction",
       "id": "oneweave_commandpalette_pendingcommandaction",
-      "community_name": "Community 18"
+      "community_name": "Community 2"
     },
     {
       "label": "CompassView.swift",
@@ -3303,10 +3303,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L42",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "timeofday",
       "id": "oneweave_dailybriefings_timeofday",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": "earlyMorning",
@@ -3314,10 +3314,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "earlymorning",
       "id": "oneweave_dailybriefings_timeofday_earlymorning",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": "morning",
@@ -3325,10 +3325,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L44",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "morning",
       "id": "oneweave_dailybriefings_timeofday_morning",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": "afternoon",
@@ -3336,10 +3336,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "afternoon",
       "id": "oneweave_dailybriefings_timeofday_afternoon",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": "evening",
@@ -3347,10 +3347,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "evening",
       "id": "oneweave_dailybriefings_timeofday_evening",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": "night",
@@ -3358,10 +3358,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L47",
       "_origin": "ast",
-      "community": 3,
+      "community": 43,
       "norm_label": "night",
       "id": "oneweave_dailybriefings_timeofday_night",
-      "community_name": "Community 3"
+      "community_name": "Community 43"
     },
     {
       "label": ".from()",
@@ -3380,10 +3380,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L49",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "int",
       "id": "sources_oneweave_dailybriefings_swift_int",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "BriefingSection",
@@ -3523,10 +3523,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L96",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "briefcalendarevent",
       "id": "oneweave_dailybriefings_briefcalendarevent",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "UUID",
@@ -3534,10 +3534,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L97",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "uuid",
       "id": "sources_oneweave_dailybriefings_swift_uuid",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "Date",
@@ -3556,10 +3556,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L102",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".init()",
       "id": "oneweave_dailybriefings_briefcalendarevent_init",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "BriefQuest",
@@ -3567,10 +3567,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L110",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "briefquest",
       "id": "oneweave_dailybriefings_briefquest",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "Bool",
@@ -3578,10 +3578,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L113",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "bool",
       "id": "sources_oneweave_dailybriefings_swift_bool",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": ".init()",
@@ -3589,10 +3589,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L116",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".init()",
       "id": "oneweave_dailybriefings_briefquest_init",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "BriefEchoCountdown",
@@ -3600,10 +3600,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L124",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "briefechocountdown",
       "id": "oneweave_dailybriefings_briefechocountdown",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": ".init()",
@@ -3611,10 +3611,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L130",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".init()",
       "id": "oneweave_dailybriefings_briefechocountdown_init",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "MorningBriefing",
@@ -3776,10 +3776,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L389",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "comparable",
       "id": "oneweave_dailybriefings_comparable",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": ".clamped()",
@@ -3787,10 +3787,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L390",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".clamped()",
       "id": "oneweave_dailybriefings_comparable_clamped",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "ClosedRange",
@@ -3798,10 +3798,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L390",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "closedrange",
       "id": "sources_oneweave_dailybriefings_swift_closedrange",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "Self",
@@ -3809,10 +3809,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L390",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "self",
       "id": "sources_oneweave_dailybriefings_swift_self",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "LifeContext",
@@ -3820,10 +3820,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L400",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": "lifecontext",
       "id": "oneweave_dailybriefings_lifecontext",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": "BodyThreadSnapshot",
@@ -3831,10 +3831,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L403",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": "bodythreadsnapshot",
       "id": "bodythreadsnapshot",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": "UpcomingEchoSnapshot",
@@ -3842,10 +3842,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L410",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": "upcomingechosnapshot",
       "id": "upcomingechosnapshot",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": "BodyThreadSnapshot",
@@ -3853,10 +3853,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L418",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": "bodythreadsnapshot",
       "id": "oneweave_dailybriefings_bodythreadsnapshot",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": "Double",
@@ -3864,10 +3864,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L419",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": "double",
       "id": "sources_oneweave_dailybriefings_swift_double",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": ".init()",
@@ -3875,10 +3875,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L425",
       "_origin": "ast",
-      "community": 59,
+      "community": 3,
       "norm_label": ".init()",
       "id": "oneweave_dailybriefings_bodythreadsnapshot_init",
-      "community_name": "Community 59"
+      "community_name": "Community 3"
     },
     {
       "label": "UpcomingEchoSnapshot",
@@ -3886,10 +3886,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L440",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": "upcomingechosnapshot",
       "id": "oneweave_dailybriefings_upcomingechosnapshot",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": ".init()",
@@ -3897,10 +3897,10 @@
       "source_file": "Sources/OneWeave/DailyBriefings.swift",
       "source_location": "L446",
       "_origin": "ast",
-      "community": 4,
+      "community": 3,
       "norm_label": ".init()",
       "id": "oneweave_dailybriefings_upcomingechosnapshot_init",
-      "community_name": "Community 4"
+      "community_name": "Community 3"
     },
     {
       "label": "DataLeashSettings.swift",
@@ -3963,10 +3963,10 @@
       "source_file": "Sources/OneWeave/DataLeashSettings.swift",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 56,
+      "community": 32,
       "norm_label": ".isprivate()",
       "id": "oneweave_dataleashsettings_dataleashstate_isprivate",
-      "community_name": "Community 56"
+      "community_name": "Community 32"
     },
     {
       "label": ".setAllowed()",
@@ -4337,10 +4337,10 @@
       "source_file": "Sources/OneWeave/DecisionLog.swift",
       "source_location": "L123",
       "_origin": "ast",
-      "community": 55,
+      "community": 33,
       "norm_label": "decisionlogerror",
       "id": "oneweave_decisionlog_decisionlogerror",
-      "community_name": "Community 55"
+      "community_name": "Community 33"
     },
     {
       "label": "emptyReasoning",
@@ -4348,10 +4348,10 @@
       "source_file": "Sources/OneWeave/DecisionLog.swift",
       "source_location": "L124",
       "_origin": "ast",
-      "community": 55,
+      "community": 33,
       "norm_label": "emptyreasoning",
       "id": "oneweave_decisionlog_decisionlogerror_emptyreasoning",
-      "community_name": "Community 55"
+      "community_name": "Community 33"
     },
     {
       "label": "emptyTitle",
@@ -4359,10 +4359,10 @@
       "source_file": "Sources/OneWeave/DecisionLog.swift",
       "source_location": "L125",
       "_origin": "ast",
-      "community": 55,
+      "community": 33,
       "norm_label": "emptytitle",
       "id": "oneweave_decisionlog_decisionlogerror_emptytitle",
-      "community_name": "Community 55"
+      "community_name": "Community 33"
     },
     {
       "label": "emptyOutcome",
@@ -4370,10 +4370,10 @@
       "source_file": "Sources/OneWeave/DecisionLog.swift",
       "source_location": "L126",
       "_origin": "ast",
-      "community": 55,
+      "community": 33,
       "norm_label": "emptyoutcome",
       "id": "oneweave_decisionlog_decisionlogerror_emptyoutcome",
-      "community_name": "Community 55"
+      "community_name": "Community 33"
     },
     {
       "label": "DecisionLog",
@@ -4535,10 +4535,10 @@
       "source_file": "Sources/OneWeave/EssenceLedgerView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "essenceledgerview.swift",
       "id": "oneweave_essenceledgerview",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": "EssenceLedgerView",
@@ -4612,10 +4612,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L76",
       "_origin": "ast",
-      "community": 22,
+      "community": 43,
       "norm_label": "familypodrole",
       "id": "oneweave_familypod_familypodrole",
-      "community_name": "Community 22"
+      "community_name": "Community 43"
     },
     {
       "label": "steward",
@@ -4623,10 +4623,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L77",
       "_origin": "ast",
-      "community": 22,
+      "community": 43,
       "norm_label": "steward",
       "id": "oneweave_familypod_familypodrole_steward",
-      "community_name": "Community 22"
+      "community_name": "Community 43"
     },
     {
       "label": "witness",
@@ -4634,10 +4634,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 22,
+      "community": 43,
       "norm_label": "witness",
       "id": "oneweave_familypod_familypodrole_witness",
-      "community_name": "Community 22"
+      "community_name": "Community 43"
     },
     {
       "label": "quiet",
@@ -4645,10 +4645,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L79",
       "_origin": "ast",
-      "community": 22,
+      "community": 43,
       "norm_label": "quiet",
       "id": "oneweave_familypod_familypodrole_quiet",
-      "community_name": "Community 22"
+      "community_name": "Community 43"
     },
     {
       "label": "PodVisibilityGrant",
@@ -4656,10 +4656,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L95",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "podvisibilitygrant",
       "id": "oneweave_familypod_podvisibilitygrant",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "completedQuestCount",
@@ -4667,10 +4667,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L96",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "completedquestcount",
       "id": "oneweave_familypod_podvisibilitygrant_completedquestcount",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "currentHarmonyScore",
@@ -4678,10 +4678,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L97",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "currentharmonyscore",
       "id": "oneweave_familypod_podvisibilitygrant_currentharmonyscore",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "currentStreak",
@@ -4689,10 +4689,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L98",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "currentstreak",
       "id": "oneweave_familypod_podvisibilitygrant_currentstreak",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "echoCountdowns",
@@ -4700,10 +4700,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L99",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "echocountdowns",
       "id": "oneweave_familypod_podvisibilitygrant_echocountdowns",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "threadNames",
@@ -4711,10 +4711,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L100",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "threadnames",
       "id": "oneweave_familypod_podvisibilitygrant_threadnames",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "seasonName",
@@ -4722,10 +4722,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L101",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "seasonname",
       "id": "oneweave_familypod_podvisibilitygrant_seasonname",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "amplifier",
@@ -4733,10 +4733,10 @@
       "source_file": "Sources/OneWeave/FamilyPod.swift",
       "source_location": "L102",
       "_origin": "ast",
-      "community": 47,
+      "community": 9,
       "norm_label": "amplifier",
       "id": "oneweave_familypod_podvisibilitygrant_amplifier",
-      "community_name": "Community 47"
+      "community_name": "Community 9"
     },
     {
       "label": "Set",
@@ -5206,10 +5206,10 @@
       "source_file": "Sources/OneWeave/GraphInsightGenerator.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 36,
       "norm_label": "graphinsightgenerator.swift",
       "id": "oneweave_graphinsightgenerator",
-      "community_name": "Community 34"
+      "community_name": "Community 36"
     },
     {
       "label": "GraphInsight",
@@ -5327,10 +5327,10 @@
       "source_file": "Sources/OneWeave/GraphInsightGenerator.swift",
       "source_location": "L89",
       "_origin": "ast",
-      "community": 56,
+      "community": 36,
       "norm_label": ".invalidatecache()",
       "id": "oneweave_graphinsightgenerator_graphinsightgenerator_invalidatecache",
-      "community_name": "Community 56"
+      "community_name": "Community 36"
     },
     {
       "label": ".resetCounters()",
@@ -5536,10 +5536,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": "crossthreadinsight",
       "id": "oneweave_insightgenerator_crossthreadinsight",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": "String",
@@ -5547,10 +5547,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": "string",
       "id": "sources_oneweave_insightgenerator_swift_string",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": "InsightGenerator",
@@ -5558,10 +5558,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": "insightgenerator",
       "id": "oneweave_insightgenerator_insightgenerator",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": ".generate()",
@@ -5569,10 +5569,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": ".generate()",
       "id": "oneweave_insightgenerator_insightgenerator_generate",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": "LifeContext",
@@ -5580,10 +5580,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_insightgenerator_swift_lifecontext",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": "TimelineEvent",
@@ -5591,10 +5591,10 @@
       "source_file": "Sources/OneWeave/InsightGenerator.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 62,
+      "community": 34,
       "norm_label": "timelineevent",
       "id": "sources_oneweave_insightgenerator_swift_timelineevent",
-      "community_name": "Community 62"
+      "community_name": "Community 34"
     },
     {
       "label": "InvisibleMentor.swift",
@@ -5910,10 +5910,10 @@
       "source_file": "Sources/OneWeave/LifeContext.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 8,
       "norm_label": "lifecontext.swift",
       "id": "oneweave_lifecontext",
-      "community_name": "Community 34"
+      "community_name": "Community 8"
     },
     {
       "label": "EssenceTransaction",
@@ -6416,10 +6416,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": "lifegraph.swift",
       "id": "oneweave_lifegraph",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "LifeEntity",
@@ -6548,10 +6548,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L59",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": ".coherencescorecontribution()",
       "id": "oneweave_lifegraph_lifeentity_coherencescorecontribution",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "EntityType",
@@ -6559,10 +6559,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "entitytype",
       "id": "oneweave_lifegraph_entitytype",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "person",
@@ -6570,10 +6570,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "person",
       "id": "oneweave_lifegraph_entitytype_person",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "event",
@@ -6581,10 +6581,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "event",
       "id": "oneweave_lifegraph_entitytype_event",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "task",
@@ -6592,10 +6592,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "task",
       "id": "oneweave_lifegraph_entitytype_task",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "note",
@@ -6603,10 +6603,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "note",
       "id": "oneweave_lifegraph_entitytype_note",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "healthMetric",
@@ -6614,10 +6614,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "healthmetric",
       "id": "oneweave_lifegraph_entitytype_healthmetric",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "financial",
@@ -6625,10 +6625,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "financial",
       "id": "oneweave_lifegraph_entitytype_financial",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "place",
@@ -6636,10 +6636,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "place",
       "id": "oneweave_lifegraph_entitytype_place",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "project",
@@ -6647,10 +6647,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "project",
       "id": "oneweave_lifegraph_entitytype_project",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "concept",
@@ -6658,10 +6658,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 42,
+      "community": 6,
       "norm_label": "concept",
       "id": "oneweave_lifegraph_entitytype_concept",
-      "community_name": "Community 42"
+      "community_name": "Community 6"
     },
     {
       "label": "MemoryType",
@@ -6669,10 +6669,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L70",
       "_origin": "ast",
-      "community": 43,
+      "community": 6,
       "norm_label": "memorytype",
       "id": "oneweave_lifegraph_memorytype",
-      "community_name": "Community 43"
+      "community_name": "Community 6"
     },
     {
       "label": "episodic",
@@ -6680,10 +6680,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 43,
+      "community": 6,
       "norm_label": "episodic",
       "id": "oneweave_lifegraph_memorytype_episodic",
-      "community_name": "Community 43"
+      "community_name": "Community 6"
     },
     {
       "label": "semantic",
@@ -6691,10 +6691,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L72",
       "_origin": "ast",
-      "community": 43,
+      "community": 6,
       "norm_label": "semantic",
       "id": "oneweave_lifegraph_memorytype_semantic",
-      "community_name": "Community 43"
+      "community_name": "Community 6"
     },
     {
       "label": "procedural",
@@ -6702,10 +6702,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L73",
       "_origin": "ast",
-      "community": 43,
+      "community": 6,
       "norm_label": "procedural",
       "id": "oneweave_lifegraph_memorytype_procedural",
-      "community_name": "Community 43"
+      "community_name": "Community 6"
     },
     {
       "label": "LifeRelationship",
@@ -6746,10 +6746,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L93",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "relationshiptype",
       "id": "oneweave_lifegraph_relationshiptype",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": "temporal",
@@ -6757,10 +6757,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L94",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "temporal",
       "id": "oneweave_lifegraph_relationshiptype_temporal",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": "causal",
@@ -6768,10 +6768,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L94",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "causal",
       "id": "oneweave_lifegraph_relationshiptype_causal",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": "associative",
@@ -6779,10 +6779,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L94",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "associative",
       "id": "oneweave_lifegraph_relationshiptype_associative",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": "hierarchical",
@@ -6790,10 +6790,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L94",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "hierarchical",
       "id": "oneweave_lifegraph_relationshiptype_hierarchical",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": "social",
@@ -6801,10 +6801,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L94",
       "_origin": "ast",
-      "community": 63,
+      "community": 6,
       "norm_label": "social",
       "id": "oneweave_lifegraph_relationshiptype_social",
-      "community_name": "Community 63"
+      "community_name": "Community 6"
     },
     {
       "label": ".fromTimelineEvent()",
@@ -6812,10 +6812,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L100",
       "_origin": "ast",
-      "community": 79,
+      "community": 6,
       "norm_label": ".fromtimelineevent()",
       "id": "oneweave_lifegraph_lifeentity_fromtimelineevent",
-      "community_name": "Community 79"
+      "community_name": "Community 6"
     },
     {
       "label": "TimelineEvent",
@@ -6823,10 +6823,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L100",
       "_origin": "ast",
-      "community": 79,
+      "community": 6,
       "norm_label": "timelineevent",
       "id": "sources_oneweave_lifegraph_swift_timelineevent",
-      "community_name": "Community 79"
+      "community_name": "Community 6"
     },
     {
       "label": "LifeContext",
@@ -6834,10 +6834,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L100",
       "_origin": "ast",
-      "community": 79,
+      "community": 6,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_lifegraph_swift_lifecontext",
-      "community_name": "Community 79"
+      "community_name": "Community 6"
     },
     {
       "label": ".fromQuest()",
@@ -6845,10 +6845,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L124",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": ".fromquest()",
       "id": "oneweave_lifegraph_lifeentity_fromquest",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "WeaveQuest",
@@ -6856,10 +6856,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L124",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": "weavequest",
       "id": "sources_oneweave_lifegraph_swift_weavequest",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "Double",
@@ -6867,10 +6867,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L147",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": "double",
       "id": "oneweave_lifegraph_double",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": ".clamped()",
@@ -6878,10 +6878,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L148",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": ".clamped()",
       "id": "oneweave_lifegraph_double_clamped",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "ClosedRange",
@@ -6889,10 +6889,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L148",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": "closedrange",
       "id": "sources_oneweave_lifegraph_swift_closedrange",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": "LifeGraph",
@@ -6900,10 +6900,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L154",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": "lifegraph",
       "id": "oneweave_lifegraph_lifegraph",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": ".buildCoherenceScore()",
@@ -6911,10 +6911,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L155",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": ".buildcoherencescore()",
       "id": "oneweave_lifegraph_lifegraph_buildcoherencescore",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": ".calculateResonance()",
@@ -6922,10 +6922,10 @@
       "source_file": "Sources/OneWeave/LifeGraph.swift",
       "source_location": "L162",
       "_origin": "ast",
-      "community": 40,
+      "community": 6,
       "norm_label": ".calculateresonance()",
       "id": "oneweave_lifegraph_lifegraph_calculateresonance",
-      "community_name": "Community 40"
+      "community_name": "Community 6"
     },
     {
       "label": ".semanticSearch()",
@@ -7848,10 +7848,10 @@
       "source_file": "Sources/OneWeave/MasteryMapView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "masterymapview.swift",
       "id": "oneweave_masterymapview",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": "MasteryMapView",
@@ -7958,10 +7958,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": "meaningthread",
       "id": "oneweave_meaningthread_meaningthread",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": "String",
@@ -7969,10 +7969,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": "string",
       "id": "sources_oneweave_meaningthread_swift_string",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".init()",
@@ -7980,10 +7980,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".init()",
       "id": "oneweave_meaningthread_meaningthread_init",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".captureStory()",
@@ -7991,10 +7991,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".capturestory()",
       "id": "oneweave_meaningthread_meaningthread_capturestory",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": "TimelineService",
@@ -8002,10 +8002,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": "timelineservice",
       "id": "sources_oneweave_meaningthread_swift_timelineservice",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": "LifeContext",
@@ -8013,10 +8013,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L39",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_meaningthread_swift_lifecontext",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".captureLegacy()",
@@ -8024,10 +8024,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".capturelegacy()",
       "id": "oneweave_meaningthread_meaningthread_capturelegacy",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".suggestLinkToSelfCare()",
@@ -8035,10 +8035,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L115",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".suggestlinktoselfcare()",
       "id": "oneweave_meaningthread_meaningthread_suggestlinktoselfcare",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".suggestLegacyForSelfGoal()",
@@ -8046,10 +8046,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L134",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".suggestlegacyforselfgoal()",
       "id": "oneweave_meaningthread_meaningthread_suggestlegacyforselfgoal",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".suggestLegacyForCareMoment()",
@@ -8057,10 +8057,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L144",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".suggestlegacyforcaremoment()",
       "id": "oneweave_meaningthread_meaningthread_suggestlegacyforcaremoment",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".logActivity()",
@@ -8068,10 +8068,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L156",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".logactivity()",
       "id": "oneweave_meaningthread_meaningthread_logactivity",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".processEvent()",
@@ -8079,10 +8079,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L166",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".processevent()",
       "id": "oneweave_meaningthread_meaningthread_processevent",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": "TimelineEvent",
@@ -8090,10 +8090,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L166",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": "timelineevent",
       "id": "sources_oneweave_meaningthread_swift_timelineevent",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".legacySummary()",
@@ -8101,10 +8101,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L251",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".legacysummary()",
       "id": "oneweave_meaningthread_meaningthread_legacysummary",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".clearForTesting()",
@@ -8112,10 +8112,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L258",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".clearfortesting()",
       "id": "oneweave_meaningthread_meaningthread_clearfortesting",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": ".summary()",
@@ -8123,10 +8123,10 @@
       "source_file": "Sources/OneWeave/MeaningThread.swift",
       "source_location": "L268",
       "_origin": "ast",
-      "community": 10,
+      "community": 35,
       "norm_label": ".summary()",
       "id": "oneweave_meaningthread_meaningthread_summary",
-      "community_name": "Community 10"
+      "community_name": "Community 35"
     },
     {
       "label": "MentorEchoBridge.swift",
@@ -8486,10 +8486,10 @@
       "source_file": "Sources/OneWeave/OneWeaveApp.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "oneweaveapp.swift",
       "id": "oneweave_oneweaveapp",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": "OneWeaveApp",
@@ -8530,10 +8530,10 @@
       "source_file": "Sources/OneWeave/OneWeaveApp.swift",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "maintabview",
       "id": "oneweave_oneweaveapp_maintabview",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": "LifecycleSceneBridge",
@@ -8541,10 +8541,10 @@
       "source_file": "Sources/OneWeave/OneWeaveApp.swift",
       "source_location": "L100",
       "_origin": "ast",
-      "community": 34,
+      "community": 39,
       "norm_label": "lifecyclescenebridge",
       "id": "oneweave_oneweaveapp_lifecyclescenebridge",
-      "community_name": "Community 34"
+      "community_name": "Community 39"
     },
     {
       "label": ".route()",
@@ -8585,10 +8585,10 @@
       "source_file": "Sources/OneWeave/OneWeavePrototype+GraphValidation.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 49,
+      "community": 36,
       "norm_label": "oneweaveprototype+graphvalidation.swift",
       "id": "oneweave_oneweaveprototype_graphvalidation",
-      "community_name": "Community 49"
+      "community_name": "Community 36"
     },
     {
       "label": "OneWeavePrototype",
@@ -8596,10 +8596,10 @@
       "source_file": "Sources/OneWeave/OneWeavePrototype+GraphValidation.swift",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 49,
+      "community": 36,
       "norm_label": "oneweaveprototype",
       "id": "oneweave_oneweaveprototype_graphvalidation_oneweaveprototype",
-      "community_name": "Community 49"
+      "community_name": "Community 36"
     },
     {
       "label": ".validateLifeGraphAndInsights()",
@@ -8607,10 +8607,10 @@
       "source_file": "Sources/OneWeave/OneWeavePrototype+GraphValidation.swift",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 49,
+      "community": 36,
       "norm_label": ".validatelifegraphandinsights()",
       "id": "oneweave_oneweaveprototype_graphvalidation_oneweaveprototype_validatelifegraphandinsights",
-      "community_name": "Community 49"
+      "community_name": "Community 36"
     },
     {
       "label": "OneWeavePrototype.swift",
@@ -8761,10 +8761,10 @@
       "source_file": "Sources/OneWeave/OneWeavePrototype.swift",
       "source_location": "L882",
       "_origin": "ast",
-      "community": 39,
+      "community": 38,
       "norm_label": "view",
       "id": "sources_oneweave_oneweaveprototype_swift_view",
-      "community_name": "Community 39"
+      "community_name": "Community 38"
     },
     {
       "label": "OneWeaveSnapshotStore.swift",
@@ -9709,10 +9709,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L61",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "exportleash",
       "id": "oneweave_portableexport_exportleash",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "localOnly",
@@ -9720,10 +9720,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "localonly",
       "id": "oneweave_portableexport_exportleash_localonly",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "privateBundle",
@@ -9731,10 +9731,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "privatebundle",
       "id": "oneweave_portableexport_exportleash_privatebundle",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "publicBundle",
@@ -9742,10 +9742,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L69",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "publicbundle",
       "id": "oneweave_portableexport_exportleash_publicbundle",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "fullBundle",
@@ -9753,10 +9753,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "fullbundle",
       "id": "oneweave_portableexport_exportleash_fullbundle",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "Bool",
@@ -9764,10 +9764,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "bool",
       "id": "sources_oneweave_portableexport_swift_bool",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "PortableExportBundle",
@@ -9808,10 +9808,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L137",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "exportmanifest",
       "id": "oneweave_portableexport_exportmanifest",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "Int",
@@ -9819,10 +9819,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L138",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "int",
       "id": "sources_oneweave_portableexport_swift_int",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "Date",
@@ -9830,10 +9830,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L139",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "date",
       "id": "sources_oneweave_portableexport_swift_date",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": ".init()",
@@ -9841,10 +9841,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L150",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": ".init()",
       "id": "oneweave_portableexport_exportmanifest_init",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "PortableExportError",
@@ -9852,10 +9852,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L179",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "portableexporterror",
       "id": "oneweave_portableexport_portableexporterror",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "localOnlyLeash",
@@ -9863,10 +9863,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L180",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "localonlyleash",
       "id": "oneweave_portableexport_portableexporterror_localonlyleash",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "emptyUserIntent",
@@ -9874,10 +9874,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L181",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "emptyuserintent",
       "id": "oneweave_portableexport_portableexporterror_emptyuserintent",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "fullBundleRequiresReflection",
@@ -9885,10 +9885,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L182",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "fullbundlerequiresreflection",
       "id": "oneweave_portableexport_portableexporterror_fullbundlerequiresreflection",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "decryptionFailed",
@@ -9896,10 +9896,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L183",
       "_origin": "ast",
-      "community": 55,
+      "community": 87,
       "norm_label": "decryptionfailed",
       "id": "oneweave_portableexport_portableexporterror_decryptionfailed",
-      "community_name": "Community 55"
+      "community_name": "Community 87"
     },
     {
       "label": "encodeFailed",
@@ -9929,10 +9929,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L225",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "journalmarkdownrenderer",
       "id": "oneweave_portableexport_journalmarkdownrenderer",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": ".render()",
@@ -9940,10 +9940,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L230",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": ".render()",
       "id": "oneweave_portableexport_journalmarkdownrenderer_render",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "LifeEntity",
@@ -9951,10 +9951,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L230",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "lifeentity",
       "id": "sources_oneweave_portableexport_swift_lifeentity",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": ".renderEntity()",
@@ -9962,10 +9962,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L262",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": ".renderentity()",
       "id": "oneweave_portableexport_journalmarkdownrenderer_renderentity",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": ".allowed()",
@@ -9973,10 +9973,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L286",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": ".allowed()",
       "id": "oneweave_portableexport_journalmarkdownrenderer_allowed",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "GraphOPMLRenderer",
@@ -9984,10 +9984,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L302",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "graphopmlrenderer",
       "id": "oneweave_portableexport_graphopmlrenderer",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": ".render()",
@@ -9995,10 +9995,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L306",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": ".render()",
       "id": "oneweave_portableexport_graphopmlrenderer_render",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "LifeRelationship",
@@ -10006,10 +10006,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L306",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": "liferelationship",
       "id": "sources_oneweave_portableexport_swift_liferelationship",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": ".xmlEscape()",
@@ -10017,10 +10017,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L359",
       "_origin": "ast",
-      "community": 17,
+      "community": 13,
       "norm_label": ".xmlescape()",
       "id": "oneweave_portableexport_graphopmlrenderer_xmlescape",
-      "community_name": "Community 17"
+      "community_name": "Community 13"
     },
     {
       "label": "EchoMarkdownRenderer",
@@ -10127,10 +10127,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L588",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "portableimporterror",
       "id": "oneweave_portableexport_portableimporterror",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "bundleTooLarge",
@@ -10138,10 +10138,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L589",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "bundletoolarge",
       "id": "oneweave_portableexport_portableimporterror_bundletoolarge",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "invalidOPML",
@@ -10149,10 +10149,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L590",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "invalidopml",
       "id": "oneweave_portableexport_portableimporterror_invalidopml",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "invalidAttributesJSON",
@@ -10160,10 +10160,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L591",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "invalidattributesjson",
       "id": "oneweave_portableexport_portableimporterror_invalidattributesjson",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "unsupportedBundleVersion",
@@ -10171,10 +10171,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L592",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "unsupportedbundleversion",
       "id": "oneweave_portableexport_portableimporterror_unsupportedbundleversion",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "checksumMismatch",
@@ -10182,10 +10182,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L593",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "checksummismatch",
       "id": "oneweave_portableexport_portableimporterror_checksummismatch",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "fullBundleRefused",
@@ -10193,10 +10193,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L594",
       "_origin": "ast",
-      "community": 58,
+      "community": 87,
       "norm_label": "fullbundlerefused",
       "id": "oneweave_portableexport_portableimporterror_fullbundlerefused",
-      "community_name": "Community 58"
+      "community_name": "Community 87"
     },
     {
       "label": "PortableImportPolicy",
@@ -10204,10 +10204,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L618",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "portableimportpolicy",
       "id": "oneweave_portableexport_portableimportpolicy",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "Set",
@@ -10215,10 +10215,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L628",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": "set",
       "id": "sources_oneweave_portableexport_swift_set",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": ".shouldAccept()",
@@ -10226,10 +10226,10 @@
       "source_file": "Sources/OneWeave/PortableExport.swift",
       "source_location": "L631",
       "_origin": "ast",
-      "community": 52,
+      "community": 13,
       "norm_label": ".shouldaccept()",
       "id": "oneweave_portableexport_portableimportpolicy_shouldaccept",
-      "community_name": "Community 52"
+      "community_name": "Community 13"
     },
     {
       "label": "QuestService.swift",
@@ -10237,10 +10237,10 @@
       "source_file": "Sources/OneWeave/QuestService.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 65,
       "norm_label": "questservice.swift",
       "id": "oneweave_questservice",
-      "community_name": "Community 34"
+      "community_name": "Community 65"
     },
     {
       "label": "QuestService",
@@ -10391,10 +10391,10 @@
       "source_file": "Sources/OneWeave/QuestsView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 76,
       "norm_label": "questsview.swift",
       "id": "oneweave_questsview",
-      "community_name": "Community 34"
+      "community_name": "Community 76"
     },
     {
       "label": "QuestsView",
@@ -11260,10 +11260,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracle.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 106,
       "norm_label": "resonanceoracle.swift",
       "id": "oneweave_resonanceoracle",
-      "community_name": "Community 34"
+      "community_name": "Community 106"
     },
     {
       "label": "ResonanceSimulation",
@@ -11370,10 +11370,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracleSheet.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 168,
+      "community": 39,
       "norm_label": "resonanceoraclesheet.swift",
       "id": "oneweave_resonanceoraclesheet",
-      "community_name": "Community 168"
+      "community_name": "Community 39"
     },
     {
       "label": "ResonanceOracleSheet",
@@ -11381,10 +11381,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracleSheet.swift",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 168,
+      "community": 39,
       "norm_label": "resonanceoraclesheet",
       "id": "oneweave_resonanceoraclesheet_resonanceoraclesheet",
-      "community_name": "Community 168"
+      "community_name": "Community 39"
     },
     {
       "label": "LifeContext",
@@ -11392,10 +11392,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracleSheet.swift",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 168,
+      "community": 39,
       "norm_label": "lifecontext",
       "id": "sources_oneweave_resonanceoraclesheet_swift_lifecontext",
-      "community_name": "Community 168"
+      "community_name": "Community 39"
     },
     {
       "label": "String",
@@ -11403,10 +11403,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracleSheet.swift",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 168,
+      "community": 39,
       "norm_label": "string",
       "id": "sources_oneweave_resonanceoraclesheet_swift_string",
-      "community_name": "Community 168"
+      "community_name": "Community 39"
     },
     {
       "label": "ResonanceSimulation",
@@ -11414,10 +11414,10 @@
       "source_file": "Sources/OneWeave/ResonanceOracleSheet.swift",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 168,
+      "community": 39,
       "norm_label": "resonancesimulation",
       "id": "resonancesimulation",
-      "community_name": "Community 168"
+      "community_name": "Community 39"
     },
     {
       "label": "SacredEcho.swift",
@@ -11425,10 +11425,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 53,
+      "community": 0,
       "norm_label": "sacredecho.swift",
       "id": "oneweave_sacredecho",
-      "community_name": "Community 53"
+      "community_name": "Community 0"
     },
     {
       "label": "EchoLifecycleState",
@@ -11513,10 +11513,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L64",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "echoerror",
       "id": "oneweave_sacredecho_echoerror",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "emptyReflection",
@@ -11524,10 +11524,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L65",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "emptyreflection",
       "id": "oneweave_sacredecho_echoerror_emptyreflection",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "unlockDateInPast",
@@ -11535,10 +11535,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "unlockdateinpast",
       "id": "oneweave_sacredecho_echoerror_unlockdateinpast",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "notYetUnlocked",
@@ -11546,10 +11546,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L67",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "notyetunlocked",
       "id": "oneweave_sacredecho_echoerror_notyetunlocked",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "alreadyOpened",
@@ -11557,10 +11557,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L68",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "alreadyopened",
       "id": "oneweave_sacredecho_echoerror_alreadyopened",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "noHeirDesignated",
@@ -11568,10 +11568,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L69",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "noheirdesignated",
       "id": "oneweave_sacredecho_echoerror_noheirdesignated",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "heirNotInWeaveCircle",
@@ -11579,10 +11579,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L70",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "heirnotinweavecircle",
       "id": "oneweave_sacredecho_echoerror_heirnotinweavecircle",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "decryptionFailed",
@@ -11590,10 +11590,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "decryptionfailed",
       "id": "oneweave_sacredecho_echoerror_decryptionfailed",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "cipherMissingKey",
@@ -11601,10 +11601,10 @@
       "source_file": "Sources/OneWeave/SacredEcho.swift",
       "source_location": "L72",
       "_origin": "ast",
-      "community": 107,
+      "community": 0,
       "norm_label": "ciphermissingkey",
       "id": "oneweave_sacredecho_echoerror_ciphermissingkey",
-      "community_name": "Community 107"
+      "community_name": "Community 0"
     },
     {
       "label": "persistenceFailed",
@@ -12536,10 +12536,10 @@
       "source_file": "Sources/OneWeave/SettingsView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 95,
       "norm_label": "settingsview.swift",
       "id": "oneweave_settingsview",
-      "community_name": "Community 34"
+      "community_name": "Community 95"
     },
     {
       "label": "SettingsView",
@@ -12877,10 +12877,10 @@
       "source_file": "Sources/OneWeave/Thread.swift",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "threadprotocol",
       "id": "oneweave_thread_threadprotocol",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": ".defaultRealWorldBridge()",
@@ -12888,10 +12888,10 @@
       "source_file": "Sources/OneWeave/Thread.swift",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": ".defaultrealworldbridge()",
       "id": "oneweave_thread_threadprotocol_defaultrealworldbridge",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "TimelineEvent",
@@ -12899,10 +12899,10 @@
       "source_file": "Sources/OneWeave/Thread.swift",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "timelineevent",
       "id": "sources_oneweave_thread_swift_timelineevent",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "String",
@@ -12910,10 +12910,10 @@
       "source_file": "Sources/OneWeave/Thread.swift",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "string",
       "id": "sources_oneweave_thread_swift_string",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "ThreadDetailView.swift",
@@ -12921,10 +12921,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "threaddetailview.swift",
       "id": "oneweave_threaddetailview",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "ThreadDetailView",
@@ -13141,10 +13141,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L544",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "masterybadge",
       "id": "oneweave_threaddetailview_masterybadge",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "QuestCard",
@@ -13152,10 +13152,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L576",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "questcard",
       "id": "oneweave_threaddetailview_questcard",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "Void",
@@ -13163,10 +13163,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L579",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "void",
       "id": "sources_oneweave_threaddetailview_swift_void",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "SuggestedQuestRow",
@@ -13174,10 +13174,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L610",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "suggestedquestrow",
       "id": "oneweave_threaddetailview_suggestedquestrow",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "RippleRow",
@@ -13185,10 +13185,10 @@
       "source_file": "Sources/OneWeave/ThreadDetailView.swift",
       "source_location": "L640",
       "_origin": "ast",
-      "community": 39,
+      "community": 29,
       "norm_label": "ripplerow",
       "id": "oneweave_threaddetailview_ripplerow",
-      "community_name": "Community 39"
+      "community_name": "Community 29"
     },
     {
       "label": "ThreadsOverviewView.swift",
@@ -13196,10 +13196,10 @@
       "source_file": "Sources/OneWeave/ThreadsOverviewView.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 51,
       "norm_label": "threadsoverviewview.swift",
       "id": "oneweave_threadsoverviewview",
-      "community_name": "Community 34"
+      "community_name": "Community 51"
     },
     {
       "label": "ThreadsOverviewView",
@@ -13361,10 +13361,10 @@
       "source_file": "Sources/OneWeave/ThreadsOverviewView.swift",
       "source_location": "L231",
       "_origin": "ast",
-      "community": 39,
+      "community": 51,
       "norm_label": "energyindicator",
       "id": "oneweave_threadsoverviewview_energyindicator",
-      "community_name": "Community 39"
+      "community_name": "Community 51"
     },
     {
       "label": "EnergyProfile",
@@ -13372,10 +13372,10 @@
       "source_file": "Sources/OneWeave/ThreadsOverviewView.swift",
       "source_location": "L232",
       "_origin": "ast",
-      "community": 39,
+      "community": 51,
       "norm_label": "energyprofile",
       "id": "sources_oneweave_threadsoverviewview_swift_energyprofile",
-      "community_name": "Community 39"
+      "community_name": "Community 51"
     },
     {
       "label": "TimelineEvent.swift",
@@ -13394,10 +13394,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "timelineevent",
       "id": "oneweave_timelineevent_timelineevent",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "UUID",
@@ -13405,10 +13405,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "uuid",
       "id": "sources_oneweave_timelineevent_swift_uuid",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "Date",
@@ -13416,10 +13416,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "date",
       "id": "sources_oneweave_timelineevent_swift_date",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "String",
@@ -13427,10 +13427,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "string",
       "id": "sources_oneweave_timelineevent_swift_string",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "Bool",
@@ -13438,10 +13438,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": "bool",
       "id": "sources_oneweave_timelineevent_swift_bool",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": ".init()",
@@ -13449,10 +13449,10 @@
       "source_file": "Sources/OneWeave/TimelineEvent.swift",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 15,
+      "community": 28,
       "norm_label": ".init()",
       "id": "oneweave_timelineevent_timelineevent_init",
-      "community_name": "Community 15"
+      "community_name": "Community 28"
     },
     {
       "label": "TimelineService.swift",
@@ -13614,10 +13614,10 @@
       "source_file": "Sources/OneWeave/WeaveQuest.swift",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 34,
+      "community": 66,
       "norm_label": "weavequest.swift",
       "id": "oneweave_weavequest",
-      "community_name": "Community 34"
+      "community_name": "Community 66"
     },
     {
       "label": "WeaveQuest",
@@ -14447,6 +14447,81 @@
       "norm_label": ".weaveintograph()",
       "id": "oneweave_iosserviceintegrations_healththread_weaveintograph",
       "community_name": "Community 56"
+    },
+    {
+      "label": "dispatch_oneweave.sh",
+      "file_type": "code",
+      "source_file": "scripts/dispatch_oneweave.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 47,
+      "norm_label": "dispatch_oneweave.sh",
+      "id": "scripts_dispatch_oneweave",
+      "community_name": "Community 47"
+    },
+    {
+      "label": "dispatch_oneweave.sh script",
+      "file_type": "code",
+      "source_file": "scripts/dispatch_oneweave.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 47,
+      "norm_label": "dispatch_oneweave.sh script",
+      "id": "root_hermes_workspace_projects_oneweave_scripts_dispatch_oneweave_sh__entry",
+      "community_name": "Community 47"
+    },
+    {
+      "label": "dispatch_panel.sh",
+      "file_type": "code",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "community": 42,
+      "norm_label": "dispatch_panel.sh",
+      "id": "scripts_dispatch_panel",
+      "community_name": "Community 42"
+    },
+    {
+      "label": "dispatch_panel.sh script",
+      "file_type": "code",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "community": 42,
+      "norm_label": "dispatch_panel.sh script",
+      "id": "root_hermes_workspace_projects_oneweave_scripts_dispatch_panel_sh__entry",
+      "community_name": "Community 42"
+    },
+    {
+      "label": "run_one()",
+      "file_type": "code",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L52",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_function"
+      },
+      "_origin": "ast",
+      "community": 42,
+      "norm_label": "run_one()",
+      "id": "scripts_dispatch_panel_run_one",
+      "community_name": "Community 42"
     },
     {
       "label": "bug_report.md",
@@ -22015,6 +22090,149 @@
       "norm_label": "\ud83d\udcde re-establishing context after sessions reset",
       "id": "oneweave_handoff_cycle_30_re_establishing_context_after_sessions_reset",
       "community_name": "Community 19"
+    },
+    {
+      "label": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "oneweave_handoff_cycle_31.md",
+      "id": "oneweave_handoff_cycle_31",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "OneWeave Handoff \u2014 Cycle 31 (2026-06-28)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "oneweave handoff \u2014 cycle 31 (2026-06-28)",
+      "id": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "What's New in Cycle 31",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "what's new in cycle 31",
+      "id": "oneweave_handoff_cycle_31_what_s_new_in_cycle_31",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Workflow Refinements (5 new skills)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L8",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "workflow refinements (5 new skills)",
+      "id": "oneweave_handoff_cycle_31_workflow_refinements_5_new_skills",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Meta-Reflections Document",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "meta-reflections document",
+      "id": "oneweave_handoff_cycle_31_meta_reflections_document",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Project-Side Changes",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "project-side changes",
+      "id": "oneweave_handoff_cycle_31_project_side_changes",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Why These Skills Matter",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "why these skills matter",
+      "id": "oneweave_handoff_cycle_31_why_these_skills_matter",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "How to Use the New Skills",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "how to use the new skills",
+      "id": "oneweave_handoff_cycle_31_how_to_use_the_new_skills",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Next dispatch round (cycle 32+)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L48",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "next dispatch round (cycle 32+)",
+      "id": "oneweave_handoff_cycle_31_next_dispatch_round_cycle_32",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "For a squad (sequential multi-CLI workflow)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L67",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "for a squad (sequential multi-cli workflow)",
+      "id": "oneweave_handoff_cycle_31_for_a_squad_sequential_multi_cli_workflow",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "What's Left for Mac (M01-M44)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L86",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "what's left for mac (m01-m44)",
+      "id": "oneweave_handoff_cycle_31_what_s_left_for_mac_m01_m44",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Tarball",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L97",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "tarball",
+      "id": "oneweave_handoff_cycle_31_tarball",
+      "community_name": "Community 10"
+    },
+    {
+      "label": "Git History (cycles 29-31)",
+      "file_type": "document",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L102",
+      "_origin": "ast",
+      "community": 10,
+      "norm_label": "git history (cycles 29-31)",
+      "id": "oneweave_handoff_cycle_31_git_history_cycles_29_31",
+      "community_name": "Community 10"
     },
     {
       "label": "ONEWEAVE_MONETIZATION_RETENTION.md",
@@ -54210,6 +54428,47 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "scripts/dispatch_oneweave.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_dispatch_oneweave",
+      "target": "root_hermes_workspace_projects_oneweave_scripts_dispatch_oneweave_sh__entry"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_dispatch_panel",
+      "target": "root_hermes_workspace_projects_oneweave_scripts_dispatch_panel_sh__entry"
+    },
+    {
+      "relation": "defines",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L52",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "scripts_dispatch_panel",
+      "target": "scripts_dispatch_panel_run_one"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/dispatch_panel.sh",
+      "source_location": "L62",
+      "weight": 1.0,
+      "context": "call",
+      "confidence_score": 1.0,
+      "source": "root_hermes_workspace_projects_oneweave_scripts_dispatch_panel_sh__entry",
+      "target": "scripts_dispatch_panel_run_one"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": ".github/agents/speckit.agent-context.update.agent.md",
       "source_location": "L8",
       "weight": 1.0,
@@ -60560,6 +60819,126 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31",
+      "target": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L102",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_git_history_cycles_29_31"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_how_to_use_the_new_skills"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L97",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_tarball"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L86",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_what_s_left_for_mac_m01_m44"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_what_s_new_in_cycle_31"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_oneweave_handoff_cycle_31_2026_06_28",
+      "target": "oneweave_handoff_cycle_31_why_these_skills_matter"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L22",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_what_s_new_in_cycle_31",
+      "target": "oneweave_handoff_cycle_31_meta_reflections_document"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_what_s_new_in_cycle_31",
+      "target": "oneweave_handoff_cycle_31_project_side_changes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_what_s_new_in_cycle_31",
+      "target": "oneweave_handoff_cycle_31_workflow_refinements_5_new_skills"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L67",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_how_to_use_the_new_skills",
+      "target": "oneweave_handoff_cycle_31_for_a_squad_sequential_multi_cli_workflow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ONEWEAVE_HANDOFF_CYCLE_31.md",
+      "source_location": "L48",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "oneweave_handoff_cycle_31_how_to_use_the_new_skills",
+      "target": "oneweave_handoff_cycle_31_next_dispatch_round_cycle_32"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "ONEWEAVE_MONETIZATION_RETENTION.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -61909,5 +62288,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7891018e04da75cfbae981597c6d0a0f9c102417"
+  "built_at_commit": "8f1db699bd8fd6f6b4a9bffbaaaa3de1f8ba27e8"
 }

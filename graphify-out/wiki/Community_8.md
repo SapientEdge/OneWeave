@@ -1,6 +1,6 @@
 # Community 8
 
-> 41 nodes
+> 42 nodes
 
 ## Key Concepts
 
@@ -13,6 +13,7 @@
 - **TimelineEvent** (9 connections) — `Sources/OneWeave/LifeContext.swift`
 - **Amplifier** (9 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.spendEssenceForAmplifier()** (7 connections) — `Sources/OneWeave/LifeContext.swift`
+- **LifeContext.swift** (6 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.updateHarmonyAndStreak()** (6 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.completeQuest()** (6 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.awardEssenceForEvent()** (5 connections) — `Sources/OneWeave/LifeContext.swift`
@@ -28,15 +29,14 @@
 - **.changeSeason()** (3 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.aggregateFromRecentEvents()** (3 connections) — `Sources/OneWeave/LifeContext.swift`
 - **.updateMasteryFromEvent()** (3 connections) — `Sources/OneWeave/LifeContext.swift`
-- **.echoPastEvent()** (3 connections) — `Sources/OneWeave/LifeContext.swift`
-- *... and 16 more nodes in this community*
+- *... and 17 more nodes in this community*
 
 ## Relationships
 
-- [[Community 34]] (3 shared connections)
-- [[Community 2]] (2 shared connections)
-- [[Community 43]] (2 shared connections)
-- [[Community 22]] (1 shared connections)
+- [[Community 43]] (3 shared connections)
+- [[Community 2]] (3 shared connections)
+- [[Community 34]] (1 shared connections)
+- [[Community 39]] (1 shared connections)
 - [[Community 9]] (1 shared connections)
 
 ## Source Files
@@ -45,7 +45,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 186 (99%)
+- EXTRACTED: 192 (99%)
 - INFERRED: 1 (1%)
 - AMBIGUOUS: 0 (0%)
 

@@ -1,6 +1,6 @@
 # Community 77
 
-> 44 nodes
+> 37 nodes
 
 ## Key Concepts
 
@@ -9,7 +9,6 @@
 - **CognitiveLoad.swift** (12 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **CognitiveLoadTrend** (11 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **.compute()** (11 connections) — `Sources/OneWeave/CognitiveLoad.swift`
-- **CognitiveLoadComponent** (10 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **.clamped()** (10 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **CognitiveLoad** (9 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **.init()** (7 connections) — `Sources/OneWeave/CognitiveLoad.swift`
@@ -29,14 +28,15 @@
 - **CognitiveLoadWeights** (2 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **CognitiveLoadTrend** (2 connections) — `Sources/OneWeave/CognitiveLoad.swift`
 - **Bool** (2 connections) — `Sources/OneWeave/CognitiveLoad.swift`
-- *... and 19 more nodes in this community*
+- **CognitiveLoadThresholds** (2 connections) — `Sources/OneWeave/CognitiveLoad.swift`
+- *... and 12 more nodes in this community*
 
 ## Relationships
 
-- [[Community 25]] (5 shared connections)
-- [[Community 22]] (3 shared connections)
-- [[Community 55]] (2 shared connections)
+- [[Community 25]] (4 shared connections)
+- [[Community 87]] (2 shared connections)
 - [[Community 9]] (2 shared connections)
+- [[Community 103]] (2 shared connections)
 - [[Community 34]] (1 shared connections)
 - [[Community 43]] (1 shared connections)
 
@@ -46,7 +46,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 190 (100%)
+- EXTRACTED: 174 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

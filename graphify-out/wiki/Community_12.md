@@ -33,10 +33,10 @@
 
 ## Relationships
 
-- [[Community 9]] (7 shared connections)
+- [[Community 103]] (5 shared connections)
+- [[Community 2]] (3 shared connections)
 - [[Community 34]] (1 shared connections)
 - [[Community 23]] (1 shared connections)
-- [[Community 2]] (1 shared connections)
 - [[Community 43]] (1 shared connections)
 
 ## Source Files

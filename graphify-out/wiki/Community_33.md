@@ -1,6 +1,6 @@
 # Community 33
 
-> 23 nodes
+> 27 nodes
 
 ## Key Concepts
 
@@ -8,6 +8,7 @@
 - **DecisionLog.swift** (7 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **Date** (7 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **.init()** (7 connections) — `Sources/OneWeave/DecisionLog.swift`
+- **DecisionLogError** (7 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **.record()** (7 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **String** (6 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **Double** (6 connections) — `Sources/OneWeave/DecisionLog.swift`
@@ -24,16 +25,19 @@
 - **DecisionMentorBridge** (3 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **.compute()** (3 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **Comparable** (2 connections) — `Sources/OneWeave/DecisionLog.swift`
+- **emptyReasoning** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
+- **emptyTitle** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
+- **emptyOutcome** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
 - **MentorInput** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
-- **ClosedRange** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
-- **Self** (1 connections) — `Sources/OneWeave/DecisionLog.swift`
+- *... and 2 more nodes in this community*
 
 ## Relationships
 
-- [[Community 9]] (3 shared connections)
-- [[Community 55]] (2 shared connections)
-- [[Community 22]] (2 shared connections)
+- [[Community 9]] (2 shared connections)
+- [[Community 103]] (2 shared connections)
+- [[Community 87]] (2 shared connections)
 - [[Community 34]] (1 shared connections)
+- [[Community 2]] (1 shared connections)
 - [[Community 5]] (1 shared connections)
 
 ## Source Files
@@ -42,7 +46,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 114 (99%)
+- EXTRACTED: 124 (99%)
 - INFERRED: 1 (1%)
 - AMBIGUOUS: 0 (0%)
 

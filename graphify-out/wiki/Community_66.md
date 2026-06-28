@@ -1,11 +1,12 @@
 # Community 66
 
-> 13 nodes
+> 14 nodes
 
 ## Key Concepts
 
 - **WeaveQuest** (8 connections) — `Sources/OneWeave/WeaveQuest.swift`
 - **QuestStatus** (8 connections) — `Sources/OneWeave/WeaveQuest.swift`
+- **WeaveQuest.swift** (4 connections) — `Sources/OneWeave/WeaveQuest.swift`
 - **String** (3 connections) — `Sources/OneWeave/WeaveQuest.swift`
 - **.init()** (3 connections) — `Sources/OneWeave/WeaveQuest.swift`
 - **Int** (2 connections) — `Sources/OneWeave/WeaveQuest.swift`
@@ -20,8 +21,9 @@
 
 ## Relationships
 
-- [[Community 34]] (2 shared connections)
-- [[Community 22]] (1 shared connections)
+- [[Community 34]] (1 shared connections)
+- [[Community 39]] (1 shared connections)
+- [[Community 9]] (1 shared connections)
 - [[Community 43]] (1 shared connections)
 
 ## Source Files
@@ -30,7 +32,7 @@
 
 ## Audit Trail
 
-- EXTRACTED: 32 (100%)
+- EXTRACTED: 36 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

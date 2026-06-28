@@ -1,53 +1,55 @@
 # Community 39
 
-> 16 nodes
+> 18 nodes
 
 ## Key Concepts
 
-- **View** (34 connections) — `Sources/OneWeave/OneWeavePrototype.swift`
-- **ThreadDetailView.swift** (7 connections) — `Sources/OneWeave/ThreadDetailView.swift`
-- **MasteryBadge** (5 connections) — `Sources/OneWeave/ThreadDetailView.swift`
-- **QuestCard** (5 connections) — `Sources/OneWeave/ThreadDetailView.swift`
-- **RippleRow** (5 connections) — `Sources/OneWeave/ThreadDetailView.swift`
-- **SuggestedQuestRow** (4 connections) — `Sources/OneWeave/ThreadDetailView.swift`
+- **SwiftUI** (25 connections) — `Sources/OneWeave/WeaveSummaryView.swift`
+- **OneWeaveApp.swift** (5 connections) — `Sources/OneWeave/OneWeaveApp.swift`
+- **ResonanceOracleSheet** (5 connections) — `Sources/OneWeave/ResonanceOracleSheet.swift`
+- **EssenceLedgerView.swift** (3 connections) — `Sources/OneWeave/EssenceLedgerView.swift`
 - **EssenceLedgerView** (3 connections) — `Sources/OneWeave/EssenceLedgerView.swift`
-- **Void** (3 connections) — `Sources/OneWeave/ThreadDetailView.swift`
-- **EnergyIndicator** (3 connections) — `Sources/OneWeave/ThreadsOverviewView.swift`
+- **MasteryMapView.swift** (3 connections) — `Sources/OneWeave/MasteryMapView.swift`
 - **WeaveSummaryView** (3 connections) — `Sources/OneWeave/WeaveSummaryView.swift`
+- **MainTabView** (2 connections) — `Sources/OneWeave/OneWeaveApp.swift`
+- **LifecycleSceneBridge** (2 connections) — `Sources/OneWeave/OneWeaveApp.swift`
+- **ResonanceOracleSheet.swift** (2 connections) — `Sources/OneWeave/ResonanceOracleSheet.swift`
 - **StateMachineIndicator.swift** (2 connections) — `Sources/OneWeave/StateMachineIndicator.swift`
 - **StateMachineIndicator** (2 connections) — `Sources/OneWeave/StateMachineIndicator.swift`
 - **WeaveSummaryView.swift** (2 connections) — `Sources/OneWeave/WeaveSummaryView.swift`
 - **LifeContext** (1 connections) — `Sources/OneWeave/EssenceLedgerView.swift`
-- **EnergyProfile** (1 connections) — `Sources/OneWeave/ThreadsOverviewView.swift`
+- **LifeContext** (1 connections) — `Sources/OneWeave/ResonanceOracleSheet.swift`
+- **String** (1 connections) — `Sources/OneWeave/ResonanceOracleSheet.swift`
+- **ResonanceSimulation** (1 connections) — `Sources/OneWeave/ResonanceOracleSheet.swift`
 - **LifeContext** (1 connections) — `Sources/OneWeave/WeaveSummaryView.swift`
 
 ## Relationships
 
-- [[Community 29]] (10 shared connections)
-- [[Community 34]] (7 shared connections)
-- [[Community 38]] (5 shared connections)
-- [[Community 23]] (3 shared connections)
-- [[Community 136]] (2 shared connections)
+- [[Community 38]] (6 shared connections)
+- [[Community 34]] (4 shared connections)
+- [[Community 103]] (2 shared connections)
+- [[Community 35]] (2 shared connections)
 - [[Community 2]] (2 shared connections)
-- [[Community 95]] (2 shared connections)
-- [[Community 51]] (2 shared connections)
-- [[Community 45]] (1 shared connections)
-- [[Community 18]] (1 shared connections)
+- [[Community 17]] (1 shared connections)
 - [[Community 32]] (1 shared connections)
-- [[Community 119]] (1 shared connections)
+- [[Community 136]] (1 shared connections)
+- [[Community 8]] (1 shared connections)
+- [[Community 23]] (1 shared connections)
+- [[Community 67]] (1 shared connections)
+- [[Community 11]] (1 shared connections)
 
 ## Source Files
 
 - `Sources/OneWeave/EssenceLedgerView.swift`
-- `Sources/OneWeave/OneWeavePrototype.swift`
+- `Sources/OneWeave/MasteryMapView.swift`
+- `Sources/OneWeave/OneWeaveApp.swift`
+- `Sources/OneWeave/ResonanceOracleSheet.swift`
 - `Sources/OneWeave/StateMachineIndicator.swift`
-- `Sources/OneWeave/ThreadDetailView.swift`
-- `Sources/OneWeave/ThreadsOverviewView.swift`
 - `Sources/OneWeave/WeaveSummaryView.swift`
 
 ## Audit Trail
 
-- EXTRACTED: 81 (100%)
+- EXTRACTED: 64 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

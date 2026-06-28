@@ -33,8 +33,8 @@
 
 ## Relationships
 
-- [[Community 22]] (4 shared connections)
-- [[Community 9]] (2 shared connections)
+- [[Community 9]] (4 shared connections)
+- [[Community 103]] (2 shared connections)
 - [[Community 43]] (2 shared connections)
 - [[Community 34]] (1 shared connections)
 

@@ -1,9 +1,10 @@
 # Community 38
 
-> 19 nodes
+> 20 nodes
 
 ## Key Concepts
 
+- **View** (34 connections) — `Sources/OneWeave/OneWeavePrototype.swift`
 - **CompassView** (12 connections) — `Sources/OneWeave/CompassView.swift`
 - **CompassView.swift** (7 connections) — `Sources/OneWeave/CompassView.swift`
 - **ThreadRingView** (6 connections) — `Sources/OneWeave/CompassView.swift`
@@ -26,16 +27,27 @@
 
 ## Relationships
 
-- [[Community 39]] (5 shared connections)
-- [[Community 34]] (2 shared connections)
+- [[Community 39]] (6 shared connections)
+- [[Community 29]] (5 shared connections)
+- [[Community 2]] (3 shared connections)
+- [[Community 23]] (3 shared connections)
+- [[Community 51]] (3 shared connections)
+- [[Community 136]] (2 shared connections)
+- [[Community 95]] (2 shared connections)
+- [[Community 34]] (1 shared connections)
+- [[Community 17]] (1 shared connections)
+- [[Community 32]] (1 shared connections)
+- [[Community 119]] (1 shared connections)
+- [[Community 67]] (1 shared connections)
 
 ## Source Files
 
 - `Sources/OneWeave/CompassView.swift`
+- `Sources/OneWeave/OneWeavePrototype.swift`
 
 ## Audit Trail
 
-- EXTRACTED: 61 (100%)
+- EXTRACTED: 95 (100%)
 - INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 

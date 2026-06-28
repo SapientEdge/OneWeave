@@ -34,8 +34,9 @@
 ## Relationships
 
 - [[Community 34]] (3 shared connections)
-- [[Community 9]] (3 shared connections)
-- [[Community 49]] (2 shared connections)
+- [[Community 103]] (2 shared connections)
+- [[Community 36]] (2 shared connections)
+- [[Community 2]] (1 shared connections)
 - [[Community 33]] (1 shared connections)
 - [[Community 0]] (1 shared connections)
 

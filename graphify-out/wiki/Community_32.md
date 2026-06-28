@@ -1,11 +1,12 @@
 # Community 32
 
-> 21 nodes
+> 22 nodes
 
 ## Key Concepts
 
 - **DataLeashState** (14 connections) — `Sources/OneWeave/DataLeashSettings.swift`
 - **DataLeashSettingsRecord** (9 connections) — `Sources/OneWeave/DataLeashSettings.swift`
+- **.isPrivate()** (7 connections) — `Sources/OneWeave/DataLeashSettings.swift`
 - **DataLeashSettingsView** (7 connections) — `Sources/OneWeave/DataLeashSettings.swift`
 - **DataLeashSettings.swift** (6 connections) — `Sources/OneWeave/DataLeashSettings.swift`
 - **IntegrationCategory** (6 connections) — `Sources/OneWeave/DataLeashSettings.swift`
@@ -28,12 +29,13 @@
 
 ## Relationships
 
+- [[Community 56]] (4 shared connections)
 - [[Community 49]] (3 shared connections)
-- [[Community 56]] (3 shared connections)
-- [[Community 34]] (2 shared connections)
-- [[Community 22]] (1 shared connections)
-- [[Community 9]] (1 shared connections)
+- [[Community 34]] (1 shared connections)
 - [[Community 39]] (1 shared connections)
+- [[Community 9]] (1 shared connections)
+- [[Community 103]] (1 shared connections)
+- [[Community 38]] (1 shared connections)
 
 ## Source Files
 
@@ -41,8 +43,8 @@
 
 ## Audit Trail
 
-- EXTRACTED: 89 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 92 (96%)
+- INFERRED: 4 (4%)
 - AMBIGUOUS: 0 (0%)
 
 ---

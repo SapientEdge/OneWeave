@@ -1,12 +1,11 @@
 # Community 15
 
-> 34 nodes
+> 24 nodes
 
 ## Key Concepts
 
 - **CareKinThread** (21 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **String** (14 connections) — `Sources/OneWeave/CareKinThread.swift`
-- **TimelineEvent** (14 connections) — `Sources/OneWeave/TimelineEvent.swift`
 - **.addTask()** (10 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.updateCareLoad()** (9 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.suggestIRL()** (9 connections) — `Sources/OneWeave/CareKinThread.swift`
@@ -17,40 +16,33 @@
 - **.logActivity()** (8 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **LifeContext** (7 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.getActiveTasks()** (7 connections) — `Sources/OneWeave/CareKinThread.swift`
-- **ThreadProtocol** (6 connections) — `Sources/OneWeave/Thread.swift`
 - **TimelineService** (5 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.getPendingHighPriorityTasks()** (5 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.computeCareLoad()** (5 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **TimelineEvent** (5 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.careSummary()** (5 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.isoDateString()** (4 connections) — `Sources/OneWeave/CareKinThread.swift`
-- **.defaultRealWorldBridge()** (4 connections) — `Sources/OneWeave/Thread.swift`
 - **Date** (3 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.dateFromISO()** (3 connections) — `Sources/OneWeave/CareKinThread.swift`
 - **.summary()** (3 connections) — `Sources/OneWeave/CareKinThread.swift`
-- **.init()** (3 connections) — `Sources/OneWeave/TimelineEvent.swift`
-- *... and 9 more nodes in this community*
+- **.getCareLoad()** (2 connections) — `Sources/OneWeave/CareKinThread.swift`
+- **.init()** (1 connections) — `Sources/OneWeave/CareKinThread.swift`
+- **.clearForTesting()** (1 connections) — `Sources/OneWeave/CareKinThread.swift`
 
 ## Relationships
 
-- [[Community 34]] (3 shared connections)
-- [[Community 35]] (2 shared connections)
 - [[Community 28]] (2 shared connections)
-- [[Community 10]] (2 shared connections)
-- [[Community 1]] (2 shared connections)
-- [[Community 9]] (1 shared connections)
-- [[Community 62]] (1 shared connections)
+- [[Community 34]] (1 shared connections)
+- [[Community 35]] (1 shared connections)
 
 ## Source Files
 
 - `Sources/OneWeave/CareKinThread.swift`
-- `Sources/OneWeave/Thread.swift`
-- `Sources/OneWeave/TimelineEvent.swift`
 
 ## Audit Trail
 
-- EXTRACTED: 185 (95%)
-- INFERRED: 10 (5%)
+- EXTRACTED: 158 (99%)
+- INFERRED: 2 (1%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,40 +1,35 @@
 # Community 10
 
-> 16 nodes
+> 13 nodes
 
 ## Key Concepts
 
-- **MeaningThread** (14 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.processEvent()** (10 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **String** (9 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.captureStory()** (6 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.captureLegacy()** (6 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.logActivity()** (6 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.suggestLinkToSelfCare()** (5 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **LifeContext** (4 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **TimelineService** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.suggestLegacyForSelfGoal()** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.suggestLegacyForCareMoment()** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **TimelineEvent** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.legacySummary()** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.summary()** (3 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.init()** (1 connections) — `Sources/OneWeave/MeaningThread.swift`
-- **.clearForTesting()** (1 connections) — `Sources/OneWeave/MeaningThread.swift`
+- **OneWeave Handoff — Cycle 31 (2026-06-28)** (7 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **What's New in Cycle 31** (4 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **How to Use the New Skills** (3 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **ONEWEAVE_HANDOFF_CYCLE_31.md** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Workflow Refinements (5 new skills)** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Meta-Reflections Document** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Project-Side Changes** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Why These Skills Matter** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Next dispatch round (cycle 32+)** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **For a squad (sequential multi-CLI workflow)** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **What's Left for Mac (M01-M44)** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Tarball** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
+- **Git History (cycles 29-31)** (1 connections) — `ONEWEAVE_HANDOFF_CYCLE_31.md`
 
 ## Relationships
 
-- [[Community 15]] (2 shared connections)
-- [[Community 34]] (1 shared connections)
-- [[Community 35]] (1 shared connections)
+- No strong cross-community connections detected
 
 ## Source Files
 
-- `Sources/OneWeave/MeaningThread.swift`
+- `ONEWEAVE_HANDOFF_CYCLE_31.md`
 
 ## Audit Trail
 
-- EXTRACTED: 78 (98%)
-- INFERRED: 2 (2%)
+- EXTRACTED: 24 (100%)
+- INFERRED: 0 (0%)
 - AMBIGUOUS: 0 (0%)
 
 ---

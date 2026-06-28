@@ -33,18 +33,18 @@
 
 ## Relationships
 
-- [[Community 9]] (16 shared connections)
-- [[Community 0]] (12 shared connections)
-- [[Community 4]] (8 shared connections)
+- [[Community 9]] (18 shared connections)
+- [[Community 13]] (14 shared connections)
+- [[Community 0]] (13 shared connections)
+- [[Community 3]] (12 shared connections)
 - [[Community 49]] (8 shared connections)
-- [[Community 13]] (7 shared connections)
-- [[Community 22]] (6 shared connections)
-- [[Community 77]] (5 shared connections)
-- [[Community 3]] (5 shared connections)
-- [[Community 17]] (5 shared connections)
-- [[Community 103]] (3 shared connections)
+- [[Community 103]] (4 shared connections)
+- [[Community 43]] (4 shared connections)
+- [[Community 87]] (4 shared connections)
+- [[Community 77]] (4 shared connections)
 - [[Community 35]] (2 shared connections)
-- [[Community 55]] (2 shared connections)
+- [[Community 56]] (2 shared connections)
+- [[Community 22]] (2 shared connections)
 
 ## Source Files
 

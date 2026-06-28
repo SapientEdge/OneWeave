@@ -1,41 +1,40 @@
 # Community 4
 
-> 15 nodes
+> 16 nodes
 
 ## Key Concepts
 
-- **Int** (12 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **BriefCalendarEvent** (9 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **BriefQuest** (9 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **BriefEchoCountdown** (9 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **UpcomingEchoSnapshot** (9 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **UUID** (8 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **Bool** (7 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **.init()** (6 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **.init()** (5 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **.init()** (5 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **.init()** (5 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **.clamped()** (4 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **Comparable** (2 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **ClosedRange** (1 connections) — `Sources/OneWeave/DailyBriefings.swift`
-- **Self** (1 connections) — `Sources/OneWeave/DailyBriefings.swift`
+- **WeaveQuest** (9 connections) — `Sketch_GamificationExtensions.swift`
+- **String** (6 connections) — `Sketch_GamificationExtensions.swift`
+- **QuestService** (6 connections) — `Sketch_GamificationExtensions.swift`
+- **LifeContext** (5 connections) — `Sketch_GamificationExtensions.swift`
+- **.completeQuest()** (5 connections) — `Sketch_GamificationExtensions.swift`
+- **Double** (4 connections) — `Sketch_GamificationExtensions.swift`
+- **.awardEssence()** (4 connections) — `Sketch_GamificationExtensions.swift`
+- **.init()** (3 connections) — `Sketch_GamificationExtensions.swift`
+- **.init()** (3 connections) — `Sketch_GamificationExtensions.swift`
+- **ModelContext** (2 connections) — `Sketch_GamificationExtensions.swift`
+- **TimelineService** (2 connections) — `Sketch_GamificationExtensions.swift`
+- **.generateStarterQuests()** (2 connections) — `Sketch_GamificationExtensions.swift`
+- **Int** (1 connections) — `Sketch_GamificationExtensions.swift`
+- **UUID** (1 connections) — `Sketch_GamificationExtensions.swift`
+- **QuestStatus** (1 connections) — `Sketch_GamificationExtensions.swift`
+- **Date** (1 connections) — `Sketch_GamificationExtensions.swift`
 
 ## Relationships
 
-- [[Community 3]] (15 shared connections)
-- [[Community 25]] (8 shared connections)
-- [[Community 22]] (4 shared connections)
-- [[Community 9]] (4 shared connections)
-- [[Community 59]] (1 shared connections)
+- [[Community 34]] (3 shared connections)
+- [[Community 40]] (1 shared connections)
+- [[Community 35]] (1 shared connections)
 
 ## Source Files
 
-- `Sources/OneWeave/DailyBriefings.swift`
+- `Sketch_GamificationExtensions.swift`
 
 ## Audit Trail
 
-- EXTRACTED: 92 (100%)
-- INFERRED: 0 (0%)
+- EXTRACTED: 54 (98%)
+- INFERRED: 1 (2%)
 - AMBIGUOUS: 0 (0%)
 
 ---

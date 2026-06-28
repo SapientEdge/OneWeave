@@ -2,7 +2,7 @@
 
 > God node · 25 connections · `Sources/OneWeave/WeaveSummaryView.swift`
 
-**Community:** [[Community 34]]
+**Community:** [[Community 39]]
 
 ## Connections by Relation
 

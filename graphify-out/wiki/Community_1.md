@@ -23,7 +23,7 @@
 
 ## Relationships
 
-- [[Community 15]] (2 shared connections)
+- [[Community 28]] (2 shared connections)
 - [[Community 34]] (1 shared connections)
 
 ## Source Files
