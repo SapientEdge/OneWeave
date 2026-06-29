@@ -1,6 +1,7 @@
 # OneWeave Constitution
 
-**Version:** 2.0 — Updated 2026-06-27 after Spec Kit + Graphify + Aider toolchain adoption.
+**Version:** 2.1 — Updated 2026-06-29 (cycle 46: LifeMoment native feature; additive amendment — Principle 11 + Invariant 11)
+**Previous version:** 2.0 (2026-06-27, post-Spec Kit + Graphify + Aider adoption)
 
 This constitution governs ALL OneWeave work. Every spec, plan, task, and implementation must comply.
 
@@ -41,6 +42,13 @@ Solve real 2026 needs: fragmentation, loneliness, caregiver burden, digital fati
 - Deliver working artifacts. No stubs in production paths. No "TODO: implement later."
 - Talk/plan before code. Conversational first; act only on explicit approval.
 
+### 8. Quiet Capture (added 2026-06-29, cycle 46)
+- **LifeMoment** — capturing a moment of life (photo + Vision OCR + optional reflection) is frictionless (snap → reflection in 30s) but **never awards essence, streak, or mastery automatically**.
+- Captured moments stay free-floating by default — no algorithmic categorization into a Thread. The user attaches manually, or never does.
+- Promotion to gamified artifacts (Quest, Reflection, Sacred Echo, Insight) requires **explicit user action + non-empty reflection**. Existing reflection gates (Principle 4) apply unchanged.
+- Storage is plaintext metadata by default for fast search. User can "Seal" a moment to encrypt OCR + image embedding text via `MomentSealer` (AES-256-GCM, fail-closed, `#if DEBUG` Linux test seed gated, mirror of `SacredEchoCipher`'s cryptographic discipline).
+- **Per Claude review SPEC-12:** Empty `""` reflection does NOT count — `isUserReflection = !(reflection?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)`. Whitespace-only reflection is also rejected.
+
 ---
 
 ## Non-Goals
@@ -65,9 +73,11 @@ These MUST NOT change without explicit user approval and a constitution amendmen
 5. **Reflection gate**: required on every state-changing action
 6. **Privacy tier**: every `LifeEntity` has `private` / `shared` / `public`; default `private`
 7. **Data Leash**: 9 toggles, read live BEFORE integration call, fail-closed (deny if missing)
+7a. **(amended 2026-06-29, cycle 46)** Data Leash now has **10 toggles** — the new 10th is `photos` (covers Photos library access + Vision OCR on user images). The toggle is registered as `IntegrationCategory.photos` in `iOSServiceIntegrations.swift` (added in cycle 46 V4 migration) and defaults to OFF for fresh installs. `LifeMoment.capture()` reads this toggle BEFORE any Photos/Vision call; off → capture returns a typed `PhotosDisabledError` and no moment is created.
 8. **P2P encryption**: Signal Protocol via libsignal-client; STUN stun.l.google.com:19302; TURN self-hosted Coturn
 9. **iOS minimum**: iOS 17+ (SwiftData requirement)
 10. **Color convention** (for consistency across all views): Self=.blue, Stewardship=.green, CareKin=.orange, Meaning=.purple
+11. **Moment Egress Boundary** (added 2026-06-29, cycle 46) — Vision-derived OCR + image embeddings + detected entities stored in `LifeMoment` MUST NEVER cross into TimelineEvent, LifeGraph edges, QuickCapture classification, FamilyPod sharing, P2P transmission, AppIntents return values, Widget snapshots, or PortableExport payloads. Only `userReflection` (user-authored text) and `userAssignedThread` (user-chosen) cross to other entities. When `LifeMoment.isSealed == true`, OCR + embeddings remain encrypted at rest; only unsealed on user-initiated view within the LifeMoment surface. `MomentSealer` uses HKDF info string `"OneWeaveMoment.v1"` for cryptographic isolation from SacredEchoVault keys (`"SacredEcho.<id>"`).
 
 ---
 
@@ -109,11 +119,11 @@ These MUST NOT change without explicit user approval and a constitution amendmen
 ---
 
 ## Constitutional Amendments
-
 Amendments require explicit user approval and update this file with version bump.
 
-- v1.0 (2026-06-24): Initial constitution.
+- v2.1 (2026-06-29): Added **Principle 8 (Quiet Capture)** and **Invariant 11 (Moment Egress Boundary)** to support native LifeMoment feature. Strictly additive — no existing principles or invariants modified. Documented in `.research/CYCLE46_LIFEMOMENT_SPEC.md`.
 - v2.0 (2026-06-27): Added toolchain mandates, architectural invariants, reflection-gated principle, anti-addictive gamification details. Reflects post-Tier A/Round 2/Linux push reality.
+- v1.0 (2026-06-24): Initial constitution.
 
 ---
 
