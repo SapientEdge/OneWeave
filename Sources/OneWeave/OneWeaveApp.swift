@@ -26,7 +26,10 @@ struct OneWeaveApp: App {
                     // Sacred Echo Vault (Tier A #3) — time-capsule reflections.
                     SacredEcho.self,
                     // Void Thread (cycle 39 / T228) — sealed crypto entries; ciphertext-only.
-                    VoidEntry.self
+                    VoidEntry.self,
+                    // Cycle 46 / T-A5: LifeMoment — photos + Vision OCR + reflection.
+                    // 13th @Model. See Sources/OneWeave/LifeMoment.swift + .specify/specs/046-lifemoment/.
+                    LifeMoment.self
                 ])
                 .environment(appStateMachine)
         }
@@ -173,6 +176,10 @@ enum LifecycleSceneBridge {
             LifeEntity.self,
             LifeRelationship.self,
             DataLeashSettingsRecord.self,
-            SacredEcho.self
+            SacredEcho.self,
+            // Cycle 46 / T-A5: preview also gets VoidEntry + LifeMoment so
+            // previews of new surfaces don't crash.
+            VoidEntry.self,
+            LifeMoment.self
         ])
 }

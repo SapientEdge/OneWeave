@@ -14,24 +14,27 @@
 //    a plan, schema changes either silently lose user data or throw
 //    a fatalError at first launch. We need a plan.
 //
-//  The plan covers the 11 @Model types currently registered in OneWeaveApp:
-//    1. LifeContext        (master app state)
-//    2. LifeEntity         (graph node)
-//    3. LifeRelationship   (graph edge)
-//    4. TimelineEvent      (timeline log)
-//    5. WeaveQuest         (gamification quest)
-//    6. DataLeashSettingsRecord  (privacy toggles)
-//    7. SacredEcho         (encrypted time capsule)
-//    8. BasicSelfThread    (one of 4 thread types)
-//    9. CareKinThread      (relationship thread)
+// The plan covers the 12 @Model types currently registered in OneWeaveApp:
+//   1. LifeContext        (master app state)
+//   2. LifeEntity         (graph node)
+//   3. LifeRelationship   (graph edge)
+//   4. TimelineEvent      (timeline log)
+//   5. WeaveQuest         (gamification quest)
+//   6. DataLeashSettingsRecord  (privacy toggles)
+//   7. SacredEcho         (encrypted time capsule)
+//   8. BasicSelfThread    (one of 4 thread types)
+//   9. CareKinThread      (relationship thread)
 //   10. MeaningThread      (purpose thread)
 //   11. StewardshipThread  (duty thread)
+//   12. VoidEntry          (cryptographic sink — VoidThread.swift)
 //
-//  Migration stages:
-//    V1 → current: initial release schema (no migration needed yet)
-//    V2:           adds isUserReflection on LifeEntity (Nemotron #39 fix)
-//    V3:           changes LifeEntity.attributes from String to [String:String]
-//    V4:           adds coherenceScoreContribution on LifeEntity
+// (Cycle 46 will add a 13th: LifeMoment. That arrives in OneWeaveSchemaV4.)
+//
+// Migration stages:
+//   V1 → current: initial release schema (no migration needed yet)
+//   V2:           adds isUserReflection on LifeEntity (Nemotron #39 fix)
+//   V3:           changes LifeEntity.attributes from String to [String:String]
+//   V4:           adds LifeMoment.self + VoidEntry.self (cycle 46)
 //    (future):     each new @Model property becomes a new version
 //
 //  Each stage:
@@ -61,6 +64,7 @@ import SwiftData
 
 // MARK: - Schema V1 (initial release)
 // All 11 model types at their initial definitions.
+// (V1 was missing VoidEntry — it was added to V4 in cycle 46.)
 
 public enum OneWeaveSchemaV1: VersionedSchema {
     public static var versionIdentifier: Schema.Version { Schema.Version(1, 0, 0) }
@@ -262,6 +266,7 @@ public enum OneWeaveSchemaV2: VersionedSchema {
     public static var models: [any PersistentModel.Type] {
         // Models identical to V1 plus isUserReflection, lastUpdated fields on LifeEntity.
         // SwiftData additive migration — lightweight diff is sufficient.
+        // (V1 → V2 still missing VoidEntry — added in V4.)
         [LifeContext.self, LifeEntity.self, LifeRelationship.self,
          TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
          SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
@@ -280,6 +285,7 @@ public enum OneWeaveSchemaV3: VersionedSchema {
     public static var versionIdentifier: Schema.Version { Schema.Version(3, 0, 0) }
 
     public static var models: [any PersistentModel.Type] {
+        // (V3 still missing VoidEntry — added in V4.)
         [LifeContext.self, LifeEntity.self, LifeRelationship.self,
          TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
          SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
@@ -317,6 +323,31 @@ public enum OneWeaveSchemaV3: VersionedSchema {
     }
 }
 
+// MARK: - Schema V4 (cycle 46: adds LifeMoment + VoidEntry)
+//
+// V4 is the first schema after the 8-CLI cycle 46 review. It adds two things:
+//   1. LifeMoment.self — the new feature (photos + Vision OCR + reflection;
+//      free-floating; plaintext-by-default; sealed via MomentSealer).
+//   2. VoidEntry.self — the cryptographic sink in VoidThread.swift that was
+//      already registered in OneWeaveApp.modelContainer(for:) but missing
+//      from the migration plan (caught by Claude cycle 46 review).
+//
+// The V3 → V4 migration is LIGHTWEIGHT (SwiftData handles the additive
+// diff automatically). No data loss, no custom stage needed.
+
+public enum OneWeaveSchemaV4: VersionedSchema {
+    public static var versionIdentifier: Schema.Version { Schema.Version(4, 0, 0) }
+
+    public static var models: [any PersistentModel.Type] {
+        [LifeContext.self, LifeEntity.self, LifeRelationship.self,
+         TimelineEvent.self, WeaveQuest.self, DataLeashSettingsRecord.self,
+         SacredEcho.self, BasicSelfThread.self, CareKinThread.self,
+         MeaningThread.self, StewardshipThread.self,
+         VoidEntry.self,                       // V4 add
+         LifeMoment.self]                      // V4 add (13th @Model)
+    }
+}
+
 // MARK: - Migration handlers
 
 /// Migration plan. Wires version pairs to their migration handlers.
@@ -326,7 +357,9 @@ public enum OneWeaveMigrationPlan: SchemaMigrationPlan {
     public static var schemas: [any VersionedSchema.Type] {
         // V1 → V2: additive (isUserReflection, lastUpdated). Lightweight.
         // V2 → V3: heavyweight (attributes String → [String:String]). Custom stage.
-        [OneWeaveSchemaV1.self, OneWeaveSchemaV2.self, OneWeaveSchemaV3.self]
+        // V3 → V4: additive (LifeMoment + VoidEntry). Lightweight (cycle 46).
+        [OneWeaveSchemaV1.self, OneWeaveSchemaV2.self,
+         OneWeaveSchemaV3.self, OneWeaveSchemaV4.self]
     }
 
     public static var stages: [MigrationStage] {
@@ -344,7 +377,10 @@ public enum OneWeaveMigrationPlan: SchemaMigrationPlan {
                     _ = old.attributes
                 }
                 try context.save()
-            }
+            },
+            // V3 → V4: additive (LifeMoment.self + VoidEntry.self). Lightweight.
+            // SwiftData handles the diff — no data loss for existing users.
+            .lightweight(fromVersion: OneWeaveSchemaV3.self, toVersion: OneWeaveSchemaV4.self)
         ]
     }
 

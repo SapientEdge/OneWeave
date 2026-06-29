@@ -43,7 +43,10 @@ public enum IntegrationPermission {
 
 // T114: extend to 9 categories per Constitution §2 + Invariant #7 (Privacy Data Leash: 9 integration toggles).
 // Was 6 (calendar, reminders, contacts, health, notes, mail). Added bodyThread, p2p, insights.
-// B3: Identifiable so it works with .sheet(item:) for the reflection-prompt gate.
+// Cycle 46: extended to 10 — added `photos` (Photos library access + Vision OCR on user images).
+// Per Constitution Invariant 7a (cycle 46 amendment): defaults to OFF for fresh installs.
+// `LifeMomentService.capture()` reads this toggle BEFORE any Photos/Vision call;
+// off → `LifeMomentError.photosDisabled` thrown, no moment created.
 public enum IntegrationCategory: String, Codable, CaseIterable, Identifiable {
     case calendar
     case reminders
@@ -54,8 +57,25 @@ public enum IntegrationCategory: String, Codable, CaseIterable, Identifiable {
     case bodyThread   // HealthKit Body Thread integration
     case p2p          // P2P Weave Circle / Family Pod sharing
     case insights     // Cross-domain Insight Engine
+    case photos       // Photos library access + Vision OCR (cycle 46 — 10th toggle)
 
     public var id: String { rawValue }
+
+    /// Human-readable display name (for Settings UI).
+    public var displayName: String {
+        switch self {
+        case .calendar: return "Calendar"
+        case .reminders: return "Reminders"
+        case .contacts: return "Contacts"
+        case .health: return "Health"
+        case .notes: return "Notes"
+        case .mail: return "Mail"
+        case .bodyThread: return "Body Thread"
+        case .p2p: return "P2P Weave Share"
+        case .insights: return "Cross-Domain Insights"
+        case .photos: return "Photos & Vision"
+        }
+    }
 }
 
 // MARK: - Calendar / Reminders (EventKit)

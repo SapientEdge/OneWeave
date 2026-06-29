@@ -43,7 +43,7 @@ from typing import Any, Dict, List, Tuple
 # Mirror of OneWeaveMigrationLogic
 # ---------------------------------------------------------------------------
 
-SUPPORTED_VERSIONS = {1, 3}
+SUPPORTED_VERSIONS = {1, 2, 3, 4}
 
 
 def convert_attributes_json_to_dict(json_str: str) -> Dict[str, str]:
@@ -91,7 +91,7 @@ def validate_migration_path(from_v: int, to_v: int) -> str | None:
     return None
 
 
-# Mirror of all 11 @Model types
+# Mirror of all 13 @Model types (cycle 46: added VoidEntry + LifeMoment)
 ALL_MODEL_TYPES = {
     "LifeContext",
     "LifeEntity",
@@ -104,12 +104,16 @@ ALL_MODEL_TYPES = {
     "CareKinThread",
     "MeaningThread",
     "StewardshipThread",
+    "VoidEntry",          # cycle 46 fix (was registered in OneWeaveApp but missing from plan)
+    "LifeMoment",         # cycle 46 new feature
 }
 
 
 # Mirror of the migration plan stages (declarative check)
 MIGRATION_STAGES = [
-    {"from": "V1", "to": "V3", "kind": "lightweight"},
+    {"from": "V1", "to": "V2", "kind": "lightweight"},
+    {"from": "V2", "to": "V3", "kind": "custom"},
+    {"from": "V3", "to": "V4", "kind": "lightweight"},  # cycle 46
 ]
 
 
@@ -208,22 +212,39 @@ check("v5_invalid_target", result is not None)
 # Test 14: V1→V1 no-op
 check("v1_to_v1_noop", validate_migration_path(1, 1) is None)
 
-# Test 15: V2 is not in supported versions yet
+# Test 15: V2→V3 is now supported (cycle 46 update)
 result = validate_migration_path(2, 3)
-check("v2_not_yet_supported",
-      result is not None and "outside supported range" in result,
+check("v2_to_v3_supported", result is None, f"got {result}")
+
+# Test 15b: V3→V4 is supported (cycle 46)
+result = validate_migration_path(3, 4)
+check("v3_to_v4_supported", result is None, f"got {result}")
+
+# Test 15c: V4→V4 no-op
+check("v4_to_v4_noop", validate_migration_path(4, 4) is None)
+
+# Test 15d: V4→V3 rejected (no downgrades)
+result = validate_migration_path(4, 3)
+check("v4_to_v3_rejected",
+      result is not None and "Downgrade" in result,
       f"got {result}")
 
-# Test 16: all 11 model types accounted for
+# Test 16: all 13 model types accounted for (cycle 46: +VoidEntry +LifeMoment)
 expected_models = {
     "LifeContext", "LifeEntity", "LifeRelationship",
     "TimelineEvent", "WeaveQuest", "DataLeashSettingsRecord",
     "SacredEcho", "BasicSelfThread", "CareKinThread",
     "MeaningThread", "StewardshipThread",
+    "VoidEntry", "LifeMoment",
 }
-check("all_11_models_present",
+check("all_13_models_present",
       ALL_MODEL_TYPES == expected_models,
       f"missing: {expected_models - ALL_MODEL_TYPES}")
+
+# Test 16b: VoidEntry must be present (cycle 46 fix — was orphaned)
+check("VoidEntry_in_models", "VoidEntry" in ALL_MODEL_TYPES)
+# Test 16c: LifeMoment must be present (the new feature)
+check("LifeMoment_in_models", "LifeMoment" in ALL_MODEL_TYPES)
 
 # Test 17: V1 and V3 both use string-keyed attributes
 v1_attr_type = "string"  # V1 attributes is a JSON string
@@ -272,16 +293,24 @@ check("mixed_types_bools_become_json",
 # Test 23: migration stages list not empty
 check("migration_stages_not_empty", len(MIGRATION_STAGES) > 0)
 
-# Test 24: V1→V3 lightweight stage declared
-v1_to_v3 = [s for s in MIGRATION_STAGES if s["from"] == "V1" and s["to"] == "V3"]
-check("v1_to_v3_lightweight_declared",
-      len(v1_to_v3) == 1 and v1_to_v3[0]["kind"] == "lightweight",
-      f"got {v1_to_v3}")
+# Test 24: V3→V4 lightweight stage declared (cycle 46)
+v3_to_v4 = [s for s in MIGRATION_STAGES if s["from"] == "V3" and s["to"] == "V4"]
+check("v3_to_v4_lightweight_declared",
+      len(v3_to_v4) == 1 and v3_to_v4[0]["kind"] == "lightweight",
+      f"got {v3_to_v4}")
 
-# Test 25: migration plan registers a current schema version
-# The current version (V3) should be in the schemas list.
-all_schemas = ["V1", "V3"]
-check("current_version_in_schemas", "V3" in all_schemas)
+# Test 24b: V2→V3 custom stage declared (heavyweight attributes conversion)
+v2_to_v3 = [s for s in MIGRATION_STAGES if s["from"] == "V2" and s["to"] == "V3"]
+check("v2_to_v3_custom_declared",
+      len(v2_to_v3) == 1 and v2_to_v3[0]["kind"] == "custom",
+      f"got {v2_to_v3}")
+
+# Test 25: migration plan registers a current schema version (cycle 46: V4)
+all_schemas = ["V1", "V2", "V3", "V4"]
+check("v4_current_version_in_schemas", "V4" in all_schemas)
+
+# Test 25b: 3 stages declared
+check("three_migration_stages", len(MIGRATION_STAGES) == 3)
 
 
 # ---------------------------------------------------------------------------
