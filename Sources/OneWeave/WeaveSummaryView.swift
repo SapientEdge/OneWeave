@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct WeaveSummaryView: View {
-    @Environment(\\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     @Query private var contexts: [LifeContext]
     @Environment(AppStateMachine.self) private var stateMachine
     

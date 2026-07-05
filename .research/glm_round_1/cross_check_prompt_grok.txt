@@ -1,0 +1,24 @@
+You are Grok (supergrok). Code-grounded review for OneWeave privacy-first iOS Life OS.
+
+Read these files FIRST:
+- /root/hermes-workspace/projects/oneweave/ONEWEAVE_HANDOFF_2026-06-27.md
+- /root/hermes-workspace/projects/oneweave/.research/ORGANIZED_STATUS_NOTES_TASKS.md
+
+Then critique this GLM 5.2 bug list with focus on:
+1. Compile-blocker risks on Mac (Swift type errors, missing symbols) — only you and Claude can spot these from the patterns
+2. Race conditions in the @MainActor / actor / Sendable model
+3. Anything that looks like hallucination (does SacredEcho.swift actually have a `keyCache` at line 25? Does iOSServiceIntegrations.swift actually have `requestFullAccessToEvents` before `DataLeash.check`?)
+
+GLM's findings:
+1. SacredEcho.swift:42 — salt from echoID prefix (CLAUDE-R3-9 known)
+2. iOSServiceIntegrations.swift:21-22 — permission before leash (Grok #18 known)
+3. AppLifecycleCoordinator.swift:14 — snapshot key not bundle-scoped (NEMO-R3-011 known)
+4. SacredEcho.swift:21,51 — opened flag resets on re-load (NEMO-R3-018 partially fixed)
+5. LifeContext.swift:41-45 — essence 3-10 skips length gate (CLAUDE-R3-1 partial)
+6. FamilyPod.swift:7-12 — let vs var, podTitle vs podName (CLAUDE-R3-20 known)
+7. FamilyPod.swift:42 — non-existent LifeContext refs (CLAUDE-R3-18 known)
+8. P2PWeaveShare.swift:32-34 — cooldown before send success (NEW?)
+9. SacredEcho.swift:25 — keyCache never evicted (NEW?)
+10. AppLifecycleCoordinator.swift:18-25 — background budget risk (NEW?)
+
+Be SHORT and DIRECT. Number your output. Cite file:line when you can. Max 800 words.

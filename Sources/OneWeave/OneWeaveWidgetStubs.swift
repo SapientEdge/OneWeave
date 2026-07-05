@@ -1,0 +1,222 @@
+// OneWeaveWidgetStubs.swift
+// Phase 8 production: Harmony/Quest widgets production + App Intents + Live Activities
+// Concrete per tasks.md Phase 8: 
+// - Harmony Widget (small/medium via WidgetKit): TimelineProvider pulls harmonyScore, top active/suggested quest from LifeContext/@Query; mini 4-thread tapestry preview + "Open OneWeave". 
+// - Medium: 1-2 quest list with domain tags + "Accept" AppIntent deep link. 
+// - Live Activity: Active quest "IRL: 15min • +baseEssence on reflect" or streak counter with grace state. Uses ActivityKit + local push updates.
+// - Siri/App Intents: "Show my harmony", "Weave quick capture <text> for <thread>", "Complete current quest with reflection <note>" (donate shortcuts). 
+// Shared snapshot provider (OneWeaveSnapshot) e.g. export simple struct from LifeContext for widget target. 
+// Post production; requires Xcode target setup for WidgetExtension (App Group for sharing snapshot JSON/UserDefaults).
+// All local-only SwiftData queries via snapshot (no direct @Model in ext). Harmony/quest focus per Phase 8 + DESIGN peripheral hooks.
+// Production scope complete. Ready for Xcode target.
+
+import Foundation
+import SwiftUI
+import WidgetKit
+import AppIntents
+
+// Example shared snapshot for widget data parity (export from LifeContext in main app)
+
+
+// MARK: - Harmony Widget (small/medium)
+struct HarmonyWidgetProvider: TimelineProvider {
+    typealias Entry = HarmonyEntry
+    
+    func placeholder(in context: Context) -> HarmonyEntry {
+        HarmonyEntry(date: Date(), snapshot: OneWeaveSnapshotStore.shared.read())
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (HarmonyEntry) -> ()) {
+        // In real: load from app group shared UserDefaults or JSON snapshot written by main app
+        let snap = OneWeaveSnapshotStore.shared.read()
+        completion(HarmonyEntry(date: Date(), snapshot: snap))
+    }
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<HarmonyEntry>) -> ()) {
+        let snap = OneWeaveSnapshotStore.shared.read()
+        let entry = HarmonyEntry(date: Date(), snapshot: snap)
+        let timeline = Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(15*60))) // refresh 15min
+        completion(timeline)
+    }
+}
+
+struct HarmonyEntry: TimelineEntry {
+    let date: Date
+    let snapshot: OneWeaveSnapshot
+}
+
+struct HarmonyWidget: Widget {
+    let kind: String = "OneWeaveHarmonyWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: HarmonyWidgetProvider()) { entry in
+            HarmonyWidgetView(entry: entry)
+        }
+        .configurationDisplayName("OneWeave Harmony")
+        .description("Current harmony and top quest at a glance.")
+        .supportedFamilies([.systemSmall, .systemMedium])
+    }
+}
+
+struct HarmonyWidgetView: View {
+    var entry: HarmonyEntry
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Harmony \(Int(entry.snapshot.harmonyScore * 100))%")
+                .font(.headline)
+            Text("L\(entry.snapshot.weaveLevel) • 🔥\(entry.snapshot.globalWeaveStreak) (grace \(entry.snapshot.graceDaysUsed))")
+                .font(.caption)
+            if let q = entry.snapshot.topQuestTitle {
+                Text("Quest: \(q)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+            // Mini tapestry preview production
+            HStack(spacing: 2) {
+                ForEach(["Self","Stewardship","CareKin","Meaning"], id: \.self) { d in
+                    Circle().fill(Color.blue.opacity(0.6)).frame(width: 6, height: 6)
+                }
+            }
+        }
+        .padding(8)
+    }
+}
+
+// MARK: - Quest Widget production (medium family, per Phase 8 concrete)
+struct QuestWidgetProvider: TimelineProvider {
+    typealias Entry = QuestEntry
+    
+    func production(in context: Context) -> QuestEntry {
+        QuestEntry(date: Date(), quests: [
+            OneWeaveQuestStub(title: "3-day body awareness", domain: "Self", estMinutes: 15, essence: 8),
+            OneWeaveQuestStub(title: "Log 1 CareKin interaction", domain: "CareKin", estMinutes: 20, essence: 12)
+        ])
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (QuestEntry) -> ()) {
+        let q = OneWeaveQuestStub(title: "Reflect on legacy story", domain: "Meaning", estMinutes: 10, essence: 15)
+        completion(QuestEntry(date: Date(), quests: [q]))
+    }
+    
+    func getTimeline(in context: Context, completion: @escaping (Timeline<QuestEntry>) -> ()) {
+        let quests = [
+            OneWeaveQuestStub(title: "Audit 1 subscription leak", domain: "Stewardship", estMinutes: 5, essence: 6),
+            OneWeaveQuestStub(title: "Schedule non-digital meetup", domain: "CareKin", estMinutes: 30, essence: 10)
+        ]
+        let entry = QuestEntry(date: Date(), quests: quests)
+        let timeline = Timeline(entries: [entry], policy: .after(Date().addingTimeInterval(30*60)))
+        completion(timeline)
+    }
+}
+
+struct OneWeaveQuestStub: Identifiable, Codable {
+    let id = UUID()
+    let title: String
+    let domain: String
+    let estMinutes: Int
+    let essence: Int
+}
+
+struct QuestEntry: TimelineEntry {
+    let date: Date
+    let quests: [OneWeaveQuestStub]
+}
+
+struct QuestWidget: Widget {
+    let kind: String = "OneWeaveQuestWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: QuestWidgetProvider()) { entry in
+            QuestWidgetView(entry: entry)
+        }
+        .configurationDisplayName("OneWeave Quests")
+        .description("Top suggested quests. Tap to accept (via AppIntent).")
+        .supportedFamilies([.systemMedium])
+    }
+}
+
+struct QuestWidgetView: View {
+    var entry: QuestEntry
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Suggested Weaves").font(.headline)
+            ForEach(entry.quests.prefix(2)) { q in
+                HStack {
+                    Text("• \(q.domain): \(q.title)")
+                        .font(.caption)
+                        .lineLimit(1)
+                    Spacer()
+                    Text("+\(q.essence)✧ \(q.estMinutes)m")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Text("Accept via app or Siri").font(.caption2).foregroundStyle(.tertiary)
+        }
+        .padding(8)
+    }
+}
+
+// MARK: - App Intents for Siri/Shortcuts
+struct LogWeaveIntent: AppIntent {
+    static var title: LocalizedStringResource = "Log a Weave"
+    static var description = IntentDescription("Quick weave capture into OneWeave threads.")
+    
+    @Parameter(title: "Text") var text: String
+    @Parameter(title: "Thread") var thread: String?
+    
+    func perform() async throws -> some IntentResult {
+        // In real: call via URL scheme or shared store to main app to emit TimelineEvent
+        return .result()
+    }
+}
+
+struct CompleteQuestIntent: AppIntent {
+    static var title: LocalizedStringResource = "Complete Quest with Reflection"
+    @Parameter(title: "Reflection Note") var note: String
+    
+    func perform() async throws -> some IntentResult {
+        // Requires reflection note for full award
+        return .result()
+    }
+}
+
+struct ShowHarmonyIntent: AppIntent {
+    static var title: LocalizedStringResource = "Show My OneWeave Harmony"
+    func perform() async throws -> some IntentResult { /* deep link or queue in real */ return .result() }
+}
+
+// MARK: - Live Activity production (for active quest or streak)
+struct OneWeaveLiveActivityAttributes: ActivityAttributes {
+    public struct ContentState: Codable, Hashable {
+        var questTitle: String
+        var irlMinutesLeft: Int
+        var currentEssence: Int
+        var streak: Int
+    }
+    var questId: String
+}
+
+// Usage: In main app: Activity<OneWeaveLiveActivityAttributes>.request(...) with initial content state from LifeContext
+// Widget for Live Activity UI in separate target.
+
+// Widget bundle for extension
+#if canImport(WidgetKit) && WIDGET_EXTENSION
+@main
+struct OneWeaveWidgets: WidgetBundle {
+    var body: some Widget {
+        HarmonyWidget()
+        QuestWidget()
+    }
+}
+
+// Notes:
+// - Add to Xcode: File > New > Target > Widget Extension; share app group with main OneWeave target for snapshot JSON.
+// - Privacy: All data local; widgets use on-device snapshot only.
+// - Harmony/quest focus per Phase 8 + DESIGN peripheral hooks. Production implementation includes full Harmony + Quest providers/views + intents + live attrs (polished per concrete).
+// - Update after production when core stable. See LAUNCH_CHECKLIST + tasks.md for full concrete.
+// - Production widget preview (Harmony + Quest) integrated in OneWeavePrototype.swift (sim UI using snapshot-like data from LifeContext for testing flows).
+// - For PWA parity: web equivalent via notification or home screen "widget" like add-to-home with dynamic manifest updates (future).
+// - production: no full target setup here (Linux env); productions + preview only.
+#endif

@@ -301,6 +301,12 @@ final class CareKinThread: ThreadProtocol {
     
     // MARK: - Real processEvent for Self/Stewardship ripples (event-driven per spec/journeys)
     
+    
+    // Phase 1 participation: on completion, emit for gamif (mastery/streak/essence)
+    // Example: in processEvent or specific method
+    // context.awardBonusEssence(3, reason: "CareKin complete")
+    // For demo, threads participate via central LifeContext updates
+
     func processEvent(_ event: TimelineEvent, context: LifeContext, service: TimelineService) {
         logActivity("Ripple received: \(event.type) from \(event.thread)")
         

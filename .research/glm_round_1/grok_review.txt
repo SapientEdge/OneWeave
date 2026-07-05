@@ -1,0 +1,72 @@
+**1. SacredEcho.swift:42 (salt from echoID prefix) — REAL.**  
+```swift:281:282:Sources/OneWeave/SacredEcho.swift
+let salt = Data(echoID.uuidString.prefix(16).utf8)
+return HKDF<SHA256>.deriveKey(..., salt: salt, ...)
+```
+Public prefix as HKDF salt (CLAUDE-R3-9). Weak but present.
+
+**2. iOSServiceIntegrations.swift:21-22 (permission before leash) — PARTIAL / overstated.**  
+Calendar (84-89) and Reminders (582-585): `guard leash.isAllowed(...) else { return [] }` then `await requestAccess()`.  
+Contacts (155-156): `let perm = await requestAccess()` **then** `guard ... , leash.isAllowed(...)`.  
+The prompt can fire before the check only in Contacts path. Comments claim the Grok#18 fix; it was applied selectively.
+
+**3. AppLifecycleCoordinator.swift:14 (snapshot key not bundle-scoped) — REAL (known NEMO-R3-011).**  
+```swift:142:145:Sources/OneWeave/AppLifecycleCoordinator.swift
+lifeGraphFilename = "oneweave.lifegraph.v1.json"
+lifeGraphEncryptedFilename = "oneweave.lifegraph.v1.enc"
+```
+No bundle ID or per-install scoping in the key/filename. AppGroup is `group.com.oneweave`.
+
+**4. SacredEcho.swift:21,51 (opened flag resets on re-load) — REAL risk (NEMO-R3-018 partially fixed).**  
+`open()` (539-544) only does `mc.save()` if `modelContext` is supplied (optional, defaults to nil). `stateRaw`/`openedAt` mutations are in-memory only otherwise. `state` derives from them (168-179) but re-fetch from SwiftData or envelope round-trip can lose the terminal state. `release`/`handDeliver` require context; `open` does not.
+
+**5. LifeContext.swift:41-45 (essence 3-10 skips length gate) — PARTIAL.**  
+```swift:454:455:Sources/OneWeave/LifeContext.swift
+let bonus = trimmed.isEmpty ? 3 : 10
+```
+Does the empty check (CLAUDE-R3-1 "fixed"). However, it is only `isEmpty` after trim (no min char count like FamilyPod's 20-char gate) and other essence paths (changeSeason, awardBonusEssence) bypass reflection entirely. Line numbers in GLM are stale.
+
+**6. FamilyPod.swift:7-12 (let vs var, podTitle vs podName) — REAL compile error (CLAUDE-R3-20).**  
+`FamilyPodMember` (121-122): `public let displayName`, `let lifeEntityID`.  
+```swift:427:428:Sources/OneWeave/FamilyPod.swift
+var sanitized = member
+sanitized.displayName = trimmedName  // Cannot assign to 'let'
+```
+`FamilyPod` uses `name`; callers and digests sometimes assume title. Definite type error.
+
+**7. FamilyPod.swift:42 (non-existent LifeContext refs) — REAL compile error (CLAUDE-R3-18).**  
+```swift:330:338:Sources/OneWeave/FamilyPod.swift
+context.threads
+context.currentSeasonName
+context.activeAmplifierName
+```
+LifeContext has `activeThreads`, `currentSeason`, no `threads`/`quests`/`careKinThreads` arrays of objects, no `currentSeasonName` or `activeAmplifierName`. Same mismatch appears in CognitiveLoad.swift and DailyBriefings.swift. Hard compile failure on any call to `FamilyPodDigestBuilder.build`.
+
+**8. P2PWeaveShare.swift:32-34 (cooldown before send success) — HALLUCINATION on location.**  
+No cooldown code near lines 32-34 (those are `LifeEntitySnapshot`). Cooldown logic lives only in `FamilyPodPolicy.nextEligiblePublish` / `FamilyPodLimits` (520+). Wrong file.
+
+**9. SacredEcho.swift:25 (keyCache never evicted) — HALLUCINATION.**  
+Zero occurrences of `keyCache`, `KeyCache`, or any key cache in SacredEcho.swift (or SacredEchoCipher). GraphInsightGenerator has its own `@MainActor` cache; this does not.
+
+**10. AppLifecycleCoordinator.swift:18-25 (background budget risk) — REAL risk (NEW-ish).**  
+`applicationDidEnterBackground` (409-420) does: `mc.save()`, full `makeEnvelope` (iterate entities + relationships + echoes), `encrypt` (vaultSeed + HKDF + AES-GCM), atomic write, `pushSnapshotToWidgets`. All synchronous under scenePhase `.background`. No `BGTask` wrapper visible. On large graphs this will be killed or incomplete.
+
+### Compile-blocker risks (Mac/xcodebuild only)
+- **FamilyPod.swift:427** — `let` mutation (above).
+- **FamilyPod.swift + LifeContext** — missing members (`threads`, `currentSeasonName`, `activeAmplifierName`, `quests` etc.) → "no member" errors everywhere the builder or other consumers are used.
+- **P2PWeaveShare.swift:31** — `LifeEntitySnapshot.attributes: String` but assigned `entity.attributes: [String:String]` (164) and comment claims "JSON bag".
+- **LifeContext.swift** — `awardBonusEssence` (532) and possibly others sit after the `extension LifeContext { }` close (530). Scope/declaration errors.
+- **LifeContext model surface** is far smaller than SchemaMigrationPlan, CognitiveLoad, DailyBriefings, and FamilyPod expect. Batch of type errors on first `xcodebuild`.
+- Missing symbols (Info.plist, targets, AppIntents) noted in handoff are separate; these are pure Swift type issues the Linux harness cannot see.
+
+### @MainActor / actor / Sendable races
+- `P2PWeaveShare` statics (`offlineQueue`, `pendingIntegrations` at 45/50) are plain mutable arrays. `queueShare`/`processOfflineQueue` have no actor protection; only `drainPending` and `receiveAndIntegrate` are `@MainActor`.
+- `AppLifecycleCoordinator` statics (`lastBackgroundAt`, `bodyThreadLastReadAt`) mutated from `@MainActor` methods only — fragile if any call site escapes.
+- `@MainActor` enums (`SacredEchoStore`, `LifeGraphPersistence`, `AppLifecycleCoordinator`, many Integration.*) with static mutable state + direct mutation of `LifeContext` class arrays after `Task.detached` hops (Contacts 159-199). `LifeContext` (class) carries no `Sendable`.
+- `GraphInsightGenerator` is `@MainActor struct` with static cache; `invalidateCache()` called from many paths (some async, some inside detached-adjacent flows).
+- No `actor` types in the graph for the core mutable state. All relies on "we only call these from main" discipline. Scene phase transitions + async integration paths are the obvious collision surface.
+
+### Summary of GLM list
+Accurate on knowns (1,3,6,7) and some risks (4,10, partial 2/5). Two clear hallucinations on specifics (#8 location, #9 non-existent cache). Over-generalized the leash-before-permission claim. Several "NEW?" items were already flagged in the handoff docs you required.
+
+The Linux Python suites + graphify will never surface the let/var, missing-member, or type-mismatch errors. First `xcodebuild` on Mac will.

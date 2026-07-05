@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+contact_links:
+  - name: OneWeave Discussions
+    url: https://github.com/oneweave/oneweave/discussions
+    about: For high-level questions about the OneWeave framework, ripples, philosophy or general feedback.
+  - name: Gamification Design Spec
+    url: https://github.com/oneweave/oneweave/blob/main/ONEWEAVE_GAMIFICATION_DESIGN.md
+    about: Read the full Gamification Design (Essence, Loom, Quests, Mastery, IRL bias) before proposing or reporting.
+# Issue template chooser config
+# See https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository

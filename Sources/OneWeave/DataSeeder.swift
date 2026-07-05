@@ -12,6 +12,12 @@ struct DataSeeder {
         let ctx = LifeContext()
         ctx.values["season"] = "High Care Load"
         ctx.energyProfile = .low
+        // Seed some starting gamification so prototype shows tasty progress immediately
+        ctx.weaveEssence = 12
+        ctx.weaveLevel = 2
+        ctx.globalWeaveStreak = 3
+        ctx.harmonyScore = 0.65
+        ctx.masteryTiers = ["Self": 2, "Stewardship": 1, "CareKin": 1, "Meaning": 1]
         modelContext.insert(ctx)
         
         let svc = TimelineService(modelContext: modelContext)
@@ -67,8 +73,8 @@ struct DataSeeder {
         if (try? modelContext.fetch(stewardDesc).first) == nil {
             let st = StewardshipThread()
             modelContext.insert(st)
-            st.addSubscription("Spotify", monthlyCost: 10.99, service: service, context: context)
-            st.detectLeak(serviceName: "unused-app", estimatedMonthlySavings: 9.99, service: service, context: context)
+            st.addSubscription("Spotify", cost: 10.99, service: service, context: context)
+            st.detectLeak(serviceName: "unused-app", reason: "unused or trial", savingsAmount: 9.99, service: service, context: context)
         }
         
         let careDesc = FetchDescriptor<CareKinThread>()

@@ -35,7 +35,15 @@ class TimelineService {
         notifyLifeContext(of: event)
         
         // Drive the formal AppStateMachine transition directly (in addition to LifeContext's apply)
-        stateMachine.transition(on: event)
+        // Grok A6 (cycle 4 review) + M03: pass the context — AppStateMachine.transition
+        // requires (on:context:) so the state machine can update context.currentAppState.
+        if let context = currentContext() {
+            stateMachine.transition(on: event, context: context)
+        } else {
+            // No context yet — emit without state-machine update (prototype path).
+            // The first subsequent getOrCreateLifeContext() will sync state.
+            print("[TimelineService] No LifeContext available; skipping state-machine transition for \(event.type).")
+        }
         
         // Optional ripple (local)
         if !linkedThreads.isEmpty {
@@ -73,6 +81,14 @@ class TimelineService {
             // Local error only - never external
             print("Local TimelineService notify error (no external impact): \(error.localizedDescription)")
         }
+    }
+
+    /// Read-only accessor for the current LifeContext (or nil if not yet created).
+    /// Cycle 33 / Grok A6: added so the state-machine transition can use the
+    /// same context that `notifyLifeContext` would have created.
+    private func currentContext() -> LifeContext? {
+        let descriptor = FetchDescriptor<LifeContext>()
+        return try? modelContext.fetch(descriptor).first
     }
     
     // Get or create the single LifeContext (for UI binding)

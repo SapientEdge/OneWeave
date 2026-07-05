@@ -1,0 +1,86 @@
+# macOS / Xcode
+.DS_Store
+*.swp
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+build/
+*.dSYM
+*.dSYM.zip
+*.ipa
+*.app
+*.dmg
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# CocoaPods (if used for WebRTC, etc.)
+Pods/
+*.lock
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Secrets / API keys (defense in depth)
+.env
+.env.local
+*.p12
+*.cer
+*.mobileprovision
+*.key
+
+# Build artifacts
+*.o
+*.obj
+
+# Generated / docs build dirs
+# graphify-out/        # DO NOT ignore — agents need this for context
+.graphify-out/cache/
+
+# Python (validation harness)
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Aider
+.aider*
+.aider.chat.history.md
+.aider.input.history
+.aider.model.settings.yml
+
+# Logs
+*.log
+research/output.log
+
+# OS
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Local-only notes
+*.private.md
+TODO.private.md
+
+# CLI working folders (prompts + outputs from external coding CLIs)
+.cli/
+.research/

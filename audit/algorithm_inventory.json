@@ -1,0 +1,1099 @@
+[
+  {
+    "file": "AppLifecycleCoordinator.swift",
+    "exists": true,
+    "lines": 536,
+    "funcs_with_return_count": 6,
+    "funcs_with_return_names": [
+      "containerURL->URL",
+      "lifeGraphURL->URL",
+      "makeEnvelope->LifeGraphEnvelope",
+      "persist->URL?",
+      "bestEffortRestore->LifeGraphEnvelope?",
+      "randomBytes->Data"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "AppStateMachine.swift",
+    "exists": true,
+    "lines": 86,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 3,
+    "funcs_void_names": [
+      "transition",
+      "startCapture",
+      "reset"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "BasicSelfThread.swift",
+    "exists": true,
+    "lines": 375,
+    "funcs_with_return_count": 7,
+    "funcs_with_return_names": [
+      "isoDateString->String",
+      "dateFromISO->Date?",
+      "calculateCurrentStreak->Int",
+      "getStreak->Int",
+      "suggestEnergyAwareHabit->String",
+      "habitSummary->String",
+      "summary->String"
+    ],
+    "funcs_void_count": 12,
+    "funcs_void_names": [
+      "addHabit",
+      "addGoal",
+      "getStreak",
+      "updateEnergyAwareSuggestions",
+      "suggestEnergyAwareHabit",
+      "logActivity",
+      "processEvent",
+      "logMicroLearning",
+      "captureAnalogIntent",
+      "habitSummary",
+      "clearForTesting",
+      "summary"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "BodyThreadSheet.swift",
+    "exists": true,
+    "lines": 102,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "BodyThreadWeaver.swift",
+    "exists": true,
+    "lines": 159,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "reading->BodyThreadReading",
+      "weave->LifeEntity?"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "CareKinThread.swift",
+    "exists": true,
+    "lines": 420,
+    "funcs_with_return_count": 7,
+    "funcs_with_return_names": [
+      "computeCareLoad->String",
+      "getCareLoad->String",
+      "suggestIRL->String",
+      "isoDateString->String",
+      "dateFromISO->Date?",
+      "careSummary->String",
+      "summary->String"
+    ],
+    "funcs_void_count": 13,
+    "funcs_void_names": [
+      "addTask",
+      "completeTask",
+      "prioritizeTask",
+      "computeCareLoad",
+      "updateCareLoad",
+      "getCareLoad",
+      "updateLoadTracking",
+      "suggestIRL",
+      "logActivity",
+      "processEvent",
+      "careSummary",
+      "clearForTesting",
+      "summary"
+    ],
+    "math_lines_count": 1,
+    "math_lines_sample": [
+      [
+        46,
+        "// Local activity log (private, capped)"
+      ]
+    ]
+  },
+  {
+    "file": "CognitiveLoad.swift",
+    "exists": true,
+    "lines": 505,
+    "funcs_with_return_count": 7,
+    "funcs_with_return_names": [
+      "normalizeCalendar->Double",
+      "normalizeOpenTasks->Double",
+      "normalizeSleepDebt->Double",
+      "normalizeHRV->Double",
+      "normalizeReflectionGap->Double",
+      "computeTrend->CognitiveLoadTrend",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "CommandPalette.swift",
+    "exists": true,
+    "lines": 180,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "processCommand"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "CompassView.swift",
+    "exists": true,
+    "lines": 979,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "energyLevel->Double",
+      "threadColor->Color"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 6,
+    "math_lines_sample": [
+      [
+        856,
+        "let y1 = baseY + sin(currentPhase) * (waveAmp * 0.35)"
+      ],
+      [
+        857,
+        "let y2 = baseY + sin(currentPhase + 1.1) * (waveAmp * 0.55)"
+      ],
+      [
+        864,
+        "control: CGPoint(x: ctrlX, y: baseY + sin(currentPhase + 0.55) * waveAmp * 0.9)"
+      ],
+      [
+        882,
+        "let py = y1 + t * (y2 - y1) + sin(currentPhase + Double(s) * 0.4) * 1.5"
+      ],
+      [
+        884,
+        "let tilt = cos(currentPhase * 1.2 + Double(s)) * 0.8"
+      ],
+      [
+        928,
+        "let wy = sin(weavePhase * 0.8 + Double(i)) * 1.5"
+      ]
+    ]
+  },
+  {
+    "file": "DailyBriefings.swift",
+    "exists": true,
+    "lines": 489,
+    "funcs_with_return_count": 3,
+    "funcs_with_return_names": [
+      "from->TimeOfDay",
+      "pickEveningPrompt->String",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "DataLeashSettings.swift",
+    "exists": true,
+    "lines": 351,
+    "funcs_with_return_count": 7,
+    "funcs_with_return_names": [
+      "isAllowed->Bool",
+      "isPrivate->Bool",
+      "toState->DataLeashState",
+      "icon->String",
+      "currentLeash->DataLeashState",
+      "currentLeash->DataLeashState",
+      "icon->String"
+    ],
+    "funcs_void_count": 2,
+    "funcs_void_names": [
+      "currentLeash",
+      "currentLeash"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "DataSeeder.swift",
+    "exists": true,
+    "lines": 95,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "DecisionLog.swift",
+    "exists": true,
+    "lines": 592,
+    "funcs_with_return_count": 3,
+    "funcs_with_return_names": [
+      "makeUnchosenPathPrompt->String",
+      "compute->DecisionLogStats",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "EssenceLedgerView.swift",
+    "exists": true,
+    "lines": 62,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "FamilyPod.swift",
+    "exists": true,
+    "lines": 601,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "redact->FamilyPodDigestEntry"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "GraphInsightGenerator.swift",
+    "exists": true,
+    "lines": 459,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "makeCacheKey->InsightCacheKey"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "HistoryView.swift",
+    "exists": true,
+    "lines": 136,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "threadColor->Color"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "InsightGenerator.swift",
+    "exists": true,
+    "lines": 55,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "generate->CrossThreadInsight"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "InvisibleMentor.swift",
+    "exists": true,
+    "lines": 467,
+    "funcs_with_return_count": 8,
+    "funcs_with_return_names": [
+      "respond->MentorDialogue",
+      "polarity->Double",
+      "makeDevilsAdvocatePrompt->String",
+      "composeSpoken->String",
+      "timeReference->String",
+      "tokenize->Set",
+      "jaccard->Double",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "JailbreakDetector.swift",
+    "exists": true,
+    "lines": 117,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "check->JailbreakReport"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "LifeContext.swift",
+    "exists": true,
+    "lines": 596,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "spendEssenceForAmplifier->Bool"
+    ],
+    "funcs_void_count": 14,
+    "funcs_void_names": [
+      "pushSnapshotToWidgets",
+      "changeSeason",
+      "completeSeasonReflection",
+      "updateFromEvent",
+      "aggregateFromRecentEvents",
+      "applyStateTransition",
+      "applyGentleDecay",
+      "checkRestorativeGrace",
+      "detectResonance",
+      "updateHarmonyAndStreak",
+      "completeQuest",
+      "echoPastEvent",
+      "spendEssenceForAmplifier",
+      "awardBonusEssence"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "LifeGraph.swift",
+    "exists": true,
+    "lines": 178,
+    "funcs_with_return_count": 6,
+    "funcs_with_return_names": [
+      "coherenceScoreContribution->Double",
+      "fromTimelineEvent->LifeEntity",
+      "fromQuest->LifeEntity",
+      "clamped->Double",
+      "buildCoherenceScore->Double",
+      "calculateResonance->Double"
+    ],
+    "funcs_void_count": 2,
+    "funcs_void_names": [
+      "coherenceScoreContribution",
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "LifeGraphiOSIntegrations.swift",
+    "exists": true,
+    "lines": 65,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "importAll->Void",
+      "refreshBodyThread->LifeEntity?"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "LivingGraphLoom.swift",
+    "exists": true,
+    "lines": 251,
+    "funcs_with_return_count": 6,
+    "funcs_with_return_names": [
+      "threadOverlay->some",
+      "loomGesture->some",
+      "scaledPoint->CGPoint",
+      "lerp->Double",
+      "domainIcon->String",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 3,
+    "math_lines_sample": [
+      [
+        48,
+        "let breathPhase = sin(elapsed * bpm / 60.0 * 2 * .pi) * 0.5 + 0.5  // 0..1"
+      ],
+      [
+        88,
+        "let breath = 1.0 + state.palette.breathAmplitude * sin(state.breathPhase * 2 * .pi)"
+      ],
+      [
+        114,
+        "let breath = 1.0 + state.palette.breathAmplitude * sin(state.breathPhase * 2 * .pi + thread.alignmentContribution)"
+      ]
+    ]
+  },
+  {
+    "file": "LoomGeometry.swift",
+    "exists": true,
+    "lines": 384,
+    "funcs_with_return_count": 7,
+    "funcs_with_return_names": [
+      "distance->Double",
+      "polar->LoomPoint",
+      "forSeason->LoomPalette",
+      "breathingRate->Double",
+      "makeState->LoomState",
+      "scatterScale->Double",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 4,
+    "math_lines_sample": [
+      [
+        79,
+        "public var magnitude: Double { sqrt(x * x + y * y) }"
+      ],
+      [
+        84,
+        "return sqrt(dx * dx + dy * dy)"
+      ],
+      [
+        89,
+        "x: radius * cos(angle),"
+      ],
+      [
+        90,
+        "y: radius * sin(angle)"
+      ]
+    ]
+  },
+  {
+    "file": "MasteryKnot.swift",
+    "exists": true,
+    "lines": 213,
+    "funcs_with_return_count": 4,
+    "funcs_with_return_names": [
+      "maxTier->Int",
+      "openKnotCount->Int",
+      "tierBlockedMessage->String?",
+      "loosen->ApprenticeKnot"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "MasteryMapView.swift",
+    "exists": true,
+    "lines": 153,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "tierColor->Color",
+      "tierDescription->String"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "MeaningThread.swift",
+    "exists": true,
+    "lines": 282,
+    "funcs_with_return_count": 5,
+    "funcs_with_return_names": [
+      "suggestLinkToSelfCare->String",
+      "suggestLegacyForSelfGoal->String",
+      "suggestLegacyForCareMoment->String",
+      "legacySummary->String",
+      "summary->String"
+    ],
+    "funcs_void_count": 10,
+    "funcs_void_names": [
+      "captureStory",
+      "captureLegacy",
+      "suggestLinkToSelfCare",
+      "suggestLegacyForSelfGoal",
+      "suggestLegacyForCareMoment",
+      "logActivity",
+      "processEvent",
+      "legacySummary",
+      "clearForTesting",
+      "summary"
+    ],
+    "math_lines_count": 1,
+    "math_lines_sample": [
+      [
+        32,
+        "// Local activity log (private, compacted)"
+      ]
+    ]
+  },
+  {
+    "file": "MentorEchoBridge.swift",
+    "exists": true,
+    "lines": 319,
+    "funcs_with_return_count": 4,
+    "funcs_with_return_names": [
+      "recencyMultiplier->Double",
+      "makeMentorInput->MentorInput",
+      "echoTurn->MentorTurn?",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OnboardingView.swift",
+    "exists": true,
+    "lines": 85,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeaveAPI.swift",
+    "exists": true,
+    "lines": 236,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeaveApp.swift",
+    "exists": true,
+    "lines": 177,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeavePrototype+GraphValidation.swift",
+    "exists": true,
+    "lines": 428,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "validateLifeGraphAndInsights"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeavePrototype.swift",
+    "exists": true,
+    "lines": 998,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 3,
+    "funcs_void_names": [
+      "runLifeOSValidation",
+      "demoFullLifeOS",
+      "showLivingGraphLoom"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeaveSnapshotStore.swift",
+    "exists": true,
+    "lines": 61,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "read->OneWeaveSnapshot"
+    ],
+    "funcs_void_count": 2,
+    "funcs_void_names": [
+      "write",
+      "read"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "OneWeaveWidgetStubs.swift",
+    "exists": true,
+    "lines": 223,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "placeholder->HarmonyEntry",
+      "production->QuestEntry"
+    ],
+    "funcs_void_count": 2,
+    "funcs_void_names": [
+      "placeholder",
+      "production"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "P2PWeaveShare.swift",
+    "exists": true,
+    "lines": 270,
+    "funcs_with_return_count": 3,
+    "funcs_with_return_names": [
+      "generateQRForShare->String",
+      "createCircleShare->WeaveCircleShare?",
+      "encryptSharePayload->Data"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "shareViaP2P"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "PortableExport.swift",
+    "exists": true,
+    "lines": 640,
+    "funcs_with_return_count": 8,
+    "funcs_with_return_names": [
+      "render->String",
+      "renderEntity->String",
+      "allowed->Bool",
+      "render->String",
+      "xmlEscape->String",
+      "sha256->String",
+      "fallback_fnv1a->String",
+      "shouldAccept->Bool"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "PrivateLog.swift",
+    "exists": true,
+    "lines": 69,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "redact->String"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 1,
+    "math_lines_sample": [
+      [
+        56,
+        "public static func log(_ message: String, file: String = #fileID, line: Int = #line) {"
+      ]
+    ]
+  },
+  {
+    "file": "QuestService.swift",
+    "exists": true,
+    "lines": 119,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "forgeCustomQuest->WeaveQuest?"
+    ],
+    "funcs_void_count": 3,
+    "funcs_void_names": [
+      "acceptQuest",
+      "completeWithReflection",
+      "forgeCustomQuest"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "QuestsView.swift",
+    "exists": true,
+    "lines": 101,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "QuickCaptureInbox.swift",
+    "exists": true,
+    "lines": 387,
+    "funcs_with_return_count": 8,
+    "funcs_with_return_names": [
+      "taskScore->Double",
+      "eventScore->Double",
+      "journalScore->Double",
+      "decisionScore->Double",
+      "noteScore->Double",
+      "extractTitle->String",
+      "parseTimeHint->Date?",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "ReflectionGate.swift",
+    "exists": true,
+    "lines": 71,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "passesEntropyCheck->Bool"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 1,
+    "math_lines_sample": [
+      [
+        67,
+        "return acc - p * (log(p) / log(2.0))"
+      ]
+    ]
+  },
+  {
+    "file": "RelationshipDecayTracker.swift",
+    "exists": true,
+    "lines": 480,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "suggestedAction->String",
+      "clamped->Self"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "clamped"
+    ],
+    "math_lines_count": 2,
+    "math_lines_sample": [
+      [
+        354,
+        "let decayed = exp(-baseDecayRate * dt)"
+      ],
+      [
+        372,
+        "let boost = 1.0 + sqrt(sumK)"
+      ]
+    ]
+  },
+  {
+    "file": "ResonanceOracle.swift",
+    "exists": true,
+    "lines": 149,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "simulate->ResonanceSimulation"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "ResonanceOracleSheet.swift",
+    "exists": true,
+    "lines": 119,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "SacredEcho.swift",
+    "exists": true,
+    "lines": 763,
+    "funcs_with_return_count": 8,
+    "funcs_with_return_names": [
+      "daysUntilUnlock->Int",
+      "now->Date",
+      "formatted->String",
+      "perEchoKey->SymmetricKey",
+      "randomBytes->Data",
+      "loadFromKeychain->Data?",
+      "persistToKeychain->Bool",
+      "formatDate->String"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "SchemaMigrationPlan.swift",
+    "exists": true,
+    "lines": 396,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "convertAttributesDictToJSON->String",
+      "validateMigrationPath->String?"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "SessionGuard.swift",
+    "exists": true,
+    "lines": 189,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "SettingsView.swift",
+    "exists": true,
+    "lines": 262,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "StateMachineIndicator.swift",
+    "exists": true,
+    "lines": 34,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "StewardshipThread.swift",
+    "exists": true,
+    "lines": 118,
+    "funcs_with_return_count": 4,
+    "funcs_with_return_names": [
+      "calculatePotentialSavings->Double",
+      "suggestSavingsRedirect->String",
+      "summary->String",
+      "defaultRealWorldBridge->String"
+    ],
+    "funcs_void_count": 8,
+    "funcs_void_names": [
+      "addSubscription",
+      "detectLeak",
+      "calculatePotentialSavings",
+      "suggestSavingsRedirect",
+      "summary",
+      "clearForTesting",
+      "processEvent",
+      "defaultRealWorldBridge"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "Thread.swift",
+    "exists": true,
+    "lines": 26,
+    "funcs_with_return_count": 1,
+    "funcs_with_return_names": [
+      "defaultRealWorldBridge->String"
+    ],
+    "funcs_void_count": 1,
+    "funcs_void_names": [
+      "defaultRealWorldBridge"
+    ],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "ThreadDetailView.swift",
+    "exists": true,
+    "lines": 676,
+    "funcs_with_return_count": 4,
+    "funcs_with_return_names": [
+      "tierName->String",
+      "tierDescription->String",
+      "tierColor->Color",
+      "perkFor->String"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "ThreadsOverviewView.swift",
+    "exists": true,
+    "lines": 253,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "threadColor->Color",
+      "threadColor->Color"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "TimelineEvent.swift",
+    "exists": true,
+    "lines": 41,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "TimelineService.swift",
+    "exists": true,
+    "lines": 128,
+    "funcs_with_return_count": 2,
+    "funcs_with_return_names": [
+      "currentContext->LifeContext?",
+      "getOrCreateLifeContext->LifeContext"
+    ],
+    "funcs_void_count": 4,
+    "funcs_void_names": [
+      "emitEvent",
+      "emitAndNotifyContext",
+      "getOrCreateLifeContext",
+      "handleCrossThread"
+    ],
+    "math_lines_count": 1,
+    "math_lines_sample": [
+      [
+        114,
+        "// For now: simple log (in prod: emit follow-up event or update values)"
+      ]
+    ]
+  },
+  {
+    "file": "TonalCoherence.swift",
+    "exists": true,
+    "lines": 285,
+    "funcs_with_return_count": 5,
+    "funcs_with_return_names": [
+      "vector->TonalVector",
+      "distance->Double",
+      "vector->TonalVector",
+      "centroid->TonalVector",
+      "coherenceAngle->Double"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 4,
+    "math_lines_sample": [
+      [
+        165,
+        "return sqrt(dc * dc + de * de + dw * dw + do_ * do_)"
+      ],
+      [
+        170,
+        "return sqrt(calm * calm + energy * energy + weight * weight + openness * openness)"
+      ],
+      [
+        238,
+        "///   cos(\u03b8) = (a \u00b7 b) / (|a| \u00b7 |b|)"
+      ],
+      [
+        255,
+        "let radians = acos(clamped)"
+      ]
+    ]
+  },
+  {
+    "file": "WeaveQuest.swift",
+    "exists": true,
+    "lines": 45,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "WeaveSummaryView.swift",
+    "exists": true,
+    "lines": 31,
+    "funcs_with_return_count": 0,
+    "funcs_with_return_names": [],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  },
+  {
+    "file": "iOSServiceIntegrations.swift",
+    "exists": true,
+    "lines": 792,
+    "funcs_with_return_count": 10,
+    "funcs_with_return_names": [
+      "weavePausePrompt->String",
+      "composeURL->URL?",
+      "insightBody->String?",
+      "decisionBody->String?",
+      "makeComposer->MFMailComposeViewController?",
+      "notePayload->String",
+      "reflectionPayload->String?",
+      "decisionPayload->String?",
+      "snapshotPayload->String?",
+      "weaveIntoGraph->LifeEntity"
+    ],
+    "funcs_void_count": 0,
+    "funcs_void_names": [],
+    "math_lines_count": 0,
+    "math_lines_sample": []
+  }
+]

@@ -1,6 +1,24 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - File-scope supporting types
+
+/// Single essence ledger entry (audit trail for the calm, anti-addictive economy).
+public struct EssenceTransaction: Codable, Identifiable, Hashable {
+    public var id: UUID = UUID()
+    public var amount: Double
+    public var reason: String
+    public var timestamp: Date = Date()
+    public var thread: String? = nil
+
+    public init(amount: Double, reason: String, timestamp: Date = Date(), thread: String? = nil) {
+        self.amount = amount
+        self.reason = reason
+        self.timestamp = timestamp
+        self.thread = thread
+    }
+}
+
 @Model
 final class LifeContext {
     var values: [String: String] = [:]  // e.g. "season": "High Care Load", "focus": "goal name"
@@ -19,6 +37,174 @@ final class LifeContext {
     var currentAppState: String = AppState.idle.rawValue
     var currentStateDetail: String = ""
     var lastStateTransition: Date = Date()
+    
+    // === Full Gamification (local-only, Spec Kit 002 compliant, calm & anti-addictive) ===
+    // XP/Essence tracking - earned on weaves/ripples/quests, powers level & mastery
+    var weaveEssence: Double = 0
+    var weaveLevel: Int = 1
+    // Per-thread mastery 1=Novice ... 4=Luminary (updated on impactful events)
+    var masteryTiers: [String: Int] = ["Self": 1, "Stewardship": 1, "CareKin": 1, "Meaning": 1]
+    // Stored value used for widget snapshot / persistence layer.
+    // Updated by updateHarmonyAndStreak (deterministic formula).
+    // DEPRECATED as a public value — UI should prefer `computedHarmonyScore`
+    // which derives deterministically from state. Mutating this field from
+    // elsewhere is a bug (Cycle 35 audit finding).
+    var harmonyScore: Double = 0.5
+
+    /// Deterministic harmony computed from observable state.
+    ///
+    /// Formula (Cycle 36 audit fix — was an incremental counter with 6 mutation
+    /// sites across the codebase, all hardcoded nudges; risk: misleading users
+    /// and violating privacy promise of "accurate reflection"):
+    ///
+    ///   masteryBalance = 1 − σ_normalized(masteryTiers.values)
+    ///                   (low stddev across 4 domains = balanced = high score)
+    ///   activeCoverage = min(4, activeThreads.count) / 4.0
+    ///                   (user engaged across all 4 domains)
+    ///   reflectionPace = max(0, 1 − daysSinceLastReflection / 7.0)
+    ///                   (recent reflection = high score)
+    ///   graphCoherence = lifeCoherenceScore
+    ///                   (graph-level coherence, already a formula)
+    ///
+    ///   harmony = 0.35·masteryBalance + 0.25·activeCoverage
+    ///           + 0.20·reflectionPace + 0.20·graphCoherence
+    ///
+    /// All inputs are in [0,1], weights sum to 1.0, output in [0,1].
+    /// Same state → same score. Auditable. Tested via audit/algorithm_oracle.py.
+    var computedHarmonyScore: Double {
+        let tiers = masteryTiers.values.map { Double($0) }
+        let mean = tiers.isEmpty ? 1.0 : tiers.reduce(0, +) / Double(tiers.count)
+        let variance = tiers.isEmpty ? 0.0 : tiers.reduce(0) { $0 + pow($1 - mean, 2) } / Double(tiers.count)
+        let stddev = sqrt(variance)
+        // Normalize stddev: max possible stddev for tiers 1..4 is ~1.5
+        let normalizedStddev = min(1.0, stddev / 1.5)
+        let masteryBalance = 1.0 - normalizedStddev
+
+        let activeCoverage = min(4.0, Double(activeThreads.count)) / 4.0
+
+        let reflectionPace: Double
+        if let last = lastReflectionAt {
+            let days = max(0, Date().timeIntervalSince(last) / 86400)
+            reflectionPace = max(0.0, 1.0 - days / 7.0)
+        } else {
+            reflectionPace = 0.0  // never reflected
+        }
+
+        let graphCoherence = lifeCoherenceScore
+
+        let harmony = 0.35 * masteryBalance
+                    + 0.25 * activeCoverage
+                    + 0.20 * reflectionPace
+                    + 0.20 * graphCoherence
+        return min(1.0, max(0.0, harmony))
+    }
+    // Streak with restorative grace (no punitive reset; lowEnergy suggests restoration)
+    var globalWeaveStreak: Int = 0
+    var lastActiveWeaveDate: Date = Date()
+    var lastReflectionAt: Date? = nil  // for computedHarmonyScore; populated on reflection write
+    var graceDaysUsed: Int = 0
+    var maxGraceDays: Int = 2
+
+    // Cycle 37: Apprentice knots (T149). Open knots cap mastery tier
+    // advancement — constitutional commitment to genuine mastery > time-served.
+    // See MasteryKnot.swift for the engine. Persisted by Mac side.
+    var apprenticeKnots: [ApprenticeKnot] = []
+
+    // Cognitive load previous reading (for trend computation).
+    // Stored on the model so it survives app restarts; not exported to widgets/snapshots.
+    var previousCognitiveLoadReadingJSON: String = ""
+
+    // Active quests and completed count for retention
+    
+// Active quests tracking (Phase 3/6)
+// Quests persist in activeQuests array; updated on accept/complete.
+var activeQuests: [UUID] = []
+    var completedQuestCount: Int = 0
+    var essenceLedger: [String] = []
+    var essenceTransactions: [EssenceTransaction] = []
+    
+    // Seasons: user or auto tag. On change: reflection gate, chapter summary, Essence burst.
+    var currentSeason: String = "Spring"
+
+    // T076 (GLM 5.2 round 1, cross-verified by Claude opus + Grok supergrok):
+    // FamilyPod.swift:330/335/338 references `context.threads`, `context.currentSeasonName`,
+    // `context.activeAmplifierName` — none of which exist. Without these computed
+    // shims, `FamilyPodDigestBuilder.build` will not compile on Mac. Linux-side
+    // mirror validated via validate_family_pod_builder_surface.py.
+    var threads: [String] { activeThreads }
+    var currentSeasonName: String { currentSeason }
+    var activeAmplifierName: String? { nil }
+
+    // === Life Graph Integration (from research - Tier 1 Life Graph + typed memory) ===
+    // Extends existing threads/timeline without replacement. Enables coherence, insights, Data Leash.
+    var lifeGraphEntities: [LifeEntity] = []
+    var lifeGraphRelationships: [LifeRelationship] = []
+    
+    // Fresh unique: Overall Life Coherence Score (graph + harmony fusion)
+    var lifeCoherenceScore: Double {
+        LifeGraph.buildCoherenceScore(entities: lifeGraphEntities)
+    }
+
+    func pushSnapshotToWidgets(from quests: [WeaveQuest] = []) {
+        let lookup = Dictionary(uniqueKeysWithValues: quests.map { ($0.id, $0) })
+        let activeTitles = activeQuests.prefix(2).compactMap { lookup[$0]?.title }
+        let topQuest = activeQuests.first.flatMap { lookup[$0] }
+        let snap = OneWeaveSnapshot(
+            harmonyScore: harmonyScore,
+            weaveLevel: weaveLevel,
+            weaveEssence: Int(weaveEssence),
+            globalWeaveStreak: globalWeaveStreak,
+            graceDaysUsed: graceDaysUsed,
+            topQuestTitle: topQuest?.title,
+            topQuestDomain: topQuest?.domains.first,
+            activeQuestTitles: activeTitles,
+            masteryTiers: masteryTiers,
+            lastUpdated: Date(),
+            lifeCoherenceScore: lifeCoherenceScore,
+            graphEntityCount: lifeGraphEntities.count
+        )
+        OneWeaveSnapshotStore.shared.write(snap)
+    }
+  // or "High Care Load" style from values
+    var seasonChangeDate: Date = Date()
+    var seasonReflectionCompleted: Bool = false
+
+    func changeSeason(to newSeason: String) {
+        if newSeason != currentSeason {
+            let old = currentSeason
+            currentSeason = newSeason
+            seasonChangeDate = Date()
+            seasonReflectionCompleted = false  // gate re-arms; full +20 only on reflection commit
+            values["season"] = newSeason
+            // Reflection-gated burst (constitution: reflection-gated principle).
+            // Award a small immediate "transition" tick so the change isn't invisible,
+            // and stage the full +20 burst behind seasonReflectionCompleted = true.
+            weaveEssence += 2
+            essenceLedger.append("+2 season transition tick \(old) → \(newSeason) (full +20 burst pending reflection)")
+        pushSnapshotToWidgets()
+            harmonyScore = min(1.0, harmonyScore + 0.1)
+        }
+    }
+
+    func completeSeasonReflection(note: String) {
+        let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else {
+            // Empty reflection — do nothing, do not flip the gate.
+            return
+        }
+        if !seasonReflectionCompleted {
+            seasonReflectionCompleted = true
+            weaveEssence += 10
+            // T107: strip reflection plaintext prefix from ledger entry (prevent export leak).
+            // Was leaking 50 chars of reflection plaintext into Settings export.
+            // Now logs only char count + date — no content.
+            essenceLedger.append("+10 season reflection (\(trimmed.count) chars on \(Date().formatted(date: .abbreviated, time: .omitted)))")
+            // Emit chapter summary event
+            let summaryEvent = TimelineEvent(thread: "Meaning", type: "season_chapter_summary", payload: ["season": currentSeason, "reflection": trimmed], affectsEnergy: true)
+            updateFromEvent(summaryEvent)
+        }
+    }
+  // Phase 1 log  // lightweight log: "+5 for goal complete @Self"
     
     init() {}
 
@@ -86,6 +272,11 @@ final class LifeContext {
         // === Formal AppStateMachine: transitions triggered by TimelineEvents ===
         // Updates currentAppState + detail so Compass/History reflect live state with colors/animations.
         applyStateTransition(from: event)
+        
+        // === Basic Gamification: award on every ripple/weave (ties to state machine + threads) ===
+        awardEssenceForEvent(event)
+        updateMasteryFromEvent(event)
+        updateHarmonyAndStreak(event)
     }
     
     // Recompute aggregates from a batch of recent events (for full refresh)
@@ -183,6 +374,326 @@ final class LifeContext {
     var timeInCurrentState: TimeInterval {
         Date().timeIntervalSince(lastStateTransition)
     }
+    // Gentle decay (Phase 2): linear on long inactivity. Encourages rhythm, no hard timers or FOMO.
+    // All local, tunable, anti-addictive.
+    func applyGentleDecay() {
+        let inactiveHours = timeInCurrentState / 3600.0
+        if inactiveHours > 48 {
+            let decay = min(5.0, inactiveHours * 0.05)
+            if weaveEssence > 10 {
+                weaveEssence = max(10, weaveEssence - decay)
+                essenceLedger.append("-\(Int(decay)) gentle decay (rhythm)")
+            }
+            if harmonyScore > 0.5 {
+                harmonyScore = max(0.5, harmonyScore - 0.01)
+            }
+        }
+    }
+
+    
+    // MARK: - Basic Gamification (local only, tied to TimelineEvent + state machine)
+    
+    private func awardEssenceForEvent(_ event: TimelineEvent) {
+        var amount: Double = 2.0  // base per weave/ripple - purposeful, not grindy
+        
+        // Multipliers for cross-thread ripples (core mechanic)
+        if event.linkedThreads.count > 1 {
+            amount += Double(event.linkedThreads.count) * 1.2
+        }
+        if event.linkedThreads.count >= 3 {
+            amount += 3.0  // tasty cross-domain bonus
+        }
+        
+        // Bonus for high-impact weave types (complete, win, quest, story, habit)
+        let type = event.type.lowercased()
+        if type.contains("complete") || type.contains("win") || type.contains("quest") || type.contains("story") || type.contains("habit_complete") {
+            amount += 5.0
+        }
+        if event.affectsEnergy {
+            amount += 1.0
+        }
+        
+        weaveEssence += amount
+        
+        // Level up logic (simple thresholds)
+        updateLevelIfNeeded()
+    }
+    
+    private func updateLevelIfNeeded() {
+        let threshold = Double(weaveLevel * 25 + 10)  // e.g. L1: ~35, L2:~60 etc - scales gently
+        if weaveEssence >= threshold {
+            weaveLevel += 1
+            // Note: UI will show "Level Up!" feedback;
+            // mastery may also advance
+        }
+    }
+    
+    private func updateMasteryFromEvent(_ event: TimelineEvent) {
+        let thread = event.thread
+        guard var currentTier = masteryTiers[thread] else { return }
+        
+        let type = event.type.lowercased()
+        var masteryGain = 0
+        
+        // Cumulative from impactful actions + ripples (per 002 spec: ripples + validated quests + harmony)
+        if type.contains("complete") || type.contains("win") || type.contains("quest") || type.contains("story_captured") || type.contains("habit_complete") || type.contains("leak_fixed") {
+            masteryGain += 1
+        }
+        if event.linkedThreads.count > 1 {
+            masteryGain += 1  // cross-ripple bonus
+        }
+        if event.linkedThreads.count >= 3 {
+            masteryGain += 1
+        }
+        
+        // Volume + harmony contribution (passive)
+        if eventCount % 5 == 0 && harmonyScore > 0.7 {
+            masteryGain += 1
+        }
+        
+        if masteryGain > 0 {
+            // Cycle 37: constitutional gate — open apprentice knots cap tier
+            // advancement. MasteryKnotEngine.maxTier() returns the highest
+            // tier reachable given current knots. This makes the system
+            // refuse to advance while a user has unresolved questions,
+            // which is the whole point of the Apprentice Knots feature.
+            let currentTier = masteryTiers[thread] ?? 1
+            let cap = MasteryKnotEngine.maxTier(
+                for: thread,
+                currentTier: currentTier,
+                knots: apprenticeKnots
+            )
+            if cap == Int.max || cap >= currentTier + masteryGain {
+                masteryTiers[thread] = min(4, currentTier + masteryGain)
+            }
+            // If cap is below the desired gain, the increment is silently
+            // dropped. UI should show "Self tier awaits N knots" via
+            // MasteryKnotEngine.tierBlockedMessage().
+        }
+        
+        // Cross-domain mastery tick for linked threads (resonance)
+        for linked in event.linkedThreads {
+            if let linkedTier = masteryTiers[linked], linkedTier < currentTier {
+                // Cycle 41 finding A2: respect ApprenticeKnot cap at this
+                // mutation site (was the second of three bypass sites).
+                let cap = MasteryKnotEngine.maxTier(
+                    for: linked,
+                    currentTier: linkedTier,
+                    knots: apprenticeKnots
+                )
+                if Int.random(in: 0..<2) == 0 && (cap == Int.max || cap > linkedTier) {
+                    masteryTiers[linked] = min(4, linkedTier + 1)
+                }
+            }
+        }
+    }
+    
+    private 
+    func checkRestorativeGrace() {
+        // Phase 5: if low activity or lowEnergy, suggest restoration; do not decrement global streak
+        let now = Date()
+        if now.timeIntervalSince(lastActiveWeaveDate) > 86400 * 2 {  // 2 days
+            if globalWeaveStreak > 0 {
+                // grace: keep streak, suggest quest
+            }
+        }
+    }
+
+
+    // Resonance/Combos (Phase 5): detect recent linkedThreads within window.
+    // Award combo multiplier, boost to highFlow, surface insight.
+    func detectResonance(from event: TimelineEvent) {
+        // Simple window: last 3 events or recent linked
+        let window = 3
+        if event.linkedThreads.count >= 2 {
+            // combo
+            let multiplier = 1.0 + (Double(event.linkedThreads.count) * 0.5)
+            weaveEssence += 2 * multiplier   // small bonus
+            essenceLedger.append("+ resonance combo")
+            harmonyScore = min(1.0, harmonyScore + 0.05)
+            // In real UI: trigger visual chain + "Resonance unlocked"
+        }
+    }
+
+    func updateHarmonyAndStreak(_ event: TimelineEvent) {
+        // Harmony: based on active cross-domain coverage (ties to existing activeThreads)
+        let coverage = min(4, Double(activeThreads.count))
+        harmonyScore = min(1.0, 0.4 + (coverage * 0.15))
+        
+        // Streak with restorative grace (per 002 spec: no hard reset, suggest restoration on lowEnergy)
+        let now = Date()
+        let lastDay = Calendar.current.startOfDay(for: lastActiveWeaveDate)
+        let today = Calendar.current.startOfDay(for: now)
+        
+        if lastDay != today || globalWeaveStreak == 0 {
+            if energyProfile == .low && graceDaysUsed < maxGraceDays {
+                graceDaysUsed += 1
+                // Do not increment streak on grace, but preserve it
+            } else {
+                globalWeaveStreak += 1
+                graceDaysUsed = 0
+            }
+        }
+        lastActiveWeaveDate = now
+        detectResonance(from: event)
+        pushSnapshotToWidgets()
+        
+        // On high harmony or cross weave -> potential highFlow state synergy
+    }
+    
+    /// Complete a quest with reflection. Full reward requires both a non-empty
+    /// reflection (constitution: reflection-gated principle) AND at least
+    /// `minReflectionChars` characters of substance (constitution: anti-bypass —
+    /// prevents a 1-char "ok" from earning the full 10 essence). Empty/whitespace
+    /// reflection yields the partial "engagement" reward only. Short-but-non-empty
+    /// reflection yields partial.
+    /// T075 (GLM 5.2 round 1, cross-verified): FamilyPod enforces a 20-char gate
+    /// via `minExitReflectionChars`; completeQuest was inconsistent (accepted 1 char).
+    func completeQuest(_ questId: UUID, reflection: String, context: ModelContext) {
+        let trimmed = reflection.trimmingCharacters(in: .whitespacesAndNewlines)
+        // A3 (Claude round-5 audit): wire central ReflectionGate. The previous
+        // local `minChars = 20` re-implemented gate logic without anti-bypass
+        // entropy check, so "aaaaaaaaaaaaaaaaaaaa" earned full reward.
+        // Constitution §5: reflection-gated everything. Constitution §6: anti-bypass.
+        let minChars = ReflectionGate.minCharsForFullReward
+        let bonus: Int
+        let reason: String
+        if trimmed.isEmpty {
+            bonus = 3
+            reason = "quest complete (no reflection)"
+        } else if trimmed.count >= minChars && ReflectionGate.passesEntropyCheck(trimmed) {
+            bonus = 10
+            reason = "quest complete with reflection"
+        } else {
+            // Distinguish "too short" vs "passed length but failed entropy" so
+            // the user gets a useful hint.
+            if trimmed.count < minChars {
+                reason = "quest complete (short reflection: \(trimmed.count)/\(minChars) chars)"
+            } else {
+                reason = "quest complete (low-entropy reflection: not enough variety)"
+            }
+            bonus = 3
+        }
+        weaveEssence += bonus
+        completedQuestCount += 1
+        activeQuests.removeAll { $0 == questId }
+
+        // Update mastery/harmony/streak
+        let questEvent = TimelineEvent(
+            type: "quest_completed",
+            thread: "Self", // default
+            summary: "Quest completed",
+            payload: ["reflection": trimmed],  // store trimmed; never the raw input
+            linkedThreads: ["Self"],
+            affectsEnergy: true
+        )
+        updateFromEvent(questEvent)
+
+        // Log to ledger
+        essenceLedger.append("+\(bonus) for \(reason)")
+        if essenceLedger.count > 20 { essenceLedger.removeFirst() }
+    }
+    
+    /// Public helper for quest completions etc to award bonus
+
+// Phase 2 essence economy (production amplifiers)
+enum Amplifier: String, CaseIterable {
+    case selfFocus = "SelfFocus"
+    case redirectLens = "RedirectLens"
+    case insightMagnifier = "InsightMagnifier"
+    case streakShield = "StreakShield"
+    case echoBoost = "EchoBoost"
+}
+
+extension LifeContext {
+    
+    // Echo (Phase 2): revisit past event/quest for insight + small essence + Meaning ripple. Integrate with MeaningThread.
+    func echoPastEvent(eventId: UUID? = nil) {
+        // production: lookup past TimelineEvent, award small essence, emit resonance to Meaning.
+        weaveEssence += 1
+        essenceLedger.append("+1 for echo")
+        pushSnapshotToWidgets()
+    }
+
+    func spendEssenceForAmplifier(_ amp: Amplifier, amount: Double = 10) -> Bool {
+        if weaveEssence < amount {
+            return false
+        }
+        // Anti-spam: simple cooldown check via time (local only)
+        if timeInCurrentState < 60 && amp != .streakShield {  // short window
+            return false
+        }
+        weaveEssence -= amount
+        pushSnapshotToWidgets()
+        essenceLedger.append("-\(Int(amount)) for \(amp.rawValue) amplifier")
+        
+        // Apply temporary boost (calm, state-influenced, no FOMO)
+        switch amp {
+        case .selfFocus:
+            harmonyScore = min(1.0, harmonyScore + 0.1)  // gentle focus boost
+        case .redirectLens:
+            // Would bias next suggestions toward Stewardship-like in real QuestService
+            break
+        case .insightMagnifier:
+            harmonyScore = min(1.0, harmonyScore + 0.08)
+        case .streakShield:
+            if graceDaysUsed > 0 {
+                graceDaysUsed -= 1  // protective
+            }
+        case .echoBoost:
+            // Boosts echo value in echoPastEvent
+            break
+        }
+        updateLevelIfNeeded()
+        return true
+    }
+}
+
+    func awardBonusEssence(_ amount: Double, reason: String = "weave") {
+        weaveEssence += amount
+        updateLevelIfNeeded()
+        pushSnapshotToWidgets()
+    }
+    
+    /// Computed for UI progress (tasty level badge)
+    var levelProgress: Double {
+        let threshold = Double(weaveLevel * 25 + 10)
+        let prev = Double((weaveLevel - 1) * 25 + 10)
+        let span = max(1.0, threshold - prev)
+        return max(0, min(1.0, (weaveEssence - prev) / span))
+    }
+    
+    var essenceDisplay: String {
+        "✧ \(Int(weaveEssence))"
+    }
+}
+
+// MARK: - Reflection tracking (Cycle 37 — feeds computedHarmonyScore.reflectionPace)
+
+extension LifeContext {
+    /// Mark a reflection as written. Updates `lastReflectionAt` so that
+    /// `computedHarmonyScore.reflectionPace` reflects the user's actual
+    /// reflection cadence (was previously 0 because lastReflectionAt was
+    /// never written to).
+    ///
+    /// Idempotent: writing twice in the same second updates to the latest
+    /// timestamp but doesn't artificially inflate cadence.
+    ///
+    /// Wire points (call from here when a reflection is written):
+    ///   - `LifeEntity.fromTimelineEvent` (LifeGraph.swift:114) — event.payload["reflection"]
+    ///   - `LifeEntity.fromQuest` (LifeGraph.swift:136) — quest with non-empty reflectionNote
+    ///   - `SacredEcho` opening (if user adds their own reflection)
+    ///   - `ResonanceOracle` commit reflection (Mac side)
+    public func recordReflection(at when: Date = Date()) {
+        if let last = lastReflectionAt {
+            // Only advance if newer (idempotency)
+            if when > last {
+                lastReflectionAt = when
+            }
+        } else {
+            lastReflectionAt = when
+        }
+    }
 }
 
 enum EnergyProfile: String, Codable, CaseIterable {
@@ -191,3 +702,5 @@ enum EnergyProfile: String, Codable, CaseIterable {
 
 // Global best practice: Privacy - all data local-first, no external logging of raw events without consent.
 // LifeContext aggregates locally only. No data leaves device unless explicit private sync.
+
+// EssenceTransaction model (lightweight on-device ledger)
