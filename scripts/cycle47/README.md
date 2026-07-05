@@ -1,12 +1,36 @@
 # Sub-Agent Workflow Policy (Cycle 47+)
 
-**Status:** Active policy as of cycle 47. All future cycles MUST follow this.
+> **⚠️ DEPRECATION NOTICE:** This OneWeave-local copy of cycle 47's sub-agent infrastructure is **historical**. The canonical, maintained copy lives at `~/.hermes/scripts/cycle47/` and is **Hermes-global** (works for any project).
+>
+> Going forward, all sub-agents should reference the global path. This file is preserved so OneWeave's git history shows the origin.
+
+## Canonical location
+
+`~/.hermes/scripts/cycle47/` contains:
+- `subagent_supervisor.py` (canonical)
+- `subagent_wrapper.py` (canonical)
+- `hung_detector.py` (canonical)
+- `marker.py` (canonical)
+- `README.md` (canonical policy doc)
 
 ## Background
 
 Cycle 46 had 5 sub-agents that **appeared hung** at 5+ minutes but had actually completed + committed their work. Cycle 47 diagnosed this and built infrastructure to prevent it from happening again.
 
-This document defines **how to launch sub-agents correctly** going forward.
+This document originally defined **how to launch sub-agents correctly** for OneWeave. It is now superseded by the global README — see `~/.hermes/scripts/cycle47/README.md` for the maintained version.
+
+## Quick reference (for OneWeave specifically)
+
+Same as the global policy, with paths translated:
+
+- **Sub-agents <10s expected:** `~/.hermes/scripts/cycle47/subagent_wrapper.py`
+- **Sub-agents ≥10s expected:** `~/.hermes/scripts/cycle47/subagent_supervisor.py --marker-required --hung-threshold 600`
+- **NEVER:** raw `codex exec` without wrapping
+
+For per-project data isolation in OneWeave:
+```bash
+export HERMES_SUBAGENT_DATA=/root/hermes-workspace/projects/oneweave/.hermes-subagent-data
+```
 
 ## When to use which wrapper
 
