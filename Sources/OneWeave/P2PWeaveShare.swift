@@ -2,6 +2,36 @@ import Foundation
 import SwiftData  // T100: P2PWeaveShare uses ModelContext in drainPending/receiveAndIntegrate signatures
 import CryptoKit
 
+/// Egress guard: refuses to include LifeMoment inferred content (OCR, embeddings, detected entities).
+/// Per Invariant 11 of constitution v2.1. Only userReflection and userAssignedThread may cross.
+public enum LifeMomentEgressGuard {
+    /// Fields that MUST NOT be transmitted across P2P, FamilyPod, Export, Widget, AppIntents.
+    public static let blockedFields: Set<String> = [
+        "ocrText", "ocrConfidence",
+        "imageEmbeddingText", "detectedEntitiesJSON",
+        "sealedCiphertext", "sealedNonce", "sealedTag",
+        "cipherHKDFInfo"
+    ]
+    /// Fields that MAY be transmitted (user-authored only).
+    public static let allowedFields: Set<String> = [
+        "id", "createdAt", "modifiedAt",
+        "userReflection", "userAssignedThreadRaw",
+        "momentKindRaw", "isUserReflection", "isSealed"
+    ]
+
+    /// Asserts a MomentP2PEnvelope contains only allowed fields. Returns true if clean.
+    /// Use this as a guard before any P2P wire serialization.
+    public static func assertClean(_ envelope: [String: Any]) -> Bool {
+        let envelopeKeys = Set(envelope.keys)
+        let leaked = envelopeKeys.intersection(blockedFields)
+        if !leaked.isEmpty {
+            assertionFailure("LifeMomentEgressGuard: blocked fields leaked to P2P envelope: \(leaked)")
+            return false
+        }
+        return true
+    }
+}
+
 // Deeper P2P Weave Share - Enhanced from iOS P2P Messaging Implementation Guide
 // Hybrid: Network framework (Bonjour local) + WebRTC (internet)
 // Offline queue, QR signaling for serverless auth, reflection gates, Data Leash
@@ -165,6 +195,9 @@ struct P2PWeaveShare {
         }
         
         let snapshots = filtered.map { entity in
+            // Per T-C5 / Invariant 11: LifeMoment records are NEVER transmitted via P2P.
+            // Only LifeEntity (graph nodes) are shared. The wire format omits OCR/embeddings
+            // by construction — see LifeMomentEgressGuard.
             LifeEntitySnapshot(
                 id: entity.id,
                 type: entity.type.rawValue,

@@ -32,6 +32,18 @@ struct OneWeaveSnapshot: Codable, Equatable {
     )
 }
 
+extension OneWeaveSnapshot {
+    /// Static check: the snapshot MUST NOT include any LifeMoment inferred field.
+    /// Per Invariant 11 / T-C7. If you add a moment field to the snapshot, you're
+    /// violating the egress boundary.
+    static var blockedMomentFieldsInSnapshot: Set<String> = [
+        "ocrText", "ocrConfidence",
+        "imageEmbeddingText", "detectedEntitiesJSON",
+        "sealedCiphertext", "sealedNonce", "sealedTag",
+        "cipherHKDFInfo"
+    ]
+}
+
 final class OneWeaveSnapshotStore {
     static let shared = OneWeaveSnapshotStore()
     private let suiteName = "group.com.oneweave"

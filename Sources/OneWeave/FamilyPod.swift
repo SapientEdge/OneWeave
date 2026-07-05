@@ -45,6 +45,27 @@
 
 import Foundation
 
+/// Egress guard for FamilyPod digest content.
+/// Per Invariant 11: LifeMoment OCR + embeddings + detected entities MUST NOT appear
+/// in pod digests. Only user-authored reflection + user-chosen thread may surface.
+public enum FamilyPodEgressGuard {
+    public static let blockedMomentFields: Set<String> = [
+        "ocrText", "ocrConfidence",
+        "imageEmbeddingText", "detectedEntitiesJSON",
+        "sealedCiphertext", "sealedNonce", "sealedTag",
+        "cipherHKDFInfo"
+    ]
+
+    /// Strip blocked fields from a moment dict. Returns a new dict.
+    public static func strip(_ moment: [String: Any]) -> [String: Any] {
+        var clean = moment
+        for key in blockedMomentFields {
+            clean.removeValue(forKey: key)
+        }
+        return clean
+    }
+}
+
 // MARK: - Pod membership constraints
 
 /// Hard caps and rules for a Family Pod. Constants chosen so any pod that
@@ -296,6 +317,8 @@ public enum FamilyPodDigestBuilder {
         openedEchoes: [SacredEcho] = [],
         now: Date = Date()
     ) -> FamilyPodDigestEntry {
+        // Per T-C6 / Invariant 11: FamilyPod digests MUST NOT include LifeMoment OCR/embeddings.
+        // The digest format excludes these by construction — see FamilyPodEgressGuard.
         var entry = FamilyPodDigestEntry(
             podID: pod.id,
             ownerDisplayName: ownerDisplayName,

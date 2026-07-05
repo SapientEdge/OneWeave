@@ -220,6 +220,30 @@ public enum PortableExportPolicy {
     public static let currentAppVersion: String = "OneWeave 0.9.0-rc"
 }
 
+/// PortableExport egress guard: strip LifeMoment inferred content from exports.
+/// Per Invariant 11: even .fullBundle exports MUST NOT include OCR/embeddings.
+public enum PortableExportEgressGuard {
+    public static let blockedMomentFields: Set<String> = [
+        "ocrText", "ocrConfidence",
+        "imageEmbeddingText", "detectedEntitiesJSON",
+        "sealedCiphertext", "sealedNonce", "sealedTag",
+        "cipherHKDFInfo"
+    ]
+
+    /// Returns a dict representation of a moment with blocked fields removed.
+    public static func exportableDict(_ moment: LifeMoment) -> [String: Any] {
+        return [
+            "id": moment.id.uuidString,
+            "createdAt": moment.createdAt.ISO8601Format(),
+            "modifiedAt": moment.modifiedAt.ISO8601Format(),
+            "userReflection": moment.userReflection ?? "",
+            "userAssignedThread": moment.userAssignedThreadRaw ?? "",
+            "momentKind": moment.momentKindRaw ?? "unsorted",
+            "isSealed": moment.isSealed
+        ]
+    }
+}
+
 // MARK: - Markdown renderer (journal section)
 
 public enum JournalMarkdownRenderer {
@@ -446,6 +470,11 @@ public enum PortableExportBuilder {
             // is consciously exporting.
             throw PortableExportError.emptyUserIntent
         }
+
+        // Per T-C7 / Invariant 11: PortableExport currently exports LifeEntity,
+        // LifeRelationship, and SacredEcho only. If LifeMoment export is added,
+        // route each moment through PortableExportEgressGuard.exportableDict(_:)
+        // before serialization, including for .fullBundle.
 
         // Build sections.
         let journal = JournalMarkdownRenderer.render(entities: entities, leash: leash)
