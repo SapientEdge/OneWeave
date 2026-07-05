@@ -1,0 +1,60 @@
+{
+  "status": "blocked_network_transport",
+  "llm_baseline_runs": [
+    {
+      "prompt": "echo hello",
+      "bytes": 11,
+      "cold_start_s": 0.196,
+      "llm_round_trip_s": 0.195,
+      "total_s": 31.064,
+      "codex_version": "codex-cli 0.142.5",
+      "exit_code": 1
+    },
+    {
+      "prompt": "write a python hello world",
+      "bytes": 27,
+      "cold_start_s": 0.183,
+      "llm_round_trip_s": 0.182,
+      "total_s": 31.524,
+      "codex_version": "codex-cli 0.142.5",
+      "exit_code": 1
+    },
+    {
+      "prompt": "write a 3-class python module with parse/summary/validate",
+      "bytes": 58,
+      "cold_start_s": 0.193,
+      "llm_round_trip_s": 0.192,
+      "total_s": 31.085,
+      "codex_version": "codex-cli 0.142.5",
+      "exit_code": 1
+    },
+    {
+      "prompt": "write 3 python files: config parser, logger, pipeline",
+      "bytes": 54,
+      "cold_start_s": 0.173,
+      "llm_round_trip_s": 0.173,
+      "total_s": 30.448,
+      "codex_version": "codex-cli 0.142.5",
+      "exit_code": 1
+    },
+    {
+      "prompt": "explain the difference between supervised and unsupervised learning",
+      "bytes": 68,
+      "cold_start_s": 0.192,
+      "llm_round_trip_s": 0.191,
+      "total_s": 30.683,
+      "codex_version": "codex-cli 0.142.5",
+      "exit_code": 1
+    }
+  ],
+  "echo_only_run": {
+    "prompt": "ONLY echo this exact fixed string and nothing else: CODEX_PROFILE_ECHO_ONLY",
+    "bytes": 76,
+    "cold_start_s": 0.189,
+    "llm_round_trip_s": 0.188,
+    "total_s": 30.937,
+    "codex_version": "codex-cli 0.142.5",
+    "exit_code": 1
+  },
+  "note": "All codex exec attempts exited 1 after OpenAI API transport retries; timings are failed-run timings, not LLM latency."
+}

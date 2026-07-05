@@ -1,0 +1,6 @@
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.196, "exit_code": 1, "llm_round_trip_s": 0.195, "prompt_bytes": 11, "prompt_file": "/tmp/q1_prompts/trivial.txt", "total_s": 31.064}
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.183, "exit_code": 1, "llm_round_trip_s": 0.182, "prompt_bytes": 27, "prompt_file": "/tmp/q1_prompts/simple.txt", "total_s": 31.524}
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.193, "exit_code": 1, "llm_round_trip_s": 0.192, "prompt_bytes": 58, "prompt_file": "/tmp/q1_prompts/medium.txt", "total_s": 31.085}
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.173, "exit_code": 1, "llm_round_trip_s": 0.173, "prompt_bytes": 54, "prompt_file": "/tmp/q1_prompts/large.txt", "total_s": 30.448}
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.192, "exit_code": 1, "llm_round_trip_s": 0.191, "prompt_bytes": 68, "prompt_file": "/tmp/q1_prompts/tricky.txt", "total_s": 30.683}
+{"codex_version": "codex-cli 0.142.5", "cold_start_s": 0.189, "exit_code": 1, "llm_round_trip_s": 0.188, "prompt_bytes": 76, "prompt_file": "/tmp/q1_prompts/no_llm_echo.txt", "total_s": 30.937}

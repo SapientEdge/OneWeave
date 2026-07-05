@@ -1,0 +1,82 @@
+[
+  {
+    "batch_id": "T-batch-Q2-01",
+    "complexity": "trivial",
+    "prompt": "/tmp/cycle48_q2/batch_01.txt",
+    "tasks": [
+      "T-Q2-01-1",
+      "T-Q2-01-2",
+      "T-Q2-01-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-02",
+    "complexity": "trivial",
+    "prompt": "/tmp/cycle48_q2/batch_02.txt",
+    "tasks": [
+      "T-Q2-02-1",
+      "T-Q2-02-2",
+      "T-Q2-02-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-03",
+    "complexity": "trivial",
+    "prompt": "/tmp/cycle48_q2/batch_03.txt",
+    "tasks": [
+      "T-Q2-03-1",
+      "T-Q2-03-2",
+      "T-Q2-03-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-04",
+    "complexity": "medium",
+    "prompt": "/tmp/cycle48_q2/batch_04.txt",
+    "tasks": [
+      "T-Q2-04-1",
+      "T-Q2-04-2",
+      "T-Q2-04-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-05",
+    "complexity": "medium",
+    "prompt": "/tmp/cycle48_q2/batch_05.txt",
+    "tasks": [
+      "T-Q2-05-1",
+      "T-Q2-05-2",
+      "T-Q2-05-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-06",
+    "complexity": "medium",
+    "prompt": "/tmp/cycle48_q2/batch_06.txt",
+    "tasks": [
+      "T-Q2-06-1",
+      "T-Q2-06-2",
+      "T-Q2-06-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-07",
+    "complexity": "large",
+    "prompt": "/tmp/cycle48_q2/batch_07.txt",
+    "tasks": [
+      "T-Q2-07-1",
+      "T-Q2-07-2",
+      "T-Q2-07-3"
+    ]
+  },
+  {
+    "batch_id": "T-batch-Q2-08",
+    "complexity": "large",
+    "prompt": "/tmp/cycle48_q2/batch_08.txt",
+    "tasks": [
+      "T-Q2-08-1",
+      "T-Q2-08-2",
+      "T-Q2-08-3"
+    ]
+  }
+]
