@@ -109,7 +109,7 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("✓ PASS — Cycle 41 consensus captured with all required sections")
+    print("OVERALL: PASS — Cycle 41 consensus captured with all required sections")
     return 0
 
 

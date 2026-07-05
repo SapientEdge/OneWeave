@@ -60,7 +60,7 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print(f"✓ PASS — all {len(sites)} mastery-tier mutation sites respect ApprenticeKnot cap")
+    print(f"OVERALL: PASS — all {len(sites)} mastery-tier mutation sites respect ApprenticeKnot cap")
     return 0
 
 

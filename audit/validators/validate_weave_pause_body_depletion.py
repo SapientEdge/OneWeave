@@ -71,7 +71,7 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("✓ PASS — Weave Pause body-depletion clause is constitutionally enforced")
+    print("OVERALL: PASS — Weave Pause body-depletion clause is constitutionally enforced")
     return 0
 
 

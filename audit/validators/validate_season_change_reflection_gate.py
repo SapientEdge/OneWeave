@@ -91,7 +91,7 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("✓ PASS — season change is reflection-gated per §4")
+    print("OVERALL: PASS — season change is reflection-gated per §4")
     return 0
 
 

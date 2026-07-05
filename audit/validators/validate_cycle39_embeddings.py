@@ -161,7 +161,7 @@ def main() -> int:
         for f in failures:
             print(f"  - {f}")
         return 1
-    print("✓ PASS — Cycle 39 T171-T178 semantic retrieval wired end-to-end")
+    print("OVERALL: PASS — Cycle 39 T171-T178 semantic retrieval wired end-to-end")
     return 0
 
 
