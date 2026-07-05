@@ -84,3 +84,10 @@ TODO.private.md
 # CLI working folders (prompts + outputs from external coding CLIs)
 .cli/
 .research/
+
+# Cycle 47 sub-agent reliability research: keep measurement infra scripts + reports,
+# gitignore the test outputs (baseline_*.py/txt are sub-agent test artifacts).
+scripts/cycle47/baseline_*
+scripts/cycle47/data/subagents.jsonl
+scripts/cycle47/data/markers.log
+scripts/cycle47/data/hung.log
