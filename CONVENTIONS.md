@@ -77,11 +77,21 @@ Before committing any change, verify:
 - [ ] Color convention maintained (Self=.blue, Stewardship=.green, CareKin=.orange, Meaning=.purple)
 
 ### Test discipline
-
 - Every new feature: Python mirror test in `.research/validate_<feature>.py`
 - Every bug fix: regression test that reproduces the bug first
 - Stress tests: 1k entity graphs, p2p packet storms, crypto roundtrip chaos
 - Validate via `bash .research/validate_all.sh` before commit
+
+## Sub-Agent Workflow (cycle 47+)
+
+**Mandatory for any sub-agent expected to run >10 seconds.**
+
+Use `scripts/cycle47/subagent_supervisor.py` (NOT direct `codex exec`) with `--marker-required --hung-threshold 600`. Every sub-agent prompt MUST include `marker.py start <task_id>` / `end <task_id>` calls.
+
+Full policy: [`scripts/cycle47/README.md`](scripts/cycle47/README.md)
+Cycle 47 handoff: [`specs/047-subagent-reliability/cycle47_handoff.md`](specs/047-subagent-reliability/cycle47_handoff.md)
+
+Trivial sub-agents (<10s, single file) may use `subagent_wrapper.py` directly. Never use raw `codex exec` without wrapping.
 
 ### Run before commit
 
