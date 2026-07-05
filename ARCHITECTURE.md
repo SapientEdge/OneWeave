@@ -150,3 +150,17 @@ Findings → applied → regression-tested → log appended to
 
 Every dispatch prepends `.research/NO_TRAINING_PROMPT.md` so all models
 operate in private / no-training mode.
+
+## Sub-agent infrastructure (cycle 47+)
+
+All Hermes-global, NOT OneWeave-specific:
+
+- `~/.hermes/scripts/cycle47/subagent_supervisor.py` — wraps sub-agents with pre-flight, hung-detection, marker counting. **Mandatory for sub-agents >10s.**
+- `~/.hermes/scripts/cycle47/marker.py` — heartbeat emitters (call `start` / `checkpoint` / `end` at task boundaries)
+- `~/.hermes/scripts/cycle47/subagent_wrapper.py` — lightweight wrapper for trivial sub-agents
+- `~/.hermes/scripts/cycle47/hung_detector.py` — logs file poller, emits `HUNG_DETECTED`
+- `~/.hermes/skills/subagent-hung-vs-done-check/SKILL.md` — Lesson 35.5 / 35.6
+
+OneWeave-local copies exist at `scripts/cycle47/` for historical reference but are deprecated. Canonical: global.
+
+Cycle 47 diagnosis (4 hypotheses tested, all REJECTED): cycle 46's 5 "hung" sub-agents were actually done — they had no progress markers + no automated detection, so silent periods looked identical to hangs. See `specs/047-subagent-reliability/cycle47_handoff.md`.

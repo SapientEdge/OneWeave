@@ -2,6 +2,11 @@
 
 **Status**: Production-grade. No stubs. No MVP placeholders. All core flows complete and ready for Xcode build + App Store.
 
+## Recent Cycle Summary (cycle 45+46+47)
+
+- **Cycle 46** (`002-gamification`): LifeMoment native feature — capture moments with Vision OCR, MomentSealer crypto, capture view + reflection sheet + timeline entry + detail view, search validator. Privacy invariants: Moment Egress Boundary (OCR/embeddings never cross to TimelineEvent/Graph/P2P), Photos = 10th Data Leash toggle. Commits in `master` history.
+- **Cycle 47** (`047-subagent-reliability`): Sub-agent reliability infrastructure. Built wrapper, marker, hung_detector, supervisor scripts in `scripts/cycle47/`. Promoted to **Hermes-global** at `~/.hermes/scripts/cycle47/`. 4 hypothesis tests all rejected (cycle 46 "hangs" were actually done sub-agents without progress markers). Skill: `~/.hermes/skills/subagent-hung-vs-done-check/`.
+
 ## Core (Phases 0-7 complete)
 - 4 Life Threads with event-driven ripples
 - AppStateMachine (idle/capturing/weaving/reflecting/lowEnergy/highFlow)
