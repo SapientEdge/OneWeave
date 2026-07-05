@@ -1,0 +1,24 @@
+Task: T-batch-NNN
+
+python3 ~/.hermes/scripts/cycle47/marker.py start T-batch-NNN
+
+=== Task 1 ===
+Task: T-001
+python3 ~/.hermes/scripts/cycle47/marker.py start T-001
+[instructions for task 1]
+python3 ~/.hermes/scripts/cycle47/marker.py end T-001
+
+=== Task 2 ===
+Task: T-002
+python3 ~/.hermes/scripts/cycle47/marker.py start T-002
+[instructions for task 2]
+python3 ~/.hermes/scripts/cycle47/marker.py end T-002
+
+=== Task 3 ===
+Task: T-003
+python3 ~/.hermes/scripts/cycle47/marker.py start T-003
+[instructions for task 3]
+python3 ~/.hermes/scripts/cycle47/marker.py end T-003
+
+python3 ~/.hermes/scripts/cycle47/marker.py end T-batch-NNN
+T-batch-NNN COMPLETE
