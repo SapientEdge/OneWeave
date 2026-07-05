@@ -106,6 +106,14 @@ public final class LifeMoment {
     /// Per Claude review SPEC-12.
     public var isUserReflection: Bool
 
+    /// True iff OCR + image embedding + detected entities are sealed via
+    /// MomentSealer (AES-256-GCM with HKDF info "OneWeaveMoment.v1").
+    /// When `true`, `sealedCiphertext`, `sealedNonce`, `sealedTag`, and
+    /// `sealedAt` MUST be present. `userReflection` stays plaintext even
+    /// when sealed (per Invariant 11 — it crosses the egress boundary).
+    /// Defaults to false; only MomentSealer.seal() flips it true.
+    public var isSealed: Bool = false
+
     // MARK: - Relationships (per Claude SPEC-8)
 
     /// Optional link to a corresponding LifeEntity created at capture time

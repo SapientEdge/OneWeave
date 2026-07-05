@@ -192,6 +192,7 @@ public struct DataLeashSettingsView: View {
         case .bodyThread: return "waveform.path.ecg"
         case .p2p:        return "person.crop.circle.dashed"
         case .insights:   return "sparkles"
+        case .photos:     return "photo.on.rectangle.angled"
         }
     }
 
@@ -346,6 +347,7 @@ struct DataLeashReflectionSheet: View {
         case .bodyThread: return "waveform.path.ecg"
         case .p2p:        return "person.crop.circle.dashed"
         case .insights:   return "sparkles"
+        case .photos:     return "photo.on.rectangle.angled"
         }
     }
 }
