@@ -1,6 +1,6 @@
 # OneWeave — Master Handoff Record (2026-06-27)
 
-**Author**: Hermes session with D S (Telegram DM)
+**Author**: Hermes agent session
 **Date anchor**: 2026-06-27 (Saturday)
 **Project location**: `/root/hermes-workspace/projects/oneweave/`
 **Git branch**: `002-gamification`
@@ -11,7 +11,7 @@
 
 ## 🎯 TL;DR (read this first if you're picking this up cold)
 
-OneWeave is a **privacy-first Life OS** iOS app (Swift 5.9, SwiftUI, SwiftData, iOS 17+). Built over 3-4 days on a Linux VPS by **D S + Hermes + multi-agent CLI squad** (Grok, Claude Code, Nemotron 3 Ultra). The Linux side has reached a **stable checkpoint**: algorithms, policies, privacy invariants, and validation harnesses are all in place. The project is **ready to push to GitHub and hand off to a Mac + Xcode + Claude cowork** for the device-side work.
+OneWeave is a **privacy-first Life OS** iOS app (Swift 5.9, SwiftUI, SwiftData, iOS 17+). Built over multiple cycles using a multi-agent CLI squad (Grok, Claude Code, Nemotron 3 Ultra, OpenAI Codex) plus internal agent orchestration. The Linux side has reached a **stable checkpoint**: algorithms, policies, privacy invariants, and validation harnesses are all in place. The project is **ready to push to GitHub and hand off to a Mac + Xcode** for the device-side work.
 
 **Headline numbers**:
 - **49 Swift files**, ~15,700 lines

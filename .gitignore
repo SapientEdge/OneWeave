@@ -81,13 +81,61 @@ desktop.ini
 *.private.md
 TODO.private.md
 
+# ============================================================
+# Internal-only (NOT published to GitHub)
+# ============================================================
+
 # CLI working folders (prompts + outputs from external coding CLIs)
 .cli/
 .research/
 
-# Cycle 47 sub-agent reliability research: keep measurement infra scripts + reports,
-# gitignore the test outputs (baseline_*.py/txt are sub-agent test artifacts).
-scripts/cycle47/baseline_*
-scripts/cycle47/data/subagents.jsonl
-scripts/cycle47/data/markers.log
-scripts/cycle47/data/hung.log
+# Agent working directories (codex, aider, etc.)
+.agents/
+.codex/
+.aider*
+
+# Spec Kit workflow artifacts (internal cycle planning)
+.specify/
+.specify/feature.json
+feature.json
+
+# Per-cycle handoff docs (internal process records)
+specs/046-lifemoment/
+specs/047-subagent-reliability/
+specs/048-subagent-quality/
+specs/049-cognitive-load-depth/
+specs/050-*/
+ONEWEAVE_HANDOFF_CYCLE_*.md
+ONEWEAVE_HANDOFF_CYCLE_*
+
+# Per-cycle sub-agent artifacts (timing data, baseline reports, handoff logs)
+scripts/cycle47/
+scripts/cycle48/
+scripts/cycle49/
+scripts/cycle*/
+*.cycle_*/
+
+# Graphify knowledge graph cache (regenerated on demand)
+graphify-out/cache/
+graphify-out/2026-*/
+
+# Dev-only artifacts (PWA mockup, landing page, marketing visuals)
+deliverables/
+landing.html
+visuals_*.png
+GAMIFICATION_VISUAL_MOCK.html
+ONEWEAVE_GAMIFICATION_SPEC.md
+ONEWEAVE_WHITE_PAPER.md
+WHITE_PAPER.md
+Sketch_*.swift
+STATE_MACHINE.md
+USER_JOURNEYS_ONEWEAVE.md
+ITERATION_REVIEW_*.md
+PRIVACY_AUDIT_AND_HARDENING_2026.md
+
+# Aider config (may contain user-specific settings)
+.aider.conf.yml
+.aider.model.settings.yml
+
+# Hermes session caches (in case they appear)
+.hermes/
