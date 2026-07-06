@@ -1,3 +1,0 @@
-LLM not set
-
-To resume this session: kimi -r 9dfc0653-08af-4c37-895e-1d44a385363d
