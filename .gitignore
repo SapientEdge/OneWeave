@@ -85,9 +85,18 @@ TODO.private.md
 # Internal-only (NOT published to GitHub)
 # ============================================================
 
+# Internal research notes + reviews + build logs
+# (KEEP validate_*.py + validate_all.sh — those are part of the public test suite)
+.research/*.md
+.research/*.txt
+.research/*.json
+.research/*.sh~
+.research/glm_round_*/
+.research/round*/
+.research/doc_*
+
 # CLI working folders (prompts + outputs from external coding CLIs)
 .cli/
-.research/
 
 # Agent working directories (codex, aider, etc.)
 .agents/
