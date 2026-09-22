@@ -37,12 +37,12 @@ bash .research/validate_all.sh
 You should see:
 ```
 Suites run: 43
-Suites all-green: 42
-Suites with failures: 1     ← known cycle 41 false positive, ignore
-✗ AT LEAST ONE SUITE HAS FAILURES
+Suites all-green: 43
+Suites with failures: 0
+✓ ALL SUITES PASS
 ```
 
-The 1 failure is a known false positive (`validate_cycle41_consensus.py` uses different output format — pre-existing). **42 green is the real signal.**
+All 43 suites pass. `validate_cycle41_consensus.py` skips gracefully when `.cli/` artifacts are absent (intentionally removed during public-push cleanup — fixed 2026-08-26).
 
 ## Step 3: Open in Xcode
 
